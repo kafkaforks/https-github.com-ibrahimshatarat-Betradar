@@ -1,0 +1,14 @@
+﻿2017-05-31 11:13:00,631 [IOLoop-LIVEODDS] [WARN] |jDc5JTvlk25mpcNffUmdnbgKtZI=| Msg queue DispatcherQueue3 going over the LOW watermark at 499 items
+2017-05-31 11:13:02,584 [Dispatcher3] [WARN] |+uoBXFXs5W9gOK9ZYD1JIC3cSik=| Msg queue DispatcherQueue3 dropped below LOW watermark at 499 items
+2017-05-31 22:28:26,862 [IOLoop-LIVEODDS] [WARN] |BZqpWaD3+ctCcBhHcwTzfNpTOvs=| Msg queue DispatcherQueue1 going over the LOW watermark at 499 items
+2017-05-31 22:28:26,868 [IOLoop-LIVEODDS] [WARN] |wmsUgK24K63cGxCydJOkaayGW1s=| Msg queue DispatcherQueue2 going over the LOW watermark at 499 items
+2017-05-31 22:28:26,870 [IOLoop-LIVEODDS] [WARN] |WFhwfE1yxQ3NnzOhNmdILQZ51oA=| Msg queue DispatcherQueue3 going over the LOW watermark at 499 items
+2017-05-31 22:28:28,582 [Dispatcher3] [WARN] |4azShoCWyKMo2S4YR256A3IMjDM=| Msg queue DispatcherQueue3 dropped below LOW watermark at 499 items
+2017-05-31 22:28:29,655 [Dispatcher2] [WARN] |FOWTbUghfZulqPFYUruISvfNbw0=| Msg queue DispatcherQueue2 dropped below LOW watermark at 499 items
+2017-05-31 22:28:32,813 [Dispatcher1] [WARN] |o2Av97PEtmR5NEcapXwMFVrmm7A=| Msg queue DispatcherQueue1 dropped below LOW watermark at 499 items
+2017-05-31 22:38:26,219 [IOLoop-LIVEODDS] [WARN] |iF9gM3go0Krg6AN/ypMwJx8Uwtk=| Msg queue DispatcherQueue2 going over the LOW watermark at 499 items
+2017-05-31 22:38:26,223 [IOLoop-LIVEODDS] [WARN] |88oHIeF6cSq3/29vZReqeUIxorw=| Msg queue DispatcherQueue3 going over the LOW watermark at 499 items
+2017-05-31 22:38:26,225 [IOLoop-LIVEODDS] [WARN] |gok4tKacdsyqRr0y2BBn6JBsvbc=| Msg queue DispatcherQueue1 going over the LOW watermark at 499 items
+2017-05-31 22:38:29,698 [Dispatcher3] [WARN] |9yxj/Z5WWZmndHLDeYSxUJtFYto=| Msg queue DispatcherQueue3 dropped below LOW watermark at 499 items
+2017-05-31 22:38:30,072 [Dispatcher1] [WARN] |04xxN/ToHHTZXj4jTpKPhTtWDJM=| Msg queue DispatcherQueue1 dropped below LOW watermark at 499 items
+2017-05-31 22:38:33,094 [Dispatcher2] [WARN] |0fSSEi2Uz2m7QrPeBu8AX343Mt0=| Msg queue DispatcherQueue2 dropped below LOW watermark at 499 items

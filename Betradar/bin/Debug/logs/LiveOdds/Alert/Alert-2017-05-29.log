@@ -1,0 +1,10 @@
+﻿2017-05-29 13:06:07,865 [IOLoop-LIVEODDS] [WARN] |iZsDBi9mGZP8RqyvFS02ZHNBo0Q=| TCP connection error, fatal False
+System.IO.IOException: SSL stream disconnected due to timeout
+   at Sportradar.SDK.Common.Utils.StreamWrapper.Read(Byte[] buffer, Int32 offset, Int32 count)
+   at Sportradar.SDK.ConnectionProviders.TcpConnectionProvider.HandleConnection()
+   at Sportradar.SDK.ConnectionProviders.TcpConnectionProvider.IOLoop()
+2017-05-29 13:35:02,365 [IOLoop-LIVEODDS] [WARN] |57v2HNSlH50KURBOktM5ZNwzr0g=| TCP connection error, fatal False
+System.IO.IOException: SSL stream disconnected due to timeout
+   at Sportradar.SDK.Common.Utils.StreamWrapper.Read(Byte[] buffer, Int32 offset, Int32 count)
+   at Sportradar.SDK.ConnectionProviders.TcpConnectionProvider.HandleConnection()
+   at Sportradar.SDK.ConnectionProviders.TcpConnectionProvider.IOLoop()

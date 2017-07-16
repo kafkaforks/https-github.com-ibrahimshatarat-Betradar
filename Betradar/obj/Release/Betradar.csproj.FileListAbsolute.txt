@@ -1,0 +1,204 @@
+F:\Work\ecoPayz\Betradar\Betradar\bin\Release\Betradar.exe.config
+F:\Work\ecoPayz\Betradar\Betradar\bin\Release\Betradar.exe
+F:\Work\ecoPayz\Betradar\Betradar\bin\Release\Betradar.pdb
+F:\Work\ecoPayz\Betradar\Betradar\bin\Release\Eminent.CodeGenerator.dll
+F:\Work\ecoPayz\Betradar\Betradar\bin\Release\log4net.dll
+F:\Work\ecoPayz\Betradar\Betradar\bin\Release\Newtonsoft.Json.dll
+F:\Work\ecoPayz\Betradar\Betradar\bin\Release\NLog.dll
+F:\Work\ecoPayz\Betradar\Betradar\bin\Release\Npgsql.dll
+F:\Work\ecoPayz\Betradar\Betradar\bin\Release\RestSharp.dll
+F:\Work\ecoPayz\Betradar\Betradar\bin\Release\BookmakerSdk.pdb
+F:\Work\ecoPayz\Betradar\Betradar\bin\Release\BookmakerSdk.xml
+F:\Work\ecoPayz\Betradar\Betradar\bin\Release\log4net.xml
+F:\Work\ecoPayz\Betradar\Betradar\bin\Release\Newtonsoft.Json.xml
+F:\Work\ecoPayz\Betradar\Betradar\bin\Release\NLog.xml
+F:\Work\ecoPayz\Betradar\Betradar\bin\Release\Npgsql.xml
+F:\Work\ecoPayz\Betradar\Betradar\bin\Release\RestSharp.xml
+F:\Work\ecoPayz\Betradar\Betradar\obj\Release\Betradar.csprojResolveAssemblyReference.cache
+F:\Work\ecoPayz\Betradar\Betradar\obj\Release\Betradar.exe
+F:\Work\ecoPayz\Betradar\Betradar\obj\Release\Betradar.pdb
+X:\ecoPayz\betradar-History\Live\Betradar\Betradar\bin\Release\Betradar.exe.config
+X:\ecoPayz\betradar-History\Live\Betradar\Betradar\obj\Release\Betradar.exe
+X:\ecoPayz\betradar-History\Live\Betradar\Betradar\obj\Release\Betradar.pdb
+X:\ecoPayz\betradar-History\Live\Betradar\Betradar\bin\Release\Betradar.exe
+X:\ecoPayz\betradar-History\Live\Betradar\Betradar\bin\Release\Betradar.pdb
+X:\ecoPayz\betradar-History\Live\Betradar\Betradar\bin\Release\Eminent.CodeGenerator.dll
+X:\ecoPayz\betradar-History\Live\Betradar\Betradar\bin\Release\log4net.dll
+X:\ecoPayz\betradar-History\Live\Betradar\Betradar\bin\Release\Newtonsoft.Json.dll
+X:\ecoPayz\betradar-History\Live\Betradar\Betradar\bin\Release\NLog.dll
+X:\ecoPayz\betradar-History\Live\Betradar\Betradar\bin\Release\Npgsql.dll
+X:\ecoPayz\betradar-History\Live\Betradar\Betradar\bin\Release\RestSharp.dll
+X:\ecoPayz\betradar-History\Live\Betradar\Betradar\bin\Release\log4net.xml
+X:\ecoPayz\betradar-History\Live\Betradar\Betradar\bin\Release\Newtonsoft.Json.xml
+X:\ecoPayz\betradar-History\Live\Betradar\Betradar\bin\Release\NLog.xml
+X:\ecoPayz\betradar-History\Live\Betradar\Betradar\bin\Release\Npgsql.xml
+X:\ecoPayz\betradar-History\Live\Betradar\Betradar\bin\Release\RestSharp.xml
+X:\ecoPayz\betradar-History\Live\Betradar\Betradar\obj\Release\Betradar.csprojResolveAssemblyReference.cache
+X:\ecoPayz\betradar-History\Live\Betradar\Betradar\bin\Release\websocket-sharp.dll
+X:\ecoPayz\betradar-History\Live\Betradar\Betradar\bin\Release\websocket-sharp.xml
+X:\ecoPayz\betradar-History\2_14_2017\Live\Betradar\Betradar\bin\Release\Betradar.exe.config
+X:\ecoPayz\betradar-History\2_14_2017\Live\Betradar\Betradar\obj\Release\Betradar.exe
+X:\ecoPayz\betradar-History\2_14_2017\Live\Betradar\Betradar\obj\Release\Betradar.pdb
+X:\ecoPayz\betradar-History\2_14_2017\Live\Betradar\Betradar\bin\Release\Betradar.exe
+X:\ecoPayz\betradar-History\2_14_2017\Live\Betradar\Betradar\bin\Release\Betradar.pdb
+X:\ecoPayz\betradar-History\2_14_2017\Live\Betradar\Betradar\bin\Release\Eminent.CodeGenerator.dll
+X:\ecoPayz\betradar-History\2_14_2017\Live\Betradar\Betradar\bin\Release\log4net.dll
+X:\ecoPayz\betradar-History\2_14_2017\Live\Betradar\Betradar\bin\Release\Newtonsoft.Json.dll
+X:\ecoPayz\betradar-History\2_14_2017\Live\Betradar\Betradar\bin\Release\NLog.dll
+X:\ecoPayz\betradar-History\2_14_2017\Live\Betradar\Betradar\bin\Release\Npgsql.dll
+X:\ecoPayz\betradar-History\2_14_2017\Live\Betradar\Betradar\bin\Release\RestSharp.dll
+X:\ecoPayz\betradar-History\2_14_2017\Live\Betradar\Betradar\bin\Release\websocket-sharp.dll
+X:\ecoPayz\betradar-History\2_14_2017\Live\Betradar\Betradar\bin\Release\log4net.xml
+X:\ecoPayz\betradar-History\2_14_2017\Live\Betradar\Betradar\bin\Release\Newtonsoft.Json.xml
+X:\ecoPayz\betradar-History\2_14_2017\Live\Betradar\Betradar\bin\Release\NLog.xml
+X:\ecoPayz\betradar-History\2_14_2017\Live\Betradar\Betradar\bin\Release\Npgsql.xml
+X:\ecoPayz\betradar-History\2_14_2017\Live\Betradar\Betradar\bin\Release\RestSharp.xml
+X:\ecoPayz\betradar-History\2_14_2017\Live\Betradar\Betradar\bin\Release\websocket-sharp.xml
+X:\ecoPayz\betradar-History\2_14_2017\Live\Betradar\Betradar\obj\Release\Betradar.csprojResolveAssemblyReference.cache
+C:\Users\heythamwork\Google Drive\ecoPayz\betradar-History\2_14_2017\Live\Betradar\Betradar\bin\Release\Betradar.exe.config
+C:\Users\heythamwork\Google Drive\ecoPayz\betradar-History\2_14_2017\Live\Betradar\Betradar\bin\Release\Betradar.exe
+C:\Users\heythamwork\Google Drive\ecoPayz\betradar-History\2_14_2017\Live\Betradar\Betradar\bin\Release\Betradar.pdb
+C:\Users\heythamwork\Google Drive\ecoPayz\betradar-History\2_14_2017\Live\Betradar\Betradar\bin\Release\AsyncIO.dll
+C:\Users\heythamwork\Google Drive\ecoPayz\betradar-History\2_14_2017\Live\Betradar\Betradar\bin\Release\EasyRedisMQ.dll
+C:\Users\heythamwork\Google Drive\ecoPayz\betradar-History\2_14_2017\Live\Betradar\Betradar\bin\Release\Eminent.CodeGenerator.dll
+C:\Users\heythamwork\Google Drive\ecoPayz\betradar-History\2_14_2017\Live\Betradar\Betradar\bin\Release\Jil.dll
+C:\Users\heythamwork\Google Drive\ecoPayz\betradar-History\2_14_2017\Live\Betradar\Betradar\bin\Release\log4net.dll
+C:\Users\heythamwork\Google Drive\ecoPayz\betradar-History\2_14_2017\Live\Betradar\Betradar\bin\Release\LumenWorks.Framework.IO.dll
+C:\Users\heythamwork\Google Drive\ecoPayz\betradar-History\2_14_2017\Live\Betradar\Betradar\bin\Release\NetMQ.dll
+C:\Users\heythamwork\Google Drive\ecoPayz\betradar-History\2_14_2017\Live\Betradar\Betradar\bin\Release\Newtonsoft.Json.dll
+C:\Users\heythamwork\Google Drive\ecoPayz\betradar-History\2_14_2017\Live\Betradar\Betradar\bin\Release\NLog.dll
+C:\Users\heythamwork\Google Drive\ecoPayz\betradar-History\2_14_2017\Live\Betradar\Betradar\bin\Release\Npgsql.dll
+C:\Users\heythamwork\Google Drive\ecoPayz\betradar-History\2_14_2017\Live\Betradar\Betradar\bin\Release\RestSharp.dll
+C:\Users\heythamwork\Google Drive\ecoPayz\betradar-History\2_14_2017\Live\Betradar\Betradar\bin\Release\ServiceStack.Text.dll
+C:\Users\heythamwork\Google Drive\ecoPayz\betradar-History\2_14_2017\Live\Betradar\Betradar\bin\Release\SharedLibrary.dll
+C:\Users\heythamwork\Google Drive\ecoPayz\betradar-History\2_14_2017\Live\Betradar\Betradar\bin\Release\Sigil.dll
+C:\Users\heythamwork\Google Drive\ecoPayz\betradar-History\2_14_2017\Live\Betradar\Betradar\bin\Release\StackExchange.Redis.dll
+C:\Users\heythamwork\Google Drive\ecoPayz\betradar-History\2_14_2017\Live\Betradar\Betradar\bin\Release\StackExchange.Redis.Extensions.Core.dll
+C:\Users\heythamwork\Google Drive\ecoPayz\betradar-History\2_14_2017\Live\Betradar\Betradar\bin\Release\StackExchange.Redis.Extensions.Jil.dll
+C:\Users\heythamwork\Google Drive\ecoPayz\betradar-History\2_14_2017\Live\Betradar\Betradar\bin\Release\websocket-sharp.dll
+C:\Users\heythamwork\Google Drive\ecoPayz\betradar-History\2_14_2017\Live\Betradar\Betradar\bin\Release\Zyan.Communication.dll
+C:\Users\heythamwork\Google Drive\ecoPayz\betradar-History\2_14_2017\Live\Betradar\Betradar\bin\Release\SharedLibrary.pdb
+C:\Users\heythamwork\Google Drive\ecoPayz\betradar-History\2_14_2017\Live\Betradar\Betradar\bin\Release\Jil.pdb
+C:\Users\heythamwork\Google Drive\ecoPayz\betradar-History\2_14_2017\Live\Betradar\Betradar\bin\Release\Jil.xml
+C:\Users\heythamwork\Google Drive\ecoPayz\betradar-History\2_14_2017\Live\Betradar\Betradar\bin\Release\log4net.xml
+C:\Users\heythamwork\Google Drive\ecoPayz\betradar-History\2_14_2017\Live\Betradar\Betradar\bin\Release\LumenWorks.Framework.IO.xml
+C:\Users\heythamwork\Google Drive\ecoPayz\betradar-History\2_14_2017\Live\Betradar\Betradar\bin\Release\Newtonsoft.Json.xml
+C:\Users\heythamwork\Google Drive\ecoPayz\betradar-History\2_14_2017\Live\Betradar\Betradar\bin\Release\NLog.xml
+C:\Users\heythamwork\Google Drive\ecoPayz\betradar-History\2_14_2017\Live\Betradar\Betradar\bin\Release\Npgsql.xml
+C:\Users\heythamwork\Google Drive\ecoPayz\betradar-History\2_14_2017\Live\Betradar\Betradar\bin\Release\RestSharp.xml
+C:\Users\heythamwork\Google Drive\ecoPayz\betradar-History\2_14_2017\Live\Betradar\Betradar\bin\Release\ServiceStack.Text.xml
+C:\Users\heythamwork\Google Drive\ecoPayz\betradar-History\2_14_2017\Live\Betradar\Betradar\bin\Release\Sigil.pdb
+C:\Users\heythamwork\Google Drive\ecoPayz\betradar-History\2_14_2017\Live\Betradar\Betradar\bin\Release\Sigil.xml
+C:\Users\heythamwork\Google Drive\ecoPayz\betradar-History\2_14_2017\Live\Betradar\Betradar\bin\Release\StackExchange.Redis.xml
+C:\Users\heythamwork\Google Drive\ecoPayz\betradar-History\2_14_2017\Live\Betradar\Betradar\bin\Release\StackExchange.Redis.Extensions.Core.xml
+C:\Users\heythamwork\Google Drive\ecoPayz\betradar-History\2_14_2017\Live\Betradar\Betradar\bin\Release\StackExchange.Redis.Extensions.Jil.xml
+C:\Users\heythamwork\Google Drive\ecoPayz\betradar-History\2_14_2017\Live\Betradar\Betradar\bin\Release\websocket-sharp.xml
+C:\Users\heythamwork\Google Drive\ecoPayz\betradar-History\2_14_2017\Live\Betradar\Betradar\bin\Release\Zyan.Communication.pdb
+C:\Users\heythamwork\Google Drive\ecoPayz\betradar-History\2_14_2017\Live\Betradar\Betradar\bin\Release\Zyan.Communication.xml
+C:\Users\heythamwork\Google Drive\ecoPayz\betradar-History\2_14_2017\Live\Betradar\Betradar\bin\Release\de\Zyan.Communication.resources.dll
+C:\Users\heythamwork\Google Drive\ecoPayz\betradar-History\2_14_2017\Live\Betradar\Betradar\bin\Release\ru\Zyan.Communication.resources.dll
+C:\Users\heythamwork\Google Drive\ecoPayz\betradar-History\2_14_2017\Live\Betradar\Betradar\obj\Release\Betradar.csprojResolveAssemblyReference.cache
+C:\Users\heythamwork\Google Drive\ecoPayz\betradar-History\2_14_2017\Live\Betradar\Betradar\obj\Release\Betradar.csproj.Betradar.exe.config
+C:\Users\heythamwork\Google Drive\ecoPayz\betradar-History\2_14_2017\Live\Betradar\Betradar\obj\Release\Betradar.exe
+C:\Users\heythamwork\Google Drive\ecoPayz\betradar-History\2_14_2017\Live\Betradar\Betradar\obj\Release\Betradar.pdb
+C:\Users\heythamwork\Google Drive\ecoPayz\betradar-History\2_14_2017\Live\Betradar\Betradar\bin\Release\System.Threading.Tasks.Extensions.dll
+C:\Users\heythamwork\Google Drive\ecoPayz\betradar-History\2_14_2017\Live\Betradar\Betradar\bin\Release\System.Threading.Tasks.Extensions.xml
+C:\Users\heythamwork\Google Drive\ecoPayz\Live\Betradar\Betradar\bin\Release\Betradar.exe.config
+C:\Users\heythamwork\Google Drive\ecoPayz\Live\Betradar\Betradar\obj\Release\Betradar.exe
+C:\Users\heythamwork\Google Drive\ecoPayz\Live\Betradar\Betradar\obj\Release\Betradar.pdb
+C:\Users\heythamwork\Google Drive\ecoPayz\Live\Betradar\Betradar\bin\Release\Betradar.exe
+C:\Users\heythamwork\Google Drive\ecoPayz\Live\Betradar\Betradar\bin\Release\Betradar.pdb
+C:\Users\heythamwork\Google Drive\ecoPayz\Live\Betradar\Betradar\bin\Release\AsyncIO.dll
+C:\Users\heythamwork\Google Drive\ecoPayz\Live\Betradar\Betradar\bin\Release\EasyRedisMQ.dll
+C:\Users\heythamwork\Google Drive\ecoPayz\Live\Betradar\Betradar\bin\Release\Eminent.CodeGenerator.dll
+C:\Users\heythamwork\Google Drive\ecoPayz\Live\Betradar\Betradar\bin\Release\Jil.dll
+C:\Users\heythamwork\Google Drive\ecoPayz\Live\Betradar\Betradar\bin\Release\log4net.dll
+C:\Users\heythamwork\Google Drive\ecoPayz\Live\Betradar\Betradar\bin\Release\LumenWorks.Framework.IO.dll
+C:\Users\heythamwork\Google Drive\ecoPayz\Live\Betradar\Betradar\bin\Release\NetMQ.dll
+C:\Users\heythamwork\Google Drive\ecoPayz\Live\Betradar\Betradar\bin\Release\Newtonsoft.Json.dll
+C:\Users\heythamwork\Google Drive\ecoPayz\Live\Betradar\Betradar\bin\Release\NLog.dll
+C:\Users\heythamwork\Google Drive\ecoPayz\Live\Betradar\Betradar\bin\Release\Npgsql.dll
+C:\Users\heythamwork\Google Drive\ecoPayz\Live\Betradar\Betradar\bin\Release\RestSharp.dll
+C:\Users\heythamwork\Google Drive\ecoPayz\Live\Betradar\Betradar\bin\Release\ServiceStack.Text.dll
+C:\Users\heythamwork\Google Drive\ecoPayz\Live\Betradar\Betradar\bin\Release\SharedLibrary.dll
+C:\Users\heythamwork\Google Drive\ecoPayz\Live\Betradar\Betradar\bin\Release\Sigil.dll
+C:\Users\heythamwork\Google Drive\ecoPayz\Live\Betradar\Betradar\bin\Release\StackExchange.Redis.dll
+C:\Users\heythamwork\Google Drive\ecoPayz\Live\Betradar\Betradar\bin\Release\StackExchange.Redis.Extensions.Core.dll
+C:\Users\heythamwork\Google Drive\ecoPayz\Live\Betradar\Betradar\bin\Release\StackExchange.Redis.Extensions.Jil.dll
+C:\Users\heythamwork\Google Drive\ecoPayz\Live\Betradar\Betradar\bin\Release\System.Threading.Tasks.Extensions.dll
+C:\Users\heythamwork\Google Drive\ecoPayz\Live\Betradar\Betradar\bin\Release\websocket-sharp.dll
+C:\Users\heythamwork\Google Drive\ecoPayz\Live\Betradar\Betradar\bin\Release\Zyan.Communication.dll
+C:\Users\heythamwork\Google Drive\ecoPayz\Live\Betradar\Betradar\bin\Release\SharedLibrary.pdb
+C:\Users\heythamwork\Google Drive\ecoPayz\Live\Betradar\Betradar\bin\Release\Jil.pdb
+C:\Users\heythamwork\Google Drive\ecoPayz\Live\Betradar\Betradar\bin\Release\Jil.xml
+C:\Users\heythamwork\Google Drive\ecoPayz\Live\Betradar\Betradar\bin\Release\log4net.xml
+C:\Users\heythamwork\Google Drive\ecoPayz\Live\Betradar\Betradar\bin\Release\LumenWorks.Framework.IO.xml
+C:\Users\heythamwork\Google Drive\ecoPayz\Live\Betradar\Betradar\bin\Release\Newtonsoft.Json.xml
+C:\Users\heythamwork\Google Drive\ecoPayz\Live\Betradar\Betradar\bin\Release\NLog.xml
+C:\Users\heythamwork\Google Drive\ecoPayz\Live\Betradar\Betradar\bin\Release\Npgsql.xml
+C:\Users\heythamwork\Google Drive\ecoPayz\Live\Betradar\Betradar\bin\Release\RestSharp.xml
+C:\Users\heythamwork\Google Drive\ecoPayz\Live\Betradar\Betradar\bin\Release\ServiceStack.Text.xml
+C:\Users\heythamwork\Google Drive\ecoPayz\Live\Betradar\Betradar\bin\Release\Sigil.pdb
+C:\Users\heythamwork\Google Drive\ecoPayz\Live\Betradar\Betradar\bin\Release\Sigil.xml
+C:\Users\heythamwork\Google Drive\ecoPayz\Live\Betradar\Betradar\bin\Release\StackExchange.Redis.xml
+C:\Users\heythamwork\Google Drive\ecoPayz\Live\Betradar\Betradar\bin\Release\StackExchange.Redis.Extensions.Core.xml
+C:\Users\heythamwork\Google Drive\ecoPayz\Live\Betradar\Betradar\bin\Release\StackExchange.Redis.Extensions.Jil.xml
+C:\Users\heythamwork\Google Drive\ecoPayz\Live\Betradar\Betradar\bin\Release\System.Threading.Tasks.Extensions.xml
+C:\Users\heythamwork\Google Drive\ecoPayz\Live\Betradar\Betradar\bin\Release\websocket-sharp.xml
+C:\Users\heythamwork\Google Drive\ecoPayz\Live\Betradar\Betradar\bin\Release\Zyan.Communication.pdb
+C:\Users\heythamwork\Google Drive\ecoPayz\Live\Betradar\Betradar\bin\Release\Zyan.Communication.xml
+C:\Users\heythamwork\Google Drive\ecoPayz\Live\Betradar\Betradar\bin\Release\de\Zyan.Communication.resources.dll
+C:\Users\heythamwork\Google Drive\ecoPayz\Live\Betradar\Betradar\bin\Release\ru\Zyan.Communication.resources.dll
+C:\Users\heythamwork\Google Drive\ecoPayz\Live\Betradar\Betradar\obj\Release\Betradar.csprojResolveAssemblyReference.cache
+C:\Users\heythamwork\Google Drive\ecoPayz\Live\Betradar\Betradar\obj\Release\Betradar.csproj.Betradar.exe.config
+X:\ecoPayz\Live-Solution\Betradar\Betradar\bin\Release\Betradar.exe.config
+X:\ecoPayz\Live-Solution\Betradar\Betradar\obj\Release\Betradar.exe
+X:\ecoPayz\Live-Solution\Betradar\Betradar\obj\Release\Betradar.pdb
+X:\ecoPayz\Live-Solution\Betradar\Betradar\bin\Release\Betradar.exe
+X:\ecoPayz\Live-Solution\Betradar\Betradar\bin\Release\Betradar.pdb
+X:\ecoPayz\Live-Solution\Betradar\Betradar\bin\Release\AsyncIO.dll
+X:\ecoPayz\Live-Solution\Betradar\Betradar\bin\Release\EasyRedisMQ.dll
+X:\ecoPayz\Live-Solution\Betradar\Betradar\bin\Release\Eminent.CodeGenerator.dll
+X:\ecoPayz\Live-Solution\Betradar\Betradar\bin\Release\Jil.dll
+X:\ecoPayz\Live-Solution\Betradar\Betradar\bin\Release\log4net.dll
+X:\ecoPayz\Live-Solution\Betradar\Betradar\bin\Release\LumenWorks.Framework.IO.dll
+X:\ecoPayz\Live-Solution\Betradar\Betradar\bin\Release\NetMQ.dll
+X:\ecoPayz\Live-Solution\Betradar\Betradar\bin\Release\Newtonsoft.Json.dll
+X:\ecoPayz\Live-Solution\Betradar\Betradar\bin\Release\NLog.dll
+X:\ecoPayz\Live-Solution\Betradar\Betradar\bin\Release\Npgsql.dll
+X:\ecoPayz\Live-Solution\Betradar\Betradar\bin\Release\RestSharp.dll
+X:\ecoPayz\Live-Solution\Betradar\Betradar\bin\Release\ServiceStack.Text.dll
+X:\ecoPayz\Live-Solution\Betradar\Betradar\bin\Release\SharedLibrary.dll
+X:\ecoPayz\Live-Solution\Betradar\Betradar\bin\Release\Sigil.dll
+X:\ecoPayz\Live-Solution\Betradar\Betradar\bin\Release\StackExchange.Redis.dll
+X:\ecoPayz\Live-Solution\Betradar\Betradar\bin\Release\StackExchange.Redis.Extensions.Core.dll
+X:\ecoPayz\Live-Solution\Betradar\Betradar\bin\Release\StackExchange.Redis.Extensions.Jil.dll
+X:\ecoPayz\Live-Solution\Betradar\Betradar\bin\Release\System.Threading.Tasks.Extensions.dll
+X:\ecoPayz\Live-Solution\Betradar\Betradar\bin\Release\websocket-sharp.dll
+X:\ecoPayz\Live-Solution\Betradar\Betradar\bin\Release\Zyan.Communication.dll
+X:\ecoPayz\Live-Solution\Betradar\Betradar\bin\Release\SharedLibrary.pdb
+X:\ecoPayz\Live-Solution\Betradar\Betradar\bin\Release\Jil.pdb
+X:\ecoPayz\Live-Solution\Betradar\Betradar\bin\Release\Jil.xml
+X:\ecoPayz\Live-Solution\Betradar\Betradar\bin\Release\log4net.xml
+X:\ecoPayz\Live-Solution\Betradar\Betradar\bin\Release\LumenWorks.Framework.IO.xml
+X:\ecoPayz\Live-Solution\Betradar\Betradar\bin\Release\Newtonsoft.Json.xml
+X:\ecoPayz\Live-Solution\Betradar\Betradar\bin\Release\NLog.xml
+X:\ecoPayz\Live-Solution\Betradar\Betradar\bin\Release\Npgsql.xml
+X:\ecoPayz\Live-Solution\Betradar\Betradar\bin\Release\RestSharp.xml
+X:\ecoPayz\Live-Solution\Betradar\Betradar\bin\Release\ServiceStack.Text.xml
+X:\ecoPayz\Live-Solution\Betradar\Betradar\bin\Release\Sigil.pdb
+X:\ecoPayz\Live-Solution\Betradar\Betradar\bin\Release\Sigil.xml
+X:\ecoPayz\Live-Solution\Betradar\Betradar\bin\Release\StackExchange.Redis.xml
+X:\ecoPayz\Live-Solution\Betradar\Betradar\bin\Release\StackExchange.Redis.Extensions.Core.xml
+X:\ecoPayz\Live-Solution\Betradar\Betradar\bin\Release\StackExchange.Redis.Extensions.Jil.xml
+X:\ecoPayz\Live-Solution\Betradar\Betradar\bin\Release\System.Threading.Tasks.Extensions.xml
+X:\ecoPayz\Live-Solution\Betradar\Betradar\bin\Release\websocket-sharp.xml
+X:\ecoPayz\Live-Solution\Betradar\Betradar\bin\Release\Zyan.Communication.pdb
+X:\ecoPayz\Live-Solution\Betradar\Betradar\bin\Release\Zyan.Communication.xml
+X:\ecoPayz\Live-Solution\Betradar\Betradar\bin\Release\de\Zyan.Communication.resources.dll
+X:\ecoPayz\Live-Solution\Betradar\Betradar\bin\Release\ru\Zyan.Communication.resources.dll
+X:\ecoPayz\Live-Solution\Betradar\Betradar\obj\Release\Betradar.csprojResolveAssemblyReference.cache
+X:\ecoPayz\Live-Solution\Betradar\Betradar\obj\Release\Betradar.csproj.Betradar.exe.config
+X:\ecoPayz\Live-Solution\Betradar\Betradar\bin\Release\BookmakerSdk.dll
+X:\ecoPayz\Live-Solution\Betradar\Betradar\bin\Release\BookmakerSdk.xml
+X:\ecoPayz\Live-Solution\Betradar\Betradar\bin\Release\Betradar.XML

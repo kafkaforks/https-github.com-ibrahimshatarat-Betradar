@@ -1,0 +1,201 @@
+X:\ecoPayz\betradar-History\2_14_2017\Live\Betradar\BetService\bin\Debug\BetService.exe.config
+X:\ecoPayz\betradar-History\2_14_2017\Live\Betradar\BetService\bin\Debug\BetService.exe
+X:\ecoPayz\betradar-History\2_14_2017\Live\Betradar\BetService\bin\Debug\BetService.pdb
+X:\ecoPayz\betradar-History\2_14_2017\Live\Betradar\BetService\obj\Debug\BetService.csprojResolveAssemblyReference.cache
+X:\ecoPayz\betradar-History\2_14_2017\Live\Betradar\BetService\obj\Debug\BetService.exe
+X:\ecoPayz\betradar-History\2_14_2017\Live\Betradar\BetService\obj\Debug\BetService.pdb
+X:\ecoPayz\betradar-History\2_14_2017\Live\Betradar\BetService\bin\Debug\NLog.dll
+X:\ecoPayz\betradar-History\2_14_2017\Live\Betradar\BetService\bin\Debug\NLog.xml
+X:\ecoPayz\betradar-History\2_14_2017\Live\Betradar\BetService\obj\Debug\BetService.ProjectInstaller.resources
+X:\ecoPayz\betradar-History\2_14_2017\Live\Betradar\BetService\obj\Debug\BetService.csproj.GenerateResource.Cache
+X:\ecoPayz\betradar-History\2_14_2017\Live\Betradar\BetService\bin\Debug\AsyncIO.dll
+X:\ecoPayz\betradar-History\2_14_2017\Live\Betradar\BetService\bin\Debug\NetMQ.dll
+C:\Users\heythamwork\Google Drive\ecoPayz\betradar-History\2_14_2017\Live\Betradar\BetService\bin\Debug\BetService.exe.config
+C:\Users\heythamwork\Google Drive\ecoPayz\betradar-History\2_14_2017\Live\Betradar\BetService\obj\Debug\BetService.exe
+C:\Users\heythamwork\Google Drive\ecoPayz\betradar-History\2_14_2017\Live\Betradar\BetService\obj\Debug\BetService.pdb
+C:\Users\heythamwork\Google Drive\ecoPayz\betradar-History\2_14_2017\Live\Betradar\BetService\bin\Debug\BetService.exe
+C:\Users\heythamwork\Google Drive\ecoPayz\betradar-History\2_14_2017\Live\Betradar\BetService\bin\Debug\BetService.pdb
+C:\Users\heythamwork\Google Drive\ecoPayz\betradar-History\2_14_2017\Live\Betradar\BetService\bin\Debug\AsyncIO.dll
+C:\Users\heythamwork\Google Drive\ecoPayz\betradar-History\2_14_2017\Live\Betradar\BetService\bin\Debug\NetMQ.dll
+C:\Users\heythamwork\Google Drive\ecoPayz\betradar-History\2_14_2017\Live\Betradar\BetService\bin\Debug\NLog.dll
+C:\Users\heythamwork\Google Drive\ecoPayz\betradar-History\2_14_2017\Live\Betradar\BetService\bin\Debug\NLog.xml
+C:\Users\heythamwork\Google Drive\ecoPayz\betradar-History\2_14_2017\Live\Betradar\BetService\obj\Debug\BetService.csprojResolveAssemblyReference.cache
+C:\Users\heythamwork\Google Drive\ecoPayz\betradar-History\2_14_2017\Live\Betradar\BetService\obj\Debug\BetService.ProjectInstaller.resources
+C:\Users\heythamwork\Google Drive\ecoPayz\betradar-History\2_14_2017\Live\Betradar\BetService\obj\Debug\BetService.csproj.GenerateResource.Cache
+C:\Users\heythamwork\Google Drive\ecoPayz\betradar-History\2_14_2017\Live\Betradar\BetService\bin\Debug\SharedLibrary.dll
+C:\Users\heythamwork\Google Drive\ecoPayz\betradar-History\2_14_2017\Live\Betradar\BetService\bin\Debug\SharedLibrary.pdb
+C:\Users\heythamwork\Google Drive\ecoPayz\betradar-History\2_14_2017\Live\Betradar\BetService\bin\Debug\StackExchange.Redis.dll
+C:\Users\heythamwork\Google Drive\ecoPayz\betradar-History\2_14_2017\Live\Betradar\BetService\bin\Debug\StackExchange.Redis.xml
+C:\Users\heythamwork\Google Drive\ecoPayz\betradar-History\2_14_2017\Live\Betradar\BetService\bin\Debug\RestSharp.dll
+C:\Users\heythamwork\Google Drive\ecoPayz\betradar-History\2_14_2017\Live\Betradar\BetService\bin\Debug\Npgsql.dll
+C:\Users\heythamwork\Google Drive\ecoPayz\betradar-History\2_14_2017\Live\Betradar\BetService\bin\Debug\RestSharp.xml
+C:\Users\heythamwork\Google Drive\ecoPayz\betradar-History\2_14_2017\Live\Betradar\BetService\bin\Debug\Npgsql.xml
+C:\Users\heythamwork\Google Drive\ecoPayz\betradar-History\2_14_2017\Live\Betradar\BetService\bin\Debug\MessagePack.dll
+C:\Users\heythamwork\Google Drive\ecoPayz\betradar-History\2_14_2017\Live\Betradar\BetService\bin\Debug\System.Runtime.Serialization.Primitives.dll
+C:\Users\heythamwork\Google Drive\ecoPayz\betradar-History\2_14_2017\Live\Betradar\BetService\bin\Debug\System.Threading.Tasks.Extensions.dll
+C:\Users\heythamwork\Google Drive\ecoPayz\betradar-History\2_14_2017\Live\Betradar\BetService\bin\Debug\System.ValueTuple.dll
+C:\Users\heythamwork\Google Drive\ecoPayz\betradar-History\2_14_2017\Live\Betradar\BetService\bin\Debug\Zyan.Communication.dll
+C:\Users\heythamwork\Google Drive\ecoPayz\betradar-History\2_14_2017\Live\Betradar\BetService\bin\Debug\MsgPack.dll
+C:\Users\heythamwork\Google Drive\ecoPayz\betradar-History\2_14_2017\Live\Betradar\BetService\bin\Debug\MessagePack.xml
+C:\Users\heythamwork\Google Drive\ecoPayz\betradar-History\2_14_2017\Live\Betradar\BetService\bin\Debug\System.Threading.Tasks.Extensions.xml
+C:\Users\heythamwork\Google Drive\ecoPayz\betradar-History\2_14_2017\Live\Betradar\BetService\bin\Debug\Zyan.Communication.pdb
+C:\Users\heythamwork\Google Drive\ecoPayz\betradar-History\2_14_2017\Live\Betradar\BetService\bin\Debug\Zyan.Communication.xml
+C:\Users\heythamwork\Google Drive\ecoPayz\betradar-History\2_14_2017\Live\Betradar\BetService\bin\Debug\de\Zyan.Communication.resources.dll
+C:\Users\heythamwork\Google Drive\ecoPayz\betradar-History\2_14_2017\Live\Betradar\BetService\bin\Debug\ru\Zyan.Communication.resources.dll
+C:\Users\heythamwork\Google Drive\ecoPayz\betradar-History\2_14_2017\Live\Betradar\BetService\bin\Debug\ServiceStack.Common.dll
+C:\Users\heythamwork\Google Drive\ecoPayz\betradar-History\2_14_2017\Live\Betradar\BetService\bin\Debug\ServiceStack.Interfaces.dll
+C:\Users\heythamwork\Google Drive\ecoPayz\betradar-History\2_14_2017\Live\Betradar\BetService\bin\Debug\ServiceStack.Plugins.MsgPack.dll
+C:\Users\heythamwork\Google Drive\ecoPayz\betradar-History\2_14_2017\Live\Betradar\BetService\bin\Debug\ServiceStack.Text.dll
+C:\Users\heythamwork\Google Drive\ecoPayz\betradar-History\2_14_2017\Live\Betradar\BetService\bin\Debug\ServiceStack.Common.pdb
+C:\Users\heythamwork\Google Drive\ecoPayz\betradar-History\2_14_2017\Live\Betradar\BetService\bin\Debug\ServiceStack.Common.xml
+C:\Users\heythamwork\Google Drive\ecoPayz\betradar-History\2_14_2017\Live\Betradar\BetService\bin\Debug\ServiceStack.Interfaces.pdb
+C:\Users\heythamwork\Google Drive\ecoPayz\betradar-History\2_14_2017\Live\Betradar\BetService\bin\Debug\ServiceStack.Interfaces.xml
+C:\Users\heythamwork\Google Drive\ecoPayz\betradar-History\2_14_2017\Live\Betradar\BetService\bin\Debug\ServiceStack.Text.pdb
+C:\Users\heythamwork\Google Drive\ecoPayz\betradar-History\2_14_2017\Live\Betradar\BetService\bin\Debug\ServiceStack.Text.xml
+C:\Users\heythamwork\Google Drive\ecoPayz\betradar-History\2_14_2017\Live\Betradar\BetService\bin\Debug\Newtonsoft.Json.dll
+C:\Users\heythamwork\Google Drive\ecoPayz\betradar-History\2_14_2017\Live\Betradar\BetService\bin\Debug\Newtonsoft.Json.xml
+C:\Users\heythamwork\Google Drive\ecoPayz\betradar-History\2_14_2017\Live\Betradar\BetService\obj\Debug\BetService.csproj.BetService.exe.config
+C:\Users\heythamwork\Google Drive\ecoPayz\Live\Betradar\BetService\bin\Debug\BetService.exe.config
+C:\Users\heythamwork\Google Drive\ecoPayz\Live\Betradar\BetService\obj\Debug\BetService.exe
+C:\Users\heythamwork\Google Drive\ecoPayz\Live\Betradar\BetService\obj\Debug\BetService.pdb
+C:\Users\heythamwork\Google Drive\ecoPayz\Live\Betradar\BetService\bin\Debug\BetService.exe
+C:\Users\heythamwork\Google Drive\ecoPayz\Live\Betradar\BetService\bin\Debug\BetService.pdb
+C:\Users\heythamwork\Google Drive\ecoPayz\Live\Betradar\BetService\bin\Debug\AsyncIO.dll
+C:\Users\heythamwork\Google Drive\ecoPayz\Live\Betradar\BetService\bin\Debug\MessagePack.dll
+C:\Users\heythamwork\Google Drive\ecoPayz\Live\Betradar\BetService\bin\Debug\MsgPack.dll
+C:\Users\heythamwork\Google Drive\ecoPayz\Live\Betradar\BetService\bin\Debug\NetMQ.dll
+C:\Users\heythamwork\Google Drive\ecoPayz\Live\Betradar\BetService\bin\Debug\NLog.dll
+C:\Users\heythamwork\Google Drive\ecoPayz\Live\Betradar\BetService\bin\Debug\Npgsql.dll
+C:\Users\heythamwork\Google Drive\ecoPayz\Live\Betradar\BetService\bin\Debug\ServiceStack.Common.dll
+C:\Users\heythamwork\Google Drive\ecoPayz\Live\Betradar\BetService\bin\Debug\ServiceStack.Interfaces.dll
+C:\Users\heythamwork\Google Drive\ecoPayz\Live\Betradar\BetService\bin\Debug\ServiceStack.Plugins.MsgPack.dll
+C:\Users\heythamwork\Google Drive\ecoPayz\Live\Betradar\BetService\bin\Debug\ServiceStack.Text.dll
+C:\Users\heythamwork\Google Drive\ecoPayz\Live\Betradar\BetService\bin\Debug\SharedLibrary.dll
+C:\Users\heythamwork\Google Drive\ecoPayz\Live\Betradar\BetService\bin\Debug\System.Runtime.Serialization.Primitives.dll
+C:\Users\heythamwork\Google Drive\ecoPayz\Live\Betradar\BetService\bin\Debug\System.Threading.Tasks.Extensions.dll
+C:\Users\heythamwork\Google Drive\ecoPayz\Live\Betradar\BetService\bin\Debug\System.ValueTuple.dll
+C:\Users\heythamwork\Google Drive\ecoPayz\Live\Betradar\BetService\bin\Debug\Zyan.Communication.dll
+C:\Users\heythamwork\Google Drive\ecoPayz\Live\Betradar\BetService\bin\Debug\RestSharp.dll
+C:\Users\heythamwork\Google Drive\ecoPayz\Live\Betradar\BetService\bin\Debug\StackExchange.Redis.dll
+C:\Users\heythamwork\Google Drive\ecoPayz\Live\Betradar\BetService\bin\Debug\Newtonsoft.Json.dll
+C:\Users\heythamwork\Google Drive\ecoPayz\Live\Betradar\BetService\bin\Debug\SharedLibrary.pdb
+C:\Users\heythamwork\Google Drive\ecoPayz\Live\Betradar\BetService\bin\Debug\MessagePack.xml
+C:\Users\heythamwork\Google Drive\ecoPayz\Live\Betradar\BetService\bin\Debug\NLog.xml
+C:\Users\heythamwork\Google Drive\ecoPayz\Live\Betradar\BetService\bin\Debug\Npgsql.xml
+C:\Users\heythamwork\Google Drive\ecoPayz\Live\Betradar\BetService\bin\Debug\ServiceStack.Common.pdb
+C:\Users\heythamwork\Google Drive\ecoPayz\Live\Betradar\BetService\bin\Debug\ServiceStack.Common.xml
+C:\Users\heythamwork\Google Drive\ecoPayz\Live\Betradar\BetService\bin\Debug\ServiceStack.Interfaces.pdb
+C:\Users\heythamwork\Google Drive\ecoPayz\Live\Betradar\BetService\bin\Debug\ServiceStack.Interfaces.xml
+C:\Users\heythamwork\Google Drive\ecoPayz\Live\Betradar\BetService\bin\Debug\ServiceStack.Text.pdb
+C:\Users\heythamwork\Google Drive\ecoPayz\Live\Betradar\BetService\bin\Debug\ServiceStack.Text.xml
+C:\Users\heythamwork\Google Drive\ecoPayz\Live\Betradar\BetService\bin\Debug\System.Threading.Tasks.Extensions.xml
+C:\Users\heythamwork\Google Drive\ecoPayz\Live\Betradar\BetService\bin\Debug\Zyan.Communication.pdb
+C:\Users\heythamwork\Google Drive\ecoPayz\Live\Betradar\BetService\bin\Debug\Zyan.Communication.xml
+C:\Users\heythamwork\Google Drive\ecoPayz\Live\Betradar\BetService\bin\Debug\RestSharp.xml
+C:\Users\heythamwork\Google Drive\ecoPayz\Live\Betradar\BetService\bin\Debug\StackExchange.Redis.xml
+C:\Users\heythamwork\Google Drive\ecoPayz\Live\Betradar\BetService\bin\Debug\Newtonsoft.Json.xml
+C:\Users\heythamwork\Google Drive\ecoPayz\Live\Betradar\BetService\bin\Debug\de\Zyan.Communication.resources.dll
+C:\Users\heythamwork\Google Drive\ecoPayz\Live\Betradar\BetService\bin\Debug\ru\Zyan.Communication.resources.dll
+C:\Users\heythamwork\Google Drive\ecoPayz\Live\Betradar\BetService\obj\Debug\BetService.csprojResolveAssemblyReference.cache
+C:\Users\heythamwork\Google Drive\ecoPayz\Live\Betradar\BetService\obj\Debug\BetService.csproj.BetService.exe.config
+C:\Users\heythamwork\Google Drive\ecoPayz\Live\Betradar\BetService\obj\Debug\BetService.ProjectInstaller.resources
+C:\Users\heythamwork\Google Drive\ecoPayz\Live\Betradar\BetService\obj\Debug\BetService.csproj.GenerateResource.Cache
+X:\ecoPayz\Live-Solution\Betradar\BetService\bin\Debug\BetService.exe.config
+X:\ecoPayz\Live-Solution\Betradar\BetService\bin\Debug\BetService.exe
+X:\ecoPayz\Live-Solution\Betradar\BetService\bin\Debug\BetService.pdb
+X:\ecoPayz\Live-Solution\Betradar\BetService\bin\Debug\AsyncIO.dll
+X:\ecoPayz\Live-Solution\Betradar\BetService\bin\Debug\MessagePack.dll
+X:\ecoPayz\Live-Solution\Betradar\BetService\bin\Debug\MsgPack.dll
+X:\ecoPayz\Live-Solution\Betradar\BetService\bin\Debug\NetMQ.dll
+X:\ecoPayz\Live-Solution\Betradar\BetService\bin\Debug\NLog.dll
+X:\ecoPayz\Live-Solution\Betradar\BetService\bin\Debug\Npgsql.dll
+X:\ecoPayz\Live-Solution\Betradar\BetService\bin\Debug\ServiceStack.Common.dll
+X:\ecoPayz\Live-Solution\Betradar\BetService\bin\Debug\ServiceStack.Plugins.MsgPack.dll
+X:\ecoPayz\Live-Solution\Betradar\BetService\bin\Debug\ServiceStack.Text.dll
+X:\ecoPayz\Live-Solution\Betradar\BetService\bin\Debug\SharedLibrary.dll
+X:\ecoPayz\Live-Solution\Betradar\BetService\bin\Debug\System.Runtime.Serialization.Primitives.dll
+X:\ecoPayz\Live-Solution\Betradar\BetService\bin\Debug\System.Threading.Tasks.Extensions.dll
+X:\ecoPayz\Live-Solution\Betradar\BetService\bin\Debug\System.ValueTuple.dll
+X:\ecoPayz\Live-Solution\Betradar\BetService\bin\Debug\Zyan.Communication.dll
+X:\ecoPayz\Live-Solution\Betradar\BetService\bin\Debug\RestSharp.dll
+X:\ecoPayz\Live-Solution\Betradar\BetService\bin\Debug\StackExchange.Redis.dll
+X:\ecoPayz\Live-Solution\Betradar\BetService\bin\Debug\Newtonsoft.Json.dll
+X:\ecoPayz\Live-Solution\Betradar\BetService\bin\Debug\SharedLibrary.pdb
+X:\ecoPayz\Live-Solution\Betradar\BetService\bin\Debug\MessagePack.xml
+X:\ecoPayz\Live-Solution\Betradar\BetService\bin\Debug\NLog.xml
+X:\ecoPayz\Live-Solution\Betradar\BetService\bin\Debug\Npgsql.xml
+X:\ecoPayz\Live-Solution\Betradar\BetService\bin\Debug\ServiceStack.Common.xml
+X:\ecoPayz\Live-Solution\Betradar\BetService\bin\Debug\ServiceStack.Text.xml
+X:\ecoPayz\Live-Solution\Betradar\BetService\bin\Debug\System.Threading.Tasks.Extensions.xml
+X:\ecoPayz\Live-Solution\Betradar\BetService\bin\Debug\Zyan.Communication.pdb
+X:\ecoPayz\Live-Solution\Betradar\BetService\bin\Debug\Zyan.Communication.xml
+X:\ecoPayz\Live-Solution\Betradar\BetService\bin\Debug\RestSharp.xml
+X:\ecoPayz\Live-Solution\Betradar\BetService\bin\Debug\StackExchange.Redis.xml
+X:\ecoPayz\Live-Solution\Betradar\BetService\bin\Debug\Newtonsoft.Json.xml
+X:\ecoPayz\Live-Solution\Betradar\BetService\bin\Debug\de\Zyan.Communication.resources.dll
+X:\ecoPayz\Live-Solution\Betradar\BetService\bin\Debug\ru\Zyan.Communication.resources.dll
+X:\ecoPayz\Live-Solution\Betradar\BetService\obj\Debug\BetService.csprojResolveAssemblyReference.cache
+X:\ecoPayz\Live-Solution\Betradar\BetService\obj\Debug\BetService.ProjectInstaller.resources
+X:\ecoPayz\Live-Solution\Betradar\BetService\obj\Debug\BetService.csproj.GenerateResource.Cache
+X:\ecoPayz\Live-Solution\Betradar\BetService\obj\Debug\BetService.exe
+X:\ecoPayz\Live-Solution\Betradar\BetService\obj\Debug\BetService.pdb
+X:\ecoPayz\Live-Solution\Betradar\BetService\bin\Debug\BookmakerSdk.dll
+X:\ecoPayz\Live-Solution\Betradar\BetService\bin\Debug\BookmakerSdk.xml
+X:\ecoPayz\Live-Solution\Betradar\BetService\obj\Debug\BetService.CouponFinalize.resources
+Y:\Google Drive\ecoPayz\Live-Solution\Betradar\BetService\bin\Debug\BetService.exe.config
+Y:\Google Drive\ecoPayz\Live-Solution\Betradar\BetService\obj\Debug\BetService.exe
+Y:\Google Drive\ecoPayz\Live-Solution\Betradar\BetService\obj\Debug\BetService.pdb
+Y:\Google Drive\ecoPayz\Live-Solution\Betradar\BetService\obj\Debug\BetService.csprojResolveAssemblyReference.cache
+Y:\Google Drive\ecoPayz\Live-Solution\Betradar\BetService\obj\Debug\BetService.csproj.BetService.exe.config
+Y:\Google Drive\ecoPayz\Live-Solution\Betradar\BetService\obj\Debug\BetService.CouponFinalize.resources
+Y:\Google Drive\ecoPayz\Live-Solution\Betradar\BetService\obj\Debug\BetService.ProjectInstaller.resources
+Y:\Google Drive\ecoPayz\Live-Solution\Betradar\BetService\obj\Debug\BetService.csproj.GenerateResource.Cache
+Y:\Google Drive\ecoPayz\Live-Solution\Betradar\BetService\bin\Debug\BetService.exe
+Y:\Google Drive\ecoPayz\Live-Solution\Betradar\BetService\bin\Debug\BetService.pdb
+Y:\Google Drive\ecoPayz\Live-Solution\Betradar\BetService\bin\Debug\AsyncIO.dll
+Y:\Google Drive\ecoPayz\Live-Solution\Betradar\BetService\bin\Debug\BookmakerSdk.dll
+Y:\Google Drive\ecoPayz\Live-Solution\Betradar\BetService\bin\Debug\MessagePack.dll
+Y:\Google Drive\ecoPayz\Live-Solution\Betradar\BetService\bin\Debug\MsgPack.dll
+Y:\Google Drive\ecoPayz\Live-Solution\Betradar\BetService\bin\Debug\NetMQ.dll
+Y:\Google Drive\ecoPayz\Live-Solution\Betradar\BetService\bin\Debug\Newtonsoft.Json.dll
+Y:\Google Drive\ecoPayz\Live-Solution\Betradar\BetService\bin\Debug\NLog.dll
+Y:\Google Drive\ecoPayz\Live-Solution\Betradar\BetService\bin\Debug\Npgsql.dll
+Y:\Google Drive\ecoPayz\Live-Solution\Betradar\BetService\bin\Debug\Phoenix.dll
+Y:\Google Drive\ecoPayz\Live-Solution\Betradar\BetService\bin\Debug\RestSharp.dll
+Y:\Google Drive\ecoPayz\Live-Solution\Betradar\BetService\bin\Debug\ServiceStack.Common.dll
+Y:\Google Drive\ecoPayz\Live-Solution\Betradar\BetService\bin\Debug\ServiceStack.Interfaces.dll
+Y:\Google Drive\ecoPayz\Live-Solution\Betradar\BetService\bin\Debug\ServiceStack.Plugins.MsgPack.dll
+Y:\Google Drive\ecoPayz\Live-Solution\Betradar\BetService\bin\Debug\ServiceStack.Text.dll
+Y:\Google Drive\ecoPayz\Live-Solution\Betradar\BetService\bin\Debug\SharedLibrary.dll
+Y:\Google Drive\ecoPayz\Live-Solution\Betradar\BetService\bin\Debug\System.Runtime.Serialization.Primitives.dll
+Y:\Google Drive\ecoPayz\Live-Solution\Betradar\BetService\bin\Debug\System.Threading.Tasks.Extensions.dll
+Y:\Google Drive\ecoPayz\Live-Solution\Betradar\BetService\bin\Debug\System.ValueTuple.dll
+Y:\Google Drive\ecoPayz\Live-Solution\Betradar\BetService\bin\Debug\Zyan.Communication.dll
+Y:\Google Drive\ecoPayz\Live-Solution\Betradar\BetService\bin\Debug\websocket-sharp.dll
+Y:\Google Drive\ecoPayz\Live-Solution\Betradar\BetService\bin\Debug\StackExchange.Redis.dll
+Y:\Google Drive\ecoPayz\Live-Solution\Betradar\BetService\bin\Debug\Phoenix.pdb
+Y:\Google Drive\ecoPayz\Live-Solution\Betradar\BetService\bin\Debug\SharedLibrary.pdb
+Y:\Google Drive\ecoPayz\Live-Solution\Betradar\BetService\bin\Debug\BookmakerSdk.xml
+Y:\Google Drive\ecoPayz\Live-Solution\Betradar\BetService\bin\Debug\MessagePack.xml
+Y:\Google Drive\ecoPayz\Live-Solution\Betradar\BetService\bin\Debug\Newtonsoft.Json.xml
+Y:\Google Drive\ecoPayz\Live-Solution\Betradar\BetService\bin\Debug\NLog.xml
+Y:\Google Drive\ecoPayz\Live-Solution\Betradar\BetService\bin\Debug\Npgsql.xml
+Y:\Google Drive\ecoPayz\Live-Solution\Betradar\BetService\bin\Debug\RestSharp.xml
+Y:\Google Drive\ecoPayz\Live-Solution\Betradar\BetService\bin\Debug\ServiceStack.Common.pdb
+Y:\Google Drive\ecoPayz\Live-Solution\Betradar\BetService\bin\Debug\ServiceStack.Common.xml
+Y:\Google Drive\ecoPayz\Live-Solution\Betradar\BetService\bin\Debug\ServiceStack.Interfaces.pdb
+Y:\Google Drive\ecoPayz\Live-Solution\Betradar\BetService\bin\Debug\ServiceStack.Interfaces.xml
+Y:\Google Drive\ecoPayz\Live-Solution\Betradar\BetService\bin\Debug\ServiceStack.Text.pdb
+Y:\Google Drive\ecoPayz\Live-Solution\Betradar\BetService\bin\Debug\ServiceStack.Text.xml
+Y:\Google Drive\ecoPayz\Live-Solution\Betradar\BetService\bin\Debug\System.Threading.Tasks.Extensions.xml
+Y:\Google Drive\ecoPayz\Live-Solution\Betradar\BetService\bin\Debug\Zyan.Communication.pdb
+Y:\Google Drive\ecoPayz\Live-Solution\Betradar\BetService\bin\Debug\Zyan.Communication.xml
+Y:\Google Drive\ecoPayz\Live-Solution\Betradar\BetService\bin\Debug\websocket-sharp.xml
+Y:\Google Drive\ecoPayz\Live-Solution\Betradar\BetService\bin\Debug\StackExchange.Redis.xml
+Y:\Google Drive\ecoPayz\Live-Solution\Betradar\BetService\bin\Debug\de\Zyan.Communication.resources.dll
+Y:\Google Drive\ecoPayz\Live-Solution\Betradar\BetService\bin\Debug\ru\Zyan.Communication.resources.dll
+X:\ecoPayz\Live-Solution\Betradar\BetService\obj\Debug\BetService.Properties.Resources.resources
+X:\ecoPayz\Live-Solution\Betradar\BetService\bin\Debug\PhoenixSocket.dll
+X:\ecoPayz\Live-Solution\Betradar\BetService\bin\Debug\WebSocket4Net.dll
+X:\ecoPayz\Live-Solution\Betradar\BetService\bin\Debug\ServiceStack.Interfaces.dll
+X:\ecoPayz\Live-Solution\Betradar\BetService\bin\Debug\ServiceStack.Interfaces.xml

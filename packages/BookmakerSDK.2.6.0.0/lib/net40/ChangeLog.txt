@@ -1,0 +1,240 @@
+2.6.0.0 (30.5.2017)
+LiveScout: added Gold and Networth property to entity MatchUpdate; property Innings changed to List<Innings>
+LiveOdds: added property StatusId
+General: BetStopReason - Id property changed from string to int
+
+2.5.7.0 (30.3.2017)
+Fixed LiveOdds schema for TvChannel property
+Updated LiveScout schema (added CoverageStatusId)
+
+2.5.6.1 (29.3.2017)
+Fixed issue with Lcoo encoding
+
+2.5.6.0 (28.3.2017)
+Fixed settings of VirtualGameId and RaceDayNumber in virtual sports
+Added UniqueId to home and away team property
+Changed hostname for VFL feed
+Added new EventTypes for LiveScout
+
+2.5.5.0 (21.3.2017)
+Minor fixed for AliveWithOutrights
+Implemented support for HomeCompetitors & AwayCompetitors
+
+2.5.4.0 (15.3.2017)
+VTO - added virtualgameId field
+VFC - added some additional checks for outrights headers
+
+2.5.3.0 (7.3.2017)
+Changed how it fetches data for Lcoo feed (previously in some rare cases throwed exception)
+
+2.5.2.0 (7.2.2017)
+LiveOdds - fixed case where in some situation IsConnectionStable was wrongly set 
+
+2.5.1.0 (31.1.2017)
+To LiveOdds feed added CoveredFrom property (indicates whether the match is being covered from a television feed or the scout is at the match venue)
+
+2.5.0.0 (16.1.2017)
+LiveScout score can have score1 sub element(for example tiebreak), minor breaking change 
+
+2.4.6.0 (13.12.2016)
+- minor changes
+
+2.4.5.0 (5.10.2016)
+- LiveOdds XSD has changed
+
+2.4.4.0 (4.10.2016)
+- LiveOdds/LiveScout 2016.5 release changes
+
+2.4.3.0 (15.9.2016)
+- LCoO schema changed, void factor is now String
+- LiveOddsTestManager StartMatchReplay added fast forward option
+
+2.4.2.0 (26.7.2016)
+- LiveOdds/LiveScout 2016.4 release changes
+- RaceDay EndTime and RaceDayNumber nullable
+
+2.4.1.0 (6.7.2016)
+- LCoO fetch URL changed from www.betradar.com to getxml.betradar.com
+
+2.4.0.0 (24.6.2016)
+- Virtual Football Cup support
+- GetEventList has been split to 2 different calls. One with events ids and another with date interval
+
+2.3.13.0 (26.5.2016)
+- LiveScout XSD was updated, made according changes in the SDK
+
+2.3.12.0 (23.5.2016)
+- LiveOdds/LiveScout 2016.3 release changes
+
+2.3.11.0 (12.5.2016)
+- LCoO Goal type added
+- LCoO FixtureEntity Players added
+
+2.3.10.0 (26.4.2016)
+- LCoO RoundInfoEntity Id will be null if not present in XML
+- LCoO TextEntity Id, Superid, TeamId will be null if not present in XML
+- LCoO Goal/Card Doubtful will be parsed correctly
+
+2.3.9.0 (13.4.2016)
+- LiveOdds/LiveScout 2016.2 release changes
+- LCoO added AAMSCalendarID
+- With introduction of new sport there are over 100 new score types so we changed MatchUpdate.Score from IDictionary<ScoreType, HomeAway<double>> to IDictionary<String, HomeAway<double>>
+- Changed default setting of RestartOnParseError to false
+
+2.3.8.0 (31.3.2016)
+- Added support for multiple matches per current request
+- Fixed set score splitting
+
+2.3.7.0 (23.3.2016)
+- LiveOdds connection parameters have changed. liveodds.betradar.com:1981/1980 -> liveplex.betradar.com:1961/1960. Check your firewall rules
+
+2.3.6.0 (15.2.2016)
+- LiveOdds/LiveScout 2016.1 release changes
+- XSD schema validation strictness is now configurable
+- LiveScout use matchsubscription XML element to subscribe
+
+2.3.5.0 (8.12.2015)
+- LiveOdds/LiveScout 2015.6 release changes
+
+2.3.4.0 (3.12.2015)
+- LCoO venue text now gets populated even if no translations are set
+
+2.3.3.0 (10.11.2015)
+- LCoO BetResultEntity.Status and OddsEntity.Id are nullable
+- VHC now uses vsportsodds.betradar.com url as default 
+- cancelbet was added to VHC and VDR schema
+
+2.3.2.0 (19.10.2015)
+- LiveOdds/LiveScout 2015.5 release changes
+- Feeds will now restart on any parse error by default
+- SdkLogger now deletes logger files even if in non default folder
+
+2.3.1.0 (28.9.2015)
+- SingleHeaderEvent and SingleHeaderWithOddsEvent are now Serializable 
+- LCoO FeedType information added to LCoO entities
+- LCoO venue text now gets populated correctly
+- ILiveOddsTestManager ChangeXmlConfig support added
+- SdkConfigurationMessageDispatcher NumDispatchers maximum possible value increased from 8 to 64
+
+2.3.0.0 (19.8.2015)
+- LiveOdds/LiveScout 2015.4 release changes
+- Extended LiveScout interface with OnOpened, OnClosed
+
+2.2.2.0 (31.7.2015)
+- LCoO was missing StatusInfo SDK data structure
+- Extended LiveScout EventType with new events
+
+2.2.1.0 (16.7.2015)
+- Some SDK entities were missing Serializable interface
+
+2.2.0.0 (6.7.2015)
+- Virtual Basketball League support
+- ScoutEvent PCount renamed to PitchCount
+
+2.1.17.0 (16.6.2015)
+- LiveOdds/LiveScout 2015.3 release changes
+
+2.1.16.0 (18.5.2015)
+- LiveOdds schema was missing "awaiting_sd" status
+- VHC staging hostname fix
+- LCoO HttpQueueFetcher set proxy to null to disable automatic proxy detection
+
+2.1.15.0 (13.4.2015)
+- LCoO fixture timezone in now configurable
+- Fixed OddsCreator service url
+
+2.1.14.0 (18.3.2015)
+- Fixed LiveOdds schema
+- Extended ILiveOddsTestManager
+- VTO test=true now connects to virtualstaging2.betradar.com
+
+2.1.13.0 (18.2.2015)
+- Round added to LO schema which is used in VTO
+
+2.1.12.0 (18.2.2015)
+- Added MatchStatus cancelled which is used in VTO
+
+2.1.11.0 (17.2.2015)
+- Fixed LiveScout parsing
+
+2.1.10.0 (10.2.2015)
+- Updated SDK for 2015.1 server update
+
+2.1.9.0 (29.1.2015)
+- LCoO updated to latest schema
+- RestartOnParseError option added
+- LiveOddsTestManager added reset xml config request to force update check
+
+2.1.8.0 (9.12.2014)
+
+- LCoO Timestamp is optional, so now its nullable.
+- LCoO EventName was not being populated
+- EventOddsField now has ViewIndex to indicate original order
+- Updated SDK for 2014.6 server update
+
+2.1.7.0 (20.10.2014)
+
+- Updated SDK for 2014.5 server update
+- PlayerPosition changed from enum to string to support other sports
+
+2.1.6.0 (8.10.2014)
+
+- NodaTime dependency was missing
+- Fix : LCoO Competitors Texts list was empty
+
+2.1.5.0 (6.10.2014)
+
+- Fix : LCoO player list was always full even if null data was received
+- Fix : LCoO player entity TextEntity was not populated correctly
+
+2.1.4.0 (30.9.2014)
+
+- LCoO schema was updated
+- Changed parsing of LCoO message creation time, it is now in UTC
+
+2.1.3.0 (22.9.2014)
+
+- Schema was missing after_sd status
+
+
+2.1.2.0
+
+- BookEvents returns request id
+- Reduced min key strength
+- Artificial BetStop has undefined event status
+
+2.1.1.0 (21.8.2014)
+
+- OddsCreator namespace fix
+- There were 2014.4 changes missing
+- CipherSettings error better logging
+- LiveOddsGUI if Test="true" StartAuto is called when connection stable
+- Lcoo was missing some dlls in merged dll
+
+2.1.0.0 (6.8.2014)
+
+- Support for Life Cycle of Odds feed
+- Support for Virtual Tennis Open feed
+- Updated SDK for 2014.4 server update
+- ILiveOddsTestManager StartMatchReplay fix
+- Sdk logging fix
+- Sdk injection fixes
+- Removed Active property from OddsEntityBase
+
+2.0.2.0 (31.7.2014)
+
+- BetCancel StartTime and EndTime should be nullable
+- ConnectionData increased default SendTimeout and ReceiveTimeout
+- Sdk resolver config fix
+
+2.0.1.0 (22.7.2014)
+
+- Logging fix. Stats and config are not per feed anymore
+- Nuget 4.5 .NET package fix
+
+2.0.0.0 (3.7.2014)
+
+- Initial release
+- Added support for VHC, VDR, LivePlex, Soccer Roulette
+- Some major changes to interfaces, namespaces, classes, logging, ...
+- New error manager

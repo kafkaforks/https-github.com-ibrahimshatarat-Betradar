@@ -1,0 +1,98 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Betradar</name>
+    </assembly>
+    <members>
+        <!-- Badly formed XML comment ignored for member "M:Betradar.Classes.DbInsert.Common.selectEnumValue(System.String,System.String)" -->
+        <!-- Badly formed XML comment ignored for member "M:Betradar.Classes.DbInsert.Common.insertAdditionalData(Sportradar.SDK.FeedProviders.LiveOdds.LiveOdds.ScoreCardSummary)" -->
+        <!-- Badly formed XML comment ignored for member "M:Betradar.Classes.DbInsert.Common.insertAdditionalData(Sportradar.SDK.FeedProviders.LiveScout.LineupsEventArgs)" -->
+        <member name="M:Betradar.Classes.DbInsert.Common.insertAdditionalData(System.Collections.Generic.IDictionary{System.String,System.String})">
+            <summary>
+            Insert Additional data in Dictionaries
+            </summary>
+            <param name="entity"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Betradar.Classes.DbInsert.Common.insertOutrightResults(System.Collections.Generic.List{Sportradar.SDK.FeedProviders.Lcoo.OutrightResultEntity})">
+            <summary>
+            Insert outright Results
+            </summary>
+            <param name="entities"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Betradar.Classes.DbInsert.Common.insertOutrightResult(Sportradar.SDK.FeedProviders.Lcoo.OutrightResultEntity,System.Int64)">
+            <summary>
+            Insert Single Outright Result
+            </summary>
+            <param name="entity"></param>
+            <returns></returns>
+        </member>
+        <!-- Badly formed XML comment ignored for member "M:Betradar.Classes.DbInsert.Common.insertWinningOutcome(Sportradar.SDK.FeedProviders.Lcoo.WinningOutcomeEntity)" -->
+        <member name="M:Betradar.Classes.DbInsert.Common.insertMatchRoles(System.Collections.Generic.List{Sportradar.SDK.FeedProviders.LiveScout.MatchRole})">
+            <summary>
+            Insert Match Roles
+            </summary>
+            <param name="entity"></param>
+            Returns custom type Return Queue Long;        /// Queue: is the sum of other inserts " if applied " to add to the mother queue in case of rollback        /// Long: is the main inserted row id        /// 
+        </member>
+        <member name="M:Betradar.Classes.DbInsert.Common.updateDyMatchAllData(System.Int64,System.Int64,System.String,System.String,System.Int64,System.String,System.String,System.DateTime,System.Int64,System.String,System.String,System.Int64,System.String,System.String,System.Int64)">
+            <summary>
+            Update new match table 
+            </summary>
+            <param name="p_home_team_id"></param>
+            <param name="p_away_team_id"></param>
+            <param name="p_home_team_name"></param>
+            <param name="p_away_team_name"></param>
+            <param name="p_category_id"></param>
+            <param name="p_category_name"></param>
+            <param name="p_category_name_tr"></param>
+            <param name="p_match_start_date"></param>
+            <param name="p_sport_id"></param>
+            <param name="p_sport_name"></param>
+            <param name="p_sport_name_tr"></param>
+            <param name="p_tournament_id"></param>
+            <param name="p_tournament_name"></param>
+            <param name="p_tournament_name_tr"></param>
+            <param name="p_match_id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Betradar.Classes.DbInsert.Common.insertCpLcooOdds(Sportradar.SDK.FeedProviders.Lcoo.OddsEntity,System.Int64,System.Int64,System.String,System.String,System.Boolean,System.String)">
+            <summary>
+            Insert Pre Match Odds
+            </summary>
+            <param name="entity"></param>
+            <param name="p_match_id"></param>
+            <param name="p_odd_type_id"></param>
+            <param name="p_odd_type_name"></param>
+            <param name="p_odd_name"></param>
+            <param name="p_odd_visible"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Betradar.Classes.DbInsert.Common.duplicateJsonToArray(System.String)">
+            <summary>
+            Insert 
+            </summary>
+            <param name="Lineupentity"></param>
+            Returns custom type Return Queue Long;        /// Queue: is the sum of other inserts " if applied " to add to the mother queue in case of rollback        /// Long: is the main inserted row id        /// 
+            <returns>ReturnQueueLong</returns>
+        </member>
+        <member name="M:Betradar.Classes.DbInsert.Common.insertCpLcooBetclearOdds(Sportradar.SDK.FeedProviders.Lcoo.BetResultEntity,System.Int64,System.String)">
+            <summary>
+            Insert Bet Clears for Lcoo
+            </summary>
+            <param name="entity"></param>
+            <param name="MatchID"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Betradar.Classes.DbInsert.Common.SetRollback(System.Int64,SharedLibrary.Globals.Tables,SharedLibrary.Globals.TransactionTypes)">
+            <summary>
+            This function sets the Roll Back object and the calling function sets the queue in case of a roll back
+            </summary>
+            <param name="RowId"></param>
+            <param name="Table"></param>
+            <param name="Transaction"></param>
+            <returns>Globals.Rollback</returns>
+        </member>
+    </members>
+</doc>
