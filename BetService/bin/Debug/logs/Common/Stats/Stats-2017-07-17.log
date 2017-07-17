@@ -10546,3 +10546,1137 @@ AvgDequeueRate : 0.00/s
 TotalDropped : 0
 TotalEnqueued : 0
 TotalDequeued : 0
+2017-07-17 17:26:31,990 [24] [DEBUG] |pTDsW7V1tyAse4uJ/eMS7Z2Lsw8=| -Minutely stats:
+ItemsInQueue : Min , Max , Avg 
+TimeInQueue : Min , Max , Avg 
+TimeToProcess : Min , Max , Avg 
+AvgEnqueueRate : 0.00/s
+AvgDequeueRate : 0.00/s
+TotalDropped : 0
+TotalEnqueued : 0
+TotalDequeued : 0
+2017-07-17 17:26:31,990 [22] [DEBUG] |uQOb8tbX/Z/r/h3LRrGw9fNimrw=| DispatcherQueue2-Minutely stats:
+ItemsInQueue : Min , Max , Avg 
+TimeInQueue : Min , Max , Avg 
+TimeToProcess : Min , Max , Avg 
+AvgEnqueueRate : 0.00/s
+AvgDequeueRate : 0.00/s
+TotalDropped : 0
+TotalEnqueued : 0
+TotalDequeued : 0
+2017-07-17 17:26:31,990 [12] [DEBUG] |+Df+a4GBixdYfkuqe7+hmnFhPG4=| -Minutely stats:
+ItemsInQueue : Min , Max , Avg 
+TimeInQueue : Min , Max , Avg 
+TimeToProcess : Min , Max , Avg 
+AvgEnqueueRate : 0.00/s
+AvgDequeueRate : 0.00/s
+TotalDropped : 0
+TotalEnqueued : 0
+TotalDequeued : 0
+2017-07-17 17:26:31,990 [27] [DEBUG] |BGkTWbVpUNeHNI2s86sLJa6rZPI=| DispatcherQueue1-Minutely stats:
+ItemsInQueue : Min , Max , Avg 
+TimeInQueue : Min , Max , Avg 
+TimeToProcess : Min , Max , Avg 
+AvgEnqueueRate : 0.00/s
+AvgDequeueRate : 0.00/s
+TotalDropped : 0
+TotalEnqueued : 0
+TotalDequeued : 0
+2017-07-17 17:26:31,990 [25] [DEBUG] |Am0N5lxERa4QdfSdGQS087hNy/M=| -Minutely stats:
+ItemsInQueue : Min , Max , Avg 
+TimeInQueue : Min , Max , Avg 
+TimeToProcess : Min , Max , Avg 
+AvgEnqueueRate : 0.00/s
+AvgDequeueRate : 0.00/s
+TotalDropped : 0
+TotalEnqueued : 0
+TotalDequeued : 0
+2017-07-17 17:26:31,990 [29] [DEBUG] |1DaA98i3e4uqcYu+ApDQIOdw8mQ=| DispatcherQueue3-Minutely stats:
+ItemsInQueue : Min , Max , Avg 
+TimeInQueue : Min , Max , Avg 
+TimeToProcess : Min , Max , Avg 
+AvgEnqueueRate : 0.00/s
+AvgDequeueRate : 0.00/s
+TotalDropped : 0
+TotalEnqueued : 0
+TotalDequeued : 0
+2017-07-17 17:27:31,990 [28] [DEBUG] |CU4OVCs+SqakspFeLsTP0L9C1VQ=| -Minutely stats:
+ItemsInQueue : Min , Max , Avg 
+TimeInQueue : Min , Max , Avg 
+TimeToProcess : Min , Max , Avg 
+AvgEnqueueRate : 0.00/s
+AvgDequeueRate : 0.00/s
+TotalDropped : 0
+TotalEnqueued : 0
+TotalDequeued : 0
+2017-07-17 17:27:31,990 [25] [DEBUG] |Gd96SykZdyYRNDzd8ffDEIHTkAY=| -Minutely stats:
+ItemsInQueue : Min , Max , Avg 
+TimeInQueue : Min , Max , Avg 
+TimeToProcess : Min , Max , Avg 
+AvgEnqueueRate : 0.00/s
+AvgDequeueRate : 0.00/s
+TotalDropped : 0
+TotalEnqueued : 0
+TotalDequeued : 0
+2017-07-17 17:27:31,990 [24] [DEBUG] |vT3YhtNvAjKV1vd1DgXbDpRORWk=| DispatcherQueue2-Minutely stats:
+ItemsInQueue : Min , Max , Avg 
+TimeInQueue : Min , Max , Avg 
+TimeToProcess : Min , Max , Avg 
+AvgEnqueueRate : 0.00/s
+AvgDequeueRate : 0.00/s
+TotalDropped : 0
+TotalEnqueued : 0
+TotalDequeued : 0
+2017-07-17 17:27:31,990 [22] [DEBUG] |+w4kVGdN4W1YcQxPXqX1M0QZruM=| DispatcherQueue1-Minutely stats:
+ItemsInQueue : Min , Max , Avg 
+TimeInQueue : Min , Max , Avg 
+TimeToProcess : Min , Max , Avg 
+AvgEnqueueRate : 0.00/s
+AvgDequeueRate : 0.00/s
+TotalDropped : 0
+TotalEnqueued : 0
+TotalDequeued : 0
+2017-07-17 17:27:31,990 [29] [DEBUG] |V6As6QKkkaumoT5J5Q00cajkITw=| DispatcherQueue3-Minutely stats:
+ItemsInQueue : Min , Max , Avg 
+TimeInQueue : Min , Max , Avg 
+TimeToProcess : Min , Max , Avg 
+AvgEnqueueRate : 0.00/s
+AvgDequeueRate : 0.00/s
+TotalDropped : 0
+TotalEnqueued : 0
+TotalDequeued : 0
+2017-07-17 17:27:31,990 [23] [DEBUG] |q5daxstQh5cDfqdM+7K9mtUpSEo=| -Minutely stats:
+ItemsInQueue : Min , Max , Avg 
+TimeInQueue : Min , Max , Avg 
+TimeToProcess : Min , Max , Avg 
+AvgEnqueueRate : 0.00/s
+AvgDequeueRate : 0.00/s
+TotalDropped : 0
+TotalEnqueued : 0
+TotalDequeued : 0
+2017-07-17 17:28:31,991 [24] [DEBUG] |fUYeBJ/EPkFdVTJTtiFEeUsjh5I=| -Minutely stats:
+ItemsInQueue : Min , Max , Avg 
+TimeInQueue : Min , Max , Avg 
+TimeToProcess : Min , Max , Avg 
+AvgEnqueueRate : 0.00/s
+AvgDequeueRate : 0.00/s
+TotalDropped : 0
+TotalEnqueued : 0
+TotalDequeued : 0
+2017-07-17 17:28:31,991 [26] [DEBUG] |viehFmUenWqTNNFJ24TROMSbYZ4=| -Minutely stats:
+ItemsInQueue : Min , Max , Avg 
+TimeInQueue : Min , Max , Avg 
+TimeToProcess : Min , Max , Avg 
+AvgEnqueueRate : 0.00/s
+AvgDequeueRate : 0.00/s
+TotalDropped : 0
+TotalEnqueued : 0
+TotalDequeued : 0
+2017-07-17 17:28:31,991 [22] [DEBUG] |wasXdSqenodh7VbYP4khCnevpcY=| DispatcherQueue3-Minutely stats:
+ItemsInQueue : Min , Max , Avg 
+TimeInQueue : Min , Max , Avg 
+TimeToProcess : Min , Max , Avg 
+AvgEnqueueRate : 0.00/s
+AvgDequeueRate : 0.00/s
+TotalDropped : 0
+TotalEnqueued : 0
+TotalDequeued : 0
+2017-07-17 17:28:31,991 [27] [DEBUG] |8HNfK5FR28phgN3ZPD2pEtzPB+M=| -Minutely stats:
+ItemsInQueue : Min , Max , Avg 
+TimeInQueue : Min , Max , Avg 
+TimeToProcess : Min , Max , Avg 
+AvgEnqueueRate : 0.00/s
+AvgDequeueRate : 0.00/s
+TotalDropped : 0
+TotalEnqueued : 0
+TotalDequeued : 0
+2017-07-17 17:28:31,991 [23] [DEBUG] |e7KHpnn8fPZSSi9/BWtQZNOyZ/s=| DispatcherQueue2-Minutely stats:
+ItemsInQueue : Min , Max , Avg 
+TimeInQueue : Min , Max , Avg 
+TimeToProcess : Min , Max , Avg 
+AvgEnqueueRate : 0.00/s
+AvgDequeueRate : 0.00/s
+TotalDropped : 0
+TotalEnqueued : 0
+TotalDequeued : 0
+2017-07-17 17:28:31,991 [12] [DEBUG] |TlGZjtKcRNH5KPDOmw8jqIVxqYQ=| DispatcherQueue1-Minutely stats:
+ItemsInQueue : Min , Max , Avg 
+TimeInQueue : Min , Max , Avg 
+TimeToProcess : Min , Max , Avg 
+AvgEnqueueRate : 0.00/s
+AvgDequeueRate : 0.00/s
+TotalDropped : 0
+TotalEnqueued : 0
+TotalDequeued : 0
+2017-07-17 17:29:31,992 [25] [DEBUG] |n2If/6J88Pty3GrItNLdPgW9uZY=| DispatcherQueue3-Minutely stats:
+ItemsInQueue : Min , Max , Avg 
+TimeInQueue : Min , Max , Avg 
+TimeToProcess : Min , Max , Avg 
+AvgEnqueueRate : 0.00/s
+AvgDequeueRate : 0.00/s
+TotalDropped : 0
+TotalEnqueued : 0
+TotalDequeued : 0
+2017-07-17 17:29:31,992 [22] [DEBUG] |nhz3mgLpUNIrwCRMPfCMFUQzqZY=| -Minutely stats:
+ItemsInQueue : Min , Max , Avg 
+TimeInQueue : Min , Max , Avg 
+TimeToProcess : Min , Max , Avg 
+AvgEnqueueRate : 0.00/s
+AvgDequeueRate : 0.00/s
+TotalDropped : 0
+TotalEnqueued : 0
+TotalDequeued : 0
+2017-07-17 17:29:31,992 [28] [DEBUG] |uI/500goBNAlpUHxQDTzz7dPIKk=| DispatcherQueue2-Minutely stats:
+ItemsInQueue : Min , Max , Avg 
+TimeInQueue : Min , Max , Avg 
+TimeToProcess : Min , Max , Avg 
+AvgEnqueueRate : 0.00/s
+AvgDequeueRate : 0.00/s
+TotalDropped : 0
+TotalEnqueued : 0
+TotalDequeued : 0
+2017-07-17 17:29:31,992 [13] [DEBUG] |758YINOQcrkcKnQN4IeT9rgbh7Q=| -Minutely stats:
+ItemsInQueue : Min , Max , Avg 
+TimeInQueue : Min , Max , Avg 
+TimeToProcess : Min , Max , Avg 
+AvgEnqueueRate : 0.00/s
+AvgDequeueRate : 0.00/s
+TotalDropped : 0
+TotalEnqueued : 0
+TotalDequeued : 0
+2017-07-17 17:29:31,992 [23] [DEBUG] |3rPrXI04tdW4Znwz3lN0R7BwTLg=| DispatcherQueue1-Minutely stats:
+ItemsInQueue : Min , Max , Avg 
+TimeInQueue : Min , Max , Avg 
+TimeToProcess : Min , Max , Avg 
+AvgEnqueueRate : 0.00/s
+AvgDequeueRate : 0.00/s
+TotalDropped : 0
+TotalEnqueued : 0
+TotalDequeued : 0
+2017-07-17 17:29:31,992 [29] [DEBUG] |iK5yzuyoEQqJcSzwCCwkILZir5E=| -Minutely stats:
+ItemsInQueue : Min , Max , Avg 
+TimeInQueue : Min , Max , Avg 
+TimeToProcess : Min , Max , Avg 
+AvgEnqueueRate : 0.00/s
+AvgDequeueRate : 0.00/s
+TotalDropped : 0
+TotalEnqueued : 0
+TotalDequeued : 0
+2017-07-17 17:30:32,007 [13] [DEBUG] |zwaXgMdUaL8OQx4eDJcN2hxa5+w=| -Minutely stats:
+ItemsInQueue : Min , Max , Avg 
+TimeInQueue : Min , Max , Avg 
+TimeToProcess : Min , Max , Avg 
+AvgEnqueueRate : 0.00/s
+AvgDequeueRate : 0.00/s
+TotalDropped : 0
+TotalEnqueued : 0
+TotalDequeued : 0
+2017-07-17 17:30:32,007 [20] [DEBUG] |nIymyOuIBERLEjzPIEgcTo/VzNs=| -Minutely stats:
+ItemsInQueue : Min , Max , Avg 
+TimeInQueue : Min , Max , Avg 
+TimeToProcess : Min , Max , Avg 
+AvgEnqueueRate : 0.00/s
+AvgDequeueRate : 0.00/s
+TotalDropped : 0
+TotalEnqueued : 0
+TotalDequeued : 0
+2017-07-17 17:30:32,007 [12] [DEBUG] |myZZvkDusNeYDznoAprW97H/hSU=| DispatcherQueue3-Minutely stats:
+ItemsInQueue : Min , Max , Avg 
+TimeInQueue : Min , Max , Avg 
+TimeToProcess : Min , Max , Avg 
+AvgEnqueueRate : 0.00/s
+AvgDequeueRate : 0.00/s
+TotalDropped : 0
+TotalEnqueued : 0
+TotalDequeued : 0
+2017-07-17 17:30:32,007 [22] [DEBUG] |3WaYpEQVlM287PBq4kf899Fm8PI=| -Minutely stats:
+ItemsInQueue : Min , Max , Avg 
+TimeInQueue : Min , Max , Avg 
+TimeToProcess : Min , Max , Avg 
+AvgEnqueueRate : 0.00/s
+AvgDequeueRate : 0.00/s
+TotalDropped : 0
+TotalEnqueued : 0
+TotalDequeued : 0
+2017-07-17 17:30:32,008 [26] [DEBUG] |2UvvTDlxvoaaXVjAMrDPax+RAb0=| DispatcherQueue1-Minutely stats:
+ItemsInQueue : Min , Max , Avg 
+TimeInQueue : Min , Max , Avg 
+TimeToProcess : Min , Max , Avg 
+AvgEnqueueRate : 0.00/s
+AvgDequeueRate : 0.00/s
+TotalDropped : 0
+TotalEnqueued : 0
+TotalDequeued : 0
+2017-07-17 17:30:32,007 [28] [DEBUG] |eDEBkOxaAuUPgK+c4m4MsuwPaMo=| DispatcherQueue2-Minutely stats:
+ItemsInQueue : Min , Max , Avg 
+TimeInQueue : Min , Max , Avg 
+TimeToProcess : Min , Max , Avg 
+AvgEnqueueRate : 0.00/s
+AvgDequeueRate : 0.00/s
+TotalDropped : 0
+TotalEnqueued : 0
+TotalDequeued : 0
+2017-07-17 17:31:32,020 [25] [DEBUG] |XOBPvvhyIZRnkxkjqU4UaZI3gTs=| DispatcherQueue3-Minutely stats:
+ItemsInQueue : Min , Max , Avg 
+TimeInQueue : Min , Max , Avg 
+TimeToProcess : Min , Max , Avg 
+AvgEnqueueRate : 0.00/s
+AvgDequeueRate : 0.00/s
+TotalDropped : 0
+TotalEnqueued : 0
+TotalDequeued : 0
+2017-07-17 17:31:32,020 [23] [DEBUG] |NX3GNcHwnInHS79EXjJVxu3/gus=| -Minutely stats:
+ItemsInQueue : Min , Max , Avg 
+TimeInQueue : Min , Max , Avg 
+TimeToProcess : Min , Max , Avg 
+AvgEnqueueRate : 0.00/s
+AvgDequeueRate : 0.00/s
+TotalDropped : 0
+TotalEnqueued : 0
+TotalDequeued : 0
+2017-07-17 17:31:32,020 [22] [DEBUG] |p04Zf3YHgVaMW8Q0AaW697JOV4Y=| DispatcherQueue2-Minutely stats:
+ItemsInQueue : Min , Max , Avg 
+TimeInQueue : Min , Max , Avg 
+TimeToProcess : Min , Max , Avg 
+AvgEnqueueRate : 0.00/s
+AvgDequeueRate : 0.00/s
+TotalDropped : 0
+TotalEnqueued : 0
+TotalDequeued : 0
+2017-07-17 17:31:32,020 [24] [DEBUG] |A/EVg8nGKELgjOv544u4Yc87XxY=| -Minutely stats:
+ItemsInQueue : Min , Max , Avg 
+TimeInQueue : Min , Max , Avg 
+TimeToProcess : Min , Max , Avg 
+AvgEnqueueRate : 0.00/s
+AvgDequeueRate : 0.00/s
+TotalDropped : 0
+TotalEnqueued : 0
+TotalDequeued : 0
+2017-07-17 17:31:32,020 [29] [DEBUG] |H/9MM9vMagkAjlv1Etgdh7XEoq4=| -Minutely stats:
+ItemsInQueue : Min , Max , Avg 
+TimeInQueue : Min , Max , Avg 
+TimeToProcess : Min , Max , Avg 
+AvgEnqueueRate : 0.00/s
+AvgDequeueRate : 0.00/s
+TotalDropped : 0
+TotalEnqueued : 0
+TotalDequeued : 0
+2017-07-17 17:31:32,020 [28] [DEBUG] |HS/j0uSjVGbjQiiOE7N8Eaysp3g=| DispatcherQueue1-Minutely stats:
+ItemsInQueue : Min , Max , Avg 
+TimeInQueue : Min , Max , Avg 
+TimeToProcess : Min , Max , Avg 
+AvgEnqueueRate : 0.00/s
+AvgDequeueRate : 0.00/s
+TotalDropped : 0
+TotalEnqueued : 0
+TotalDequeued : 0
+2017-07-17 17:32:32,020 [27] [DEBUG] |J+r370dlfabMf76fUD1t15k7fhQ=| DispatcherQueue2-Minutely stats:
+ItemsInQueue : Min , Max , Avg 
+TimeInQueue : Min , Max , Avg 
+TimeToProcess : Min , Max , Avg 
+AvgEnqueueRate : 0.00/s
+AvgDequeueRate : 0.00/s
+TotalDropped : 0
+TotalEnqueued : 0
+TotalDequeued : 0
+2017-07-17 17:32:32,020 [22] [DEBUG] |wdXs9fDhUGDZyKqGhzDnG4l9dGE=| DispatcherQueue1-Minutely stats:
+ItemsInQueue : Min , Max , Avg 
+TimeInQueue : Min , Max , Avg 
+TimeToProcess : Min , Max , Avg 
+AvgEnqueueRate : 0.00/s
+AvgDequeueRate : 0.00/s
+TotalDropped : 0
+TotalEnqueued : 0
+TotalDequeued : 0
+2017-07-17 17:32:32,020 [26] [DEBUG] |yK0/BePqw4SM9kW1DATk3qItTxs=| DispatcherQueue3-Minutely stats:
+ItemsInQueue : Min , Max , Avg 
+TimeInQueue : Min , Max , Avg 
+TimeToProcess : Min , Max , Avg 
+AvgEnqueueRate : 0.00/s
+AvgDequeueRate : 0.00/s
+TotalDropped : 0
+TotalEnqueued : 0
+TotalDequeued : 0
+2017-07-17 17:32:32,020 [28] [DEBUG] |jM8LP3wnYJMAlfoIn8tytpWDghE=| -Minutely stats:
+ItemsInQueue : Min , Max , Avg 
+TimeInQueue : Min , Max , Avg 
+TimeToProcess : Min , Max , Avg 
+AvgEnqueueRate : 0.00/s
+AvgDequeueRate : 0.00/s
+TotalDropped : 0
+TotalEnqueued : 0
+TotalDequeued : 0
+2017-07-17 17:32:32,020 [24] [DEBUG] |ppN3dwNR8WAR/nxTW6fHX7AbK8M=| -Minutely stats:
+ItemsInQueue : Min , Max , Avg 
+TimeInQueue : Min , Max , Avg 
+TimeToProcess : Min , Max , Avg 
+AvgEnqueueRate : 0.00/s
+AvgDequeueRate : 0.00/s
+TotalDropped : 0
+TotalEnqueued : 0
+TotalDequeued : 0
+2017-07-17 17:32:32,020 [20] [DEBUG] |b1X8Z45h9LlyIti3bPIYMLDNrwM=| -Minutely stats:
+ItemsInQueue : Min , Max , Avg 
+TimeInQueue : Min , Max , Avg 
+TimeToProcess : Min , Max , Avg 
+AvgEnqueueRate : 0.00/s
+AvgDequeueRate : 0.00/s
+TotalDropped : 0
+TotalEnqueued : 0
+TotalDequeued : 0
+2017-07-17 17:33:32,021 [25] [DEBUG] |Mg4TPoJLgSJzmpvPqpCnAnNxWe4=| -Minutely stats:
+ItemsInQueue : Min , Max , Avg 
+TimeInQueue : Min , Max , Avg 
+TimeToProcess : Min , Max , Avg 
+AvgEnqueueRate : 0.00/s
+AvgDequeueRate : 0.00/s
+TotalDropped : 0
+TotalEnqueued : 0
+TotalDequeued : 0
+2017-07-17 17:33:32,021 [29] [DEBUG] |7DJrOsmU+hxQyE/+Pp1018xvKps=| DispatcherQueue3-Minutely stats:
+ItemsInQueue : Min , Max , Avg 
+TimeInQueue : Min , Max , Avg 
+TimeToProcess : Min , Max , Avg 
+AvgEnqueueRate : 0.00/s
+AvgDequeueRate : 0.00/s
+TotalDropped : 0
+TotalEnqueued : 0
+TotalDequeued : 0
+2017-07-17 17:33:32,021 [24] [DEBUG] |nzbTeYIkZajImc4+3OvHbmIQ7ps=| DispatcherQueue2-Minutely stats:
+ItemsInQueue : Min , Max , Avg 
+TimeInQueue : Min , Max , Avg 
+TimeToProcess : Min , Max , Avg 
+AvgEnqueueRate : 0.00/s
+AvgDequeueRate : 0.00/s
+TotalDropped : 0
+TotalEnqueued : 0
+TotalDequeued : 0
+2017-07-17 17:33:32,021 [22] [DEBUG] |ya6UD3s927I1hEaDgiTD8KNg7ws=| DispatcherQueue1-Minutely stats:
+ItemsInQueue : Min , Max , Avg 
+TimeInQueue : Min , Max , Avg 
+TimeToProcess : Min , Max , Avg 
+AvgEnqueueRate : 0.00/s
+AvgDequeueRate : 0.00/s
+TotalDropped : 0
+TotalEnqueued : 0
+TotalDequeued : 0
+2017-07-17 17:33:32,021 [23] [DEBUG] |zQrkGSIIfSbDBHoL2smjFQsxVvw=| -Minutely stats:
+ItemsInQueue : Min , Max , Avg 
+TimeInQueue : Min , Max , Avg 
+TimeToProcess : Min , Max , Avg 
+AvgEnqueueRate : 0.00/s
+AvgDequeueRate : 0.00/s
+TotalDropped : 0
+TotalEnqueued : 0
+TotalDequeued : 0
+2017-07-17 17:33:32,021 [28] [DEBUG] |80HPQYJXQ9CqsxnNxqJ50iwLZ+U=| -Minutely stats:
+ItemsInQueue : Min , Max , Avg 
+TimeInQueue : Min , Max , Avg 
+TimeToProcess : Min , Max , Avg 
+AvgEnqueueRate : 0.00/s
+AvgDequeueRate : 0.00/s
+TotalDropped : 0
+TotalEnqueued : 0
+TotalDequeued : 0
+2017-07-17 17:34:32,036 [24] [DEBUG] |t3ln9kZo6y5CZR8Yfie19MBdtNg=| -Minutely stats:
+ItemsInQueue : Min , Max , Avg 
+TimeInQueue : Min , Max , Avg 
+TimeToProcess : Min , Max , Avg 
+AvgEnqueueRate : 0.00/s
+AvgDequeueRate : 0.00/s
+TotalDropped : 0
+TotalEnqueued : 0
+TotalDequeued : 0
+2017-07-17 17:34:32,036 [22] [DEBUG] |p5I1+/tVBt5gfFkiG9wAuKz2DOY=| DispatcherQueue1-Minutely stats:
+ItemsInQueue : Min , Max , Avg 
+TimeInQueue : Min , Max , Avg 
+TimeToProcess : Min , Max , Avg 
+AvgEnqueueRate : 0.00/s
+AvgDequeueRate : 0.00/s
+TotalDropped : 0
+TotalEnqueued : 0
+TotalDequeued : 0
+2017-07-17 17:34:32,036 [20] [DEBUG] |0xX10wpoOlvig5tlJOxjvCTKBRM=| DispatcherQueue2-Minutely stats:
+ItemsInQueue : Min , Max , Avg 
+TimeInQueue : Min , Max , Avg 
+TimeToProcess : Min , Max , Avg 
+AvgEnqueueRate : 0.00/s
+AvgDequeueRate : 0.00/s
+TotalDropped : 0
+TotalEnqueued : 0
+TotalDequeued : 0
+2017-07-17 17:34:32,036 [12] [DEBUG] |+BX3+OrDCERrOtVXDLiQAFLIcvM=| -Minutely stats:
+ItemsInQueue : Min , Max , Avg 
+TimeInQueue : Min , Max , Avg 
+TimeToProcess : Min , Max , Avg 
+AvgEnqueueRate : 0.00/s
+AvgDequeueRate : 0.00/s
+TotalDropped : 0
+TotalEnqueued : 0
+TotalDequeued : 0
+2017-07-17 17:34:32,036 [25] [DEBUG] |U7aagymWw8YJY4InDNCEWbjSD/8=| -Minutely stats:
+ItemsInQueue : Min , Max , Avg 
+TimeInQueue : Min , Max , Avg 
+TimeToProcess : Min , Max , Avg 
+AvgEnqueueRate : 0.00/s
+AvgDequeueRate : 0.00/s
+TotalDropped : 0
+TotalEnqueued : 0
+TotalDequeued : 0
+2017-07-17 17:34:32,036 [28] [DEBUG] |k2ZO47fkQmMYGAQelshCVnk56ck=| DispatcherQueue3-Minutely stats:
+ItemsInQueue : Min , Max , Avg 
+TimeInQueue : Min , Max , Avg 
+TimeToProcess : Min , Max , Avg 
+AvgEnqueueRate : 0.00/s
+AvgDequeueRate : 0.00/s
+TotalDropped : 0
+TotalEnqueued : 0
+TotalDequeued : 0
+2017-07-17 17:35:32,037 [28] [DEBUG] |ZjKV0xwOgg3Bt0EgiNmr46Xh/y8=| -Minutely stats:
+ItemsInQueue : Min , Max , Avg 
+TimeInQueue : Min , Max , Avg 
+TimeToProcess : Min , Max , Avg 
+AvgEnqueueRate : 0.00/s
+AvgDequeueRate : 0.00/s
+TotalDropped : 0
+TotalEnqueued : 0
+TotalDequeued : 0
+2017-07-17 17:35:32,037 [23] [DEBUG] |FE/hnHrCOz+WRjGwVp8hfIbFex4=| -Minutely stats:
+ItemsInQueue : Min , Max , Avg 
+TimeInQueue : Min , Max , Avg 
+TimeToProcess : Min , Max , Avg 
+AvgEnqueueRate : 0.00/s
+AvgDequeueRate : 0.00/s
+TotalDropped : 0
+TotalEnqueued : 0
+TotalDequeued : 0
+2017-07-17 17:35:32,038 [22] [DEBUG] |1ZJzVTvaMnsABWAN/zoo4XTxzdc=| DispatcherQueue1-Minutely stats:
+ItemsInQueue : Min , Max , Avg 
+TimeInQueue : Min , Max , Avg 
+TimeToProcess : Min , Max , Avg 
+AvgEnqueueRate : 0.00/s
+AvgDequeueRate : 0.00/s
+TotalDropped : 0
+TotalEnqueued : 0
+TotalDequeued : 0
+2017-07-17 17:35:32,037 [24] [DEBUG] |mprrqDNb+f8pdhvX7iJnBrERQ5Q=| DispatcherQueue2-Minutely stats:
+ItemsInQueue : Min , Max , Avg 
+TimeInQueue : Min , Max , Avg 
+TimeToProcess : Min , Max , Avg 
+AvgEnqueueRate : 0.00/s
+AvgDequeueRate : 0.00/s
+TotalDropped : 0
+TotalEnqueued : 0
+TotalDequeued : 0
+2017-07-17 17:35:32,037 [29] [DEBUG] |xZofIOJ/uevNs0RkAU28vENzGC8=| DispatcherQueue3-Minutely stats:
+ItemsInQueue : Min , Max , Avg 
+TimeInQueue : Min , Max , Avg 
+TimeToProcess : Min , Max , Avg 
+AvgEnqueueRate : 0.00/s
+AvgDequeueRate : 0.00/s
+TotalDropped : 0
+TotalEnqueued : 0
+TotalDequeued : 0
+2017-07-17 17:35:32,037 [25] [DEBUG] |Fcgz3AQjwirTyZxs850kNe5vZpY=| -Minutely stats:
+ItemsInQueue : Min , Max , Avg 
+TimeInQueue : Min , Max , Avg 
+TimeToProcess : Min , Max , Avg 
+AvgEnqueueRate : 0.00/s
+AvgDequeueRate : 0.00/s
+TotalDropped : 0
+TotalEnqueued : 0
+TotalDequeued : 0
+2017-07-17 17:37:14,948 [21] [DEBUG] |zHkFJt7osUPGmidfQ574dOiqkUA=| DispatcherQueue1-Minutely stats:
+ItemsInQueue : Min , Max , Avg 
+TimeInQueue : Min , Max , Avg 
+TimeToProcess : Min , Max , Avg 
+AvgEnqueueRate : 0.00/s
+AvgDequeueRate : 0.00/s
+TotalDropped : 0
+TotalEnqueued : 0
+TotalDequeued : 0
+2017-07-17 17:37:14,957 [13] [DEBUG] |eSJiLt3XRUDohOdy3r9LJODanRw=| -Minutely stats:
+ItemsInQueue : Min , Max , Avg 
+TimeInQueue : Min , Max , Avg 
+TimeToProcess : Min , Max , Avg 
+AvgEnqueueRate : 0.00/s
+AvgDequeueRate : 0.00/s
+TotalDropped : 0
+TotalEnqueued : 0
+TotalDequeued : 0
+2017-07-17 17:37:14,957 [21] [DEBUG] |3Bzq+D5d4yCOzT1N3huWFSgf+YM=| DispatcherQueue3-Minutely stats:
+ItemsInQueue : Min , Max , Avg 
+TimeInQueue : Min , Max , Avg 
+TimeToProcess : Min , Max , Avg 
+AvgEnqueueRate : 0.00/s
+AvgDequeueRate : 0.00/s
+TotalDropped : 0
+TotalEnqueued : 0
+TotalDequeued : 0
+2017-07-17 17:37:14,958 [13] [DEBUG] |q2QM85HKVztIYQSqXncZfNlUyf8=| -Minutely stats:
+ItemsInQueue : Min , Max , Avg 
+TimeInQueue : Min , Max , Avg 
+TimeToProcess : Min , Max , Avg 
+AvgEnqueueRate : 0.00/s
+AvgDequeueRate : 0.00/s
+TotalDropped : 0
+TotalEnqueued : 0
+TotalDequeued : 0
+2017-07-17 17:37:14,958 [21] [DEBUG] |Zqk2+ezbV+iXapefokwyhqlZoGE=| DispatcherQueue2-Minutely stats:
+ItemsInQueue : Min , Max , Avg 
+TimeInQueue : Min , Max , Avg 
+TimeToProcess : Min , Max , Avg 
+AvgEnqueueRate : 0.00/s
+AvgDequeueRate : 0.00/s
+TotalDropped : 0
+TotalEnqueued : 0
+TotalDequeued : 0
+2017-07-17 17:37:14,961 [13] [DEBUG] |eSlJuGor5PDB/w5Xykc6yB2Z7SI=| -Minutely stats:
+ItemsInQueue : Min , Max , Avg 
+TimeInQueue : Min , Max , Avg 
+TimeToProcess : Min , Max , Avg 
+AvgEnqueueRate : 0.00/s
+AvgDequeueRate : 0.00/s
+TotalDropped : 0
+TotalEnqueued : 0
+TotalDequeued : 0
+2017-07-17 17:38:14,944 [21] [DEBUG] |+pWCZZ9B+0wEH/I+RopJZoL45k0=| DispatcherQueue1-Minutely stats:
+ItemsInQueue : Min 0, Max 1, Avg 0
+TimeInQueue : Min 00:00:00.0020004, Max 00:00:00.0138625, Avg 00:00:00.0080000
+TimeToProcess : Min 00:00:00.0013316, Max 00:00:00.0077362, Avg 00:00:00.0050000
+AvgEnqueueRate : 0.03/s
+AvgDequeueRate : 0.03/s
+TotalDropped : 0
+TotalEnqueued : 2
+TotalDequeued : 2
+2017-07-17 17:38:14,958 [13] [DEBUG] |xzT9j0tqL8I76Shn8DN7t8JAOEk=| -Minutely stats:
+ItemsInQueue : Min , Max , Avg 
+TimeInQueue : Min , Max , Avg 
+TimeToProcess : Min , Max , Avg 
+AvgEnqueueRate : 0.00/s
+AvgDequeueRate : 0.00/s
+TotalDropped : 0
+TotalEnqueued : 0
+TotalDequeued : 0
+2017-07-17 17:38:14,958 [21] [DEBUG] |a9GA2bwjGzxD5dOs6RGl5DVH6u4=| -Minutely stats:
+ItemsInQueue : Min , Max , Avg 
+TimeInQueue : Min , Max , Avg 
+TimeToProcess : Min , Max , Avg 
+AvgEnqueueRate : 0.00/s
+AvgDequeueRate : 0.00/s
+TotalDropped : 0
+TotalEnqueued : 0
+TotalDequeued : 0
+2017-07-17 17:38:14,958 [14] [DEBUG] |9Sk1d+1RvxDv3mDhYj+4EZE4XXs=| -Minutely stats:
+ItemsInQueue : Min , Max , Avg 
+TimeInQueue : Min , Max , Avg 
+TimeToProcess : Min , Max , Avg 
+AvgEnqueueRate : 0.00/s
+AvgDequeueRate : 0.00/s
+TotalDropped : 0
+TotalEnqueued : 0
+TotalDequeued : 0
+2017-07-17 17:38:14,958 [23] [DEBUG] |ejhST7uyL56MXS3n2LSZeBKy9e0=| DispatcherQueue3-Minutely stats:
+ItemsInQueue : Min 0, Max 1, Avg 0
+TimeInQueue : Min 00:00:00.0139991, Max 00:00:00.0139991, Avg 00:00:00.0140000
+TimeToProcess : Min 00:00:00.0132657, Max 00:00:00.0132657, Avg 00:00:00.0130000
+AvgEnqueueRate : 0.02/s
+AvgDequeueRate : 0.02/s
+TotalDropped : 0
+TotalEnqueued : 1
+TotalDequeued : 1
+2017-07-17 17:38:14,958 [22] [DEBUG] |n5NoHoe3tKi+ZXZC7mQgJk0sqjw=| DispatcherQueue2-Minutely stats:
+ItemsInQueue : Min 0, Max 1, Avg 0
+TimeInQueue : Min 00:00:00.0139991, Max 00:00:00.0139991, Avg 00:00:00.0140000
+TimeToProcess : Min 00:00:00.0138922, Max 00:00:00.0138922, Avg 00:00:00.0140000
+AvgEnqueueRate : 0.02/s
+AvgDequeueRate : 0.02/s
+TotalDropped : 0
+TotalEnqueued : 1
+TotalDequeued : 1
+2017-07-17 17:39:14,945 [26] [DEBUG] |QVmcf8PEKlE1sMuyMKY6bISPwKw=| DispatcherQueue1-Minutely stats:
+ItemsInQueue : Min , Max , Avg 
+TimeInQueue : Min , Max , Avg 
+TimeToProcess : Min , Max , Avg 
+AvgEnqueueRate : 0.00/s
+AvgDequeueRate : 0.00/s
+TotalDropped : 0
+TotalEnqueued : 0
+TotalDequeued : 0
+2017-07-17 17:39:14,959 [25] [DEBUG] |2G+sK33xwb6xxh/hyHp+GF9j8BQ=| DispatcherQueue3-Minutely stats:
+ItemsInQueue : Min , Max , Avg 
+TimeInQueue : Min , Max , Avg 
+TimeToProcess : Min , Max , Avg 
+AvgEnqueueRate : 0.00/s
+AvgDequeueRate : 0.00/s
+TotalDropped : 0
+TotalEnqueued : 0
+TotalDequeued : 0
+2017-07-17 17:39:14,959 [24] [DEBUG] |w89m47Tkffhpp6YU50WrQRQI3So=| -Minutely stats:
+ItemsInQueue : Min , Max , Avg 
+TimeInQueue : Min , Max , Avg 
+TimeToProcess : Min , Max , Avg 
+AvgEnqueueRate : 0.00/s
+AvgDequeueRate : 0.00/s
+TotalDropped : 0
+TotalEnqueued : 0
+TotalDequeued : 0
+2017-07-17 17:39:14,959 [23] [DEBUG] |d91XL2mOGFHyskMZ4hXXF9KrMk8=| -Minutely stats:
+ItemsInQueue : Min , Max , Avg 
+TimeInQueue : Min , Max , Avg 
+TimeToProcess : Min , Max , Avg 
+AvgEnqueueRate : 0.00/s
+AvgDequeueRate : 0.00/s
+TotalDropped : 0
+TotalEnqueued : 0
+TotalDequeued : 0
+2017-07-17 17:39:14,959 [26] [DEBUG] |a7Jx079kUsjQIsq2OOGVWQXVCwU=| DispatcherQueue2-Minutely stats:
+ItemsInQueue : Min , Max , Avg 
+TimeInQueue : Min , Max , Avg 
+TimeToProcess : Min , Max , Avg 
+AvgEnqueueRate : 0.00/s
+AvgDequeueRate : 0.00/s
+TotalDropped : 0
+TotalEnqueued : 0
+TotalDequeued : 0
+2017-07-17 17:39:14,959 [25] [DEBUG] |oI4LJFwytrF06cirlRmVe5ohhlA=| -Minutely stats:
+ItemsInQueue : Min , Max , Avg 
+TimeInQueue : Min , Max , Avg 
+TimeToProcess : Min , Max , Avg 
+AvgEnqueueRate : 0.00/s
+AvgDequeueRate : 0.00/s
+TotalDropped : 0
+TotalEnqueued : 0
+TotalDequeued : 0
+2017-07-17 17:40:14,946 [23] [DEBUG] |jJ+W3a/a7nUXx+uauQhMHMZsVio=| DispatcherQueue1-Minutely stats:
+ItemsInQueue : Min , Max , Avg 
+TimeInQueue : Min , Max , Avg 
+TimeToProcess : Min , Max , Avg 
+AvgEnqueueRate : 0.00/s
+AvgDequeueRate : 0.00/s
+TotalDropped : 0
+TotalEnqueued : 0
+TotalDequeued : 0
+2017-07-17 17:40:14,960 [29] [DEBUG] |CdWnBBElEEh036ChYEcku8xjM9Q=| DispatcherQueue3-Minutely stats:
+ItemsInQueue : Min , Max , Avg 
+TimeInQueue : Min , Max , Avg 
+TimeToProcess : Min , Max , Avg 
+AvgEnqueueRate : 0.00/s
+AvgDequeueRate : 0.00/s
+TotalDropped : 0
+TotalEnqueued : 0
+TotalDequeued : 0
+2017-07-17 17:40:14,960 [29] [DEBUG] |oGQCBVQEc2YQ5DAI/thRdh+95io=| -Minutely stats:
+ItemsInQueue : Min , Max , Avg 
+TimeInQueue : Min , Max , Avg 
+TimeToProcess : Min , Max , Avg 
+AvgEnqueueRate : 0.00/s
+AvgDequeueRate : 0.00/s
+TotalDropped : 0
+TotalEnqueued : 0
+TotalDequeued : 0
+2017-07-17 17:40:14,960 [30] [DEBUG] |tjWgGV4EiqlyBanvUSgNPkNwCSo=| -Minutely stats:
+ItemsInQueue : Min , Max , Avg 
+TimeInQueue : Min , Max , Avg 
+TimeToProcess : Min , Max , Avg 
+AvgEnqueueRate : 0.00/s
+AvgDequeueRate : 0.00/s
+TotalDropped : 0
+TotalEnqueued : 0
+TotalDequeued : 0
+2017-07-17 17:40:14,960 [24] [DEBUG] |Od0kOnVS+Ksh2XovxqyY7czPEF4=| DispatcherQueue2-Minutely stats:
+ItemsInQueue : Min , Max , Avg 
+TimeInQueue : Min , Max , Avg 
+TimeToProcess : Min , Max , Avg 
+AvgEnqueueRate : 0.00/s
+AvgDequeueRate : 0.00/s
+TotalDropped : 0
+TotalEnqueued : 0
+TotalDequeued : 0
+2017-07-17 17:40:14,960 [25] [DEBUG] |f9XRPrK/Sg6tud9ps9Prnw150R4=| -Minutely stats:
+ItemsInQueue : Min , Max , Avg 
+TimeInQueue : Min , Max , Avg 
+TimeToProcess : Min , Max , Avg 
+AvgEnqueueRate : 0.00/s
+AvgDequeueRate : 0.00/s
+TotalDropped : 0
+TotalEnqueued : 0
+TotalDequeued : 0
+2017-07-17 17:41:14,959 [24] [DEBUG] |jMP5Vv6KGCmiCZ8S0vfA/6w9uFM=| DispatcherQueue1-Minutely stats:
+ItemsInQueue : Min 0, Max 2, Avg 0
+TimeInQueue : Min 00:00:00.0069977, Max 00:00:00.0268910, Avg 00:00:00.0160000
+TimeToProcess : Min 00:00:00.0063981, Max 00:00:00.0255759, Avg 00:00:00.0130000
+AvgEnqueueRate : 0.05/s
+AvgDequeueRate : 0.05/s
+TotalDropped : 0
+TotalEnqueued : 3
+TotalDequeued : 3
+2017-07-17 17:41:14,972 [25] [DEBUG] |qtxLyoIK65D269Xnj5LQMO7kXw4=| -Minutely stats:
+ItemsInQueue : Min , Max , Avg 
+TimeInQueue : Min , Max , Avg 
+TimeToProcess : Min , Max , Avg 
+AvgEnqueueRate : 0.00/s
+AvgDequeueRate : 0.00/s
+TotalDropped : 0
+TotalEnqueued : 0
+TotalDequeued : 0
+2017-07-17 17:41:14,972 [25] [DEBUG] |fLPcY8KN8QPH6w7EOHNtLg3BVQc=| -Minutely stats:
+ItemsInQueue : Min , Max , Avg 
+TimeInQueue : Min , Max , Avg 
+TimeToProcess : Min , Max , Avg 
+AvgEnqueueRate : 0.00/s
+AvgDequeueRate : 0.00/s
+TotalDropped : 0
+TotalEnqueued : 0
+TotalDequeued : 0
+2017-07-17 17:41:14,972 [24] [DEBUG] |GMWk1qyER3GRbuigOJbRhcIQBI8=| DispatcherQueue3-Minutely stats:
+ItemsInQueue : Min 0, Max 2, Avg 0
+TimeInQueue : Min 00:00:00.0059986, Max 00:00:00.0249972, Avg 00:00:00.0120000
+TimeToProcess : Min 00:00:00.0046461, Max 00:00:00.0245238, Avg 00:00:00.0120000
+AvgEnqueueRate : 0.05/s
+AvgDequeueRate : 0.05/s
+TotalDropped : 0
+TotalEnqueued : 3
+TotalDequeued : 3
+2017-07-17 17:41:14,972 [24] [DEBUG] |M96jKQF4Is4AakfGobrXjIzAc6c=| -Minutely stats:
+ItemsInQueue : Min , Max , Avg 
+TimeInQueue : Min , Max , Avg 
+TimeToProcess : Min , Max , Avg 
+AvgEnqueueRate : 0.00/s
+AvgDequeueRate : 0.00/s
+TotalDropped : 0
+TotalEnqueued : 0
+TotalDequeued : 0
+2017-07-17 17:41:14,972 [25] [DEBUG] |T+Rnpe5XbFLRCKRKgUGC4Je4030=| DispatcherQueue2-Minutely stats:
+ItemsInQueue : Min 0, Max 2, Avg 0
+TimeInQueue : Min 00:00:00.0029999, Max 00:00:00.0179967, Avg 00:00:00.0110000
+TimeToProcess : Min 00:00:00.0028304, Max 00:00:00.0103528, Avg 00:00:00.0070000
+AvgEnqueueRate : 0.05/s
+AvgDequeueRate : 0.05/s
+TotalDropped : 0
+TotalEnqueued : 3
+TotalDequeued : 3
+2017-07-17 17:42:14,973 [24] [DEBUG] |/EZer/4f5oV893kP3NLjjtp0VTE=| DispatcherQueue3-Minutely stats:
+ItemsInQueue : Min , Max , Avg 
+TimeInQueue : Min , Max , Avg 
+TimeToProcess : Min , Max , Avg 
+AvgEnqueueRate : 0.00/s
+AvgDequeueRate : 0.00/s
+TotalDropped : 0
+TotalEnqueued : 0
+TotalDequeued : 0
+2017-07-17 17:42:14,973 [24] [DEBUG] |b4E1xbghnNBpJddlpBr8Bah9XP8=| -Minutely stats:
+ItemsInQueue : Min , Max , Avg 
+TimeInQueue : Min , Max , Avg 
+TimeToProcess : Min , Max , Avg 
+AvgEnqueueRate : 0.00/s
+AvgDequeueRate : 0.00/s
+TotalDropped : 0
+TotalEnqueued : 0
+TotalDequeued : 0
+2017-07-17 17:42:14,973 [24] [DEBUG] |Dr8eajRPjexi6SCxPNgW8pDK33s=| DispatcherQueue2-Minutely stats:
+ItemsInQueue : Min , Max , Avg 
+TimeInQueue : Min , Max , Avg 
+TimeToProcess : Min , Max , Avg 
+AvgEnqueueRate : 0.00/s
+AvgDequeueRate : 0.00/s
+TotalDropped : 0
+TotalEnqueued : 0
+TotalDequeued : 0
+2017-07-17 17:42:14,973 [32] [DEBUG] |1dmUgov+tmdApjK/FMKzkaMdeWI=| -Minutely stats:
+ItemsInQueue : Min , Max , Avg 
+TimeInQueue : Min , Max , Avg 
+TimeToProcess : Min , Max , Avg 
+AvgEnqueueRate : 0.00/s
+AvgDequeueRate : 0.00/s
+TotalDropped : 0
+TotalEnqueued : 0
+TotalDequeued : 0
+2017-07-17 17:42:14,973 [24] [DEBUG] |mrj9pzuS3e0FFWb/govgpJsCCSU=| -Minutely stats:
+ItemsInQueue : Min , Max , Avg 
+TimeInQueue : Min , Max , Avg 
+TimeToProcess : Min , Max , Avg 
+AvgEnqueueRate : 0.00/s
+AvgDequeueRate : 0.00/s
+TotalDropped : 0
+TotalEnqueued : 0
+TotalDequeued : 0
+2017-07-17 17:42:14,974 [32] [DEBUG] |fuFfKxyE0Fdf9QJVFsSyPgBzMGc=| DispatcherQueue1-Minutely stats:
+ItemsInQueue : Min , Max , Avg 
+TimeInQueue : Min , Max , Avg 
+TimeToProcess : Min , Max , Avg 
+AvgEnqueueRate : 0.00/s
+AvgDequeueRate : 0.00/s
+TotalDropped : 0
+TotalEnqueued : 0
+TotalDequeued : 0
+2017-07-17 17:47:50,112 [22] [DEBUG] |8FIScgHte9oDZVR37+XH+4L+7k0=| -Minutely stats:
+ItemsInQueue : Min , Max , Avg 
+TimeInQueue : Min , Max , Avg 
+TimeToProcess : Min , Max , Avg 
+AvgEnqueueRate : 0.00/s
+AvgDequeueRate : 0.00/s
+TotalDropped : 0
+TotalEnqueued : 0
+TotalDequeued : 0
+2017-07-17 17:47:50,112 [24] [DEBUG] |JyFF0F8JCK9l3IuuoCc2lHvEbys=| -Minutely stats:
+ItemsInQueue : Min , Max , Avg 
+TimeInQueue : Min , Max , Avg 
+TimeToProcess : Min , Max , Avg 
+AvgEnqueueRate : 0.00/s
+AvgDequeueRate : 0.00/s
+TotalDropped : 0
+TotalEnqueued : 0
+TotalDequeued : 0
+2017-07-17 17:47:50,112 [23] [DEBUG] |Z8Vmd90ylIRi0dfqg21Re51vEC8=| DispatcherQueue2-Minutely stats:
+ItemsInQueue : Min , Max , Avg 
+TimeInQueue : Min , Max , Avg 
+TimeToProcess : Min , Max , Avg 
+AvgEnqueueRate : 0.00/s
+AvgDequeueRate : 0.00/s
+TotalDropped : 0
+TotalEnqueued : 0
+TotalDequeued : 0
+2017-07-17 17:47:50,112 [13] [DEBUG] |rqcLeUwypnWYPgaXpaD/W7SUTvo=| -Minutely stats:
+ItemsInQueue : Min , Max , Avg 
+TimeInQueue : Min , Max , Avg 
+TimeToProcess : Min , Max , Avg 
+AvgEnqueueRate : 0.00/s
+AvgDequeueRate : 0.00/s
+TotalDropped : 0
+TotalEnqueued : 0
+TotalDequeued : 0
+2017-07-17 17:47:50,113 [22] [DEBUG] |G8Kg9FkdLcnIcr66XvGyYrcjryE=| DispatcherQueue1-Minutely stats:
+ItemsInQueue : Min , Max , Avg 
+TimeInQueue : Min , Max , Avg 
+TimeToProcess : Min , Max , Avg 
+AvgEnqueueRate : 0.00/s
+AvgDequeueRate : 0.00/s
+TotalDropped : 0
+TotalEnqueued : 0
+TotalDequeued : 0
+2017-07-17 17:47:50,113 [21] [DEBUG] |KM5ovloVUkidJm2Sh2QRWM+B/ZA=| DispatcherQueue3-Minutely stats:
+ItemsInQueue : Min , Max , Avg 
+TimeInQueue : Min , Max , Avg 
+TimeToProcess : Min , Max , Avg 
+AvgEnqueueRate : 0.00/s
+AvgDequeueRate : 0.00/s
+TotalDropped : 0
+TotalEnqueued : 0
+TotalDequeued : 0
+2017-07-17 17:53:09,435 [14] [DEBUG] |ajRwlPMGAdI/epB/NdgM5vOucNM=| -Minutely stats:
+ItemsInQueue : Min , Max , Avg 
+TimeInQueue : Min , Max , Avg 
+TimeToProcess : Min , Max , Avg 
+AvgEnqueueRate : 0.00/s
+AvgDequeueRate : 0.00/s
+TotalDropped : 0
+TotalEnqueued : 0
+TotalDequeued : 0
+2017-07-17 17:53:09,435 [14] [DEBUG] |KU1tuEJQidwkIDCsr5CMKRX0X7s=| DispatcherQueue3-Minutely stats:
+ItemsInQueue : Min 0, Max 1, Avg 0
+TimeInQueue : Min 00:00:00.0069997, Max 00:00:00.0110006, Avg 00:00:00.0090000
+TimeToProcess : Min 00:00:00.0061310, Max 00:00:00.0107900, Avg 00:00:00.0080000
+AvgEnqueueRate : 0.01/s
+AvgDequeueRate : 0.01/s
+TotalDropped : 0
+TotalEnqueued : 2
+TotalDequeued : 2
+2017-07-17 17:53:09,435 [14] [DEBUG] |lkQ9yksGcV4k2xFOp3IMARsT+tw=| -Minutely stats:
+ItemsInQueue : Min , Max , Avg 
+TimeInQueue : Min , Max , Avg 
+TimeToProcess : Min , Max , Avg 
+AvgEnqueueRate : 0.00/s
+AvgDequeueRate : 0.00/s
+TotalDropped : 0
+TotalEnqueued : 0
+TotalDequeued : 0
+2017-07-17 17:53:09,436 [14] [DEBUG] |5t2bhZim2OnJroQmKY7vYnFcunM=| DispatcherQueue2-Minutely stats:
+ItemsInQueue : Min 0, Max 1, Avg 0
+TimeInQueue : Min 00:00:00.0010007, Max 00:00:00.0070312, Avg 00:00:00.0040000
+TimeToProcess : Min 00:00:00.0010104, Max 00:00:00.0056921, Avg 00:00:00.0030000
+AvgEnqueueRate : 0.01/s
+AvgDequeueRate : 0.01/s
+TotalDropped : 0
+TotalEnqueued : 2
+TotalDequeued : 2
+2017-07-17 17:53:09,436 [14] [DEBUG] |rn/67IQPu4ZLXaUFYv3cE864piE=| -Minutely stats:
+ItemsInQueue : Min , Max , Avg 
+TimeInQueue : Min , Max , Avg 
+TimeToProcess : Min , Max , Avg 
+AvgEnqueueRate : 0.00/s
+AvgDequeueRate : 0.00/s
+TotalDropped : 0
+TotalEnqueued : 0
+TotalDequeued : 0
+2017-07-17 17:53:09,436 [14] [DEBUG] |H9FwzhO/UtrecMGCpab65c7V98Q=| DispatcherQueue1-Minutely stats:
+ItemsInQueue : Min 0, Max 1, Avg 0
+TimeInQueue : Min 00:00:00.0020002, Max 00:00:00.0139455, Avg 00:00:00.0080000
+TimeToProcess : Min 00:00:00.0012851, Max 00:00:00.0062293, Avg 00:00:00.0040000
+AvgEnqueueRate : 0.01/s
+AvgDequeueRate : 0.01/s
+TotalDropped : 0
+TotalEnqueued : 2
+TotalDequeued : 2
+2017-07-17 17:54:48,048 [21] [DEBUG] |iRZe9IUiLIt810KA/h+5+rg4fOM=| -Minutely stats:
+ItemsInQueue : Min , Max , Avg 
+TimeInQueue : Min , Max , Avg 
+TimeToProcess : Min , Max , Avg 
+AvgEnqueueRate : 0.00/s
+AvgDequeueRate : 0.00/s
+TotalDropped : 0
+TotalEnqueued : 0
+TotalDequeued : 0
+2017-07-17 17:54:48,049 [21] [DEBUG] |XnMHiKxwYm+wgC3Uo9cfrioEe4s=| DispatcherQueue3-Minutely stats:
+ItemsInQueue : Min 0, Max 1, Avg 0
+TimeInQueue : Min 00:00:00.0039986, Max 00:00:00.0420011, Avg 00:00:00.0180000
+TimeToProcess : Min 00:00:00.0033845, Max 00:00:00.0421933, Avg 00:00:00.0180000
+AvgEnqueueRate : 0.03/s
+AvgDequeueRate : 0.03/s
+TotalDropped : 0
+TotalEnqueued : 3
+TotalDequeued : 3
+2017-07-17 17:54:48,049 [21] [DEBUG] |qyAZV3DLYrA/QQ+B+P6DtBXwtVg=| -Minutely stats:
+ItemsInQueue : Min , Max , Avg 
+TimeInQueue : Min , Max , Avg 
+TimeToProcess : Min , Max , Avg 
+AvgEnqueueRate : 0.00/s
+AvgDequeueRate : 0.00/s
+TotalDropped : 0
+TotalEnqueued : 0
+TotalDequeued : 0
+2017-07-17 17:54:48,049 [21] [DEBUG] |k+mOszEhV7v/TnRBlkI+m2UxotQ=| DispatcherQueue2-Minutely stats:
+ItemsInQueue : Min 0, Max 3, Avg 1
+TimeInQueue : Min 00:00:00.0059977, Max 00:00:00.0379206, Avg 00:00:00.0150000
+TimeToProcess : Min 00:00:00.0012067, Max 00:00:00.0377743, Avg 00:00:00.0120000
+AvgEnqueueRate : 0.04/s
+AvgDequeueRate : 0.04/s
+TotalDropped : 0
+TotalEnqueued : 4
+TotalDequeued : 4
+2017-07-17 17:54:48,049 [21] [DEBUG] |JeWmrrMlvxn00Bin9N+F3kkAJlw=| -Minutely stats:
+ItemsInQueue : Min , Max , Avg 
+TimeInQueue : Min , Max , Avg 
+TimeToProcess : Min , Max , Avg 
+AvgEnqueueRate : 0.00/s
+AvgDequeueRate : 0.00/s
+TotalDropped : 0
+TotalEnqueued : 0
+TotalDequeued : 0
+2017-07-17 17:54:48,049 [21] [DEBUG] |eoB93bEDPH+oxHDXVimxXRk6yB4=| DispatcherQueue1-Minutely stats:
+ItemsInQueue : Min 0, Max 2, Avg 0
+TimeInQueue : Min 00:00:00.0049980, Max 00:00:00.0499216, Avg 00:00:00.0180000
+TimeToProcess : Min 00:00:00.0021883, Max 00:00:00.0461532, Avg 00:00:00.0150000
+AvgEnqueueRate : 0.04/s
+AvgDequeueRate : 0.04/s
+TotalDropped : 0
+TotalEnqueued : 4
+TotalDequeued : 4
+2017-07-17 17:57:00,774 [34] [DEBUG] |+YIx18rFEbk8ItIJ1cUlCz/czxI=| -Minutely stats:
+ItemsInQueue : Min , Max , Avg 
+TimeInQueue : Min , Max , Avg 
+TimeToProcess : Min , Max , Avg 
+AvgEnqueueRate : 0.00/s
+AvgDequeueRate : 0.00/s
+TotalDropped : 0
+TotalEnqueued : 0
+TotalDequeued : 0
+2017-07-17 17:57:00,774 [34] [DEBUG] |8tDV3DjBYCr8kR8pJh2DUenSsok=| DispatcherQueue3-Minutely stats:
+ItemsInQueue : Min 0, Max 3, Avg 1
+TimeInQueue : Min 00:00:00.0108645, Max 00:00:00.0830287, Avg 00:00:00.0480000
+TimeToProcess : Min 00:00:00.0103503, Max 00:00:00.0445775, Avg 00:00:00.0260000
+AvgEnqueueRate : 0.05/s
+AvgDequeueRate : 0.05/s
+TotalDropped : 0
+TotalEnqueued : 7
+TotalDequeued : 7
+2017-07-17 17:57:00,774 [34] [DEBUG] |FgDvuqq7O9iJoqM+6itTC58APSU=| -Minutely stats:
+ItemsInQueue : Min , Max , Avg 
+TimeInQueue : Min , Max , Avg 
+TimeToProcess : Min , Max , Avg 
+AvgEnqueueRate : 0.00/s
+AvgDequeueRate : 0.00/s
+TotalDropped : 0
+TotalEnqueued : 0
+TotalDequeued : 0
+2017-07-17 17:57:00,774 [34] [DEBUG] |VfzCKKpCENDAiFka/6CMiMHdWKU=| DispatcherQueue2-Minutely stats:
+ItemsInQueue : Min 0, Max 3, Avg 1
+TimeInQueue : Min 00:00:00.0090030, Max 00:00:37.6970036, Avg 00:00:07.5690000
+TimeToProcess : Min 00:00:00.0012561, Max 00:00:37.6152856, Avg 00:00:07.5450000
+AvgEnqueueRate : 0.04/s
+AvgDequeueRate : 0.04/s
+TotalDropped : 0
+TotalEnqueued : 5
+TotalDequeued : 5
+2017-07-17 17:57:00,775 [34] [DEBUG] |s6dD7pEjkgqNcwlKvIbLKnI2PVU=| -Minutely stats:
+ItemsInQueue : Min , Max , Avg 
+TimeInQueue : Min , Max , Avg 
+TimeToProcess : Min , Max , Avg 
+AvgEnqueueRate : 0.00/s
+AvgDequeueRate : 0.00/s
+TotalDropped : 0
+TotalEnqueued : 0
+TotalDequeued : 0
+2017-07-17 17:57:00,775 [34] [DEBUG] |jp9SuuljWVeH3AKQTUZ+9gGRX2w=| DispatcherQueue1-Minutely stats:
+ItemsInQueue : Min 0, Max 3, Avg 1
+TimeInQueue : Min 00:00:00.0468655, Max 00:00:37.7210007, Avg 00:00:07.6000000
+TimeToProcess : Min 00:00:00.0271582, Max 00:00:37.6423129, Avg 00:00:07.5660000
+AvgEnqueueRate : 0.04/s
+AvgDequeueRate : 0.04/s
+TotalDropped : 0
+TotalEnqueued : 5
+TotalDequeued : 5
+2017-07-17 17:59:23,120 [12] [DEBUG] |YwEij3XHUjOyOJH27uHAg8h5vtc=| -Minutely stats:
+ItemsInQueue : Min , Max , Avg 
+TimeInQueue : Min , Max , Avg 
+TimeToProcess : Min , Max , Avg 
+AvgEnqueueRate : 0.00/s
+AvgDequeueRate : 0.00/s
+TotalDropped : 0
+TotalEnqueued : 0
+TotalDequeued : 0
+2017-07-17 17:59:23,120 [21] [DEBUG] |Yb3g5F0SMv7gMxE96okxwJpO0jY=| DispatcherQueue3-Minutely stats:
+ItemsInQueue : Min , Max , Avg 
+TimeInQueue : Min , Max , Avg 
+TimeToProcess : Min , Max , Avg 
+AvgEnqueueRate : 0.00/s
+AvgDequeueRate : 0.00/s
+TotalDropped : 0
+TotalEnqueued : 0
+TotalDequeued : 0
+2017-07-17 17:59:23,121 [12] [DEBUG] |w6vKxL5daEgch/F2crppiixLotY=| -Minutely stats:
+ItemsInQueue : Min , Max , Avg 
+TimeInQueue : Min , Max , Avg 
+TimeToProcess : Min , Max , Avg 
+AvgEnqueueRate : 0.00/s
+AvgDequeueRate : 0.00/s
+TotalDropped : 0
+TotalEnqueued : 0
+TotalDequeued : 0
+2017-07-17 17:59:23,122 [12] [DEBUG] |MdxwpbUQJraknNKY7wn1a7DnuQ4=| -Minutely stats:
+ItemsInQueue : Min , Max , Avg 
+TimeInQueue : Min , Max , Avg 
+TimeToProcess : Min , Max , Avg 
+AvgEnqueueRate : 0.00/s
+AvgDequeueRate : 0.00/s
+TotalDropped : 0
+TotalEnqueued : 0
+TotalDequeued : 0
+2017-07-17 17:59:23,121 [21] [DEBUG] |PUzvz0imA/ycdU57XKciB18Z9U4=| DispatcherQueue2-Minutely stats:
+ItemsInQueue : Min , Max , Avg 
+TimeInQueue : Min , Max , Avg 
+TimeToProcess : Min , Max , Avg 
+AvgEnqueueRate : 0.00/s
+AvgDequeueRate : 0.00/s
+TotalDropped : 0
+TotalEnqueued : 0
+TotalDequeued : 0
+2017-07-17 17:59:23,123 [12] [DEBUG] |dYu+zFbQVz/CAf15ly9j/qZfsIs=| DispatcherQueue1-Minutely stats:
+ItemsInQueue : Min , Max , Avg 
+TimeInQueue : Min , Max , Avg 
+TimeToProcess : Min , Max , Avg 
+AvgEnqueueRate : 0.00/s
+AvgDequeueRate : 0.00/s
+TotalDropped : 0
+TotalEnqueued : 0
+TotalDequeued : 0
