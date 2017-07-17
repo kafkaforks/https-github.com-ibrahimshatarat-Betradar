@@ -4298,3 +4298,102 @@ System.Security.Authentication.InvalidCredentialException: Login failed
    at Sportradar.SDK.ConnectionProviders.TcpConnectionProvider.HandleConnection()
    at Sportradar.SDK.ConnectionProviders.TcpConnectionProvider.IOLoop()
 2017-07-17 17:34:38,899 [IOLoop-LIVEODDS] [WARN] |svxiD747mz3PF8v4U1UjYYyqd+0=| Invalid login - waiting for 00:00:10 before reconnecting again
+2017-07-17 17:34:49,915 [IOLoop-LIVEODDS] [WARN] |mwZNaLplV/7WYFF5Ke0uL3lvEDw=| TCP connection error, fatal False
+System.Security.Authentication.InvalidCredentialException: Login failed
+   at Sportradar.SDK.ProtocolProviders.LiveOddsProtocolProvider.ParsedMessageReceivedHandler(IMessageIdentifier identifier, IProtocolResponse proto)
+   at Sportradar.SDK.ProtocolProviders.ProtocolProviderDelegates.ParsedDataReceivedDelegate.Invoke(IMessageIdentifier identifier, IProtocolResponse response)
+   at Sportradar.SDK.ProtocolProviders.LiveOddsCommonProtocolProvider.ParsedMessageReceived(IMessageIdentifier identifier, IProtocolResponse response)
+   at Sportradar.SDK.ProtocolProviders.LiveOddsCommonProtocolProvider.MessageReceivedHandler[T](IMessageIdentifier identifier, String msg, DataReceivedOutcome outcome)
+   at Sportradar.SDK.Common.Interfaces.ConnectionProviderDelegates.DataReceivedDelegate.Invoke(IMessageIdentifier identifier, String message, DataReceivedOutcome outcome)
+   at Sportradar.SDK.ConnectionProviders.TcpConnectionProvider.LineReceivedHandler(StringBuilder message_builder, String msg)
+   at Sportradar.SDK.ConnectionProviders.TcpConnectionProvider.HandleConnection()
+   at Sportradar.SDK.ConnectionProviders.TcpConnectionProvider.IOLoop()
+2017-07-17 17:34:49,915 [IOLoop-LIVEODDS] [WARN] |KBL7Cl6BOeFcQVABRTddaBj1Jjs=| Invalid login - waiting for 00:00:10 before reconnecting again
+2017-07-17 17:35:06,593 [IOLoop-LIVEODDS] [WARN] |ETW4A+WDIQBixrsOGVWqfhauEQo=| TCP connection error, fatal False
+System.Security.Authentication.InvalidCredentialException: Login failed
+   at Sportradar.SDK.ProtocolProviders.LiveOddsProtocolProvider.ParsedMessageReceivedHandler(IMessageIdentifier identifier, IProtocolResponse proto)
+   at Sportradar.SDK.ProtocolProviders.ProtocolProviderDelegates.ParsedDataReceivedDelegate.Invoke(IMessageIdentifier identifier, IProtocolResponse response)
+   at Sportradar.SDK.ProtocolProviders.LiveOddsCommonProtocolProvider.ParsedMessageReceived(IMessageIdentifier identifier, IProtocolResponse response)
+   at Sportradar.SDK.ProtocolProviders.LiveOddsCommonProtocolProvider.MessageReceivedHandler[T](IMessageIdentifier identifier, String msg, DataReceivedOutcome outcome)
+   at Sportradar.SDK.Common.Interfaces.ConnectionProviderDelegates.DataReceivedDelegate.Invoke(IMessageIdentifier identifier, String message, DataReceivedOutcome outcome)
+   at Sportradar.SDK.ConnectionProviders.TcpConnectionProvider.LineReceivedHandler(StringBuilder message_builder, String msg)
+   at Sportradar.SDK.ConnectionProviders.TcpConnectionProvider.HandleConnection()
+   at Sportradar.SDK.ConnectionProviders.TcpConnectionProvider.IOLoop()
+2017-07-17 17:35:06,594 [IOLoop-LIVEODDS] [WARN] |YzkhwvcCi1UrH2sYXKrk807GosY=| Invalid login - waiting for 00:00:10 before reconnecting again
+2017-07-17 17:35:18,991 [IOLoop-LIVEODDS] [WARN] |y+T4OqmNBggzSoBuLU3rUQCWqJQ=| TCP connection error, fatal False
+System.Security.Authentication.InvalidCredentialException: Login failed
+   at Sportradar.SDK.ProtocolProviders.LiveOddsProtocolProvider.ParsedMessageReceivedHandler(IMessageIdentifier identifier, IProtocolResponse proto)
+   at Sportradar.SDK.ProtocolProviders.ProtocolProviderDelegates.ParsedDataReceivedDelegate.Invoke(IMessageIdentifier identifier, IProtocolResponse response)
+   at Sportradar.SDK.ProtocolProviders.LiveOddsCommonProtocolProvider.ParsedMessageReceived(IMessageIdentifier identifier, IProtocolResponse response)
+   at Sportradar.SDK.ProtocolProviders.LiveOddsCommonProtocolProvider.MessageReceivedHandler[T](IMessageIdentifier identifier, String msg, DataReceivedOutcome outcome)
+   at Sportradar.SDK.Common.Interfaces.ConnectionProviderDelegates.DataReceivedDelegate.Invoke(IMessageIdentifier identifier, String message, DataReceivedOutcome outcome)
+   at Sportradar.SDK.ConnectionProviders.TcpConnectionProvider.LineReceivedHandler(StringBuilder message_builder, String msg)
+   at Sportradar.SDK.ConnectionProviders.TcpConnectionProvider.HandleConnection()
+   at Sportradar.SDK.ConnectionProviders.TcpConnectionProvider.IOLoop()
+2017-07-17 17:35:18,992 [IOLoop-LIVEODDS] [WARN] |izM7w+r9QcSZsXqwp4X6ZCpnz/A=| Invalid login - waiting for 00:00:10 before reconnecting again
+2017-07-17 17:35:31,606 [IOLoop-LIVEODDS] [WARN] |sJrab9ADEM9xWU0OwAVdMk4WkA4=| TCP connection error, fatal False
+System.Security.Authentication.InvalidCredentialException: Login failed
+   at Sportradar.SDK.ProtocolProviders.LiveOddsProtocolProvider.ParsedMessageReceivedHandler(IMessageIdentifier identifier, IProtocolResponse proto)
+   at Sportradar.SDK.ProtocolProviders.ProtocolProviderDelegates.ParsedDataReceivedDelegate.Invoke(IMessageIdentifier identifier, IProtocolResponse response)
+   at Sportradar.SDK.ProtocolProviders.LiveOddsCommonProtocolProvider.ParsedMessageReceived(IMessageIdentifier identifier, IProtocolResponse response)
+   at Sportradar.SDK.ProtocolProviders.LiveOddsCommonProtocolProvider.MessageReceivedHandler[T](IMessageIdentifier identifier, String msg, DataReceivedOutcome outcome)
+   at Sportradar.SDK.Common.Interfaces.ConnectionProviderDelegates.DataReceivedDelegate.Invoke(IMessageIdentifier identifier, String message, DataReceivedOutcome outcome)
+   at Sportradar.SDK.ConnectionProviders.TcpConnectionProvider.LineReceivedHandler(StringBuilder message_builder, String msg)
+   at Sportradar.SDK.ConnectionProviders.TcpConnectionProvider.HandleConnection()
+   at Sportradar.SDK.ConnectionProviders.TcpConnectionProvider.IOLoop()
+2017-07-17 17:35:31,608 [IOLoop-LIVEODDS] [WARN] |t/ZPanRoQ04oF22E59t33GBsxp4=| Invalid login - waiting for 00:00:10 before reconnecting again
+2017-07-17 17:35:42,311 [IOLoop-LIVEODDS] [WARN] |NuEJq0S8/PViaGjMF6KuoVUdvlY=| TCP connection error, fatal False
+System.Security.Authentication.InvalidCredentialException: Login failed
+   at Sportradar.SDK.ProtocolProviders.LiveOddsProtocolProvider.ParsedMessageReceivedHandler(IMessageIdentifier identifier, IProtocolResponse proto)
+   at Sportradar.SDK.ProtocolProviders.ProtocolProviderDelegates.ParsedDataReceivedDelegate.Invoke(IMessageIdentifier identifier, IProtocolResponse response)
+   at Sportradar.SDK.ProtocolProviders.LiveOddsCommonProtocolProvider.ParsedMessageReceived(IMessageIdentifier identifier, IProtocolResponse response)
+   at Sportradar.SDK.ProtocolProviders.LiveOddsCommonProtocolProvider.MessageReceivedHandler[T](IMessageIdentifier identifier, String msg, DataReceivedOutcome outcome)
+   at Sportradar.SDK.Common.Interfaces.ConnectionProviderDelegates.DataReceivedDelegate.Invoke(IMessageIdentifier identifier, String message, DataReceivedOutcome outcome)
+   at Sportradar.SDK.ConnectionProviders.TcpConnectionProvider.LineReceivedHandler(StringBuilder message_builder, String msg)
+   at Sportradar.SDK.ConnectionProviders.TcpConnectionProvider.HandleConnection()
+   at Sportradar.SDK.ConnectionProviders.TcpConnectionProvider.IOLoop()
+2017-07-17 17:35:42,311 [IOLoop-LIVEODDS] [WARN] |STWBcO1ZA9WV5frxs1O+ZDzYiCo=| Invalid login - waiting for 00:00:10 before reconnecting again
+2017-07-17 17:36:16,194 [IOLoop-LIVEODDS] [WARN] |+uOQw7Qob0M7I1Ce8HPp50na8bY=| TCP connection error, fatal False
+System.Security.Authentication.InvalidCredentialException: Login failed
+   at Sportradar.SDK.ProtocolProviders.LiveOddsProtocolProvider.ParsedMessageReceivedHandler(IMessageIdentifier identifier, IProtocolResponse proto)
+   at Sportradar.SDK.ProtocolProviders.ProtocolProviderDelegates.ParsedDataReceivedDelegate.Invoke(IMessageIdentifier identifier, IProtocolResponse response)
+   at Sportradar.SDK.ProtocolProviders.LiveOddsCommonProtocolProvider.ParsedMessageReceived(IMessageIdentifier identifier, IProtocolResponse response)
+   at Sportradar.SDK.ProtocolProviders.LiveOddsCommonProtocolProvider.MessageReceivedHandler[T](IMessageIdentifier identifier, String msg, DataReceivedOutcome outcome)
+   at Sportradar.SDK.Common.Interfaces.ConnectionProviderDelegates.DataReceivedDelegate.Invoke(IMessageIdentifier identifier, String message, DataReceivedOutcome outcome)
+   at Sportradar.SDK.ConnectionProviders.TcpConnectionProvider.LineReceivedHandler(StringBuilder message_builder, String msg)
+   at Sportradar.SDK.ConnectionProviders.TcpConnectionProvider.HandleConnection()
+   at Sportradar.SDK.ConnectionProviders.TcpConnectionProvider.IOLoop()
+2017-07-17 17:36:16,198 [IOLoop-LIVEODDS] [WARN] |O3eT+SVUvyQR8dj+b6A4YANmH80=| Invalid login - waiting for 00:00:10 before reconnecting again
+2017-07-17 17:36:29,567 [IOLoop-LIVEODDS] [WARN] |NlatdqSbGu90CX7CxhUJZ2R8jh8=| TCP connection error, fatal False
+System.Security.Authentication.InvalidCredentialException: Login failed
+   at Sportradar.SDK.ProtocolProviders.LiveOddsProtocolProvider.ParsedMessageReceivedHandler(IMessageIdentifier identifier, IProtocolResponse proto)
+   at Sportradar.SDK.ProtocolProviders.ProtocolProviderDelegates.ParsedDataReceivedDelegate.Invoke(IMessageIdentifier identifier, IProtocolResponse response)
+   at Sportradar.SDK.ProtocolProviders.LiveOddsCommonProtocolProvider.ParsedMessageReceived(IMessageIdentifier identifier, IProtocolResponse response)
+   at Sportradar.SDK.ProtocolProviders.LiveOddsCommonProtocolProvider.MessageReceivedHandler[T](IMessageIdentifier identifier, String msg, DataReceivedOutcome outcome)
+   at Sportradar.SDK.Common.Interfaces.ConnectionProviderDelegates.DataReceivedDelegate.Invoke(IMessageIdentifier identifier, String message, DataReceivedOutcome outcome)
+   at Sportradar.SDK.ConnectionProviders.TcpConnectionProvider.LineReceivedHandler(StringBuilder message_builder, String msg)
+   at Sportradar.SDK.ConnectionProviders.TcpConnectionProvider.HandleConnection()
+   at Sportradar.SDK.ConnectionProviders.TcpConnectionProvider.IOLoop()
+2017-07-17 17:36:29,567 [IOLoop-LIVEODDS] [WARN] |dS/7xn1cNbnHceyDqG/dDzNjnME=| Invalid login - waiting for 00:00:10 before reconnecting again
+2017-07-17 17:36:40,940 [IOLoop-LIVEODDS] [WARN] |ldhQ8am2DhPYElEMKtWGuwE1PxY=| TCP connection error, fatal False
+System.Security.Authentication.InvalidCredentialException: Login failed
+   at Sportradar.SDK.ProtocolProviders.LiveOddsProtocolProvider.ParsedMessageReceivedHandler(IMessageIdentifier identifier, IProtocolResponse proto)
+   at Sportradar.SDK.ProtocolProviders.ProtocolProviderDelegates.ParsedDataReceivedDelegate.Invoke(IMessageIdentifier identifier, IProtocolResponse response)
+   at Sportradar.SDK.ProtocolProviders.LiveOddsCommonProtocolProvider.ParsedMessageReceived(IMessageIdentifier identifier, IProtocolResponse response)
+   at Sportradar.SDK.ProtocolProviders.LiveOddsCommonProtocolProvider.MessageReceivedHandler[T](IMessageIdentifier identifier, String msg, DataReceivedOutcome outcome)
+   at Sportradar.SDK.Common.Interfaces.ConnectionProviderDelegates.DataReceivedDelegate.Invoke(IMessageIdentifier identifier, String message, DataReceivedOutcome outcome)
+   at Sportradar.SDK.ConnectionProviders.TcpConnectionProvider.LineReceivedHandler(StringBuilder message_builder, String msg)
+   at Sportradar.SDK.ConnectionProviders.TcpConnectionProvider.HandleConnection()
+   at Sportradar.SDK.ConnectionProviders.TcpConnectionProvider.IOLoop()
+2017-07-17 17:36:40,942 [IOLoop-LIVEODDS] [WARN] |LbzBbTwZamYAM7GkWBZhY+EiDf4=| Invalid login - waiting for 00:00:10 before reconnecting again
+2017-07-17 17:37:00,825 [IOLoop-LIVEODDS] [WARN] |Pb8YkSrGGcaGdwlOMPIGjpRTeMw=| TCP connection error, fatal False
+System.Security.Authentication.InvalidCredentialException: Login failed
+   at Sportradar.SDK.ProtocolProviders.LiveOddsProtocolProvider.ParsedMessageReceivedHandler(IMessageIdentifier identifier, IProtocolResponse proto)
+   at Sportradar.SDK.ProtocolProviders.ProtocolProviderDelegates.ParsedDataReceivedDelegate.Invoke(IMessageIdentifier identifier, IProtocolResponse response)
+   at Sportradar.SDK.ProtocolProviders.LiveOddsCommonProtocolProvider.ParsedMessageReceived(IMessageIdentifier identifier, IProtocolResponse response)
+   at Sportradar.SDK.ProtocolProviders.LiveOddsCommonProtocolProvider.MessageReceivedHandler[T](IMessageIdentifier identifier, String msg, DataReceivedOutcome outcome)
+   at Sportradar.SDK.Common.Interfaces.ConnectionProviderDelegates.DataReceivedDelegate.Invoke(IMessageIdentifier identifier, String message, DataReceivedOutcome outcome)
+   at Sportradar.SDK.ConnectionProviders.TcpConnectionProvider.LineReceivedHandler(StringBuilder message_builder, String msg)
+   at Sportradar.SDK.ConnectionProviders.TcpConnectionProvider.HandleConnection()
+   at Sportradar.SDK.ConnectionProviders.TcpConnectionProvider.IOLoop()
+2017-07-17 17:37:00,826 [IOLoop-LIVEODDS] [WARN] |sMjHz0HijnXVlp6Ay5+nyIrxTNM=| Invalid login - waiting for 00:00:10 before reconnecting again
