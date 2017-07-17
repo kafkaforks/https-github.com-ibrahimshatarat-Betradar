@@ -140,6 +140,7 @@
     <Compile Include="ErrorReturn.cs" />
     <Compile Include="Globals.cs" />
     <Compile Include="HybridgeClient.cs" />
+    <Compile Include="LcooBetClear.cs" />
     <Compile Include="LiveTimer.cs" />
     <Compile Include="Logg.cs" />
     <Compile Include="MainAttribute.cs" />

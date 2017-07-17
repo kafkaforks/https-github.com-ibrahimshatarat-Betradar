@@ -309,8 +309,32 @@ namespace SharedLibrary
                 {
                     builder.Append('|' + "0000");
                 }
-                builder.Append('|' + (UnifiedBetObject.SpecialBetValue ?? "0000") + '|' +
-                               (UnifiedBetObject.PlayerId ?? "0000") + '|' + (UnifiedBetObject.TeamId ?? "0000"));
+                if (!string.IsNullOrEmpty(UnifiedBetObject.SpecialBetValue))
+                {
+                    builder.Append('|' + (UnifiedBetObject.SpecialBetValue ?? "0000"));
+                }
+                else
+                {
+                    builder.Append('|' + "0000");
+                }
+                if (!string.IsNullOrEmpty(UnifiedBetObject.PlayerId))
+                {
+                    builder.Append('|' + (UnifiedBetObject.PlayerId ?? "0000"));
+                }
+                else
+                {
+                    builder.Append('|' + "0000");
+                }
+                if (!string.IsNullOrEmpty(UnifiedBetObject.TeamId))
+                {
+                    builder.Append('|' + (UnifiedBetObject.TeamId ?? "0000"));
+                }
+                else
+                {
+                    builder.Append('|' + "0000");
+                }
+                //builder.Append('|' + (UnifiedBetObject.SpecialBetValue ?? "0000") + '|' +
+                //               (UnifiedBetObject.PlayerId ?? "0000") + '|' + (UnifiedBetObject.TeamId ?? "0000"));
 
                 return builder.ToString();
             }
@@ -337,9 +361,14 @@ namespace SharedLibrary
                 odd.odd_odd = odd_in.Value.ToString();
                 odd.odd_special_odds_value = odd_special_odds_value;
                 //TODO UserName and Password must be dynamic for socket connection
-                RedisQueue.Send_Redis_Channel(channel,
+                //TODO ASian handicap block
+                if (odd_in.TypeId != 51)
+                {
+                    RedisQueue.Send_Redis_Channel(channel,
                     "[{\"mid_otid_ocid_sid\": \"" + oid + "\"}," + new JavaScriptSerializer().Serialize(odd) + "]",
                     "home@HYBRIDGE", "12345", "Odd", oid, msg_event);
+                }
+                
                 //Task.Factory.StartNew(()=>HybridgeClient.SendDataSocketPhoenix(channel, "[{\"mid_otid_ocid_sid\": \"" + oid + "\"}," + new JavaScriptSerializer().Serialize(odd) + "]", "home@HYBRIDGE", "12345","Odd",oid,msg_event));
                 //clientSock.SendData(channel,"[{\"mid_otid_ocid_sid\": \"" + oid + "\"}," + new JavaScriptSerializer().Serialize(odd) + "]");
             }
@@ -369,8 +398,12 @@ namespace SharedLibrary
                 }
                 odd.last_update = DateTime.UtcNow;
 
-                //TODO 
-                RedisQueue.Send_Redis_Channel(channel, "[{\"mid_otid_ocid_sid\": \"" + oid + "\"}," + new JavaScriptSerializer().Serialize(odd) + "]", "home@HYBRIDGE", "12345", "Odd_New", oid, odd_event);
+                //TODO Aian handicap block
+                if (odd_in.TypeId != 51)
+                {
+                    RedisQueue.Send_Redis_Channel(channel, "[{\"mid_otid_ocid_sid\": \"" + oid + "\"}," + new JavaScriptSerializer().Serialize(odd) + "]", "home@HYBRIDGE", "12345", "Odd_New", oid, odd_event);
+                }
+                
                 //Task.Factory.StartNew(() => HybridgeClient.SendDataSocketPhoenix(channel, "[{\"mid_otid_ocid_sid\": \"" + oid + "\"}," + new JavaScriptSerializer().Serialize(odd) + "]", "home@HYBRIDGE", "12345","Odd_New",oid,odd_event));
                 //clientSock.SendData(channel,"[{\"mid_otid_ocid_sid\": \"" + oid + "\"}," + new JavaScriptSerializer().Serialize(odd) + "]");
             }

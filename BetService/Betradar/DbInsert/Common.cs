@@ -1209,6 +1209,59 @@ namespace BetService.Classes.DbInsert
             }
 
         }
+        public DataSet selectotherOutcomesMarket(long p_match_id, long p_odd_type_id,string p_mid_otid_ocid_sid, string p_odd_special)
+        {
+            var dyMerchants = new Merchants();
+            var command = new NpgsqlCommand(Globals.DB_Functions.GetOtherMarketsOutcimes.ToDescription());
+
+
+
+            if (p_match_id != null)
+            {
+                command.Parameters.AddWithValue("p_match_id", NpgsqlDbType.Bigint, p_match_id);
+            }
+            else
+            {
+                command.Parameters.AddWithValue("p_match_id", NpgsqlDbType.Bigint, DBNull.Value);
+            }
+
+            if (p_odd_type_id != null)
+            {
+                command.Parameters.AddWithValue("p_odd_type_id", NpgsqlDbType.Bigint, p_odd_type_id);
+            }
+            else
+            {
+                command.Parameters.AddWithValue("p_odd_type_id", NpgsqlDbType.Bigint, DBNull.Value);
+            }
+            if (!string.IsNullOrEmpty(p_mid_otid_ocid_sid))
+            {
+                command.Parameters.AddWithValue("p_mid_otid_ocid_sid", NpgsqlDbType.Text, p_mid_otid_ocid_sid);
+            }
+            else
+            {
+                command.Parameters.AddWithValue("p_mid_otid_ocid_sid", NpgsqlDbType.Text, DBNull.Value);
+            }
+            //if (!string.IsNullOrEmpty(p_odd_special))
+            //{
+            //    command.Parameters.AddWithValue("p_odd_special", NpgsqlDbType.Text, p_odd_special);
+            //}
+            //else
+            //{
+            //    command.Parameters.AddWithValue("p_odd_special", NpgsqlDbType.Text, DBNull.Value);
+            //}
+
+            var ds = select(command);
+           
+            if (ds != null)
+            {
+                return ds;
+            }
+            else
+            {
+                return null;
+            }
+
+        }
         public long insertDyMerchants(Merchants merch)
         {
 
@@ -2767,6 +2820,232 @@ namespace BetService.Classes.DbInsert
                 return new Globals.ReturnQueueLong(queue, -1);
             }
         }
+        public Globals.ReturnQueueLong insertCpLcooBetclearOdds(BetResultEntity entity, long MatchID, string mid_otid_ocid_sid,bool status)
+        {
+
+            var queue = new Queue<Globals.Rollback>();
+            var ObjCommand = new NpgsqlCommand(Globals.DB_Functions.InsertCpLcooBetClearOdds.ToDescription());
+            try
+            {
+                if (MatchID != null)
+                {
+                    ObjCommand.Parameters.AddWithValue("p_match_id", NpgsqlDbType.Bigint, MatchID);
+                }
+                else
+                {
+                    ObjCommand.Parameters.AddWithValue("p_match_id", NpgsqlDbType.Bigint, DBNull.Value);
+                }
+                if (entity.OddsType != null)
+                {
+                    ObjCommand.Parameters.AddWithValue("p_odds_type", NpgsqlDbType.Bigint, entity.OddsType);
+                }
+                else
+                {
+                    ObjCommand.Parameters.AddWithValue("p_odds_type", NpgsqlDbType.Bigint, DBNull.Value);
+                }
+                if (!string.IsNullOrEmpty(entity.Outcome))
+                {
+                    ObjCommand.Parameters.AddWithValue("p_outcome", NpgsqlDbType.Text, entity.Outcome);
+                }
+                else
+                {
+                    ObjCommand.Parameters.AddWithValue("p_outcome", NpgsqlDbType.Text, DBNull.Value);
+                }
+                if (!string.IsNullOrEmpty(entity.OutcomeId))
+                {
+                    ObjCommand.Parameters.AddWithValue("p_outcome_id", NpgsqlDbType.Text, entity.OutcomeId);
+                }
+                else
+                {
+                    ObjCommand.Parameters.AddWithValue("p_outcome_id", NpgsqlDbType.Text, DBNull.Value);
+                }
+                if (!string.IsNullOrEmpty(entity.PlayerId))
+                {
+                    ObjCommand.Parameters.AddWithValue("p_player_id", NpgsqlDbType.Text, entity.PlayerId);
+                }
+                else
+                {
+                    ObjCommand.Parameters.AddWithValue("p_player_id", NpgsqlDbType.Text, DBNull.Value);
+                }
+                if (!string.IsNullOrEmpty(entity.Reason))
+                {
+                    ObjCommand.Parameters.AddWithValue("p_reason", NpgsqlDbType.Text, entity.Reason);
+                }
+                else
+                {
+                    ObjCommand.Parameters.AddWithValue("p_reason", NpgsqlDbType.Text, DBNull.Value);
+                }
+                if (!string.IsNullOrEmpty(entity.SpecialBetValue))
+                {
+                    ObjCommand.Parameters.AddWithValue("p_special_bet_value", NpgsqlDbType.Text, entity.SpecialBetValue);
+                }
+                else
+                {
+                    ObjCommand.Parameters.AddWithValue("p_special_bet_value", NpgsqlDbType.Text, DBNull.Value);
+                }
+                if (entity.Status != null)
+                {
+                    ObjCommand.Parameters.AddWithValue("p_status", NpgsqlDbType.Boolean, entity.Status);
+                }
+                else
+                {
+                    ObjCommand.Parameters.AddWithValue("p_status", NpgsqlDbType.Boolean, DBNull.Value);
+                }
+                if (!string.IsNullOrEmpty(entity.TeamId))
+                {
+                    ObjCommand.Parameters.AddWithValue("p_team_id", NpgsqlDbType.Text, entity.TeamId);
+                }
+                else
+                {
+                    ObjCommand.Parameters.AddWithValue("p_team_id", NpgsqlDbType.Text, DBNull.Value);
+                }
+                if (!string.IsNullOrEmpty(entity.VoidFactor))
+                {
+                    ObjCommand.Parameters.AddWithValue("p_void_factor", NpgsqlDbType.Text, entity.VoidFactor);
+                }
+                else
+                {
+                    ObjCommand.Parameters.AddWithValue("p_void_factor", NpgsqlDbType.Text, DBNull.Value);
+                }
+                if (!string.IsNullOrEmpty(mid_otid_ocid_sid))
+                {
+                    ObjCommand.Parameters.AddWithValue("p_mid_otid_ocid_sid", NpgsqlDbType.Text, mid_otid_ocid_sid);
+                }
+                else
+                {
+                    ObjCommand.Parameters.AddWithValue("p_mid_otid_ocid_sid", NpgsqlDbType.Text, DBNull.Value);
+                }
+                var RetId = insert(ObjCommand);
+                if (RetId > 0)
+                {
+                    return new Globals.ReturnQueueLong(queue, RetId);
+                }
+                else
+                {
+                    return new Globals.ReturnQueueLong(queue, -1);
+                }
+
+            }
+            catch (Exception ex)
+            {
+                Logg.logger.Fatal(ex.Message);
+                return new Globals.ReturnQueueLong(queue, -1);
+            }
+        }
+        public Globals.ReturnQueueLong insertCpLcooBetclearOdds( long MatchID,long OddsType,string Outcome,string OutcomeId,string PlayerId, string Reason,
+            string SpecialBetValue, string TeamId,string VoidFactor,
+            string mid_otid_ocid_sid,bool status)
+        {
+
+            var queue = new Queue<Globals.Rollback>();
+            var ObjCommand = new NpgsqlCommand(Globals.DB_Functions.InsertCpLcooBetClearOdds.ToDescription());
+            try
+            {
+                if (MatchID != null)
+                {
+                    ObjCommand.Parameters.AddWithValue("p_match_id", NpgsqlDbType.Bigint, MatchID);
+                }
+                else
+                {
+                    ObjCommand.Parameters.AddWithValue("p_match_id", NpgsqlDbType.Bigint, DBNull.Value);
+                }
+                if (OddsType != null)
+                {
+                    ObjCommand.Parameters.AddWithValue("p_odds_type", NpgsqlDbType.Bigint, OddsType);
+                }
+                else
+                {
+                    ObjCommand.Parameters.AddWithValue("p_odds_type", NpgsqlDbType.Bigint, DBNull.Value);
+                }
+                if (!string.IsNullOrEmpty(Outcome))
+                {
+                    ObjCommand.Parameters.AddWithValue("p_outcome", NpgsqlDbType.Text, Outcome);
+                }
+                else
+                {
+                    ObjCommand.Parameters.AddWithValue("p_outcome", NpgsqlDbType.Text, DBNull.Value);
+                }
+                if (!string.IsNullOrEmpty(OutcomeId))
+                {
+                    ObjCommand.Parameters.AddWithValue("p_outcome_id", NpgsqlDbType.Text, OutcomeId);
+                }
+                else
+                {
+                    ObjCommand.Parameters.AddWithValue("p_outcome_id", NpgsqlDbType.Text, DBNull.Value);
+                }
+                if (!string.IsNullOrEmpty(PlayerId))
+                {
+                    ObjCommand.Parameters.AddWithValue("p_player_id", NpgsqlDbType.Text,PlayerId);
+                }
+                else
+                {
+                    ObjCommand.Parameters.AddWithValue("p_player_id", NpgsqlDbType.Text, DBNull.Value);
+                }
+                if (!string.IsNullOrEmpty(Reason))
+                {
+                    ObjCommand.Parameters.AddWithValue("p_reason", NpgsqlDbType.Text, Reason);
+                }
+                else
+                {
+                    ObjCommand.Parameters.AddWithValue("p_reason", NpgsqlDbType.Text, DBNull.Value);
+                }
+                if (!string.IsNullOrEmpty(SpecialBetValue))
+                {
+                    ObjCommand.Parameters.AddWithValue("p_special_bet_value", NpgsqlDbType.Text, SpecialBetValue);
+                }
+                else
+                {
+                    ObjCommand.Parameters.AddWithValue("p_special_bet_value", NpgsqlDbType.Text, DBNull.Value);
+                }
+                if (status == null)
+                {
+                    ObjCommand.Parameters.AddWithValue("p_status", NpgsqlDbType.Boolean, status);
+                }
+                else
+                {
+                    ObjCommand.Parameters.AddWithValue("p_status", NpgsqlDbType.Boolean, DBNull.Value);
+                }
+                if (!string.IsNullOrEmpty(TeamId))
+                {
+                    ObjCommand.Parameters.AddWithValue("p_team_id", NpgsqlDbType.Text, TeamId);
+                }
+                else
+                {
+                    ObjCommand.Parameters.AddWithValue("p_team_id", NpgsqlDbType.Text, DBNull.Value);
+                }
+                if (!string.IsNullOrEmpty(VoidFactor))
+                {
+                    ObjCommand.Parameters.AddWithValue("p_void_factor", NpgsqlDbType.Text, VoidFactor);
+                }
+                else
+                {
+                    ObjCommand.Parameters.AddWithValue("p_void_factor", NpgsqlDbType.Text, DBNull.Value);
+                }
+                if (!string.IsNullOrEmpty(mid_otid_ocid_sid))
+                {
+                    ObjCommand.Parameters.AddWithValue("p_mid_otid_ocid_sid", NpgsqlDbType.Text, mid_otid_ocid_sid);
+                }
+                else
+                {
+                    ObjCommand.Parameters.AddWithValue("p_mid_otid_ocid_sid", NpgsqlDbType.Text, DBNull.Value);
+                }
+                var RetId = insert(ObjCommand);
+                if (RetId > 0)
+                {
+                    return new Globals.ReturnQueueLong(queue, RetId);
+                }
+                else
+                {
+                    return new Globals.ReturnQueueLong(queue, -1);
+                }
+
+            }
+            catch (Exception ex)
+            {
+                Logg.logger.Fatal(ex.Message);
+                return new Globals.ReturnQueueLong(queue, -1);
+            }
+        }
 
         public Globals.ReturnQueueLong insertCpLcooBetclearOdds_test(BetResultEntity_test entity, long MatchID, string mid_otid_ocid_sid)
         {
@@ -3238,6 +3517,60 @@ namespace BetService.Classes.DbInsert
                 objCommand.Connection.Close();
             }
         }
+
+        public DataSet selectReader(NpgsqlCommand objCommand)
+        {
+            var lbetclear = new LcooBetClear();
+            var ldata = new List<LcooBetClear>();
+            objCommand.Connection = connection();
+            objCommand.Connection.Open();
+            objCommand.CommandType = CommandType.StoredProcedure;
+            var ds = new DataSet();
+            try
+            {
+                ds.Tables.Add();
+                NpgsqlDataReader dr = objCommand.ExecuteReader();
+                while (dr.Read())
+                {
+                  
+                        //lbetclear.id = long.TryParse(dr[0].ToString(),);
+                   
+                    
+                    lbetclear.match_id = long.Parse(dr[1].ToString());
+                    lbetclear.odd_type_id = long.Parse(dr[2].ToString());
+                    lbetclear.odd_type_name = dr[3].ToString();
+                    lbetclear.odd_id = long.Parse(dr[4].ToString());
+                    lbetclear.odd_outcome = dr[5].ToString();
+                    lbetclear.odd_outcome_id = dr[6].ToString();
+                    lbetclear.odd_player_id = dr[7].ToString();
+                    lbetclear.odd_team_id = dr[8].ToString();
+                    lbetclear.odd_name = dr[9].ToString();
+                    lbetclear.odd_visible = bool.Parse(dr[10].ToString());
+                    lbetclear.odd_special = dr[11].ToString();
+                    lbetclear.odd_odd = dr[12].ToString();
+                    lbetclear.is_deleted = bool.Parse(dr[13].ToString());
+                    lbetclear.created_at = DateTime.Parse(dr[14].ToString());
+                    lbetclear.odd_probability = dr[15].ToString();
+                    lbetclear.last_update = DateTime.Parse(dr[16].ToString());
+                    lbetclear.last_odd = dr[17].ToString();
+                    lbetclear.mid_otid_ocid_sid = dr[18].ToString();
+                    ldata.Add(lbetclear);
+                }
+#if DEBUG
+                WriteFullLine(objCommand.CommandText);
+#endif
+                return ds;
+            }
+            catch (Exception ex)
+            {
+                Logg.logger.Fatal(ex.Message);
+                return null;
+            }
+            finally
+            {
+                objCommand.Connection.Close();
+            }
+        }
         public DataSet select(NpgsqlCommand objCommand)
         {
             objCommand.Connection = connection();
@@ -3246,7 +3579,6 @@ namespace BetService.Classes.DbInsert
             var ds = new DataSet();
             try
             {
-                objCommand.Connection.Open();
                 NpgsqlDataAdapter da = new NpgsqlDataAdapter(objCommand);
                 da.Fill(ds);
 #if DEBUG

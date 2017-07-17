@@ -24,14 +24,15 @@ namespace BetService.Classes.DbInsert
                 var channel = CreateLiveOddsChannelName(args.BetStart.EventHeader.Id, "global", merch);
                 merch = config.AppSettings.Get("ChannelsSecretPrefixLast_real2");
                 var channel2 = CreateLiveOddsChannelName(args.BetStart.EventHeader.Id, "global", merch);
-
+                merch = config.AppSettings.Get("ChannelsSecretPrefixLast_real3");
+                var channel3 = CreateLiveOddsChannelName(args.BetStart.EventHeader.Id, "global", merch);
 
                 Task.Factory.StartNew(
                               () =>
                               {
                                   SendToHybridgeSocketMessages(args.BetStart.Status.ToString(), channel, "BETSTART");
                                   SendToHybridgeSocketMessages(args.BetStart.Status.ToString(), channel2, "BETSTART");
-
+                                  SendToHybridgeSocketMessages(args.BetStart.Status.ToString(), channel3, "BETSTART");
                               }
                               , CancellationToken.None, TaskCreationOptions.DenyChildAttach, TaskScheduler.Default);
 

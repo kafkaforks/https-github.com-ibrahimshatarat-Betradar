@@ -15,19 +15,23 @@ namespace BetService
 {
     static class Program
     {
-        
+
         /// <summary>
         /// The main entry point for the application.
         /// </summary>
-       public static Queue<AliveEventArgs> AliveQueue = new Queue<AliveEventArgs>();
+        public static Queue<AliveEventArgs> AliveQueue = new Queue<AliveEventArgs>();
 
-       
-        static  void Main(string[] args)
+
+        static void Main(string[] args)
         {
             var coup = new Coupons();
             Globals.MerchantsDs = coup.selectAllMerchants(null);
-            
-            // var common = new Common();
+
+            //var common = new Common();
+            //var ds = common.selectotherOutcomesMarket(12016834, 20, "12016834|20|3|0000|0000|0000", "");
+          
+
+
             //var entity = new BetResultEntity_test();
             // common.insertCpLcooBetclearOdds_test(entity, 11537497, "11537497|10|1|0000|0000|0000");
             // Console.WriteLine(entity.OddsType);
@@ -66,7 +70,7 @@ namespace BetService
             {
                 ServiceBase.Run(ServicesToRun);
             }
-           
+
         }
     }
 }

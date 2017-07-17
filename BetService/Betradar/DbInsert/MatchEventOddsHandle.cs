@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading;
@@ -60,20 +61,82 @@ namespace BetService.Classes.DbInsert
                 {
                     //Parallel.ForEach(match.BetResults, bet_result =>
                     //{
-                   
-                        foreach (var bet_result in match.BetResults)
+
+                    foreach (var bet_result in match.BetResults)
+                    {
+                        var bet = new BetClearQueueElement();
+                        bet.MatchId = match.MatchId;
+                        bet.OddsId = bet_result.OddsType;
+                        if (bet_result.OutcomeId != null)
                         {
-                            var bet = new BetClearQueueElement();
-                            bet.MatchId = match.MatchId;
-                            bet.OddsId = bet_result.OddsType;
-                            if (bet_result.OutcomeId != null)
+                            bet.OutcomeId = int.Parse(bet_result.OutcomeId);
+                        }
+                        bet.SpecialBetValue = bet_result.SpecialBetValue;
+                        bet.PlayerId = bet_result.PlayerId;
+
+                        bet.TeamId = bet_result.TeamId;
+                        var mid = EncodeUnifiedBetClearQueueElement(bet);
+                        if (bet_result.OddsType != 51)
+                        {
+                            if (bet_result.Status != null)
                             {
-                                bet.OutcomeId = int.Parse(bet_result.OutcomeId);
+
+                                common.insertCpLcooBetclearOdds(bet_result, match.MatchId, mid);
+                                Task.Factory.StartNew(() =>
+                                {
+                                    var coupon = new Coupons();
+                                    coupon.MatchFinalize(mid);
+                                });
                             }
-                            bet.SpecialBetValue = bet_result.SpecialBetValue;
-                            bet.PlayerId = bet_result.PlayerId;
-                            bet.TeamId = bet_result.TeamId;
-                            var mid = EncodeUnifiedBetClearQueueElement(bet);
+                            else
+                            {
+                                common.insertCpLcooBetclearOdds(bet_result, match.MatchId, mid, true);
+                                var ds = common.selectotherOutcomesMarket(bet.MatchId, bet_result.OddsType, mid,
+                                    bet_result.SpecialBetValue);
+                                if (ds != null && ds.Tables.Count > 0)
+                                {
+                                    if (ds.Tables[0].Rows.Count > 0)
+                                    {
+                                        foreach (DataRow betresult in ds.Tables[0].Rows)
+                                        {
+                                            var oneBet = new BetClearQueueElement();
+                                            oneBet.MatchId = match.MatchId;
+                                            oneBet.OddsId = long.Parse(betresult["odd_type_id"].ToString());
+                                            if (!string.IsNullOrEmpty(betresult["odd_outcome_id"].ToString()))
+                                            {
+                                                oneBet.OutcomeId = int.Parse(betresult["odd_outcome_id"].ToString());
+                                            }
+                                            oneBet.SpecialBetValue = betresult["odd_special"].ToString();
+                                            oneBet.PlayerId = betresult["odd_player_id"].ToString();
+
+                                            oneBet.TeamId = betresult["odd_team_id"].ToString();
+                                            var oneMid = EncodeUnifiedBetClearQueueElement(oneBet);
+                                            common.insertCpLcooBetclearOdds(match.MatchId,
+                                                long.Parse(betresult["odd_type_id"].ToString()),
+                                                betresult["odd_outcome"].ToString(),
+                                                betresult["odd_outcome_id"].ToString(),
+                                                betresult["odd_player_id"].ToString(), "",
+                                                betresult["odd_special"].ToString(), betresult["odd_team_id"].ToString()
+                                                , "", oneMid, false);
+
+                                            Task.Factory.StartNew(() =>
+                                            {
+                                                var coupon = new Coupons();
+                                                coupon.MatchFinalize(oneMid);
+                                            });
+
+                                            //common.insertCpLcooBetclearOdds(match.MatchId, bet_result.OddsType,
+                                            //    bet_result.Outcome, bet_result.OutcomeId,
+                                            //    bet_result.PlayerId, bet_result.Reason, bet_result.SpecialBetValue,
+                                            //    bet_result.TeamId, bet_result.VoidFactor, oneMid);
+                                        }
+                                    }
+                                }
+
+                            }
+                        }
+                        else
+                        {
                             common.insertCpLcooBetclearOdds(bet_result, match.MatchId, mid);
                             Task.Factory.StartNew(() =>
                             {
@@ -81,8 +144,11 @@ namespace BetService.Classes.DbInsert
                                 coupon.MatchFinalize(mid);
                             });
                         }
-                        // Task.Factory.StartNew(() => sendToRpc(mid));
-                        //sendToRpc(mid);
+
+
+                    }
+                    // Task.Factory.StartNew(() => sendToRpc(mid));
+                    //sendToRpc(mid);
                     //});
 
                 }
@@ -98,7 +164,7 @@ namespace BetService.Classes.DbInsert
             {
                 // Here we add the odds of the match
 
-                int[] visible_odd_types = new int[] { 10, 46, 60, 42,20,225,52 };
+                int[] visible_odd_types = new int[] { 10, 46, 60, 42, 20, 225, 52 };
                 if (match.Odds != null)
                 {
 

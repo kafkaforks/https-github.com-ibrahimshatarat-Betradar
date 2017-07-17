@@ -362,7 +362,9 @@ namespace SharedLibrary
             [Description("select_merchants")]
             SelectMerchants = 123,
             [Description("cp_cancel_odd")]
-            CancelOdd = 124
+            CancelOdd = 124,
+            [Description("cp_get_other_market_outcomes")]
+            GetOtherMarketsOutcimes = 125
         }
         public enum Tables
         {

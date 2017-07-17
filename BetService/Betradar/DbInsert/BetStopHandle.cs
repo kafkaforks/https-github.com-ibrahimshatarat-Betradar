@@ -38,13 +38,15 @@ namespace BetService.Classes.DbInsert
                 var channel = CreateLiveOddsChannelName(args.BetStop.EventHeader.Id, "global", merch);
                 merch = config.AppSettings.Get("ChannelsSecretPrefixLast_real2");
                 var channel2 = CreateLiveOddsChannelName(args.BetStop.EventHeader.Id, "global", merch);
-
+                merch = config.AppSettings.Get("ChannelsSecretPrefixLast_real3");
+                var channel3 = CreateLiveOddsChannelName(args.BetStop.EventHeader.Id, "global", merch);
 
                 Task.Factory.StartNew(
                   () =>
                   {
                       SendToHybridgeSocketMessages(args.BetStop.Status.ToString(), channel, "BETSTOP");
                       SendToHybridgeSocketMessages(args.BetStop.Status.ToString(), channel2, "BETSTOP");
+                      SendToHybridgeSocketMessages(args.BetStop.Status.ToString(), channel3, "BETSTOP");
                   }
                   , CancellationToken.None, TaskCreationOptions.DenyChildAttach, TaskScheduler.Default);
 

@@ -79,6 +79,12 @@ namespace BetService.Classes.DbInsert
                                     SendToHybridgeSocket(args.OddsChange.EventHeader.Id, odd.Id, val.TypeId, "", odd.SpecialOddsValue,
                                         val, CreateLiveOddsChannelName(args.OddsChange.EventHeader.Id, lang.Key, last_prefix), "ODDCHANGE");
                                 }
+                                foreach (var lang in NameDictionary)
+                                {
+                                    var last_prefix = config.AppSettings.Get("ChannelsSecretPrefixLast_real3");
+                                    SendToHybridgeSocket(args.OddsChange.EventHeader.Id, odd.Id, val.TypeId, "", odd.SpecialOddsValue,
+                                        val, CreateLiveOddsChannelName(args.OddsChange.EventHeader.Id, lang.Key, last_prefix), "ODDCHANGE");
+                                }
                                 NameDictionary = null;
                                 csr.Cancel();
                             }
