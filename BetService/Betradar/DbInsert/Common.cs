@@ -2883,13 +2883,13 @@ namespace BetService.Classes.DbInsert
                 {
                     ObjCommand.Parameters.AddWithValue("p_special_bet_value", NpgsqlDbType.Text, DBNull.Value);
                 }
-                if (entity.Status != null)
+                if (status != null)
                 {
-                    ObjCommand.Parameters.AddWithValue("p_status", NpgsqlDbType.Boolean, entity.Status);
+                    ObjCommand.Parameters.AddWithValue("p_status", NpgsqlDbType.Boolean, status);
                 }
                 else
                 {
-                    ObjCommand.Parameters.AddWithValue("p_status", NpgsqlDbType.Boolean, DBNull.Value);
+                    ObjCommand.Parameters.AddWithValue("p_status", NpgsqlDbType.Boolean, entity.Status);
                 }
                 if (!string.IsNullOrEmpty(entity.TeamId))
                 {
@@ -2997,7 +2997,7 @@ namespace BetService.Classes.DbInsert
                 {
                     ObjCommand.Parameters.AddWithValue("p_special_bet_value", NpgsqlDbType.Text, DBNull.Value);
                 }
-                if (status == null)
+                if (status != null)
                 {
                     ObjCommand.Parameters.AddWithValue("p_status", NpgsqlDbType.Boolean, status);
                 }
