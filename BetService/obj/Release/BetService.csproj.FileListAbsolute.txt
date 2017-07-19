@@ -107,7 +107,6 @@ X:\ecoPayz\Live-Solution\Betradar\BetService\bin\Release\NetMQ.dll
 X:\ecoPayz\Live-Solution\Betradar\BetService\bin\Release\NLog.dll
 X:\ecoPayz\Live-Solution\Betradar\BetService\bin\Release\Npgsql.dll
 X:\ecoPayz\Live-Solution\Betradar\BetService\bin\Release\ServiceStack.Common.dll
-X:\ecoPayz\Live-Solution\Betradar\BetService\bin\Release\ServiceStack.Interfaces.dll
 X:\ecoPayz\Live-Solution\Betradar\BetService\bin\Release\ServiceStack.Plugins.MsgPack.dll
 X:\ecoPayz\Live-Solution\Betradar\BetService\bin\Release\ServiceStack.Text.dll
 X:\ecoPayz\Live-Solution\Betradar\BetService\bin\Release\SharedLibrary.dll
@@ -123,7 +122,6 @@ X:\ecoPayz\Live-Solution\Betradar\BetService\bin\Release\MessagePack.xml
 X:\ecoPayz\Live-Solution\Betradar\BetService\bin\Release\NLog.xml
 X:\ecoPayz\Live-Solution\Betradar\BetService\bin\Release\Npgsql.xml
 X:\ecoPayz\Live-Solution\Betradar\BetService\bin\Release\ServiceStack.Common.xml
-X:\ecoPayz\Live-Solution\Betradar\BetService\bin\Release\ServiceStack.Interfaces.xml
 X:\ecoPayz\Live-Solution\Betradar\BetService\bin\Release\ServiceStack.Text.xml
 X:\ecoPayz\Live-Solution\Betradar\BetService\bin\Release\System.Threading.Tasks.Extensions.xml
 X:\ecoPayz\Live-Solution\Betradar\BetService\bin\Release\Zyan.Communication.pdb
