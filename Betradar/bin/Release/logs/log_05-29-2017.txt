@@ -1,6 +1,0 @@
-13:05:23 || SharedLibrary.RPC.Client.Serverproxy || No connection could be made because the target machine actively refused it 127.0.0.1:8080
-13:05:23 || SharedLibrary.Core.sendToRpc || Object reference not set to an instance of an object.
-13:05:25 || SharedLibrary.RPC.Client.Serverproxy || No connection could be made because the target machine actively refused it 127.0.0.1:8080
-13:05:25 || SharedLibrary.Core.sendToRpc || Object reference not set to an instance of an object.
-13:05:27 || SharedLibrary.RPC.Client.Serverproxy || No connection could be made because the target machine actively refused it 127.0.0.1:8080
-13:05:27 || SharedLibrary.Core.sendToRpc || Object reference not set to an instance of an object.

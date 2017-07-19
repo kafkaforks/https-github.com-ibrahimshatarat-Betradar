@@ -1241,14 +1241,14 @@ namespace BetService.Classes.DbInsert
             {
                 command.Parameters.AddWithValue("p_mid_otid_ocid_sid", NpgsqlDbType.Text, DBNull.Value);
             }
-            //if (!string.IsNullOrEmpty(p_odd_special))
-            //{
-            //    command.Parameters.AddWithValue("p_odd_special", NpgsqlDbType.Text, p_odd_special);
-            //}
-            //else
-            //{
-            //    command.Parameters.AddWithValue("p_odd_special", NpgsqlDbType.Text, DBNull.Value);
-            //}
+            if (!string.IsNullOrEmpty(p_odd_special))
+            {
+                command.Parameters.AddWithValue("p_odd_special", NpgsqlDbType.Text, p_odd_special);
+            }
+            else
+            {
+                command.Parameters.AddWithValue("p_odd_special", NpgsqlDbType.Text, DBNull.Value);
+            }
 
             var ds = select(command);
            
@@ -2883,9 +2883,9 @@ namespace BetService.Classes.DbInsert
                 {
                     ObjCommand.Parameters.AddWithValue("p_special_bet_value", NpgsqlDbType.Text, DBNull.Value);
                 }
-                if (entity.Status != null)
+                if (status != null)
                 {
-                    ObjCommand.Parameters.AddWithValue("p_status", NpgsqlDbType.Boolean, entity.Status);
+                    ObjCommand.Parameters.AddWithValue("p_status", NpgsqlDbType.Boolean, status);
                 }
                 else
                 {
@@ -2997,7 +2997,7 @@ namespace BetService.Classes.DbInsert
                 {
                     ObjCommand.Parameters.AddWithValue("p_special_bet_value", NpgsqlDbType.Text, DBNull.Value);
                 }
-                if (status == null)
+                if (status != null)
                 {
                     ObjCommand.Parameters.AddWithValue("p_status", NpgsqlDbType.Boolean, status);
                 }

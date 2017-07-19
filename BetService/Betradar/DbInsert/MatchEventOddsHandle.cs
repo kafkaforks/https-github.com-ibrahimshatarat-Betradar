@@ -76,7 +76,7 @@ namespace BetService.Classes.DbInsert
 
                         bet.TeamId = bet_result.TeamId;
                         var mid = EncodeUnifiedBetClearQueueElement(bet);
-                        if (bet_result.OddsType != 51)
+                        if (bet_result.OddsType != 51 && bet_result.OddsType != 7)
                         {
                             if (bet_result.Status != null)
                             {

@@ -362,7 +362,7 @@ namespace SharedLibrary
                 odd.odd_special_odds_value = odd_special_odds_value;
                 //TODO UserName and Password must be dynamic for socket connection
                 //TODO ASian handicap block
-                if (odd_in.TypeId != 51)
+                if (odd_in.TypeId != 51 && odd_in.TypeId != 7)
                 {
                     RedisQueue.Send_Redis_Channel(channel,
                     "[{\"mid_otid_ocid_sid\": \"" + oid + "\"}," + new JavaScriptSerializer().Serialize(odd) + "]",
@@ -399,7 +399,7 @@ namespace SharedLibrary
                 odd.last_update = DateTime.UtcNow;
 
                 //TODO Aian handicap block
-                if (odd_in.TypeId != 51)
+                if (odd_in.TypeId != 51 && odd_in.TypeId != 7)
                 {
                     RedisQueue.Send_Redis_Channel(channel, "[{\"mid_otid_ocid_sid\": \"" + oid + "\"}," + new JavaScriptSerializer().Serialize(odd) + "]", "home@HYBRIDGE", "12345", "Odd_New", oid, odd_event);
                 }
