@@ -10,34 +10,29 @@ namespace SharedLibrary
         public static ConnectionMultiplexer RedisConn;
         static RedisConnectorHelper()
         {
+            try
+            {
+
             ConfigurationOptions configs = new ConfigurationOptions
             {
                 EndPoints =
                     {
-                        {config.AppSettings.Get("RedisServer"), 6379}
+                        {config.AppSettings.Get("RedisServer"), int.Parse(config.AppSettings.Get("RedisPort"))}
                     },
                 KeepAlive = 180,
-                //DefaultVersion = new Version(2, 8, 8),
                 AbortOnConnectFail = false,
+                ResponseTimeout = 1000,
+                ConnectTimeout = 1000,
+                SyncTimeout = 500,
                 Password = config.AppSettings.Get("RedisServerPassword")
             };
 
             RedisConn = ConnectionMultiplexer.Connect(configs);
-        }
 
-        static void RedisConnect()
-        {
-            ConnectionMultiplexer.Connect("");
-        }
-
-        private static ConnectionMultiplexer multiConnection;
-        public static Lazy<ConnectionMultiplexer> lazyConnection;
-
-        public static ConnectionMultiplexer Connection
-        {
-            get
+            }
+            catch (Exception ex)
             {
-                return lazyConnection.Value;
+                Logg.logger.Fatal(ex.Message);
             }
         }
     }

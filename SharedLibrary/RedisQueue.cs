@@ -44,15 +44,14 @@ namespace SharedLibrary
                 var data = new JObject();
                 if (!string.IsNullOrEmpty(node))
                 {
-                  //  data["external_content_name"] = node;
+                    //  data["external_content_name"] = node;
 
                 }
                 if (!string.IsNullOrEmpty(external_content_id))
                 {
-                   // data["external_content_id"] = external_content_id;
+                    // data["external_content_id"] = external_content_id;
                 }
                 data["auth"] = new JObject();
-               // data["data.upsert"] = new JObject();
                 data["event"] = "data.upsert";
                 data["data"] = new JObject();
                 data["auth"]["username"] = Core.config.AppSettings.Get("HybridgeClientUserName");
@@ -60,6 +59,7 @@ namespace SharedLibrary
                 data["data"]["channel"] = Channel;
                 data["data"]["event"] = bet_event;
                 data["data"]["payload"] = Data;
+
                 if (sub.IsConnected(address))
                 {
                     sub.Publish(address, data.ToString());
@@ -69,8 +69,9 @@ namespace SharedLibrary
                     sub = Rconnect.GetSubscriber();
                     sub.Publish(address, data.ToString());
                 }
+                data.RemoveAll();
                 data = null;
-
+                GC.Collect();
             }
             catch (Exception ex)
             {

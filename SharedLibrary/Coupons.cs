@@ -527,7 +527,6 @@ namespace SharedLibrary
             }
         }
 
-
         public long insertSeamlessCount(long counpon_id, string request, string response)
         {
             var command = new NpgsqlCommand(Globals.DB_Functions.UpdateSendSeamless.ToDescription());
@@ -713,9 +712,9 @@ namespace SharedLibrary
                     connectionBuilder.Database = config.AppSettings.Get("DB_Database");
                     connectionBuilder.Username = config.AppSettings.Get("DB_Username");
                     connectionBuilder.Password = config.AppSettings.Get("DB_Password");
-                    connectionBuilder.Timeout = 50;
+                    connectionBuilder.Timeout = 300;
                     connectionBuilder.Pooling = true;
-                    connectionBuilder.CommandTimeout = 50;
+                    connectionBuilder.CommandTimeout = 300;
                     con = new NpgsqlConnection(connectionBuilder.ConnectionString);
                     return con;
                 }

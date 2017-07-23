@@ -18,11 +18,11 @@ namespace BetService.Classes.DbInsert
         }
         public void RunTask(BetCancelUndoEventArgs args)
         {
-            //var common = new Common();
+            var common = new Common();
             //var queue = new Queue<Globals.Rollback>();
             try
             {
-                //Task.Factory.StartNew(() => common.insertMatchDataAllDetails((MatchHeader)args.BetCancelUndo.EventHeader, null));
+               // Task.Factory.StartNew(() => common.insertMatchDataAllDetails((MatchHeader)args.BetCancelUndo.EventHeader, null));
                 Task.Factory.StartNew(() => insertOdds(args));
             }
             catch (Exception ex)

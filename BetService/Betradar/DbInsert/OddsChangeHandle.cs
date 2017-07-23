@@ -60,8 +60,8 @@ namespace BetService.Classes.DbInsert
 
                             //TODO OPEN
                             var csr = new CancellationTokenSource();
-                            
-                           
+
+
 
                             Task.Factory.StartNew(() =>
                             {
@@ -70,7 +70,7 @@ namespace BetService.Classes.DbInsert
                                 {
                                     var last_prefix = config.AppSettings.Get("ChannelsSecretPrefixLast_real");
                                     SendToHybridgeSocket(args.OddsChange.EventHeader.Id, odd.Id, val.TypeId, "", odd.SpecialOddsValue,
-                                        val, CreateLiveOddsChannelName(args.OddsChange.EventHeader.Id, lang.Key, last_prefix),"ODDCHANGE");
+                                        val, CreateLiveOddsChannelName(args.OddsChange.EventHeader.Id, lang.Key, last_prefix), "ODDCHANGE");
                                 }
 
                                 foreach (var lang in NameDictionary)
@@ -89,7 +89,7 @@ namespace BetService.Classes.DbInsert
                                 csr.Cancel();
                             }
 
-                             ,csr.Token,TaskCreationOptions.None, TaskScheduler.Default)
+                             , csr.Token, TaskCreationOptions.None, TaskScheduler.Default)
                             ;
                         }
                     }
@@ -105,8 +105,8 @@ namespace BetService.Classes.DbInsert
             //Task.Factory.StartNew(
             //         () =>
             //         {
-            common.insertMatchDataAllDetails((MatchHeader)args.OddsChange.EventHeader, null);
-            //}
+            //             common.insertMatchDataAllDetails((MatchHeader)args.OddsChange.EventHeader, null);
+            //         }
             //, CancellationToken.None, TaskCreationOptions.DenyChildAttach, TaskScheduler.Default);
 
             //Task.Factory.StartNew(
@@ -117,7 +117,7 @@ namespace BetService.Classes.DbInsert
 
         public void RunTask(OddsChangeEventArgs queueElement)
         {
-            
+
         }
     }
 }

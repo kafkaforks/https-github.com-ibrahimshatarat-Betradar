@@ -61,12 +61,8 @@ namespace BetService.Classes.DbInsert
                 // var channel = CreateLiveOddsChannelName(args.BetStop.EventHeader.Id, "global");
                 // SendToHybridgeSocketMessages(args.BetStop.Status.ToString(), channel);
 
-                //Task.Factory.StartNew(
-                //    () =>
-                //    {
-                        common.insertMatchDataAllDetails((MatchHeader) args.BetStop.EventHeader, null);
-                    //}
-                    //, CancellationToken.None, TaskCreationOptions.DenyChildAttach, TaskScheduler.Default);
+
+                common.insertMatchDataAllDetails((MatchHeader)args.BetStop.EventHeader, null);
 
 
 

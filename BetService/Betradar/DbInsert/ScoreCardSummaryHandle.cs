@@ -19,11 +19,11 @@ namespace BetService.Classes.DbInsert
             try
             {
                 var common = new Common();
-
-               // Task.Factory.StartNew(
-               //() =>
-               //{
-                   common.updateDmadYellowRedCard(args.ScoreCardSummary, args.ScoreCardSummary.EventHeader.Id);
+                //Task.Factory.StartNew(() => common.insertMatchDataAllDetails((MatchHeader)args.ScoreCardSummary.EventHeader, null));
+                // Task.Factory.StartNew(
+                //() =>
+                //{
+                common.updateDmadYellowRedCard(args.ScoreCardSummary, args.ScoreCardSummary.EventHeader.Id);
                //}
                //, CancellationToken.None, TaskCreationOptions.DenyChildAttach, TaskScheduler.Default);
 

@@ -53,15 +53,10 @@ namespace BetService.Classes.DbInsert
             var queue = new Queue<Globals.Rollback>();
             var queueMatch = new Queue<Globals.Rollback>();
             var match = queueElement.MatchEntity;
-            //var client = new Client();
-            //var proxy = client.Serverproxy();
             try
             {
                 if (match.BetResults != null)
                 {
-                    //Parallel.ForEach(match.BetResults, bet_result =>
-                    //{
-
                     foreach (var bet_result in match.BetResults)
                     {
                         var bet = new BetClearQueueElement();
@@ -73,88 +68,12 @@ namespace BetService.Classes.DbInsert
                         }
                         bet.SpecialBetValue = bet_result.SpecialBetValue;
                         bet.PlayerId = bet_result.PlayerId;
-
                         bet.TeamId = bet_result.TeamId;
                         var mid = EncodeUnifiedBetClearQueueElement(bet);
-                        if (bet_result.OddsType != 51 && bet_result.OddsType != 7)
-                        {
-                            if (bet_result.Status != null)
-                            {
-
-                                common.insertCpLcooBetclearOdds(bet_result, match.MatchId, mid);
-                                Task.Factory.StartNew(() =>
-                                {
-                                    var coupon = new Coupons();
-                                    coupon.MatchFinalize(mid);
-                                });
-                            }
-                            else
-                            {
-                                common.insertCpLcooBetclearOdds(bet_result, match.MatchId, mid, true);
-                                var ds = common.selectotherOutcomesMarket(bet.MatchId, bet_result.OddsType, mid,
-                                    bet_result.SpecialBetValue);
-                                if (ds != null && ds.Tables.Count > 0)
-                                {
-                                    if (ds.Tables[0].Rows.Count > 0)
-                                    {
-                                        foreach (DataRow betresult in ds.Tables[0].Rows)
-                                        {
-                                            var oneBet = new BetClearQueueElement();
-                                            oneBet.MatchId = match.MatchId;
-                                            oneBet.OddsId = long.Parse(betresult["odd_type_id"].ToString());
-                                            if (!string.IsNullOrEmpty(betresult["odd_outcome_id"].ToString()))
-                                            {
-                                                oneBet.OutcomeId = int.Parse(betresult["odd_outcome_id"].ToString());
-                                            }
-                                            oneBet.SpecialBetValue = betresult["odd_special"].ToString();
-                                            oneBet.PlayerId = betresult["odd_player_id"].ToString();
-
-                                            oneBet.TeamId = betresult["odd_team_id"].ToString();
-                                            var oneMid = EncodeUnifiedBetClearQueueElement(oneBet);
-                                            common.insertCpLcooBetclearOdds(match.MatchId,
-                                                long.Parse(betresult["odd_type_id"].ToString()),
-                                                betresult["odd_outcome"].ToString(),
-                                                betresult["odd_outcome_id"].ToString(),
-                                                betresult["odd_player_id"].ToString(), "",
-                                                betresult["odd_special"].ToString(), betresult["odd_team_id"].ToString()
-                                                , "", oneMid, false);
-
-                                            Task.Factory.StartNew(() =>
-                                            {
-                                                var coupon = new Coupons();
-                                                coupon.MatchFinalize(oneMid);
-                                            });
-
-                                            //common.insertCpLcooBetclearOdds(match.MatchId, bet_result.OddsType,
-                                            //    bet_result.Outcome, bet_result.OutcomeId,
-                                            //    bet_result.PlayerId, bet_result.Reason, bet_result.SpecialBetValue,
-                                            //    bet_result.TeamId, bet_result.VoidFactor, oneMid);
-                                        }
-                                    }
-                                }
-
-                            }
-                        }
-                        else
-                        {
-                            common.insertCpLcooBetclearOdds(bet_result, match.MatchId, mid);
-                            Task.Factory.StartNew(() =>
-                            {
-                                var coupon = new Coupons();
-                                coupon.MatchFinalize(mid);
-                            });
-                        }
-
-
+                        common.insertCpLcooBetclearOdds(bet_result, match.MatchId, mid);
                     }
-                    // Task.Factory.StartNew(() => sendToRpc(mid));
-                    //sendToRpc(mid);
-                    //});
-
                 }
-                common.insertMatch(match, 1);
-
-                //Task.Factory.StartNew(() => common.insertMatchDataAllDetails((MatchHeader)queueElement.MatchEntity., null));
+               common.insertMatch(match, 1);
             }
             catch (Exception ex)
             {
@@ -167,7 +86,6 @@ namespace BetService.Classes.DbInsert
                 int[] visible_odd_types = new int[] { 10, 46, 60, 42, 20, 225, 52 };
                 if (match.Odds != null)
                 {
-
                     foreach (var Odds in match.Odds)
                     {
                         foreach (var odd in Odds.Odds)
@@ -218,90 +136,6 @@ namespace BetService.Classes.DbInsert
                             {
                                 common.updateCpLcooOdds(match.MatchId, Odds.OddsType);
                             }
-
-                            #region old odds
-                            //var commandOdds = new NpgsqlCommand(Globals.DB_Functions.InsertCouponOdds.ToDescription());
-                            //commandOdds.Parameters.AddWithValue("p_match_id", NpgsqlDbType.Bigint, match.MatchId);
-                            //if (Odds.OddsType != null)
-                            //{
-                            //    commandOdds.Parameters.AddWithValue("p_odd_type_id", NpgsqlDbType.Bigint, Odds.OddsType);
-                            //}
-                            //else
-                            //{
-                            //    commandOdds.Parameters.AddWithValue("p_odd_type_id", NpgsqlDbType.Bigint, DBNull.Value);
-                            //}
-
-                            //commandOdds.Parameters.AddWithValue("p_odd_type_name", NpgsqlDbType.Text, DBNull.Value);
-                            //commandOdds.Parameters.AddWithValue("p_odd_type_name_tr", NpgsqlDbType.Text, DBNull.Value);
-                            //if (odd.Id != null)
-                            //{
-                            //    commandOdds.Parameters.AddWithValue("p_odd_id", NpgsqlDbType.Bigint, odd.Id);
-                            //}
-                            //else
-                            //{
-                            //    commandOdds.Parameters.AddWithValue("p_odd_id", NpgsqlDbType.Bigint, DBNull.Value);
-                            //}
-
-                            //commandOdds.Parameters.AddWithValue("p_odd_name", NpgsqlDbType.Text, DBNull.Value);
-                            //if (visible_odd_types.Contains(Odds.OddsType))
-                            //{
-                            //    commandOdds.Parameters.AddWithValue("p_odd_visible", NpgsqlDbType.Boolean, true);
-                            //}
-                            //else
-                            //{
-                            //    commandOdds.Parameters.AddWithValue("p_odd_visible", NpgsqlDbType.Boolean,false);
-                            //}
-
-                            //if (odd.SpecialBetValue != null)
-                            //{
-                            //    commandOdds.Parameters.AddWithValue("p_odd_special", NpgsqlDbType.Text, odd.SpecialBetValue);
-                            //}
-                            //else
-                            //{
-                            //    commandOdds.Parameters.AddWithValue("p_odd_special", NpgsqlDbType.Text, DBNull.Value);
-                            //}
-                            //if (odd.Value != null)
-                            //{
-                            //    commandOdds.Parameters.AddWithValue("p_odd_odd", NpgsqlDbType.Text, odd.Value);
-                            //}
-                            //else
-                            //{
-                            //    commandOdds.Parameters.AddWithValue("p_odd_odd", NpgsqlDbType.Text, DBNull.Value);
-                            //}
-                            //if (match.Probabilities != null)
-                            //{
-                            //    var probability = "";
-                            //    foreach (var prob in match.Probabilities)
-                            //    {
-                            //        if (prob.OddsType == Odds.OddsType)
-                            //        {
-                            //            foreach (var odd_prob in prob.OddsProbabilities)
-                            //            {
-                            //                if (odd_prob.Outcome == odd.OutCome)
-                            //                {
-                            //                    if (odd_prob.Value != null)
-                            //                    {
-                            //                        probability = odd_prob.Value;
-                            //                    }
-                            //                    else
-                            //                    {
-                            //                        probability = String.Empty;
-                            //                    }
-                            //                }
-                            //            }
-                            //        }
-                            //    }
-                            //    commandOdds.Parameters.AddWithValue("p_odd_probability", NpgsqlDbType.Text, probability);
-                            //   // commandOdds.Parameters.AddWithValue("p_odd_probability", NpgsqlDbType.Text, DBNull.Value);
-                            //}
-                            //else
-                            //{
-                            //    commandOdds.Parameters.AddWithValue("p_odd_probability", NpgsqlDbType.Text, DBNull.Value);
-                            //}
-
-                            //commandOdds.Parameters.AddWithValue("p_odd_format", NpgsqlDbType.Text, DBNull.Value);
-                            //var odds_insert_id = common.insert(commandOdds);
-                            #endregion
                         }
 
                     }

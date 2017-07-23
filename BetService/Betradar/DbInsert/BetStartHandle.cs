@@ -46,13 +46,8 @@ namespace BetService.Classes.DbInsert
                 //});
 
 
-                //Task.Factory.StartNew(
-                //    () =>
-                //    {
-                        common.insertMatchDataAllDetails((MatchHeader) args.BetStart.EventHeader, null);
-                    //}
-                    //, CancellationToken.None, TaskCreationOptions.DenyChildAttach, TaskScheduler.Default);
 
+                common.insertMatchDataAllDetails((MatchHeader)args.BetStart.EventHeader, null);
 
 
                 //Task.Factory.StartNew(() => common.insertMatchDataAllDetails((MatchHeader)args.BetStart.EventHeader, null));

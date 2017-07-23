@@ -23,12 +23,12 @@ namespace BetService.Classes.DbInsert
         private void RunTask(BetCancelEventArgs args)
         {
             
-            //var common = new Common();
+            var common = new Common();
             var queue = new Queue<Globals.Rollback>();
             try
             {
-                // common.insertMatchDataAllDetails((MatchHeader)args.BetStop.EventHeader, null);
-                //Task.Factory.StartNew(() => common.insertMatchDataAllDetails((MatchHeader)args.BetCancel.EventHeader, null));
+                 common.insertMatchDataAllDetails((MatchHeader)args.BetCancel.EventHeader, null);
+                Task.Factory.StartNew(() => common.insertMatchDataAllDetails((MatchHeader)args.BetCancel.EventHeader, null));
                 if (args.BetCancel.Odds != null && args.BetCancel.Odds.Count > 0)
                 {
                     // Task.Factory.StartNew(() => insertOdds(args));
@@ -48,7 +48,7 @@ namespace BetService.Classes.DbInsert
             }
             try
             {
-                //Task.Factory.StartNew(() => common.insertMatchDataAllDetails((MatchHeader)args.BetCancel.EventHeader, null));
+                Task.Factory.StartNew(() => common.insertMatchDataAllDetails((MatchHeader)args.BetCancel.EventHeader, null));
             }
             catch (Exception ex)
             {

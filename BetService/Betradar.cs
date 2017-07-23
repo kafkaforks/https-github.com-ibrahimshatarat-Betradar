@@ -171,8 +171,8 @@ namespace BetService
 
         protected override void OnStop()
         {
-           // enabled_feeds.ForEach(xx => xx.Stop());
-           // m_sdk.Stop();
+            enabled_feeds.ForEach(xx => xx.Stop());
+            m_sdk.Stop();
             AliveTimer.Stop();
             AliveTimer.Dispose();
             AliveTimer = null;

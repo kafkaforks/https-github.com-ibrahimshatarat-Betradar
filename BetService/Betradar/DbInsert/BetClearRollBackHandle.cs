@@ -20,8 +20,8 @@ namespace BetService.Classes.DbInsert
 
         public void RunTask(BetClearRollbackEventArgs queueElement)
         {
-            //var common = new Common();
-            //Task.Factory.StartNew(() => common.insertMatchDataAllDetails((MatchHeader)queueElement.BetClearRollback.EventHeader, null));
+           // var common = new Common();
+           // Task.Factory.StartNew(() => common.insertMatchDataAllDetails((MatchHeader)queueElement.BetClearRollback.EventHeader, null));
 
         }
     }
