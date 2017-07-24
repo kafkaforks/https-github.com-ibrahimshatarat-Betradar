@@ -24,9 +24,9 @@ namespace Betradar.Classes.Socket
             if (meta_data != null)
             {
                Logg.logger.Info("{0}: Received MetaInfo with {1} races and {2} racedays", m_feed_name, meta_data.RaceHeaderInfos.Count, meta_data.RaceDays.Count);
-                string xml = Globals.Serialization.XmlSerialize(e.MetaInfo);
+                //string xml = Globals.Serialization.XmlSerialize(e.MetaInfo);
                 //Globals.Queue_Feed.Enqueue(xml);
-                string json = JsonConvert.SerializeObject(e.MetaInfo);
+                //string json = JsonConvert.SerializeObject(e.MetaInfo);
                
             }
         }

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 using BetService.Classes.DbInsert;
@@ -29,16 +30,28 @@ namespace Betradar.Classes.Socket
             //var exe = new ThreadInterruptedException();
             //Thread threadAlive = new Thread(action) { IsBackground = true };
             //threadAlive.Start();
-            
-
-            Console.WriteLine(":::::::::::::::::::::: Header Count: {0} / Status: {1} ::::::::::::::::::::::", e.Alive.EventHeaders.Count, e.Alive.Status);
-            foreach (var head in e.Alive.EventHeaders)
+            try
             {
-                common.insertMatchDataAllDetails((MatchHeader)head, null);
+                Console.WriteLine(":::::::::::::::::::::: Header Count: {0} / Status: {1} ::::::::::::::::::::::", e.Alive.EventHeaders.Count, e.Alive.Status);
+                var matches = new List<string>();
+                foreach (var head in e.Alive.EventHeaders)
+                {
+                    common.insertMatchDataAllDetails((MatchHeader)head, null);
+                    if (head.Status != EventStatus.UNDEFINED && head.Status != EventStatus.NOT_STARTED && head.Status != EventStatus.PAUSED && head.Status != EventStatus.ENDED && head.Status != EventStatus.ABANDONED && head.Status != EventStatus.CANCELED)
+                    {
+                        if (head.Active)
+                        {
+                            matches.Add(head.Id.ToString());
+                        }
+                    }
+                }
+
+                common.UpdateAliveMatches(matches);
             }
-            
-            
-            
+            catch (Exception ex)
+            {
+                SharedLibrary.Logg.logger.Fatal(ex.Message);
+            }
             //Task.Factory.StartNew(
             //    () =>
             //    {
@@ -50,8 +63,8 @@ namespace Betradar.Classes.Socket
             //    }
             //    , CancellationToken.None, TaskCreationOptions.DenyChildAttach, TaskScheduler.Default);
 
-           
-           
+
+
 
             //Task.Factory.StartNew(() => common.WorkAlive(e));
             //common.WorkAlive(e);

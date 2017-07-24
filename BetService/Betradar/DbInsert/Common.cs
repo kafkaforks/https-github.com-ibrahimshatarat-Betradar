@@ -3257,6 +3257,23 @@ namespace BetService.Classes.DbInsert
                 return null;
             }
         }
+
+        public void UpdateAliveMatches(List<string> matches)
+        {
+            try
+            {
+                string csv = String.Join(",", matches.Select(x => x.ToString()).ToArray());
+                string query = "UPDATE dy_alive_matches SET matches_on = '" + csv + "', last_update = now() WHERE id = 1;";
+                NpgsqlCommand objCommand = new NpgsqlCommand(query);
+                objCommand.CommandText = query;
+                insertNonProc(objCommand);
+            }
+            catch (Exception ex)
+            {
+                SharedLibrary.Logg.logger.Fatal(ex.Message);
+            }
+        }
+
         public bool LiveOddsMoveToArch(DateTime lastUpdate)
         {
             string rollbackArch = "BEGIN;" +
