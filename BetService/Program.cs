@@ -21,7 +21,6 @@ namespace BetService
         /// </summary>
         public static Queue<AliveEventArgs> AliveQueue = new Queue<AliveEventArgs>();
 
-
         static void Main(string[] args)
         {
             var coup = new Coupons();

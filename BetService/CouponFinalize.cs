@@ -18,6 +18,7 @@ namespace BetService
     {
 
         public static Timer timerFinalise = null;
+        public static Timer timerRedisChannel = null;
         private Timer AliveTimer = null;
         Thread m_thread = null;
        
@@ -49,6 +50,7 @@ namespace BetService
             // start the thread
             //Debugger.Break();
             Globals.timerOnOff = true;
+            Globals.redisTimerOnOff = true;
             //m_thread.Start(); 
             timerFinalise = new Timer();
             timerFinalise.AutoReset = false;
@@ -65,6 +67,13 @@ namespace BetService
             AliveTimer.Elapsed += AliveTimer_Tick;
             AliveTimer.Enabled = true;
             AliveTimer.Start();
+
+            timerRedisChannel = new Timer();
+            timerRedisChannel.Interval = 1000;
+            timerRedisChannel.Elapsed += timerRedisChannel_Tick;
+            timerRedisChannel.Enabled = true;
+            timerRedisChannel.Start();
+
         }
 
         protected override void OnStop()
@@ -141,6 +150,19 @@ namespace BetService
             //AliveTimer.Stop();
             //cou.WorkAlive();
             //AliveTimer.Start();
+        }
+
+        private void timerRedisChannel_Tick(object sender, ElapsedEventArgs e)
+        {
+            //timerRedisChannel.Enabled = false;
+            //if (Globals.redisTimerOnOff)
+            //{
+            //    Globals.redisTimerOnOff = false;
+            //    RedisQueue.SendRedisChannelFromQueue();
+            //}
+
+            //timerRedisChannel.Enabled = true;
+           
         }
 
         private void finalize()

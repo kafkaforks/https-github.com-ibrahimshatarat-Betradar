@@ -24,7 +24,7 @@ namespace SharedLibrary
         private static ClientWebSocket pusher = new ClientWebSocket();
         public static ClientWebSocket client;
 
-       
+
 
         public Core()
         {
@@ -119,8 +119,8 @@ namespace SharedLibrary
             }
             catch (Exception)
             {
-                    
-               
+
+
             }
         }
 
@@ -134,9 +134,9 @@ namespace SharedLibrary
             }
             catch (Exception ex)
             {
-              Logg.logger.Fatal(ex.Message);
+                Logg.logger.Fatal(ex.Message);
             }
-            
+
         }
 
         //public void sendToRpcLive(string mid)
@@ -345,10 +345,10 @@ namespace SharedLibrary
             }
         }
 
-        public void SendToHybridgeSocket(long match_id, long odd_id, int? odd_eventoddsfield_typeid, string odd_name, string odd_special_odds_value, EventOddsField odd_in,string channel,string msg_event)
+        public void SendToHybridgeSocket(long match_id, long odd_id, int? odd_eventoddsfield_typeid, string odd_name, string odd_special_odds_value, EventOddsField odd_in, string channel, string msg_event)
         {
             var oddUnique = new BetClearQueueElementLive();
-            
+
             try
             {
                 oddUnique.MatchId = match_id;
@@ -360,15 +360,24 @@ namespace SharedLibrary
                 odd.odd_name = odd_name;
                 odd.odd_odd = odd_in.Value.ToString();
                 odd.odd_special_odds_value = odd_special_odds_value;
-                //TODO UserName and Password must be dynamic for socket connection
+                //TODO REDISCALL
                 //TODO ASian handicap block
                 if (odd_in.TypeId != 51 && odd_in.TypeId != 7)
                 {
                     RedisQueue.Send_Redis_Channel(channel,
                     "[{\"mid_otid_ocid_sid\": \"" + oid + "\"}," + new JavaScriptSerializer().Serialize(odd) + "]",
                     "home@HYBRIDGE", "12345", "Odd", oid, msg_event);
+                    //var channelQueueObject = new RedisChannelObject();
+                    //channelQueueObject.Channel = channel;
+                    //channelQueueObject.Data = "[{\"mid_otid_ocid_sid\": \"" + oid + "\"}," + new JavaScriptSerializer().Serialize(odd) + "]";
+                    //channelQueueObject.username = config.AppSettings.Get("RedisUserName");
+                    //channelQueueObject.password = config.AppSettings.Get("RedisPassword");
+                    //channelQueueObject.node = "Odd";
+                    //channelQueueObject.external_content_id = oid;
+                    //channelQueueObject.bet_event = msg_event;
+                    //Globals.Queue_RedisChannelSend.Enqueue(channelQueueObject);
                 }
-                
+
                 //Task.Factory.StartNew(()=>HybridgeClient.SendDataSocketPhoenix(channel, "[{\"mid_otid_ocid_sid\": \"" + oid + "\"}," + new JavaScriptSerializer().Serialize(odd) + "]", "home@HYBRIDGE", "12345","Odd",oid,msg_event));
                 //clientSock.SendData(channel,"[{\"mid_otid_ocid_sid\": \"" + oid + "\"}," + new JavaScriptSerializer().Serialize(odd) + "]");
             }
@@ -378,7 +387,7 @@ namespace SharedLibrary
             }
         }
 
-        public void SendToHybridgeSocketNewOdd(long match_id, long odd_id, int? odd_eventoddsfield_typeid, string odd_name, string odd_special_odds_value, EventOddsField odd_in, string channel,string odd_event)
+        public void SendToHybridgeSocketNewOdd(long match_id, long odd_id, int? odd_eventoddsfield_typeid, string odd_name, string odd_special_odds_value, EventOddsField odd_in, string channel, string odd_event)
         {
             var oddUnique = new BetClearQueueElementLive();
             try
@@ -401,9 +410,18 @@ namespace SharedLibrary
                 //TODO Aian handicap block
                 if (odd_in.TypeId != 51 && odd_in.TypeId != 7)
                 {
+                    //var channelQueueObject = new RedisChannelObject();
+                    //channelQueueObject.Channel = channel;
+                    //channelQueueObject.Data = "[{\"mid_otid_ocid_sid\": \"" + oid + "\"}," + new JavaScriptSerializer().Serialize(odd) + "]";
+                    //channelQueueObject.username = config.AppSettings.Get("RedisUserName");
+                    //channelQueueObject.password = config.AppSettings.Get("RedisPassword");
+                    //channelQueueObject.node = "Odd_New";
+                    //channelQueueObject.external_content_id = oid;
+                    //channelQueueObject.bet_event = odd_event;
+                    //Globals.Queue_RedisChannelSend.Enqueue(channelQueueObject);
                     RedisQueue.Send_Redis_Channel(channel, "[{\"mid_otid_ocid_sid\": \"" + oid + "\"}," + new JavaScriptSerializer().Serialize(odd) + "]", "home@HYBRIDGE", "12345", "Odd_New", oid, odd_event);
                 }
-                
+
                 //Task.Factory.StartNew(() => HybridgeClient.SendDataSocketPhoenix(channel, "[{\"mid_otid_ocid_sid\": \"" + oid + "\"}," + new JavaScriptSerializer().Serialize(odd) + "]", "home@HYBRIDGE", "12345","Odd_New",oid,odd_event));
                 //clientSock.SendData(channel,"[{\"mid_otid_ocid_sid\": \"" + oid + "\"}," + new JavaScriptSerializer().Serialize(odd) + "]");
             }
@@ -413,11 +431,20 @@ namespace SharedLibrary
             }
         }
 
-        public void SendToHybridgeSocketMessages(string message, string channel,string odd_event)
+        public void SendToHybridgeSocketMessages(string message, string channel, string odd_event)
         {
             try
             {
-                //TODO
+                //TODO REDISSEND
+                //var channelQueueObject = new RedisChannelObject();
+                //channelQueueObject.Channel = channel;
+                //channelQueueObject.Data = "[{\"message\": \"" + message + "\"}]]";
+                //channelQueueObject.username = config.AppSettings.Get("RedisUserName");
+                //channelQueueObject.password = config.AppSettings.Get("RedisPassword");
+                //channelQueueObject.node = "Message";
+                //channelQueueObject.external_content_id = null;
+                //channelQueueObject.bet_event = odd_event;
+                //Globals.Queue_RedisChannelSend.Enqueue(channelQueueObject);
                 RedisQueue.Send_Redis_Channel(channel, "[{\"message\": \"" + message + "\"}]]", "home@HYBRIDGE", "12345", "Message", null, odd_event);
                 //Task.Factory.StartNew(() => HybridgeClient.SendDataSocketPhoenix(channel, "[{\"message\": \"" + message + "\"}]]", "home@HYBRIDGE", "12345","Message",null,odd_event));
                 //clientSock.SendData(channel, "[{\"message\": \"" + message + "\"}]]");
@@ -522,7 +549,7 @@ namespace SharedLibrary
             }
         }
 
-        public string CreateLiveOddsChannelName(long match_id, string language,string last_prefix)
+        public string CreateLiveOddsChannelName(long match_id, string language, string last_prefix)
         {
             try
             {
@@ -533,12 +560,12 @@ namespace SharedLibrary
                    // var last_prefix = config.AppSettings.Get("ChannelsSecretPrefixLast_test");
                     var secret = config.AppSettings.Get("ChannelsSecretKey_test");
 #else
-                     var prefix = config.AppSettings.Get("ChannelsSecretPrefix_real");
+                    var prefix = config.AppSettings.Get("ChannelsSecretPrefix_real");
                     // var last_prefix = config.AppSettings.Get("ChannelsSecretPrefixLast_real");
                     var secret = config.AppSettings.Get("ChannelsSecretKey_real");
 #endif
-                    byte[] bytes = System.Text.Encoding.UTF8.GetBytes(secret+"betradar_live_odds_" + language + "_" + match_id.ToString());
-                    return prefix + ToHex(sha1.ComputeHash(bytes), false)+last_prefix;
+                    byte[] bytes = System.Text.Encoding.UTF8.GetBytes(secret + "betradar_live_odds_" + language + "_" + match_id.ToString());
+                    return prefix + ToHex(sha1.ComputeHash(bytes), false) + last_prefix;
                 }
 
             }

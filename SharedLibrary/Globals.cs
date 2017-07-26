@@ -33,7 +33,9 @@ namespace SharedLibrary
         public static BetQueue<NpgsqlCommand> Queue_Errors;
         public static BetQueue<OddChangeQueue> Queue_Odd_Change;
         public static BetQueue<BetClearQueueElementLive> Queue_BetClearQueueElementLive;
+        public static BetQueue<RedisChannelObject> Queue_RedisChannelSend;
         public static volatile bool timerOnOff = false;
+        public static volatile bool redisTimerOnOff = false;
         public static object lockObject = new object();
         public static DataSet MerchantsDs;
         //public static void insertenum(string membername, int value, string description, int enums)

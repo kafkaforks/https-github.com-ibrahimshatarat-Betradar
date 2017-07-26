@@ -51,13 +51,13 @@ namespace BetService
 
         protected override void OnStart(string[] args)
         {
-            
+
             // instantiate the thread
             // m_thread = new Thread(new ThreadStart(ThreadProc));
             // start the thread
             // m_thread.Start();
             //Debugger.Break();
-
+            Globals.Queue_RedisChannelSend = new BetQueue<RedisChannelObject>();
             timer1 = new Timer();
             timer1.Interval = 11000;
             timer1.Elapsed += timer1_Tick;

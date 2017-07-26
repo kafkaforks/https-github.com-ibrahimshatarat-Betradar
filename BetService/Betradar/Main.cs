@@ -19,6 +19,7 @@ namespace BetService
             Globals.Queue_Errors = new BetQueue<NpgsqlCommand>();
             Globals.Queue_Odd_Change = new BetQueue<OddChangeQueue>();
             Globals.Queue_BetClearQueueElementLive = new BetQueue<BetClearQueueElementLive>();
+            
             #region TESTING
             // Console.ReadLine();
             //var client = new Client();
