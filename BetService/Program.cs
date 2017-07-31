@@ -5,8 +5,11 @@ using System.Linq;
 using System.ServiceProcess;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web.Script.Serialization;
 using BetService.Classes.DbInsert;
 using BetService.DbInsert.Betradar;
+using NetMQ;
+using NetMQ.Sockets;
 using SharedLibrary;
 using Sportradar.SDK.FeedProviders.Lcoo;
 using Sportradar.SDK.FeedProviders.LiveOdds.Common;
@@ -20,15 +23,17 @@ namespace BetService
         /// The main entry point for the application.
         /// </summary>
         public static Queue<AliveEventArgs> AliveQueue = new Queue<AliveEventArgs>();
-
+        
         static void Main(string[] args)
         {
+            
             var coup = new Coupons();
             Globals.MerchantsDs = coup.selectAllMerchants(null);
 
+           
             //var common = new Common();
             //var ds = common.selectotherOutcomesMarket(12016834, 20, "12016834|20|3|0000|0000|0000", "");
-          
+
 
 
             //var entity = new BetResultEntity_test();
@@ -50,7 +55,7 @@ namespace BetService
             ServiceBase[] ServicesToRun;
             ServicesToRun = new ServiceBase[]
             {
-                new CouponFinalize(),new Betradar()
+                new CouponFinalize(),new Betradar(),new LiveOddsSender() 
             };
 
 
@@ -58,9 +63,10 @@ namespace BetService
             {
                 CouponFinalize service1;
                 Betradar service2;
+                LiveOddsSender service3;
                 Task.Factory.StartNew(() => service1 = new CouponFinalize(args));
                 Task.Factory.StartNew(() => service2 = new Betradar(args));
-
+                Task.Factory.StartNew(() => service3= new LiveOddsSender(args));
                 //Console.WriteLine("Press any key to stop program");
                 Console.Read();
 

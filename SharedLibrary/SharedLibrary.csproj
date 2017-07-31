@@ -31,8 +31,8 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="AsyncIO, Version=0.1.25.0, Culture=neutral, PublicKeyToken=44a94435bd6f33f8, processorArchitecture=MSIL">
-      <HintPath>..\packages\AsyncIO.0.1.26.0\lib\net40\AsyncIO.dll</HintPath>
+    <Reference Include="AsyncIO, Version=0.1.20.0, Culture=neutral, PublicKeyToken=44a94435bd6f33f8, processorArchitecture=MSIL">
+      <HintPath>..\packages\AsyncIO.0.1.20.0\lib\net40\AsyncIO.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="BookmakerSdk, Version=2.6.1.0, Culture=neutral, PublicKeyToken=ebebff56eb417380, processorArchitecture=MSIL">
@@ -51,8 +51,8 @@
       <HintPath>..\packages\MsgPack.Cli.0.8.1\lib\net46\MsgPack.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="NetMQ, Version=4.0.0.1, Culture=neutral, PublicKeyToken=a6decef4ddc58b3a, processorArchitecture=MSIL">
-      <HintPath>..\packages\NetMQ.4.0.0.1\lib\net40\NetMQ.dll</HintPath>
+    <Reference Include="NetMQ, Version=3.3.3.4, Culture=neutral, PublicKeyToken=a6decef4ddc58b3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\NetMQ.3.3.3.4\lib\net40\NetMQ.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Newtonsoft.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
@@ -152,11 +152,10 @@
     <Compile Include="QueueBetClear.cs" />
     <Compile Include="RedisConnectorHelper.cs" />
     <Compile Include="RedisQueue.cs" />
-    <Compile Include="RPC\Client.cs" />
-    <Compile Include="RPC\IBetClearingQueue.cs" />
     <Compile Include="SeamlessResponse.cs" />
     <Compile Include="SenToApiClass.cs" />
     <Compile Include="SocketOdd.cs" />
+    <Compile Include="ZMQClient.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config">

@@ -2859,6 +2859,13 @@
             <param name="ordinal">The zero-based column ordinal.</param>
             <returns>The returned object.</returns>
         </member>
+        <member name="M:Npgsql.NpgsqlDataReader.GetStreamAsync(System.Int32)">
+            <summary>
+            Retrieves data as a <see cref="T:System.IO.Stream"/>.
+            </summary>
+            <param name="ordinal">The zero-based column ordinal.</param>
+            <returns>The returned object.</returns>
+        </member>
         <member name="M:Npgsql.NpgsqlDataReader.GetChars(System.Int32,System.Int64,System.Char[],System.Int32,System.Int32)">
             <summary>
             Reads a stream of characters from the specified column, starting at location indicated by dataOffset, into the buffer, starting at the location indicated by bufferOffset.
@@ -2871,6 +2878,13 @@
             <returns>The actual number of characters read.</returns>
         </member>
         <member name="M:Npgsql.NpgsqlDataReader.GetTextReader(System.Int32)">
+            <summary>
+            Retrieves data as a <see cref="T:System.IO.TextReader"/>.
+            </summary>
+            <param name="ordinal">The zero-based column ordinal.</param>
+            <returns>The returned object.</returns>
+        </member>
+        <member name="M:Npgsql.NpgsqlDataReader.GetTextReaderAsync(System.Int32)">
             <summary>
             Retrieves data as a <see cref="T:System.IO.TextReader"/>.
             </summary>
@@ -5751,11 +5765,6 @@
              Note that a connection may be closed before its TransactionScope completes. In this case we close the NpgsqlConnection
              as usual but the connector in a special list in the pool; it will be closed only when the scope completes.
              </remarks>
-        </member>
-        <member name="M:Npgsql.VolatileResourceManager.RollbackLocal">
-            <summary>
-            Repeatedly attempts to rollback, to support timeout-triggered rollbacks that occur while the connection is busy.
-            </summary>
         </member>
         <member name="P:Npgsql.WriteBuffer.Size">
             <summary>

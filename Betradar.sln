@@ -9,6 +9,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SharedLibrary", "SharedLibr
 EndProject
 Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "BetServiceSetup", "BetServiceSetup\BetServiceSetup.vdproj", "{E7C066C4-7210-4189-A420-54706E773DE0}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Communicator", "Communicator\Communicator.csproj", "{2DD5FC39-60A1-4306-AF1A-AC2D63F5A233}"
+EndProject
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "BetradarComSetup", "BetradarComSetup\BetradarComSetup.vdproj", "{2E287ECB-D0B6-4404-BB4C-7216913B3409}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -24,6 +28,12 @@ Global
 		{DA2907BC-53EC-49B7-8740-C09AABFE57AB}.Release|Any CPU.Build.0 = Release|Any CPU
 		{E7C066C4-7210-4189-A420-54706E773DE0}.Debug|Any CPU.ActiveCfg = Debug
 		{E7C066C4-7210-4189-A420-54706E773DE0}.Release|Any CPU.ActiveCfg = Release
+		{2DD5FC39-60A1-4306-AF1A-AC2D63F5A233}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2DD5FC39-60A1-4306-AF1A-AC2D63F5A233}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2DD5FC39-60A1-4306-AF1A-AC2D63F5A233}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2DD5FC39-60A1-4306-AF1A-AC2D63F5A233}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2E287ECB-D0B6-4404-BB4C-7216913B3409}.Debug|Any CPU.ActiveCfg = Debug
+		{2E287ECB-D0B6-4404-BB4C-7216913B3409}.Release|Any CPU.ActiveCfg = Release
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -175,3 +175,4 @@ X:\ecoPayz\Live-Solution\Betradar\SharedLibrary\bin\Debug\AsyncIO.dll
 X:\ecoPayz\Live-Solution\Betradar\SharedLibrary\bin\Debug\NetMQ.dll
 X:\ecoPayz\Live-Solution\Betradar\SharedLibrary\bin\Debug\ServiceStack.Client.dll
 X:\ecoPayz\Live-Solution\Betradar\SharedLibrary\bin\Debug\ServiceStack.Client.xml
+X:\ecoPayz\Live-Solution\Betradar\SharedLibrary\bin\Debug\NetMQ.xml

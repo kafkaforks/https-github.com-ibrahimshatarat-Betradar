@@ -3,9 +3,11 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.IO;
+using System.Messaging;
 using System.Text;
 using System.Xml;
 using System.Xml.Serialization;
+using NetMQ.Sockets;
 using Npgsql;
 
 
@@ -13,50 +15,12 @@ namespace SharedLibrary
 {
     public static class Globals
     {
-        public static QueueBetClear<BetClearQueueElement> QueueLcooBetClear;
-        //public static BetQueue<ScoreCardSummaryEventArgs> Queue_ScoreCardSummary;
-        //public static BetQueue<MatchEventOdds> Queue_MatchEventOdds;
-        //public static BetQueue<OutrightEventOdds> Queue_OutRightEventOdds;
-        //public static BetQueue<ThreeBallEventArgs> Queue_ThreeBallEvent;
-        //public static BetQueue<BetCancelEventArgs> Queue_BetCancel;
-        //public static BetQueue<BetCancelUndoEventArgs> Queue_BetCancelUndo;
-        //public static BetQueue<BetClearEventArgs> Queue_BetClear;
-        //public static BetQueue<BetClearRollbackEventArgs> Queue_BetClearRollBack;
-        //public static BetQueue<BetStartEventArgs> Queue_BetStart;
-        //public static BetQueue<BetStopEventArgs> Queue_BetStop;
-        //public static BetQueue<OddsChangeEventArgs> Queue_OddsChange;
-        //public static BetQueue<RaceResultEventArgs> Queue_RaceResult;
-        //public static BetQueue<OutrightBetClearEventArgs> Queue_OutrightBetClear;
-        //public static BetQueue<OutrightBetStartEventArgs> Queue_OutrightBetStart;
-        //public static BetQueue<OutrightBetStopEventArgs> Queue_OutrightBetStop;
-        public static BetQueue<string> Queue_Feed;
-        public static BetQueue<NpgsqlCommand> Queue_Errors;
-        public static BetQueue<OddChangeQueue> Queue_Odd_Change;
-        public static BetQueue<BetClearQueueElementLive> Queue_BetClearQueueElementLive;
-        public static BetQueue<RedisChannelObject> Queue_RedisChannelSend;
         public static volatile bool timerOnOff = false;
         public static volatile bool redisTimerOnOff = false;
-        public static object lockObject = new object();
         public static DataSet MerchantsDs;
-        //public static void insertenum(string membername, int value, string description, int enums)
-        //{
-        //    try
-        //    {
-        //        Common qw = new Common();
-        //        var dictionaryObjCommand =
-        //            new NpgsqlCommand(Globals.DB_Functions.InsertEnum.ToDescription());
-        //        dictionaryObjCommand.Parameters.AddWithValue("member_name", membername);
-        //        dictionaryObjCommand.Parameters.AddWithValue("value", value);
-        //        dictionaryObjCommand.Parameters.AddWithValue("description", description);
-        //        dictionaryObjCommand.Parameters.AddWithValue("fk_enums_id", enums);
-        //        qw.insert(dictionaryObjCommand);
-        //    }
-        //    catch (Exception)
-        //    {
-
-        //        throw;
-        //    }
-        //}
+        public static string BetQueueName = ".\\private$\\BetQueue";
+        public static Queue<string> LiveOddsQueue; 
+       
         public enum BetFeedTypes
         {
             [Description("PreMatch")]
@@ -67,8 +31,6 @@ namespace SharedLibrary
 
         public enum FeedTypes
         {
-            //[Description("live_ScoreCardSummary")]
-            //live_ScoreCardSummary = 1,
             [Description("BetCancel")]
             BetCancel = 1,
             [Description("BetCanselUndo")]

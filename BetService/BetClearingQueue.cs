@@ -48,7 +48,7 @@ namespace BetService
     //        return ServiceQueueLive.Dequeue();
     //    }
     //}
-    public class BetClearingQueue : IBetClearingQueue
+    public class BetClearingQueue 
     {
         public static QueueBetClear<BetClearQueueElement> ServiceQueue = new QueueBetClear<BetClearQueueElement>();
         public static QueueBetClear<string> StringQueue = new QueueBetClear<string>();

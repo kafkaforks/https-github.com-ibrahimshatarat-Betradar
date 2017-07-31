@@ -6,10 +6,10 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Web.Script.Serialization;
+using NetMQ;
 using Newtonsoft.Json.Linq;
 using NLog.Internal;
 using RestSharp;
-using SharedLibrary.RPC;
 using Sportradar.SDK.FeedProviders.LiveOdds.Common;
 
 namespace SharedLibrary
@@ -124,43 +124,6 @@ namespace SharedLibrary
             }
         }
 
-        public void sendToRpc(string mid)
-        {
-            try
-            {
-                var client = new Client();
-                var proxy = client.Serverproxy();
-                proxy.AddStringQueue(mid);
-            }
-            catch (Exception ex)
-            {
-                Logg.logger.Fatal(ex.Message);
-            }
-
-        }
-
-        //public void sendToRpcLive(string mid)
-        //{
-        //    try
-        //    {
-        //        var client = new Client();
-        //        var proxy = client.ServerproxyLive();
-        //        var ret = proxy.AddStringQueueLive(mid);
-        //        if (!ret.success)
-        //        {
-        //            Globals.Queue_BetClearQueueElementLive.Enqueue(DecodeUnifiedBetClearQueueElementLive(mid));
-        //            SharedLibrary.Logg.logger.Fatal("SEND TO PROXY ERROR: " + ret.message);
-        //        }
-        //        else
-        //        {
-        //            SharedLibrary.Logg.logger.Debug("SEND "+ mid + " TO PROXY DONE !!!!!!!!!!!!!!");
-        //        }
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        Logg.logger.Fatal(ex.Message);
-        //    }
-        //}
 
         public static Queue<Globals.Rollback> CloneRollbackQueue(Queue<Globals.Rollback> ToQueue, Queue<Globals.Rollback> FromQueue)
         {
@@ -344,7 +307,7 @@ namespace SharedLibrary
                 return null;
             }
         }
-
+       
         public void SendToHybridgeSocket(long match_id, long odd_id, int? odd_eventoddsfield_typeid, string odd_name, string odd_special_odds_value, EventOddsField odd_in, string channel, string msg_event)
         {
             var oddUnique = new BetClearQueueElementLive();
@@ -353,7 +316,15 @@ namespace SharedLibrary
             {
                 oddUnique.MatchId = match_id;
                 oddUnique.OddId = odd_id;
-                oddUnique.TypeId = odd_eventoddsfield_typeid;
+                if (odd_eventoddsfield_typeid != null)
+                {
+                    oddUnique.TypeId = odd_eventoddsfield_typeid;
+                }
+                else
+                {
+                    oddUnique.TypeId = 0;
+                }
+                
                 var oid = EncodeUnifiedBetClearQueueElementLive(oddUnique);
                 var odd = new SocketOdd();
                 odd.odd_eventoddsfield_active = odd_in.Active;
@@ -364,10 +335,18 @@ namespace SharedLibrary
                 //TODO ASian handicap block
                 if (odd_in.TypeId != 51 && odd_in.TypeId != 7)
                 {
-                    RedisQueue.Send_Redis_Channel(channel,
-                    "[{\"mid_otid_ocid_sid\": \"" + oid + "\"}," + new JavaScriptSerializer().Serialize(odd) + "]",
-                    "home@HYBRIDGE", "12345", "Odd", oid, msg_event);
-                    //var channelQueueObject = new RedisChannelObject();
+                    //Task.Factory.StartNew(()=>RedisQueue.Send_Redis_Channel(channel,
+                    // "[{\"mid_otid_ocid_sid\": \"" + oid + "\"}," + new JavaScriptSerializer().Serialize(odd) + "]",
+                    // "home@HYBRIDGE", "12345", "Odd", oid, msg_event));
+                    if (oid!=null && odd != null && msg_event != null)
+                    {
+                        var ZMQ = new ZMQClient();
+                      Task.Factory.StartNew(()=> ZMQ.SendOut(channel, "[{\"mid_otid_ocid_sid\": \"" + oid + "\"}," + new JavaScriptSerializer().Serialize(odd) + "]", "home@HYBRIDGE", "12345", "Odd", oid, msg_event));
+                        ZMQ = null;
+                    }
+
+
+                    // var channelQueueObject = new RedisChannelObject();
                     //channelQueueObject.Channel = channel;
                     //channelQueueObject.Data = "[{\"mid_otid_ocid_sid\": \"" + oid + "\"}," + new JavaScriptSerializer().Serialize(odd) + "]";
                     //channelQueueObject.username = config.AppSettings.Get("RedisUserName");
@@ -394,7 +373,14 @@ namespace SharedLibrary
             {
                 oddUnique.MatchId = match_id;
                 oddUnique.OddId = odd_id;
-                oddUnique.TypeId = odd_eventoddsfield_typeid;
+                if (odd_eventoddsfield_typeid != null)
+                {
+                    oddUnique.TypeId = odd_eventoddsfield_typeid;
+                }
+                else
+                {
+                    oddUnique.TypeId = 0;
+                }
                 var oid = EncodeUnifiedBetClearQueueElementLive(oddUnique);
                 var odd = new SocketOdd();
                 odd.odd_eventoddsfield_active = odd_in.Active;
@@ -410,20 +396,16 @@ namespace SharedLibrary
                 //TODO Aian handicap block
                 if (odd_in.TypeId != 51 && odd_in.TypeId != 7)
                 {
-                    //var channelQueueObject = new RedisChannelObject();
-                    //channelQueueObject.Channel = channel;
-                    //channelQueueObject.Data = "[{\"mid_otid_ocid_sid\": \"" + oid + "\"}," + new JavaScriptSerializer().Serialize(odd) + "]";
-                    //channelQueueObject.username = config.AppSettings.Get("RedisUserName");
-                    //channelQueueObject.password = config.AppSettings.Get("RedisPassword");
-                    //channelQueueObject.node = "Odd_New";
-                    //channelQueueObject.external_content_id = oid;
-                    //channelQueueObject.bet_event = odd_event;
-                    //Globals.Queue_RedisChannelSend.Enqueue(channelQueueObject);
-                    RedisQueue.Send_Redis_Channel(channel, "[{\"mid_otid_ocid_sid\": \"" + oid + "\"}," + new JavaScriptSerializer().Serialize(odd) + "]", "home@HYBRIDGE", "12345", "Odd_New", oid, odd_event);
+                    if (oid != null && odd != null && odd_event != null)
+                    {
+                        var ZMQ = new ZMQClient();
+                        Task.Factory.StartNew(() => ZMQ.SendOut(channel,
+                            "[{\"mid_otid_ocid_sid\": \"" + oid + "\"}," + new JavaScriptSerializer().Serialize(odd) +
+                            "]", "home@HYBRIDGE", "12345", "Odd_New", oid, odd_event));
+                        ZMQ = null;
+                    }
                 }
 
-                //Task.Factory.StartNew(() => HybridgeClient.SendDataSocketPhoenix(channel, "[{\"mid_otid_ocid_sid\": \"" + oid + "\"}," + new JavaScriptSerializer().Serialize(odd) + "]", "home@HYBRIDGE", "12345","Odd_New",oid,odd_event));
-                //clientSock.SendData(channel,"[{\"mid_otid_ocid_sid\": \"" + oid + "\"}," + new JavaScriptSerializer().Serialize(odd) + "]");
             }
             catch (Exception ex)
             {
@@ -436,18 +418,14 @@ namespace SharedLibrary
             try
             {
                 //TODO REDISSEND
-                //var channelQueueObject = new RedisChannelObject();
-                //channelQueueObject.Channel = channel;
-                //channelQueueObject.Data = "[{\"message\": \"" + message + "\"}]]";
-                //channelQueueObject.username = config.AppSettings.Get("RedisUserName");
-                //channelQueueObject.password = config.AppSettings.Get("RedisPassword");
-                //channelQueueObject.node = "Message";
-                //channelQueueObject.external_content_id = null;
-                //channelQueueObject.bet_event = odd_event;
-                //Globals.Queue_RedisChannelSend.Enqueue(channelQueueObject);
-                RedisQueue.Send_Redis_Channel(channel, "[{\"message\": \"" + message + "\"}]]", "home@HYBRIDGE", "12345", "Message", null, odd_event);
-                //Task.Factory.StartNew(() => HybridgeClient.SendDataSocketPhoenix(channel, "[{\"message\": \"" + message + "\"}]]", "home@HYBRIDGE", "12345","Message",null,odd_event));
-                //clientSock.SendData(channel, "[{\"message\": \"" + message + "\"}]]");
+                if (channel != null && message != null)
+                {
+                    var ZMQ = new ZMQClient();
+                    Task.Factory.StartNew(() => ZMQ.SendOut(channel, "[{\"message\": \"" + message + "\"}]]", "home@HYBRIDGE",
+                        "12345", "Message", "", odd_event));
+                    ZMQ = null;
+                }
+
             }
             catch (Exception ex)
             {

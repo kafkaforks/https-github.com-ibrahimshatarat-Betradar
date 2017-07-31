@@ -142,5 +142,4 @@ X:\ecoPayz\Live-Solution\Betradar\BetService\obj\Release\BetService.csprojResolv
 X:\ecoPayz\Live-Solution\Betradar\BetService\obj\Release\BetService.Properties.Resources.resources
 X:\ecoPayz\Live-Solution\Betradar\BetService\bin\Release\PhoenixSocket.dll
 X:\ecoPayz\Live-Solution\Betradar\BetService\bin\Release\WebSocket4Net.dll
-X:\ecoPayz\Live-Solution\Betradar\BetService\bin\Release\ServiceStack.Interfaces.dll
-X:\ecoPayz\Live-Solution\Betradar\BetService\bin\Release\ServiceStack.Interfaces.xml
+X:\ecoPayz\Live-Solution\Betradar\BetService\bin\Release\NetMQ.xml

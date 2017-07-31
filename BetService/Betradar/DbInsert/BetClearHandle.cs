@@ -71,7 +71,6 @@ namespace BetService.Classes.DbInsert
                         }
                         catch (Exception ex)
                         {
-                            Globals.Queue_BetClearQueueElementLive.Enqueue(oddUnique);
                             SharedLibrary.Logg.logger.Fatal("SEND TO PROXY ERROR: " + ex.Message);
                         }
                     }

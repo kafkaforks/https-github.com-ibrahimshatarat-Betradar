@@ -21,7 +21,7 @@ namespace BetService
         public static Timer timerRedisChannel = null;
         private Timer AliveTimer = null;
         Thread m_thread = null;
-       
+
 
         public CouponFinalize()
         {
@@ -90,16 +90,17 @@ namespace BetService
 
         private void TimerFinaliseTick(object sender, ElapsedEventArgs e)
         {
-                timerFinalise.Enabled = false;
-                //finalize();
-                if (Globals.timerOnOff)
-                {
+            timerFinalise.Enabled = false;
+            //finalize();
+            if (Globals.timerOnOff)
+            {
                 Globals.timerOnOff = false;
                 var coup = new Coupons();
-                  //  coup.GetAllFinalizedCoupons();
-                }
+                //  coup.GetAllFinalizedCoupons();
+                Globals.timerOnOff = true;
+            }
 
-                timerFinalise.Enabled = true;
+            timerFinalise.Enabled = true;
         }
 
         public void ThreadProc()
@@ -162,7 +163,7 @@ namespace BetService
             //}
 
             //timerRedisChannel.Enabled = true;
-           
+
         }
 
         private void finalize()
@@ -213,7 +214,7 @@ namespace BetService
                 else
                 {
 #if DEBUG
-                     Console.WriteLine("Queue is empty now !!!");
+                    Console.WriteLine("Queue is empty now !!!");
 #endif
                 }
             }
@@ -236,26 +237,26 @@ namespace BetService
 
         private void finalize_coupon_temp()
         {
-            try
-            {
-                var bet = RedisQueue.BetClear_Dequeue();
-                if (bet != null)
-                {
-                    Logg.logger.Debug(bet.MatchId.ToString() + " : " + bet.OddsId.ToString());
-                }
-                else
-                {
-                    Logg.logger.Info("No queue elements found!");
-                }
-            }
-            catch (Exception ex)
-            {
+            //try
+            //{
+            //    var bet = RedisQueue.BetClear_Dequeue();
+            //    if (bet != null)
+            //    {
+            //        Logg.logger.Debug(bet.MatchId.ToString() + " : " + bet.OddsId.ToString());
+            //    }
+            //    else
+            //    {
+            //        Logg.logger.Info("No queue elements found!");
+            //    }
+            //}
+            //catch (Exception ex)
+            //{
 
-                Logg.logger.Fatal(ex.Message);
-            }
+            //    Logg.logger.Fatal(ex.Message);
+            //}
 
         }
 
-      
+
     }
 }

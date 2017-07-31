@@ -197,5 +197,4 @@ Y:\Google Drive\ecoPayz\Live-Solution\Betradar\BetService\bin\Debug\ru\Zyan.Comm
 X:\ecoPayz\Live-Solution\Betradar\BetService\obj\Debug\BetService.Properties.Resources.resources
 X:\ecoPayz\Live-Solution\Betradar\BetService\bin\Debug\PhoenixSocket.dll
 X:\ecoPayz\Live-Solution\Betradar\BetService\bin\Debug\WebSocket4Net.dll
-X:\ecoPayz\Live-Solution\Betradar\BetService\bin\Debug\ServiceStack.Interfaces.dll
-X:\ecoPayz\Live-Solution\Betradar\BetService\bin\Debug\ServiceStack.Interfaces.xml
+X:\ecoPayz\Live-Solution\Betradar\BetService\bin\Debug\NetMQ.xml

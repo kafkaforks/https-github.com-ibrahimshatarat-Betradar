@@ -1,0 +1,18 @@
+11:07:13 || Communicator.ZMQServer.Connect || Could not load file or assembly 'AsyncIO, Version=0.1.25.0, Culture=neutral, PublicKeyToken=44a94435bd6f33f8' or one of its dependencies. The located assembly's manifest definition does not match the assembly reference. (Exception from HRESULT: 0x80131040)
+11:07:21 || Communicator.ZMQServer.Server || cannot connect to eny of the endpoints
+19:07:38 || Communicator.Program.Main || Connector Start!!!!
+19:07:39 || Communicator.ZMQServer.Server || Could not load file or assembly 'AsyncIO, Version=0.1.25.0, Culture=neutral, PublicKeyToken=44a94435bd6f33f8' or one of its dependencies. The located assembly's manifest definition does not match the assembly reference. (Exception from HRESULT: 0x80131040)
+19:07:26 || Communicator.Program.Main || Connector Start!!!!
+19:07:47 || Communicator.Program.Main || Connector Start!!!!
+20:07:57 || Communicator.Program.Main || Connector Start!!!!
+20:07:42 || Communicator.Program.Main || Connector Start!!!!
+20:07:55 || Communicator.Program.Main || Connector Start!!!!
+20:07:55 || Communicator.Program.Main || Connector Start!!!!
+20:07:18 || Communicator.Program.Main || Connector Start!!!!
+20:07:51 || Communicator.Program.Main || Connector Start!!!!
+22:07:23 || Communicator.Program.Main || Connector Start!!!!
+22:07:46 || Communicator.Program.Main || Connector Start!!!!
+22:07:46 || Communicator.Program.Main || Connector Start!!!!
+23:07:01 || Communicator.Program.Main || Connector Start!!!!
+23:07:53 || Communicator.Program.Main || Connector Start!!!!
+23:07:44 || Communicator.Program.Main || Connector Start!!!!

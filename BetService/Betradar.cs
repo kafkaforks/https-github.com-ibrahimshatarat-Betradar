@@ -11,6 +11,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Timers;
 using Betradar.Classes.Socket;
+using NetMQ.Sockets;
 using Npgsql;
 using SharedLibrary;
 using Sportradar.SDK.Common.Interfaces;
@@ -49,15 +50,11 @@ namespace BetService
             this.OnStop();
         }
 
+    
+
         protected override void OnStart(string[] args)
         {
-
-            // instantiate the thread
-            // m_thread = new Thread(new ThreadStart(ThreadProc));
-            // start the thread
-            // m_thread.Start();
-            //Debugger.Break();
-            Globals.Queue_RedisChannelSend = new BetQueue<RedisChannelObject>();
+            Globals.LiveOddsQueue = new Queue<string>();
             timer1 = new Timer();
             timer1.Interval = 11000;
             timer1.Elapsed += timer1_Tick;
@@ -72,9 +69,6 @@ namespace BetService
             AliveTimer.Enabled = true;
             AliveTimer.Start();
             initFeed();
-            // _thread = new Thread(new Main().StartBetradarAll);
-            // _thread.Start();
-
         }
 
         public void ThreadProc()
@@ -143,6 +137,7 @@ namespace BetService
         {
             //Task.Factory.StartNew(HybridgeClient.JoinChannel);
             //HybridgeClient.JoinChannel();
+           
             if (!m_sdk.IsStarted)
             {
                 if (!m_sdk.IsInitialized)
@@ -186,9 +181,6 @@ namespace BetService
 
         private void StartBetradarAll()
         {
-            Globals.Queue_Errors = new BetQueue<NpgsqlCommand>();
-            Globals.Queue_Odd_Change = new BetQueue<OddChangeQueue>();
-            Globals.Queue_BetClearQueueElementLive = new BetQueue<BetClearQueueElementLive>();
             #region TESTING
             // Console.ReadLine();
             //var client = new Client();

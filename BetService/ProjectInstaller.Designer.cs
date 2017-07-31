@@ -31,6 +31,7 @@
             this.serviceProcessInstaller1 = new System.ServiceProcess.ServiceProcessInstaller();
             this.serviceInstaller1 = new System.ServiceProcess.ServiceInstaller();
             this.serviceInstaller2 = new System.ServiceProcess.ServiceInstaller();
+            this.serviceInstaller3 = new System.ServiceProcess.ServiceInstaller();
             // 
             // serviceProcessInstaller1
             // 
@@ -50,12 +51,18 @@
             this.serviceInstaller2.ServiceName = "Betradar";
             this.serviceInstaller2.StartType = System.ServiceProcess.ServiceStartMode.Automatic;
             // 
+            // serviceInstaller3
+            // 
+            this.serviceInstaller3.ServiceName = "LiveOddsSender";
+            this.serviceInstaller3.StartType = System.ServiceProcess.ServiceStartMode.Automatic;
+            // 
             // ProjectInstaller
             // 
             this.Installers.AddRange(new System.Configuration.Install.Installer[] {
-            this.serviceProcessInstaller1,
             this.serviceInstaller1,
-            this.serviceInstaller2});
+            this.serviceInstaller2,
+            this.serviceProcessInstaller1,
+            this.serviceInstaller3});
 
         }
 
@@ -64,5 +71,6 @@
         private System.ServiceProcess.ServiceProcessInstaller serviceProcessInstaller1;
         private System.ServiceProcess.ServiceInstaller serviceInstaller1;
         private System.ServiceProcess.ServiceInstaller serviceInstaller2;
+        private System.ServiceProcess.ServiceInstaller serviceInstaller3;
     }
 }

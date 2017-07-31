@@ -22,8 +22,8 @@ namespace BetService.Classes.DbInsert
             //var queue = new Queue<Globals.Rollback>();
             try
             {
-               // Task.Factory.StartNew(() => common.insertMatchDataAllDetails((MatchHeader)args.BetCancelUndo.EventHeader, null));
                 Task.Factory.StartNew(() => insertOdds(args));
+                Task.Factory.StartNew(() => common.insertMatchDataAllDetails((MatchHeader)args.BetCancelUndo.EventHeader, null));
             }
             catch (Exception ex)
             {

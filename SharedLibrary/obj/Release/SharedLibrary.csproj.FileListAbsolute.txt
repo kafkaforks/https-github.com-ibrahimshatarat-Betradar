@@ -119,7 +119,6 @@ X:\ecoPayz\Live-Solution\Betradar\SharedLibrary\bin\Release\Zyan.Communication.p
 X:\ecoPayz\Live-Solution\Betradar\SharedLibrary\bin\Release\Zyan.Communication.xml
 X:\ecoPayz\Live-Solution\Betradar\SharedLibrary\bin\Release\de\Zyan.Communication.resources.dll
 X:\ecoPayz\Live-Solution\Betradar\SharedLibrary\bin\Release\ru\Zyan.Communication.resources.dll
-X:\ecoPayz\Live-Solution\Betradar\SharedLibrary\obj\Release\SharedLibrary.csprojResolveAssemblyReference.cache
 X:\ecoPayz\Live-Solution\Betradar\SharedLibrary\obj\Release\SharedLibrary.dll
 X:\ecoPayz\Live-Solution\Betradar\SharedLibrary\obj\Release\SharedLibrary.pdb
 X:\ecoPayz\Live-Solution\Betradar\SharedLibrary\bin\Release\ServiceStack.Interfaces.xml
@@ -129,3 +128,5 @@ X:\ecoPayz\Live-Solution\Betradar\SharedLibrary\bin\Release\PhoenixSocket.dll
 X:\ecoPayz\Live-Solution\Betradar\SharedLibrary\bin\Release\WebSocket4Net.dll
 X:\ecoPayz\Live-Solution\Betradar\SharedLibrary\bin\Release\ServiceStack.Client.dll
 X:\ecoPayz\Live-Solution\Betradar\SharedLibrary\bin\Release\ServiceStack.Client.xml
+X:\ecoPayz\Live-Solution\Betradar\SharedLibrary\obj\Release\SharedLibrary.csprojResolveAssemblyReference.cache
+X:\ecoPayz\Live-Solution\Betradar\SharedLibrary\bin\Release\NetMQ.xml
