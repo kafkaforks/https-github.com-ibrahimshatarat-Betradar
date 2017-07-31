@@ -3262,11 +3262,15 @@ namespace BetService.Classes.DbInsert
         {
             try
             {
-                string csv = String.Join(",", matches.Select(x => x.ToString()).ToArray());
-                string query = "UPDATE dy_alive_matches SET matches_on = '" + csv + "', last_update = now() WHERE id = 1;";
-                NpgsqlCommand objCommand = new NpgsqlCommand(query);
-                objCommand.CommandText = query;
-                insertNonProc(objCommand);
+                if (matches.Count>0)
+                {
+                    string csv = String.Join(",", matches.Select(x => x.ToString()).ToArray());
+                    string query = "UPDATE dy_alive_matches SET matches_on = '" + csv + "', last_update = now() WHERE id = 1;  UPDATE dy_match_all_data SET feed_type = 2 WHERE match_id in ("+csv+")";
+                    NpgsqlCommand objCommand = new NpgsqlCommand(query);
+                    objCommand.CommandText = query;
+                    insertNonProc(objCommand);
+                }
+               
             }
             catch (Exception ex)
             {

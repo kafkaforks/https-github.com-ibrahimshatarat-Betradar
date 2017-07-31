@@ -96,7 +96,7 @@ namespace BetService
             {
                 Globals.timerOnOff = false;
                 var coup = new Coupons();
-                //  coup.GetAllFinalizedCoupons();
+                  coup.GetAllFinalizedCoupons();
                 Globals.timerOnOff = true;
             }
 

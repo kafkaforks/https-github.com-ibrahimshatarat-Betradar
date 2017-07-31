@@ -270,6 +270,26 @@ namespace SharedLibrary
             }
         }
 
+        public void GetFinalisedOdds()
+        {
+            try
+            {
+                var command = new NpgsqlCommand(Globals.DB_Functions.GetFullFinalisedCoupons.ToDescription());
+                var data = select(command);
+                //TODO send to seamless
+                //sendAllToApi(data);
+                Globals.timerOnOff = true;
+            }
+            catch (Exception ex)
+            {
+                Logg.logger.Fatal(ex.Message);
+            }
+            finally
+            {
+
+            }
+        }
+
         public  void sendAllToApi(DataSet data)
         {
             var dt = new DataTable();
