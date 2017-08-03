@@ -308,129 +308,129 @@ namespace SharedLibrary
             }
         }
 
-        public async Task SendToHybridgeSocket(long match_id, long odd_id, int? odd_eventoddsfield_typeid, string odd_name, string odd_special_odds_value, EventOddsField odd_in, Task<string> channel, string msg_event)
-        {
-            var oddUnique = new BetClearQueueElementLive();
+        //public async Task SendToHybridgeSocket(long match_id, long odd_id, int? odd_eventoddsfield_typeid, string odd_name, string odd_special_odds_value, EventOddsField odd_in, string channel, string msg_event)
+        //{
+        //    var oddUnique = new BetClearQueueElementLive();
 
-            try
-            {
-                oddUnique.MatchId = match_id;
-                oddUnique.OddId = odd_id;
-                if (odd_eventoddsfield_typeid != null)
-                {
-                    oddUnique.TypeId = odd_eventoddsfield_typeid;
-                }
-                else
-                {
-                    oddUnique.TypeId = 0;
-                }
+        //    try
+        //    {
+        //        oddUnique.MatchId = match_id;
+        //        oddUnique.OddId = odd_id;
+        //        if (odd_eventoddsfield_typeid != null)
+        //        {
+        //            oddUnique.TypeId = odd_eventoddsfield_typeid;
+        //        }
+        //        else
+        //        {
+        //            oddUnique.TypeId = 0;
+        //        }
 
-                var oid = EncodeUnifiedBetClearQueueElementLive(oddUnique);
-                var odd = new SocketOdd();
-                odd.odd_eventoddsfield_active = odd_in.Active;
-                odd.odd_name = odd_name;
-                odd.odd_odd = odd_in.Value.ToString();
-                odd.odd_special_odds_value = odd_special_odds_value;
-                //TODO REDISCALL
-                //TODO ASian handicap block
-                if (odd_in.TypeId != 51 && odd_in.TypeId != 7)
-                {
-                    //Task.Factory.StartNew(()=>RedisQueue.Send_Redis_Channel(channel,
-                    // "[{\"mid_otid_ocid_sid\": \"" + oid + "\"}," + new JavaScriptSerializer().Serialize(odd) + "]",
-                    // "home@HYBRIDGE", "12345", "Odd", oid, msg_event));
-                    if (oid != null && odd != null && msg_event != null)
-                    {
-                        var ZMQ = new ZMQClient();
-                         await ZMQ.SendOut(await channel, "[{\"mid_otid_ocid_sid\": \"" + oid + "\"}," + new JavaScriptSerializer().Serialize(odd) + "]", "home@HYBRIDGE", "12345", "Odd", oid.Result, msg_event);
-                        //ZMQ = null;
-                    }
+        //        var oid = EncodeUnifiedBetClearQueueElementLive(oddUnique);
+        //        var odd = new SocketOdd();
+        //        odd.odd_eventoddsfield_active = odd_in.Active;
+        //        odd.odd_name = odd_name;
+        //        odd.odd_odd = odd_in.Value.ToString();
+        //        odd.odd_special_odds_value = odd_special_odds_value;
+        //        //TODO REDISCALL
+        //        //TODO ASian handicap block
+        //        if (odd_in.TypeId != 51 && odd_in.TypeId != 7)
+        //        {
+        //            //Task.Factory.StartNew(()=>RedisQueue.Send_Redis_Channel(channel,
+        //            // "[{\"mid_otid_ocid_sid\": \"" + oid + "\"}," + new JavaScriptSerializer().Serialize(odd) + "]",
+        //            // "home@HYBRIDGE", "12345", "Odd", oid, msg_event));
+        //            if (oid != null && odd != null && msg_event != null)
+        //            {
+        //                var ZMQ = new ZMQClient();
+        //                 await ZMQ.SendOut( channel, "[{\"mid_otid_ocid_sid\": \"" + oid + "\"}," + new JavaScriptSerializer().Serialize(odd) + "]", "home@HYBRIDGE", "12345", "Odd", oid.Result, msg_event);
+        //                //ZMQ = null;
+        //            }
 
 
-                    // var channelQueueObject = new RedisChannelObject();
-                    //channelQueueObject.Channel = channel;
-                    //channelQueueObject.Data = "[{\"mid_otid_ocid_sid\": \"" + oid + "\"}," + new JavaScriptSerializer().Serialize(odd) + "]";
-                    //channelQueueObject.username = config.AppSettings.Get("RedisUserName");
-                    //channelQueueObject.password = config.AppSettings.Get("RedisPassword");
-                    //channelQueueObject.node = "Odd";
-                    //channelQueueObject.external_content_id = oid;
-                    //channelQueueObject.bet_event = msg_event;
-                    //Globals.Queue_RedisChannelSend.Enqueue(channelQueueObject);
-                }
+        //            // var channelQueueObject = new RedisChannelObject();
+        //            //channelQueueObject.Channel = channel;
+        //            //channelQueueObject.Data = "[{\"mid_otid_ocid_sid\": \"" + oid + "\"}," + new JavaScriptSerializer().Serialize(odd) + "]";
+        //            //channelQueueObject.username = config.AppSettings.Get("RedisUserName");
+        //            //channelQueueObject.password = config.AppSettings.Get("RedisPassword");
+        //            //channelQueueObject.node = "Odd";
+        //            //channelQueueObject.external_content_id = oid;
+        //            //channelQueueObject.bet_event = msg_event;
+        //            //Globals.Queue_RedisChannelSend.Enqueue(channelQueueObject);
+        //        }
 
-                //Task.Factory.StartNew(()=>HybridgeClient.SendDataSocketPhoenix(channel, "[{\"mid_otid_ocid_sid\": \"" + oid + "\"}," + new JavaScriptSerializer().Serialize(odd) + "]", "home@HYBRIDGE", "12345","Odd",oid,msg_event));
-                //clientSock.SendData(channel,"[{\"mid_otid_ocid_sid\": \"" + oid + "\"}," + new JavaScriptSerializer().Serialize(odd) + "]");
-            }
-            catch (Exception ex)
-            {
-                Logg.logger.Fatal(ex.Message);
-            }
-        }
+        //        //Task.Factory.StartNew(()=>HybridgeClient.SendDataSocketPhoenix(channel, "[{\"mid_otid_ocid_sid\": \"" + oid + "\"}," + new JavaScriptSerializer().Serialize(odd) + "]", "home@HYBRIDGE", "12345","Odd",oid,msg_event));
+        //        //clientSock.SendData(channel,"[{\"mid_otid_ocid_sid\": \"" + oid + "\"}," + new JavaScriptSerializer().Serialize(odd) + "]");
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        Logg.logger.Fatal(ex.Message);
+        //    }
+        //}
 
-        public async void SendToHybridgeSocketNewOdd(long match_id, long odd_id, int? odd_eventoddsfield_typeid, string odd_name, string odd_special_odds_value, EventOddsField odd_in, string channel, string odd_event)
-        {
-            var oddUnique = new BetClearQueueElementLive();
-            try
-            {
-                oddUnique.MatchId = match_id;
-                oddUnique.OddId = odd_id;
-                if (odd_eventoddsfield_typeid != null)
-                {
-                    oddUnique.TypeId = odd_eventoddsfield_typeid;
-                }
-                else
-                {
-                    oddUnique.TypeId = 0;
-                }
-                var oid = EncodeUnifiedBetClearQueueElementLive(oddUnique);
-                var odd = new SocketOdd();
-                odd.odd_eventoddsfield_active = odd_in.Active;
-                odd.odd_name = odd_name;
-                odd.odd_odd = odd_in.Value.ToString();
-                odd.odd_special_odds_value = odd_special_odds_value;
-                if (odd_in.Probability != null)
-                {
-                    odd.odd_probability = odd_in.Probability.ToString();
-                }
-                odd.last_update = DateTime.UtcNow;
+        //public async void SendToHybridgeSocketNewOdd(long match_id, long odd_id, int? odd_eventoddsfield_typeid, string odd_name, string odd_special_odds_value, EventOddsField odd_in, string channel, string odd_event)
+        //{
+        //    var oddUnique = new BetClearQueueElementLive();
+        //    try
+        //    {
+        //        oddUnique.MatchId = match_id;
+        //        oddUnique.OddId = odd_id;
+        //        if (odd_eventoddsfield_typeid != null)
+        //        {
+        //            oddUnique.TypeId = odd_eventoddsfield_typeid;
+        //        }
+        //        else
+        //        {
+        //            oddUnique.TypeId = 0;
+        //        }
+        //        var oid = EncodeUnifiedBetClearQueueElementLive(oddUnique);
+        //        var odd = new SocketOdd();
+        //        odd.odd_eventoddsfield_active = odd_in.Active;
+        //        odd.odd_name = odd_name;
+        //        odd.odd_odd = odd_in.Value.ToString();
+        //        odd.odd_special_odds_value = odd_special_odds_value;
+        //        if (odd_in.Probability != null)
+        //        {
+        //            odd.odd_probability = odd_in.Probability.ToString();
+        //        }
+        //        odd.last_update = DateTime.UtcNow;
 
-                //TODO Aian handicap block
-                if (odd_in.TypeId != 51 && odd_in.TypeId != 7)
-                {
-                    if (oid != null && odd != null && odd_event != null)
-                    {
-                        var ZMQ = new ZMQClient();
-                        await ZMQ.SendOut(channel,
-                            "[{\"mid_otid_ocid_sid\": \"" + oid + "\"}," + new JavaScriptSerializer().Serialize(odd) +
-                            "]", "home@HYBRIDGE", "12345", "Odd_New", oid.Result, odd_event);
-                        // ZMQ = null;
-                    }
-                }
+        //        //TODO Aian handicap block
+        //        if (odd_in.TypeId != 51 && odd_in.TypeId != 7)
+        //        {
+        //            if (oid != null && odd != null && odd_event != null)
+        //            {
+        //                var ZMQ = new ZMQClient();
+        //                await ZMQ.SendOut(channel,
+        //                    "[{\"mid_otid_ocid_sid\": \"" + oid + "\"}," + new JavaScriptSerializer().Serialize(odd) +
+        //                    "]", "home@HYBRIDGE", "12345", "Odd_New", oid.Result, odd_event);
+        //                // ZMQ = null;
+        //            }
+        //        }
 
-            }
-            catch (Exception ex)
-            {
-                Logg.logger.Fatal(ex.Message);
-            }
-        }
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        Logg.logger.Fatal(ex.Message);
+        //    }
+        //}
 
-        public async Task SendToHybridgeSocketMessages(string message, string channel, string odd_event)
-        {
-            try
-            {
-                //TODO REDISSEND
-                if (channel != null && message != null)
-                {
-                    ZMQClient zmq = new ZMQClient();
-                    await zmq.SendOut(channel, "[{\"message\": \"" + message + "\"}]]", "home@HYBRIDGE", "12345", "Message", null, odd_event);
-                    // zmq = null;
-                }
+        //public async Task SendToHybridgeSocketMessages(string message, string channel, string odd_event)
+        //{
+        //    try
+        //    {
+        //        //TODO REDISSEND
+        //        if (channel != null && message != null)
+        //        {
+        //            ZMQClient zmq = new ZMQClient();
+        //            await zmq.SendOut(channel, "[{\"message\": \"" + message + "\"}]]", "home@HYBRIDGE", "12345", "Message", null, odd_event);
+        //            // zmq = null;
+        //        }
 
-            }
-            catch (Exception ex)
-            {
-                Logg.logger.Fatal(ex.Message);
-            }
-        }
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        Logg.logger.Fatal(ex.Message);
+        //    }
+        //}
 
         public async Task<string> EncodeUnifiedBetClearQueueElementLive(BetClearQueueElementLive UnifiedBetObject)
         {

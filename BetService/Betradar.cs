@@ -5,6 +5,7 @@ using System.Configuration;
 using System.Data;
 using System.Diagnostics;
 using System.Linq;
+using System.Net;
 using System.ServiceProcess;
 using System.Text;
 using System.Threading;
@@ -69,6 +70,7 @@ namespace BetService
             AliveTimer.Enabled = true;
             AliveTimer.Start();
             initFeed();
+            //SocketClient.connector.Connect(new IPEndPoint(IPAddress.Parse("127.0.0.1"), 6767));
         }
 
         public void ThreadProc()

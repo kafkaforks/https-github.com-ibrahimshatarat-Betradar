@@ -29,7 +29,7 @@ namespace BetService
             
             var coup = new Coupons();
             Globals.MerchantsDs = coup.selectAllMerchants(null);
-
+           
            
             //var common = new Common();
             //var ds = common.selectotherOutcomesMarket(12016834, 20, "12016834|20|3|0000|0000|0000", "");

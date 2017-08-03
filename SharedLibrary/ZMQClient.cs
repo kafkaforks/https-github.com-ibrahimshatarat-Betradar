@@ -27,14 +27,14 @@ namespace SharedLibrary
         public async Task SendOut(string Channel, string Data, string username, string password, string node,
             string external_content_id, string bet_event)
         {
-
+  
             await SendRedisChannelZmq(Channel, Data, username, password, node, external_content_id, bet_event);
 
         }
 
         public async Task SendOutQueue(string message)
         {
-          await  SenMQueue(message);
+            await SenMQueue(message);
         }
 
         private async Task SendRedisChannelZmq(string Channel, string Data, string username, string password, string node, string external_content_id, string bet_event)
@@ -59,7 +59,11 @@ namespace SharedLibrary
                 data["data"]["channel"] = Channel;
                 data["data"]["event"] = bet_event;
                 data["data"]["payload"] = Data;
-               await SendToredis(data.ToString());
+                
+                
+                
+                //await SendToredis(data.ToString());
+
                 // var command = new NpgsqlCommand("insert_cp_send");
                 // command.Parameters.AddWithValue("p_message", NpgsqlDbType.Text, data.ToString());
                 // await insert(command);

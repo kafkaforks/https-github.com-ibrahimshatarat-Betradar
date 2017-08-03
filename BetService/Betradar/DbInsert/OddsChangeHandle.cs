@@ -61,28 +61,34 @@ namespace BetService.Classes.DbInsert
                             }
 
                             //TODO OPEN
-                            var csr = new CancellationTokenSource();
+                            var socket = new SocketClient();
                             foreach (var lang in NameDictionary)
                             {
                                 var last_prefix = config.AppSettings.Get("ChannelsSecretPrefixLast_real");
-                                await SendToHybridgeSocket(args.OddsChange.EventHeader.Id, odd.Id, val.TypeId, "", odd.SpecialOddsValue,
-                                    val, CreateLiveOddsChannelName(args.OddsChange.EventHeader.Id, lang.Key, last_prefix), "ODDCHANGE");
+
+                                await socket.SendToHybridgeSocket(args.OddsChange.EventHeader.Id, odd.Id, val.TypeId, "", odd.SpecialOddsValue,
+                                  val, await CreateLiveOddsChannelName(args.OddsChange.EventHeader.Id, lang.Key, last_prefix), "ODDCHANGE");
+
                             }
 
                             foreach (var lang in NameDictionary)
                             {
                                 var last_prefix = config.AppSettings.Get("ChannelsSecretPrefixLast_real2");
-                                await SendToHybridgeSocket(args.OddsChange.EventHeader.Id, odd.Id, val.TypeId, "", odd.SpecialOddsValue,
-                                     val, CreateLiveOddsChannelName(args.OddsChange.EventHeader.Id, lang.Key, last_prefix), "ODDCHANGE");
+
+                                await socket.SendToHybridgeSocket(args.OddsChange.EventHeader.Id, odd.Id, val.TypeId, "", odd.SpecialOddsValue,
+                                     val, await CreateLiveOddsChannelName(args.OddsChange.EventHeader.Id, lang.Key, last_prefix), "ODDCHANGE");
+
                             }
                             foreach (var lang in NameDictionary)
                             {
                                 var last_prefix = config.AppSettings.Get("ChannelsSecretPrefixLast_real3");
-                                await SendToHybridgeSocket(args.OddsChange.EventHeader.Id, odd.Id, val.TypeId, "", odd.SpecialOddsValue,
-                                    val, CreateLiveOddsChannelName(args.OddsChange.EventHeader.Id, lang.Key, last_prefix), "ODDCHANGE");
+
+                                await socket.SendToHybridgeSocket(args.OddsChange.EventHeader.Id, odd.Id, val.TypeId, "", odd.SpecialOddsValue,
+                                    val, await CreateLiveOddsChannelName(args.OddsChange.EventHeader.Id, lang.Key, last_prefix), "ODDCHANGE");
+
                             }
                             NameDictionary = null;
-
+                            socket = null;
                         }
                     }
                     else
