@@ -27,11 +27,8 @@ namespace BetService.Classes.DbInsert
             var queue = new Queue<Globals.Rollback>();
             try
             {
-                await common.insertMatchDataAllDetails((MatchHeader)args.BetCancel.EventHeader, null);
-                await common.insertMatchDataAllDetails((MatchHeader)args.BetCancel.EventHeader, null);
                 if (args.BetCancel.Odds != null && args.BetCancel.Odds.Count > 0)
                 {
-                    // Task.Factory.StartNew(() => insertOdds(args));
                     await insertOdds(args);
                 }
             }
@@ -51,35 +48,32 @@ namespace BetService.Classes.DbInsert
 
         }
 
-        private async
-        Task
-insertOdds(BetCancelEventArgs args)
+        private async Task insertOdds(BetCancelEventArgs args)
         {
             var common = new Common();
             try
             {
-                var entity = args.BetCancel;
+               // var entity = args.BetCancel;
                 bool active = true;
-                foreach (var Odd in entity.Odds)
-                {
-                    if (Odd.Active != null)
+                foreach(var odd in args.BetCancel.Odds)
                     {
-                        active = Odd.Active;
+                    if (odd.Active != null)
+                    {
+                        active = odd.Active;
                     }
 
-                    await common.insertLiveOdds(Odd, null, active, null, null,
+                    await common.insertLiveOdds(odd, null, active, null, null,
                         "", null, "", null,
-                        "", null, entity.EventHeader.Id, 0, entity.Status.ToString(), entity.Timestamp.ToString());
+                        "", null, args.BetCancel.EventHeader.Id, 0, args.BetCancel.Status.ToString(), args.BetCancel.Timestamp.ToString());
 
-                    foreach (var field in Odd.OddsFields)
+                    foreach (var field in odd.OddsFields)
                     {
-                        var val = field.Value;
                         var oddUnique = new BetClearQueueElementLive();
-                        oddUnique.MatchId = entity.EventHeader.Id;
-                        oddUnique.OddId = Odd.Id;
-                        if (Odd.TypeId != null)
+                        oddUnique.MatchId = args.BetCancel.EventHeader.Id;
+                        oddUnique.OddId = odd.Id;
+                        if (odd.TypeId != null)
                         {
-                            oddUnique.TypeId = int.Parse(Odd.TypeId.ToString());
+                            oddUnique.TypeId = int.Parse(odd.TypeId.ToString());
                         }
                         else
                         {
@@ -101,16 +95,12 @@ insertOdds(BetCancelEventArgs args)
 
                     }
                 }
+
             }
             catch (Exception ex)
             {
                 SharedLibrary.Logg.logger.Fatal(ex.Message);
             }
         }
-
-        //public void Dispose()
-        //{
-        //    throw new NotImplementedException();
-        //}
     }
 }

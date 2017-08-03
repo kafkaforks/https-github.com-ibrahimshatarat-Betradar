@@ -19,7 +19,6 @@ namespace BetService.Classes.DbInsert
         {
             try
             {
-
                 var common = new Common();
                 await common.insertMatchDataAllDetails((MatchHeader)args.BetStop.EventHeader, null);
                 var merch = config.AppSettings.Get("ChannelsSecretPrefixLast_real");
@@ -29,39 +28,10 @@ namespace BetService.Classes.DbInsert
                 merch = config.AppSettings.Get("ChannelsSecretPrefixLast_real3");
                 var channel3 = await CreateLiveOddsChannelName(args.BetStop.EventHeader.Id, "global", merch);
 
-                await SendToHybridgeSocketMessages(args.BetStop.Status.ToString(), channel, "BETSTOP");
-                await SendToHybridgeSocketMessages(args.BetStop.Status.ToString(), channel2, "BETSTOP");
-                await SendToHybridgeSocketMessages(args.BetStop.Status.ToString(), channel3, "BETSTOP");
-
-
-
-                //// Benchmark  Testing
-                /// 
-                /// 
-                await SendToHybridgeSocketMessages(args.BetStop.Status.ToString(), channel, "BETSTOP");
-                await SendToHybridgeSocketMessages(args.BetStop.Status.ToString(), channel2, "BETSTOP");
-                await SendToHybridgeSocketMessages(args.BetStop.Status.ToString(), channel3, "BETSTOP");
-                await SendToHybridgeSocketMessages(args.BetStop.Status.ToString(), channel, "BETSTOP");
-                await SendToHybridgeSocketMessages(args.BetStop.Status.ToString(), channel2, "BETSTOP");
-                await SendToHybridgeSocketMessages(args.BetStop.Status.ToString(), channel3, "BETSTOP");
-                await SendToHybridgeSocketMessages(args.BetStop.Status.ToString(), channel, "BETSTOP");
-                await SendToHybridgeSocketMessages(args.BetStop.Status.ToString(), channel2, "BETSTOP");
-                await SendToHybridgeSocketMessages(args.BetStop.Status.ToString(), channel3, "BETSTOP");
-                await SendToHybridgeSocketMessages(args.BetStop.Status.ToString(), channel, "BETSTOP");
-                await SendToHybridgeSocketMessages(args.BetStop.Status.ToString(), channel2, "BETSTOP");
-                await SendToHybridgeSocketMessages(args.BetStop.Status.ToString(), channel3, "BETSTOP");
-                await SendToHybridgeSocketMessages(args.BetStop.Status.ToString(), channel, "BETSTOP");
-                await SendToHybridgeSocketMessages(args.BetStop.Status.ToString(), channel2, "BETSTOP");
-                await SendToHybridgeSocketMessages(args.BetStop.Status.ToString(), channel3, "BETSTOP");
-                await SendToHybridgeSocketMessages(args.BetStop.Status.ToString(), channel, "BETSTOP");
-                await SendToHybridgeSocketMessages(args.BetStop.Status.ToString(), channel2, "BETSTOP");
-                await SendToHybridgeSocketMessages(args.BetStop.Status.ToString(), channel3, "BETSTOP");
-
-                /// 
-                /// 
-                /// 
-                /// END
-                
+                var socket = new SocketClient();
+                await socket.SendToHybridgeSocketMessages(args.BetStop.Status.ToString(), channel, "BETSTOP");
+                await socket.SendToHybridgeSocketMessages(args.BetStop.Status.ToString(), channel2, "BETSTOP");
+                await socket.SendToHybridgeSocketMessages(args.BetStop.Status.ToString(), channel3, "BETSTOP");
             }
             catch (Exception ex)
             {

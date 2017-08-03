@@ -5,6 +5,8 @@ using System.Data;
 using System.Diagnostics;
 using System.Linq;
 using System.Messaging;
+using System.Net;
+using System.Net.Sockets;
 using System.ServiceProcess;
 using System.Text;
 using System.Threading;
@@ -36,14 +38,30 @@ namespace Communicator
 
         protected override void OnStart(string[] args)
         {
-            Globals.redisTimerOnOff = true;
-            Logg.logger.Fatal("Connector Start at UTC: " + DateTime.UtcNow.ToString());
-            timerRedisChannel = new Timer();
-            timerRedisChannel.Interval = 1000;
-            timerRedisChannel.Elapsed += timerRedisChannel_Tick;
-            timerRedisChannel.Enabled = true;
-            timerRedisChannel.Start();
+            //Globals.redisTimerOnOff = true;
+            //Logg.logger.Fatal("Connector Start at UTC: " + DateTime.UtcNow.ToString());
+            //timerRedisChannel = new Timer();
+            //timerRedisChannel.Interval = 1000;
+            //timerRedisChannel.Elapsed += timerRedisChannel_Tick;
+            //timerRedisChannel.Enabled = true;
+            //timerRedisChannel.Start();
             // TODO: Add code here to start your service.
+
+
+
+            Connection connection;
+            Console.WriteLine("The beginning");
+            using (Socket listener = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp))
+            {
+                Console.WriteLine("listener");
+                listener.Bind(new IPEndPoint(IPAddress.Parse("127.0.0.1"), 6767));
+                listener.Listen(1);
+                connection = new Connection(listener.Accept());
+                Console.WriteLine("Connection established.");
+            }
+
+            connection.WaitForNextString(SocketServer.ReceivedString);
+
 
         }
 
