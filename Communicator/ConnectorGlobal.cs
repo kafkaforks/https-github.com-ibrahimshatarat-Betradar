@@ -15,7 +15,7 @@ namespace Communicator
         private static ISubscriber sub = Rconnect.GetSubscriber();
 
 
-        public static void SendRedisChannel(string message)
+        public static async void SendRedisChannel(string message)
         {
             try
             {

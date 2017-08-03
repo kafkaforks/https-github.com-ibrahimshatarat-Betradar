@@ -15,59 +15,53 @@ namespace BetService.Classes.DbInsert
 {
     public class BetStopHandle : Core
     {
-        public BetStopHandle(BetStopEventArgs args)
+        public async Task BetStopHandler(BetStopEventArgs args)
         {
             try
             {
 
                 var common = new Common();
-                //if (args.BetStop. .Name != null)
-                //{
-                //    NameDictionary.Add("BET", entity.Name.International);
-                //    NameDictionary.Add("en", entity.Name.International);
-                //    foreach (var language in entity.Name.AvailableTranslationLanguages)
-                //    {
-                //        NameDictionary.Add(language, entity.Name.GetTranslation(language));
-                //    }
-                //}
-                // common.insertMatchDataAllDetails((MatchHeader)args.BetStop.EventHeader, null);
-
-
-
+                await common.insertMatchDataAllDetails((MatchHeader)args.BetStop.EventHeader, null);
                 var merch = config.AppSettings.Get("ChannelsSecretPrefixLast_real");
-                var channel = CreateLiveOddsChannelName(args.BetStop.EventHeader.Id, "global", merch);
+                var channel = await CreateLiveOddsChannelName(args.BetStop.EventHeader.Id, "global", merch);
                 merch = config.AppSettings.Get("ChannelsSecretPrefixLast_real2");
-                var channel2 = CreateLiveOddsChannelName(args.BetStop.EventHeader.Id, "global", merch);
+                var channel2 = await CreateLiveOddsChannelName(args.BetStop.EventHeader.Id, "global", merch);
                 merch = config.AppSettings.Get("ChannelsSecretPrefixLast_real3");
-                var channel3 = CreateLiveOddsChannelName(args.BetStop.EventHeader.Id, "global", merch);
+                var channel3 = await CreateLiveOddsChannelName(args.BetStop.EventHeader.Id, "global", merch);
 
-                Task.Factory.StartNew(
-                  () =>
-                  {
-                      SendToHybridgeSocketMessages(args.BetStop.Status.ToString(), channel, "BETSTOP");
-                      SendToHybridgeSocketMessages(args.BetStop.Status.ToString(), channel2, "BETSTOP");
-                      SendToHybridgeSocketMessages(args.BetStop.Status.ToString(), channel3, "BETSTOP");
-                  }
-                  , CancellationToken.None, TaskCreationOptions.DenyChildAttach, TaskScheduler.Default);
-
-                //Task.Factory.StartNew(() =>
-                //{
-                //    SendToHybridgeSocketMessages(args.BetStop.Status.ToString(), channel);
-                //    SendToHybridgeSocketMessages(args.BetStop.Status.ToString(), channel2);
-
-                //});
-
-
-                // var channel = CreateLiveOddsChannelName(args.BetStop.EventHeader.Id, "global");
-                // SendToHybridgeSocketMessages(args.BetStop.Status.ToString(), channel);
-
-
-                common.insertMatchDataAllDetails((MatchHeader)args.BetStop.EventHeader, null);
+                await SendToHybridgeSocketMessages(args.BetStop.Status.ToString(), channel, "BETSTOP");
+                await SendToHybridgeSocketMessages(args.BetStop.Status.ToString(), channel2, "BETSTOP");
+                await SendToHybridgeSocketMessages(args.BetStop.Status.ToString(), channel3, "BETSTOP");
 
 
 
+                //// Benchmark  Testing
+                /// 
+                /// 
+                await SendToHybridgeSocketMessages(args.BetStop.Status.ToString(), channel, "BETSTOP");
+                await SendToHybridgeSocketMessages(args.BetStop.Status.ToString(), channel2, "BETSTOP");
+                await SendToHybridgeSocketMessages(args.BetStop.Status.ToString(), channel3, "BETSTOP");
+                await SendToHybridgeSocketMessages(args.BetStop.Status.ToString(), channel, "BETSTOP");
+                await SendToHybridgeSocketMessages(args.BetStop.Status.ToString(), channel2, "BETSTOP");
+                await SendToHybridgeSocketMessages(args.BetStop.Status.ToString(), channel3, "BETSTOP");
+                await SendToHybridgeSocketMessages(args.BetStop.Status.ToString(), channel, "BETSTOP");
+                await SendToHybridgeSocketMessages(args.BetStop.Status.ToString(), channel2, "BETSTOP");
+                await SendToHybridgeSocketMessages(args.BetStop.Status.ToString(), channel3, "BETSTOP");
+                await SendToHybridgeSocketMessages(args.BetStop.Status.ToString(), channel, "BETSTOP");
+                await SendToHybridgeSocketMessages(args.BetStop.Status.ToString(), channel2, "BETSTOP");
+                await SendToHybridgeSocketMessages(args.BetStop.Status.ToString(), channel3, "BETSTOP");
+                await SendToHybridgeSocketMessages(args.BetStop.Status.ToString(), channel, "BETSTOP");
+                await SendToHybridgeSocketMessages(args.BetStop.Status.ToString(), channel2, "BETSTOP");
+                await SendToHybridgeSocketMessages(args.BetStop.Status.ToString(), channel3, "BETSTOP");
+                await SendToHybridgeSocketMessages(args.BetStop.Status.ToString(), channel, "BETSTOP");
+                await SendToHybridgeSocketMessages(args.BetStop.Status.ToString(), channel2, "BETSTOP");
+                await SendToHybridgeSocketMessages(args.BetStop.Status.ToString(), channel3, "BETSTOP");
 
-                //Task.Factory.StartNew(() => common.insertMatchDataAllDetails((MatchHeader)args.BetStop.EventHeader, null));
+                /// 
+                /// 
+                /// 
+                /// END
+                
             }
             catch (Exception ex)
             {

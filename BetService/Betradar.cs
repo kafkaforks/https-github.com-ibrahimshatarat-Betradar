@@ -27,10 +27,10 @@ namespace BetService
         private static Timer AliveTimer = null;
         public static long TimerCount = 0;
         private Timer timer1 = null;
-        Thread m_thread = null;
+       // Thread m_thread = null;
         public static Sdk m_sdk = Sdk.Instance;
         private List<IStartable> enabled_feeds;
-        Thread _thread;
+       // Thread _thread;
 
         public Betradar()
         {

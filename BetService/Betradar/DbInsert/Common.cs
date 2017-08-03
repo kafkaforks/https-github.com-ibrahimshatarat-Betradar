@@ -24,936 +24,17 @@ using MatchHeader = Sportradar.SDK.FeedProviders.LiveOdds.LiveOdds.MatchHeader;
 
 namespace BetService.Classes.DbInsert
 {
-    public class Common : Core, IDisposable
+    public class Common : Core
     {
-        // private NpgsqlConnection con;
-        private element entity;
-
-        public Common()
-        {
-
-        }
-
-        /// <summary>
-        /// Selects the enum value
-        /// </summary>
-        /// <param name="enumMaster"></param>
-        /// <param name="enumSlave"></param>
-        /// Returns custom type Return Queue Long;        /// Queue: is the sum of other inserts " if applied " to add to the mother queue in case of rollback        /// Long: is the main inserted row id        /// </returns>
-        public int selectEnumValue(string enumMaster, string enumSlave)
-        {
-            var adObjCommand = new NpgsqlCommand(Globals.DB_Functions.SelectEnumsByNames.ToDescription());
-            adObjCommand.Parameters.AddWithValue("enum_group_name", enumMaster);
-            adObjCommand.Parameters.AddWithValue("enum_name", enumSlave);
-            var ds = select(adObjCommand);
-            var result = -1;
-            if (ds.Tables.Count > 0)
-            {
-                if (ds.Tables[0].Rows.Count > 0)
-                {
-                    result = int.Parse(ds.Tables[0].Rows[0]["select_enum_by_names"].ToString());
-                }
-            }
-            return result;
-        }
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="queueElement"></param>
-        /// Returns custom type Return Queue Long;        /// Queue: is the sum of other inserts " if applied " to add to the mother queue in case of rollback        /// Long: is the main inserted row id        /// </returns>
-        //public Globals.ReturnQueueLong insertMatchHeader(MatchHeader queueElement)
-        //{
-        //    var common = new Common();
-        //    var queue = new Queue<Globals.Rollback>();
-        //    try
-        //    {
-        //        /// Now insert the detailed Match Header to match_header table
-
-        //        var messageObjCommand = new NpgsqlCommand(Globals.DB_Functions.InserMatchHeader.ToDescription());
-        //        if (queueElement.Active != null)
-        //            messageObjCommand.Parameters.AddWithValue("active", queueElement.Active);
-        //        else
-        //            messageObjCommand.Parameters.AddWithValue("active", NpgsqlDbType.Boolean, DBNull.Value);
-
-        //        if (queueElement.AutoTraded != null)
-        //            messageObjCommand.Parameters.AddWithValue("auto_traded", queueElement.AutoTraded);
-        //        else
-        //            messageObjCommand.Parameters.AddWithValue("auto_traded", NpgsqlDbType.Boolean, DBNull.Value);
-
-        //        if (queueElement.Balls != null)
-        //            messageObjCommand.Parameters.AddWithValue("balls", queueElement.Balls);
-        //        else
-        //            messageObjCommand.Parameters.AddWithValue("balls", NpgsqlDbType.Integer, DBNull.Value);
-
-        //        if (queueElement.Bases != null)
-        //            messageObjCommand.Parameters.AddWithValue("bases", queueElement.Bases);
-        //        else
-        //            messageObjCommand.Parameters.AddWithValue("bases", NpgsqlDbType.Text, DBNull.Value);
-
-        //        if (queueElement.Batter != null)
-        //        {
-        //            var homeAway_id = insertHomeAway(queueElement.Batter);
-        //            if (homeAway_id != null && homeAway_id > 0)
-        //            {
-        //                queue.Enqueue(SetRollback(homeAway_id, Globals.Tables.HomeAway, Globals.TransactionTypes.Insert));
-        //                messageObjCommand.Parameters.AddWithValue("fk_home_away_id_batter", NpgsqlDbType.Bigint, queueElement.Active);
-        //            }
-        //        }
-        //        else
-        //            messageObjCommand.Parameters.AddWithValue("fk_home_away_id_batter", NpgsqlDbType.Bigint, DBNull.Value);
-
-        //        if (queueElement.BetStatus != null)
-        //        {
-        //            var enum_id = selectEnumValue(Globals.MasterEnum.EventBetStatus.ToDescription(),
-        //                queueElement.BetStatus.ToString());
-        //            var ggd = new Globals.enum_grouping();
-        //            if (queueElement.BetStatus.HasValue)
-        //                ggd.master = int.Parse(queueElement.BetStatus.Value.ToString());
-        //            ggd.slave = enum_id;
-        //            messageObjCommand.Parameters.AddWithValue("bet_status", ggd);
-        //        }
-        //        else
-        //            messageObjCommand.Parameters.AddWithValue("bet_status", NpgsqlDbType.Composite, DBNull.Value);
-
-        //        if (queueElement.BetStopReason != null)
-        //        {
-        //            var id = inserBetStopReason(queueElement.BetStopReason.Id, queueElement.BetStopReason.Reason);
-        //            queue.Enqueue(SetRollback(id, Globals.Tables.BetStopReason, Globals.TransactionTypes.Insert));
-        //            messageObjCommand.Parameters.AddWithValue("fk_bet_stop_reason_id", NpgsqlDbType.Bigint, id);
-        //        }
-        //        else
-        //            messageObjCommand.Parameters.AddWithValue("fk_bet_stop_reason_id", NpgsqlDbType.Bigint, DBNull.Value);
-
-        //        if (queueElement.Booked != null)
-        //            messageObjCommand.Parameters.AddWithValue("booked", NpgsqlDbType.Boolean, queueElement.Booked.Value);
-        //        else
-        //            messageObjCommand.Parameters.AddWithValue("booked", NpgsqlDbType.Boolean, DBNull.Value);
-        //        if (queueElement.ClearedScore != null)
-        //            messageObjCommand.Parameters.AddWithValue("cleared_score", NpgsqlDbType.Text, queueElement.ClearedScore);
-        //        else
-        //            messageObjCommand.Parameters.AddWithValue("cleared_score", NpgsqlDbType.Text, DBNull.Value);
-        //        if (queueElement.ClockStopped != null)
-        //            messageObjCommand.Parameters.AddWithValue("clock_stopped", NpgsqlDbType.Boolean, queueElement.ClockStopped);
-        //        else
-        //            messageObjCommand.Parameters.AddWithValue("clock_stopped", NpgsqlDbType.Boolean, DBNull.Value);
-        //        if (queueElement.Corners != null)
-        //        {
-        //            var id = insertHomeAway(queueElement.Corners);
-        //            queue.Enqueue(SetRollback(id, Globals.Tables.Corners, Globals.TransactionTypes.Insert));
-        //            messageObjCommand.Parameters.AddWithValue("fk_home_away_id_corners", NpgsqlDbType.Bigint, queueElement.Active);
-        //        }
-        //        else
-        //            messageObjCommand.Parameters.AddWithValue("fk_home_away_id_corners", NpgsqlDbType.Bigint, DBNull.Value);
-        //        if (queueElement.CurrentCtTeam != null)
-        //        {
-        //            var id = selectEnumValue(Globals.MasterEnum.Team.ToDescription(), queueElement.CurrentCtTeam.ToString());
-        //            messageObjCommand.Parameters.AddWithValue("current_ct_team", id);
-        //        }
-        //        else
-        //            messageObjCommand.Parameters.AddWithValue("current_ct_team", NpgsqlDbType.Composite, DBNull.Value);
-        //        if (queueElement.CurrentEnd != null)
-        //            messageObjCommand.Parameters.AddWithValue("current_end", NpgsqlDbType.Integer, queueElement.CurrentEnd);
-        //        else
-        //            messageObjCommand.Parameters.AddWithValue("current_end", NpgsqlDbType.Integer, DBNull.Value);
-        //        if (queueElement.Delivery != null)
-        //        {
-        //            var enums = selectEnumValue(Globals.MasterEnum.Team.ToDescription(), queueElement.Delivery.ToString());
-        //            messageObjCommand.Parameters.AddWithValue("delivery", enums);
-        //        }
-        //        else
-        //            messageObjCommand.Parameters.AddWithValue("delivery", NpgsqlDbType.Composite, DBNull.Value);
-        //        if (queueElement.Dismissals != null)
-        //        {
-        //            var id = insertHomeAway(queueElement.Dismissals);
-        //            queue.Enqueue(SetRollback(id, Globals.Tables.HomeAway, Globals.TransactionTypes.Insert));
-        //            messageObjCommand.Parameters.AddWithValue("fk_home_away_dismissals_id", NpgsqlDbType.Bigint, id);
-        //        }
-        //        else
-        //            messageObjCommand.Parameters.AddWithValue("fk_home_away_dismissals_id", NpgsqlDbType.Bigint, DBNull.Value);
-        //        if (queueElement.EarlyBetStatus != null)
-        //        {
-        //            var enums = selectEnumValue(Globals.MasterEnum.OddsMatchEarlyBetStatus.ToDescription(),
-        //                 queueElement.EarlyBetStatus.ToString());
-        //            messageObjCommand.Parameters.AddWithValue("early_bet_status", enums);
-        //        }
-        //        else
-        //            messageObjCommand.Parameters.AddWithValue("early_bet_status", NpgsqlDbType.Composite, DBNull.Value);
-        //        if (queueElement.Expedite != null)
-        //            messageObjCommand.Parameters.AddWithValue("expedite", NpgsqlDbType.Boolean, queueElement.Expedite);
-        //        else
-        //            messageObjCommand.Parameters.AddWithValue("expedite", NpgsqlDbType.Boolean, DBNull.Value);
-        //        if (queueElement.GameScore != null)
-        //            messageObjCommand.Parameters.AddWithValue("game_score", NpgsqlDbType.Text, queueElement.GameScore);
-        //        else
-        //            messageObjCommand.Parameters.AddWithValue("game_score", NpgsqlDbType.Text, DBNull.Value);
-        //        if (queueElement.Id != null)
-        //            messageObjCommand.Parameters.AddWithValue("event_id", queueElement.Id);
-        //        else
-        //            messageObjCommand.Parameters.AddWithValue("event_id", NpgsqlDbType.Bigint, DBNull.Value);
-        //        if (queueElement.Innings != null)
-        //            messageObjCommand.Parameters.AddWithValue("innings", queueElement.Active);
-        //        else
-        //            messageObjCommand.Parameters.AddWithValue("innings", NpgsqlDbType.Integer, DBNull.Value);
-        //        if (queueElement.LegScore != null)
-        //            messageObjCommand.Parameters.AddWithValue("leg_score", queueElement.Active);
-        //        else
-        //            messageObjCommand.Parameters.AddWithValue("leg_score", NpgsqlDbType.Text, DBNull.Value);
-        //        if (queueElement.MatchTime != null)
-        //            messageObjCommand.Parameters.AddWithValue("match_time", NpgsqlDbType.Bigint, queueElement.MatchTime);
-        //        else
-        //            messageObjCommand.Parameters.AddWithValue("match_time", NpgsqlDbType.Bigint, DBNull.Value);
-        //        if (queueElement.MatchTimeExtended != null)
-        //            messageObjCommand.Parameters.AddWithValue("match_time_extended", NpgsqlDbType.Text, queueElement.MatchTimeExtended);
-        //        else
-        //            messageObjCommand.Parameters.AddWithValue("match_time_extended", NpgsqlDbType.Text, DBNull.Value);
-        //        if (queueElement.Message != null)
-        //        {
-        //            var ret = insertMessages(queueElement.Message);
-        //            queue.Enqueue(SetRollback(ret.id, Globals.Tables.Messages, Globals.TransactionTypes.Insert));
-        //            queue = CloneRollbackQueue(queue, ret.queue);
-        //            messageObjCommand.Parameters.AddWithValue("fk_messages_id", ret.id);
-        //        }
-        //        else
-        //            messageObjCommand.Parameters.AddWithValue("fk_messages_id", NpgsqlDbType.Bigint, DBNull.Value);
-        //        if (queueElement.Msgnr != null)
-        //            messageObjCommand.Parameters.AddWithValue("msgnr", NpgsqlDbType.Bigint, queueElement.Msgnr);
-        //        else
-        //            messageObjCommand.Parameters.AddWithValue("msgnr", NpgsqlDbType.Bigint, DBNull.Value);
-        //        if (queueElement.Outs != null)
-        //            messageObjCommand.Parameters.AddWithValue("outs", NpgsqlDbType.Integer, queueElement.Outs);
-        //        else
-        //            messageObjCommand.Parameters.AddWithValue("outs", NpgsqlDbType.Integer, DBNull.Value);
-        //        if (queueElement.Over != null)
-        //            messageObjCommand.Parameters.AddWithValue("over", NpgsqlDbType.Integer, queueElement.Over);
-        //        else
-        //            messageObjCommand.Parameters.AddWithValue("over", NpgsqlDbType.Integer, DBNull.Value);
-        //        if (queueElement.PentaltyRuns != null)
-        //        {
-        //            var id = insertHomeAway(queueElement.PentaltyRuns);
-        //            queue.Enqueue(SetRollback(id, Globals.Tables.HomeAway, Globals.TransactionTypes.Insert));
-        //            messageObjCommand.Parameters.AddWithValue("fk_home_away_id_pental_runs", id);
-        //        }
-        //        else
-        //            messageObjCommand.Parameters.AddWithValue("fk_home_away_id_pental_runs", NpgsqlDbType.Bigint, DBNull.Value);
-        //        if (queueElement.Position != null)
-        //            messageObjCommand.Parameters.AddWithValue("position", NpgsqlDbType.Integer, queueElement.Position);
-        //        else
-        //            messageObjCommand.Parameters.AddWithValue("position", NpgsqlDbType.Integer, DBNull.Value);
-        //        if (queueElement.Possession != null)
-        //        {
-        //            var enums = selectEnumValue(Globals.MasterEnum.Team.ToDescription(), queueElement.Possession.ToString());
-        //            messageObjCommand.Parameters.AddWithValue("possession", enums);
-        //        }
-        //        else
-        //            messageObjCommand.Parameters.AddWithValue("possession", NpgsqlDbType.Composite, DBNull.Value);
-        //        if (queueElement.RedCards != null)
-        //        {
-        //            var id = insertHomeAway(queueElement.RedCards);
-        //            queue.Enqueue(SetRollback(id, Globals.Tables.HomeAway, Globals.TransactionTypes.Insert));
-        //            messageObjCommand.Parameters.AddWithValue("fk_home_away_id_red_cards", id);
-        //        }
-        //        else
-        //            messageObjCommand.Parameters.AddWithValue("fk_home_away_id_red_cards", NpgsqlDbType.Bigint, DBNull.Value);
-        //        if (queueElement.RemainingBowls != null)
-        //            messageObjCommand.Parameters.AddWithValue("remaining_bowls", NpgsqlDbType.Integer, queueElement.RemainingBowls);
-        //        else
-        //            messageObjCommand.Parameters.AddWithValue("remaining_bowls", NpgsqlDbType.Integer, DBNull.Value);
-        //        if (queueElement.RemainingReds != null)
-        //            messageObjCommand.Parameters.AddWithValue("remaining_reds", NpgsqlDbType.Integer, queueElement.RemainingReds);
-        //        else
-        //            messageObjCommand.Parameters.AddWithValue("remaining_reds", NpgsqlDbType.Integer, DBNull.Value);
-        //        if (queueElement.RemainingTime != null)
-        //            messageObjCommand.Parameters.AddWithValue("remaining_time", NpgsqlDbType.Text, queueElement.RemainingTime);
-        //        else
-        //            messageObjCommand.Parameters.AddWithValue("remaining_time", NpgsqlDbType.Text, DBNull.Value);
-        //        if (queueElement.RemainingTimeInPeriod != null)
-        //            messageObjCommand.Parameters.AddWithValue("remaining_time_in_period", queueElement.RemainingTimeInPeriod);
-        //        else
-        //            messageObjCommand.Parameters.AddWithValue("remaining_time_in_period", DBNull.Value);
-        //        if (queueElement.Score != null)
-        //            messageObjCommand.Parameters.AddWithValue("score", NpgsqlDbType.Text, queueElement.Score);
-        //        else
-        //            messageObjCommand.Parameters.AddWithValue("score", NpgsqlDbType.Text, DBNull.Value);
-        //        if (queueElement.Server != null)
-        //            messageObjCommand.Parameters.AddWithValue("server", NpgsqlDbType.Integer, queueElement.Server);
-        //        else
-        //            messageObjCommand.Parameters.AddWithValue("server", NpgsqlDbType.Integer, DBNull.Value);
-        //        if (queueElement.SetScores != null)
-        //        {
-        //            var ret = insertSetScores(queueElement.SetScores);
-        //            queue.Enqueue(SetRollback(ret.id, Globals.Tables.SetScores, Globals.TransactionTypes.Insert));
-        //            messageObjCommand.Parameters.AddWithValue("fk_set_scores_id", NpgsqlDbType.Bigint, ret.id);
-        //            queue = CloneRollbackQueue(queue, ret.queue);
-        //        }
-        //        else
-        //            messageObjCommand.Parameters.AddWithValue("fk_set_scores_id", NpgsqlDbType.Bigint, DBNull.Value);
-        //        if (queueElement.SourceId != null)
-        //            messageObjCommand.Parameters.AddWithValue("source_id", NpgsqlDbType.Text, queueElement.SourceId);
-        //        else
-        //            messageObjCommand.Parameters.AddWithValue("source_id", NpgsqlDbType.Text, DBNull.Value);
-        //        if (queueElement.Status != null)
-        //        {
-        //            var enums = selectEnumValue(Globals.MasterEnum.EventStatus.ToDescription(), queueElement.Status.ToString());
-        //            messageObjCommand.Parameters.AddWithValue("status", enums);
-        //        }
-        //        else
-        //            messageObjCommand.Parameters.AddWithValue("status", NpgsqlDbType.Composite, DBNull.Value);
-        //        if (queueElement.Strikes != null)
-        //            messageObjCommand.Parameters.AddWithValue("strikes", NpgsqlDbType.Integer, queueElement.Strikes);
-        //        else
-        //            messageObjCommand.Parameters.AddWithValue("strikes", NpgsqlDbType.Integer, DBNull.Value);
-        //        if (queueElement.Suspend != null)
-        //        {
-        //            var id = insertHomeAway(queueElement.Suspend);
-        //            queue.Enqueue(SetRollback(id, Globals.Tables.HomeAway, Globals.TransactionTypes.Insert));
-        //            messageObjCommand.Parameters.AddWithValue("fk_home_away_id_suspend", NpgsqlDbType.Bigint, id);
-        //        }
-        //        else
-        //            messageObjCommand.Parameters.AddWithValue("fk_home_away_id_suspend", NpgsqlDbType.Bigint, DBNull.Value);
-        //        if (queueElement.Throw != null)
-        //            messageObjCommand.Parameters.AddWithValue("throw", NpgsqlDbType.Integer, queueElement.Throw);
-        //        else
-        //            messageObjCommand.Parameters.AddWithValue("throw", NpgsqlDbType.Integer, DBNull.Value);
-        //        if (queueElement.TieBreak != null)
-        //            messageObjCommand.Parameters.AddWithValue("tie_break", NpgsqlDbType.Integer, queueElement.TieBreak);
-        //        else
-        //            messageObjCommand.Parameters.AddWithValue("tie_break", NpgsqlDbType.Integer, DBNull.Value);
-        //        if (queueElement.Try != null)
-        //            messageObjCommand.Parameters.AddWithValue("try", NpgsqlDbType.Integer, queueElement.Try);
-        //        else
-        //            messageObjCommand.Parameters.AddWithValue("try", NpgsqlDbType.Integer, DBNull.Value);
-        //        if (queueElement.Visit != null)
-        //            messageObjCommand.Parameters.AddWithValue("visit", NpgsqlDbType.Integer, queueElement.Visit);
-        //        else
-        //            messageObjCommand.Parameters.AddWithValue("visit", NpgsqlDbType.Integer, DBNull.Value);
-        //        if (queueElement.Yards != null)
-        //            messageObjCommand.Parameters.AddWithValue("yards", NpgsqlDbType.Integer, queueElement.Yards);
-        //        else
-        //            messageObjCommand.Parameters.AddWithValue("yards", NpgsqlDbType.Integer, DBNull.Value);
-        //        if (queueElement.YellowCards != null)
-        //        {
-        //            var id = insertHomeAway(queueElement.YellowCards);
-        //            queue.Enqueue(SetRollback(id, Globals.Tables.HomeAway, Globals.TransactionTypes.Insert));
-        //            messageObjCommand.Parameters.AddWithValue("fk_home_away_id_yellow_cards", NpgsqlDbType.Bigint, id);
-        //        }
-        //        else
-        //            messageObjCommand.Parameters.AddWithValue("fk_home_away_id_yellow_cards", NpgsqlDbType.Bigint, DBNull.Value);
-        //        if (queueElement.YellowRedCards != null)
-        //        {
-        //            var id = insertHomeAway(queueElement.YellowRedCards);
-        //            queue.Enqueue(SetRollback(id, Globals.Tables.HomeAway, Globals.TransactionTypes.Insert));
-        //            messageObjCommand.Parameters.AddWithValue("fk_home_away_id_yellow_red_cards", NpgsqlDbType.Bigint, id);
-        //        }
-        //        else
-        //            messageObjCommand.Parameters.AddWithValue("fk_home_away_id_yellow_red_cards", NpgsqlDbType.Bigint, DBNull.Value);
-
-        //        return new Globals.ReturnQueueLong(queue, insert(messageObjCommand));
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        Logg.logger.Fatal(ex.Message);
-        //        return new Globals.ReturnQueueLong(queue, -1);
-        //    }
-        //}
-        /// <summary>
-        /// Additional data Insert
-        /// </summary>
-        /// <param name="entity"></param>
-        /// Returns custom type Return Queue Long;        /// Queue: is the sum of other inserts " if applied " to add to the mother queue in case of rollback        /// Long: is the main inserted row id        /// </returns>
-        public Globals.ReturnQueueLong insertAdditionalData(ScoreCardSummary entity)
-        {
-            var queue = new Queue<Globals.Rollback>();
-            try
-            {
-                //TODO: this function is not finished
-                ///Insert into the main dictionary table (1 => ∞) first
-                var adObjCommand = new NpgsqlCommand(Globals.DB_Functions.InsertDictionaries.ToDescription());
-                adObjCommand.Parameters.AddWithValue("fk_table_id", Globals.Tables.Live_Common_Feed.ToDescription());
-                var dictionaries_id = insert(adObjCommand);
-
-                /// Now insert the detailed dictionaries to dictionary table
-                foreach (var dictionary in entity.AdditionalData)
-                {
-                    var dictionaryObjCommand = new NpgsqlCommand(Globals.DB_Functions.InserDictionary.ToDescription());
-                    dictionaryObjCommand.Parameters.AddWithValue("fk_table_id", NpgsqlDbType.Integer, Globals.Tables.Dictionary.ToDescription());
-                    dictionaryObjCommand.Parameters.AddWithValue("dictionaries_id", dictionaries_id);
-                    dictionaryObjCommand.Parameters.AddWithValue("key", dictionary.Key);
-                    dictionaryObjCommand.Parameters.AddWithValue("value", dictionary.Value);
-                    queue.Enqueue(SetRollback(insert(dictionaryObjCommand), Globals.Tables.Dictionary, Globals.TransactionTypes.Insert));
-                }
-                return new Globals.ReturnQueueLong(queue, dictionaries_id);
-            }
-            catch (Exception ex)
-            {
-                Logg.logger.Fatal(ex);
-                return new Globals.ReturnQueueLong(queue, -1);
-            }
-        }
-        /// <summary>
-        /// Additional data Insert
-        /// </summary>
-        /// <param name="entity"></param>
-        /// Returns custom type Return Queue Long;        /// Queue: is the sum of other inserts " if applied " to add to the mother queue in case of rollback        /// Long: is the main inserted row id        /// </returns>
-        public Globals.ReturnQueueLong insertAdditionalData(LineupsEventArgs entity)
-        {
-            var queue = new Queue<Globals.Rollback>();
-            try
-            {
-                //TODO: this function is not finished
-                ///Insert into the main dictionary table (1 => ∞) first
-                var adObjCommand = new NpgsqlCommand(Globals.DB_Functions.InsertDictionaries.ToDescription());
-                adObjCommand.Parameters.AddWithValue("fk_table_id", Globals.Tables.Live_Common_Feed);
-                var dictionaries_id = insert(adObjCommand);
-
-                /// Now insert the detailed dictionaries to dictionary table
-                foreach (var dictionary in entity.Lineups.AdditionalData)
-                {
-                    var dictionaryObjCommand = new NpgsqlCommand(Globals.DB_Functions.InserDictionary.ToDescription());
-                    dictionaryObjCommand.Parameters.AddWithValue("fk_table_id", NpgsqlDbType.Integer, Globals.Tables.Dictionary.ToDescription());
-                    dictionaryObjCommand.Parameters.AddWithValue("dictionaries_id", dictionaries_id);
-                    dictionaryObjCommand.Parameters.AddWithValue("key", dictionary.Key);
-                    dictionaryObjCommand.Parameters.AddWithValue("value", dictionary.Value);
-                    queue.Enqueue(SetRollback(insert(dictionaryObjCommand), Globals.Tables.Dictionary, Globals.TransactionTypes.Insert));
-                }
-                return new Globals.ReturnQueueLong(queue, dictionaries_id);
-            }
-            catch (Exception ex)
-            {
-                Logg.logger.Fatal(ex);
-                return new Globals.ReturnQueueLong(queue, -1);
-            }
-        }
-        /// <summary>
-        /// Insert Additional data in Dictionaries
-        /// </summary>
-        /// <param name="entity"></param>
-        /// <returns></returns>
-        public Globals.ReturnQueueLong insertAdditionalData(IDictionary<string, string> entity)
-        {
-            var queue = new Queue<Globals.Rollback>();
-            ///Insert into the main dictionary table (1 => ∞) first
-            var adObjCommand = new NpgsqlCommand(Globals.DB_Functions.InsertDictionaries.ToDescription());
-            adObjCommand.Parameters.AddWithValue("fk_table_id", NpgsqlDbType.Integer, Globals.Tables.Live_Common_Feed);
-            try
-            {
-
-                var dictionaries_id = insert(adObjCommand);
-                if (dictionaries_id > 0)
-                {
-                    /// Now insert the detailed dictionaries to dictionary table
-                    foreach (var dictionary in entity)
-                    {
-                        var dictionaryObjCommand = new NpgsqlCommand(Globals.DB_Functions.InserDictionary.ToDescription());
-                        dictionaryObjCommand.Parameters.AddWithValue("fk_table_id", NpgsqlDbType.Bigint, DBNull.Value);
-                        dictionaryObjCommand.Parameters.AddWithValue("dictionaries_id", NpgsqlDbType.Bigint, dictionaries_id);
-                        if (!string.IsNullOrEmpty(dictionary.Key))
-                        {
-                            dictionaryObjCommand.Parameters.AddWithValue("key", NpgsqlDbType.Text, dictionary.Key);
-                        }
-                        else
-                        {
-                            dictionaryObjCommand.Parameters.AddWithValue("key", NpgsqlDbType.Text, DBNull.Value);
-                        }
-                        if (!string.IsNullOrEmpty(dictionary.Value))
-                        {
-                            dictionaryObjCommand.Parameters.AddWithValue("value", NpgsqlDbType.Text, dictionary.Value);
-                        }
-                        else
-                        {
-                            dictionaryObjCommand.Parameters.AddWithValue("value", NpgsqlDbType.Text, DBNull.Value);
-                        }
-
-                        queue.Enqueue(SetRollback(insert(dictionaryObjCommand), Globals.Tables.Dictionary, Globals.TransactionTypes.Insert));
-                    }
-                }
-                return new Globals.ReturnQueueLong(queue, dictionaries_id);
-            }
-            catch (Exception ex)
-            {
-                Logg.logger.Fatal(ex.Message);
-                return new Globals.ReturnQueueLong(queue, -1);
-            }
-        }
-        /// <summary>
-        /// Insert outright Results
-        /// </summary>
-        /// <param name="entities"></param>
-        /// <returns></returns>
-        public Globals.ReturnQueueLong insertOutrightResults(List<OutrightResultEntity> entities)
-        {
-            var queue = new Queue<Globals.Rollback>();
-            var command = new NpgsqlCommand(Globals.DB_Functions.InsertOutrightResults.ToDescription());
-            try
-            {
-                command.Parameters.AddWithValue("is_deleted", NpgsqlDbType.Boolean, false);
-                var results_id = insert(command);
-                foreach (var entity in entities)
-                {
-                    queue.Enqueue(SetRollback(insertOutrightResult(entity, results_id), Globals.Tables.OutrightResult, Globals.TransactionTypes.Insert));
-                }
-                return new Globals.ReturnQueueLong(queue, results_id);
-            }
-            catch (Exception ex)
-            {
-                Logg.logger.Fatal(ex.Message);
-                return new Globals.ReturnQueueLong(queue, -1);
-            }
-        }
-        /// <summary>
-        /// Insert Single Outright Result
-        /// </summary>
-        /// <param name="entity"></param>
-        /// <returns></returns>
-        private long insertOutrightResult(OutrightResultEntity entity, long ResultsId)
-        {
-            var command = new NpgsqlCommand(Globals.DB_Functions.InsertOutrightResult.ToDescription());
-            try
-            {
-                if (entity.DeadHeatFactor != null)
-                {
-                    command.Parameters.AddWithValue("dead_heat_factor", NpgsqlDbType.Double, entity.DeadHeatFactor);
-                }
-                else
-                {
-                    command.Parameters.AddWithValue("dead_heat_factor", NpgsqlDbType.Double, DBNull.Value);
-                }
-                if (!string.IsNullOrEmpty(entity.Id))
-                {
-                    command.Parameters.AddWithValue("outright_result_id", NpgsqlDbType.Text, entity.Id);
-                }
-                else
-                {
-                    command.Parameters.AddWithValue("outright_result_id", NpgsqlDbType.Text, DBNull.Value);
-                }
-                if (!string.IsNullOrEmpty(entity.Value))
-                {
-                    command.Parameters.AddWithValue("value", NpgsqlDbType.Text, entity.Value);
-                }
-                else
-                {
-                    command.Parameters.AddWithValue("value", NpgsqlDbType.Text, DBNull.Value);
-                }
-                if (ResultsId != null && ResultsId > 0)
-                {
-                    command.Parameters.AddWithValue("fk_outright_results_id", NpgsqlDbType.Bigint, ResultsId);
-                }
-                else
-                {
-                    command.Parameters.AddWithValue("fk_outright_results_id", NpgsqlDbType.Bigint, DBNull.Value);
-                }
-                return insert(command);
-            }
-            catch (Exception ex)
-            {
-                Logg.logger.Fatal(ex.Message);
-                return -1;
-            }
-        }
-        /// <summary>
-        /// Insert winning is the winning team of a tournament.
-        /// </summary>
-        /// <param name="entity"></param>
-        /// Returns custom type Return Queue Long;        /// Queue: is the sum of other inserts " if applied " to add to the mother queue in case of rollback        /// Long: is the main inserted row id        /// </returns> 
-        public long insertWinningOutcome(WinningOutcomeEntity entity)
-        {
-            var command = new NpgsqlCommand(Globals.DB_Functions.InsertWinningOutcome.ToDescription());
-            try
-            {
-                if (!string.IsNullOrEmpty(entity.Outcome))
-                {
-                    command.Parameters.AddWithValue("outcome", entity.Outcome);
-                }
-                else
-                {
-                    command.Parameters.AddWithValue("outcome", DBNull.Value);
-                }
-                if (!string.IsNullOrEmpty(entity.Reason))
-                {
-                    command.Parameters.AddWithValue("reason", entity.Reason);
-                }
-                else
-                {
-                    command.Parameters.AddWithValue("reason", DBNull.Value);
-                }
-                return insert(command);
-            }
-            catch (Exception ex)
-            {
-                Logg.logger.Fatal(ex.Message);
-                return -1;
-            }
-        }
-        /// <summary>
-        /// Insert Match Roles
-        /// </summary>
-        /// <param name="entity"></param>
-        /// Returns custom type Return Queue Long;        /// Queue: is the sum of other inserts " if applied " to add to the mother queue in case of rollback        /// Long: is the main inserted row id        /// 
-        public Globals.ReturnQueueLong insertMatchRoles(List<MatchRole> entity)
-        {
-            var queue = new Queue<Globals.Rollback>();
-            var command = new NpgsqlCommand(Globals.DB_Functions.InsertMatchRoles.ToDescription());
-            var matchroles_id = insert(command);
-            try
-            {
-                foreach (var role in entity)
-                {
-                    var com = new NpgsqlCommand(Globals.DB_Functions.InsertMatchRole.ToDescription());
-                    if (role.Description != null)
-                    {
-                        com.Parameters.AddWithValue("description", NpgsqlDbType.Text, role.Description);
-                    }
-                    else
-                    {
-                        com.Parameters.AddWithValue("description", NpgsqlDbType.Text, DBNull.Value);
-                    }
-                    if (role.Id != null)
-                    {
-                        com.Parameters.AddWithValue("match_role_id", NpgsqlDbType.Integer, role.Id);
-                    }
-                    else
-                    {
-                        com.Parameters.AddWithValue("match_role_id", NpgsqlDbType.Integer, DBNull.Value);
-                    }
-                    com.Parameters.AddWithValue("fk_match_roles_id", NpgsqlDbType.Bigint, matchroles_id);
-                    var id = insert(com);
-                    if (id != null && id > -1)
-                    {
-                        queue.Enqueue(SetRollback(id, Globals.Tables.MatchRole, Globals.TransactionTypes.Insert));
-                    }
-                }
-                return new Globals.ReturnQueueLong(queue, matchroles_id);
-            }
-            catch (Exception ex)
-            {
-                Logg.logger.Fatal(ex.Message);
-                return new Globals.ReturnQueueLong(queue, -1);
-            }
-        }
-        /// <summary>
-        /// Update new match table 
-        /// </summary>
-        /// <param name="p_home_team_id"></param>
-        /// <param name="p_away_team_id"></param>
-        /// <param name="p_home_team_name"></param>
-        /// <param name="p_away_team_name"></param>
-        /// <param name="p_category_id"></param>
-        /// <param name="p_category_name"></param>
-        /// <param name="p_category_name_tr"></param>
-        /// <param name="p_match_start_date"></param>
-        /// <param name="p_sport_id"></param>
-        /// <param name="p_sport_name"></param>
-        /// <param name="p_sport_name_tr"></param>
-        /// <param name="p_tournament_id"></param>
-        /// <param name="p_tournament_name"></param>
-        /// <param name="p_tournament_name_tr"></param>
-        /// <param name="p_match_id"></param>
-        /// <returns></returns>
-        public long updateDyMatchAllData(long p_home_team_id, long p_away_team_id, string p_home_team_name, string p_away_team_name, long p_category_id, string p_category_name,
-           string p_category_name_tr, DateTime p_match_start_date, long p_sport_id, string p_sport_name, string p_sport_name_tr, long p_tournament_id, string p_tournament_name,
-           string p_tournament_name_tr, long p_match_id)
-        {
-
-            var command = new NpgsqlCommand(Globals.DB_Functions.UpdateDyMatchAllData.ToDescription());
-
-            try
-            {
-                if (p_home_team_id != null)
-                {
-                    command.Parameters.AddWithValue("p_home_team_id", NpgsqlDbType.Bigint, p_home_team_id);
-                }
-                else
-                {
-                    command.Parameters.AddWithValue("p_home_team_id", NpgsqlDbType.Bigint, DBNull.Value);
-                }
-                if (p_away_team_id != null)
-                {
-                    command.Parameters.AddWithValue("p_away_team_id", NpgsqlDbType.Bigint, p_away_team_id);
-                }
-                else
-                {
-                    command.Parameters.AddWithValue("p_away_team_id", NpgsqlDbType.Bigint, DBNull.Value);
-                }
-                if (!string.IsNullOrEmpty(p_home_team_name))
-                {
-                    command.Parameters.AddWithValue("p_home_team_name", NpgsqlDbType.Text, p_home_team_name);
-                }
-                else
-                {
-                    command.Parameters.AddWithValue("p_home_team_name", NpgsqlDbType.Text, DBNull.Value);
-                }
-                if (!string.IsNullOrEmpty(p_away_team_name))
-                {
-                    command.Parameters.AddWithValue("p_away_team_name", NpgsqlDbType.Text, p_away_team_name);
-                }
-                else
-                {
-                    command.Parameters.AddWithValue("p_away_team_name", NpgsqlDbType.Text, DBNull.Value);
-                }
-                if (p_category_id != null)
-                {
-                    command.Parameters.AddWithValue("p_category_id", NpgsqlDbType.Bigint, p_category_id);
-                }
-                else
-                {
-                    command.Parameters.AddWithValue("p_category_id", NpgsqlDbType.Bigint, DBNull.Value);
-                }
-                if (!string.IsNullOrEmpty(p_category_name))
-                {
-                    command.Parameters.AddWithValue("p_category_name", NpgsqlDbType.Text, p_category_name);
-                }
-                else
-                {
-                    command.Parameters.AddWithValue("p_category_name", NpgsqlDbType.Text, DBNull.Value);
-                }
-                if (!string.IsNullOrEmpty(p_category_name_tr))
-                {
-                    command.Parameters.AddWithValue("p_category_name_tr", NpgsqlDbType.Text, p_category_name_tr);
-                }
-                else
-                {
-                    command.Parameters.AddWithValue("p_category_name_tr", NpgsqlDbType.Text, DBNull.Value);
-                }
-                if (p_match_start_date != null)
-                {
-
-                    command.Parameters.AddWithValue("p_match_start_date", NpgsqlDbType.Timestamp, p_match_start_date);
-                }
-                else
-                {
-                    command.Parameters.AddWithValue("p_match_start_date", NpgsqlDbType.Timestamp, DBNull.Value);
-                }
-                if (p_sport_id != null)
-                {
-                    command.Parameters.AddWithValue("p_sport_id", NpgsqlDbType.Bigint, p_sport_id);
-                }
-                else
-                {
-                    command.Parameters.AddWithValue("p_sport_id", NpgsqlDbType.Bigint, DBNull.Value);
-                }
-                if (!string.IsNullOrEmpty(p_sport_name))
-                {
-                    command.Parameters.AddWithValue("p_sport_name", NpgsqlDbType.Text, p_sport_name);
-                }
-                else
-                {
-                    command.Parameters.AddWithValue("p_sport_name", NpgsqlDbType.Text, DBNull.Value);
-                }
-                if (!string.IsNullOrEmpty(p_sport_name_tr))
-                {
-                    command.Parameters.AddWithValue("p_sport_name_tr", NpgsqlDbType.Text, p_sport_name_tr);
-                }
-                else
-                {
-                    command.Parameters.AddWithValue("p_sport_name_tr", NpgsqlDbType.Text, DBNull.Value);
-                }
-                if (p_tournament_id != null)
-                {
-                    command.Parameters.AddWithValue("p_tournament_id", NpgsqlDbType.Bigint, p_tournament_id);
-                }
-                else
-                {
-                    command.Parameters.AddWithValue("p_tournament_id", NpgsqlDbType.Bigint, DBNull.Value);
-                }
-                if (!string.IsNullOrEmpty(p_tournament_name))
-                {
-                    command.Parameters.AddWithValue("p_tournament_name", NpgsqlDbType.Text, p_tournament_name);
-                }
-                else
-                {
-                    command.Parameters.AddWithValue("p_tournament_name", NpgsqlDbType.Text, DBNull.Value);
-                }
-                if (!string.IsNullOrEmpty(p_tournament_name_tr))
-                {
-                    command.Parameters.AddWithValue("p_tournament_name_tr", NpgsqlDbType.Text, p_tournament_name_tr);
-                }
-                else
-                {
-                    command.Parameters.AddWithValue("p_tournament_name_tr", NpgsqlDbType.Text, DBNull.Value);
-                }
-                if (p_match_id != null)
-                {
-                    command.Parameters.AddWithValue("p_match_id", NpgsqlDbType.Bigint, p_match_id);
-                }
-                else
-                {
-                    command.Parameters.AddWithValue("p_match_id", NpgsqlDbType.Bigint, DBNull.Value);
-                }
-
-                return insert(command);
-            }
-            catch (Exception ex)
-            {
-                Logg.logger.Fatal(ex.Message);
-                return -1;
-            }
-        }
-
-        public long insertCpCouponOdds(long p_coupon_id, int p_feed_type, long p_match_id, Boolean p_odd_active, Boolean p_odd_changed, Boolean p_odd_finalised
-            , long p_odd_id, string p_odd_name, string p_odd_odd, string p_odd_outcome, string p_odd_outcome_id, string p_odd_probability,
-            string p_odd_special, string p_odd_type, long p_odd_type_id)
-        {
-
-            try
-            {
-                var command = new NpgsqlCommand(Globals.DB_Functions.InsertCpCouponOdds.ToDescription());
-
-                if (p_coupon_id != null)
-                {
-
-                    command.Parameters.AddWithValue("p_coupon_id", NpgsqlDbType.Bigint, p_coupon_id);
-                }
-                else
-                {
-                    command.Parameters.AddWithValue("p_coupon_id", NpgsqlDbType.Bigint, DBNull.Value);
-                }
-
-                if (p_feed_type != null)
-                {
-
-                    command.Parameters.AddWithValue("p_feed_type", NpgsqlDbType.Integer, p_feed_type);
-                }
-                else
-                {
-                    command.Parameters.AddWithValue("p_feed_type", NpgsqlDbType.Integer, DBNull.Value);
-                }
-
-                if (p_match_id != null)
-                {
-
-                    command.Parameters.AddWithValue("p_match_id", NpgsqlDbType.Bigint, p_match_id);
-                }
-                else
-                {
-                    command.Parameters.AddWithValue("p_match_id", NpgsqlDbType.Bigint, DBNull.Value);
-                }
-
-                if (p_odd_active != null)
-                {
-                    command.Parameters.AddWithValue("p_odd_active", NpgsqlDbType.Boolean, p_odd_active);
-                }
-                else
-                {
-                    command.Parameters.AddWithValue("p_odd_active", NpgsqlDbType.Boolean, DBNull.Value);
-                }
-
-                if (p_odd_changed != null)
-                {
-                    command.Parameters.AddWithValue("p_odd_changed", NpgsqlDbType.Boolean, p_odd_changed);
-                }
-                else
-                {
-                    command.Parameters.AddWithValue("p_odd_changed", NpgsqlDbType.Boolean, DBNull.Value);
-                }
-
-                if (p_odd_finalised != null)
-                {
-                    command.Parameters.AddWithValue("p_odd_finalised", NpgsqlDbType.Boolean, p_odd_finalised);
-                }
-                else
-                {
-                    command.Parameters.AddWithValue("p_odd_finalised", NpgsqlDbType.Boolean, DBNull.Value);
-                }
-
-                if (p_odd_id != null)
-                {
-
-                    command.Parameters.AddWithValue("p_odd_id", NpgsqlDbType.Bigint, p_odd_id);
-                }
-                else
-                {
-                    command.Parameters.AddWithValue("p_odd_id", NpgsqlDbType.Bigint, DBNull.Value);
-                }
-
-                if (!string.IsNullOrEmpty(p_odd_name))
-                {
-                    command.Parameters.AddWithValue("p_odd_name", NpgsqlDbType.Text, p_odd_name);
-                }
-                else
-                {
-                    command.Parameters.AddWithValue("p_odd_name", NpgsqlDbType.Text, DBNull.Value);
-                }
-
-                if (!string.IsNullOrEmpty(p_odd_odd))
-                {
-                    command.Parameters.AddWithValue("p_odd_odd", NpgsqlDbType.Text, p_odd_odd);
-                }
-                else
-                {
-                    command.Parameters.AddWithValue("p_odd_odd", NpgsqlDbType.Text, DBNull.Value);
-                }
-
-                if (!string.IsNullOrEmpty(p_odd_outcome))
-                {
-                    command.Parameters.AddWithValue("p_odd_outcome", NpgsqlDbType.Text, p_odd_outcome);
-                }
-                else
-                {
-                    command.Parameters.AddWithValue("p_odd_outcome", NpgsqlDbType.Text, DBNull.Value);
-                }
-
-                if (!string.IsNullOrEmpty(p_odd_outcome_id))
-                {
-                    command.Parameters.AddWithValue("p_odd_outcome_id", NpgsqlDbType.Text, p_odd_outcome_id);
-                }
-                else
-                {
-                    command.Parameters.AddWithValue("p_odd_outcome_id", NpgsqlDbType.Text, DBNull.Value);
-                }
-
-                if (!string.IsNullOrEmpty(p_odd_probability))
-                {
-                    command.Parameters.AddWithValue("p_odd_probability", NpgsqlDbType.Text, p_odd_probability);
-                }
-                else
-                {
-                    command.Parameters.AddWithValue("p_odd_probability", NpgsqlDbType.Text, DBNull.Value);
-                }
-
-                if (!string.IsNullOrEmpty(p_odd_special))
-                {
-                    command.Parameters.AddWithValue("p_odd_special", NpgsqlDbType.Text, p_odd_special);
-                }
-                else
-                {
-                    command.Parameters.AddWithValue("p_odd_special", NpgsqlDbType.Text, DBNull.Value);
-                }
-
-                if (!string.IsNullOrEmpty(p_odd_type))
-                {
-                    command.Parameters.AddWithValue("p_odd_type", NpgsqlDbType.Text, p_odd_type);
-                }
-                else
-                {
-                    command.Parameters.AddWithValue("p_odd_type", NpgsqlDbType.Text, DBNull.Value);
-                }
-
-                if (p_odd_type_id != null)
-                {
-
-                    command.Parameters.AddWithValue("p_odd_type_id", NpgsqlDbType.Bigint, p_odd_type_id);
-                }
-                else
-                {
-                    command.Parameters.AddWithValue("p_odd_type_id", NpgsqlDbType.Bigint, DBNull.Value);
-                }
-
-                return insert(command);
-            }
-            catch (Exception ex)
-            {
-                Logg.logger.Fatal(ex.Message);
-                return -1;
-            }
-        }
-        public bool updateCpLcooOdds(long match_id, long odd_type_id)
+        public async Task<bool> updateCpLcooOdds(long match_id, long odd_type_id)
         {
             try
             {
-                var command = new NpgsqlCommand(Globals.DB_Functions.UpdateCpLcooOdds.ToDescription());
+                var command = new NpgsqlCommand(await Globals.DB_Functions.UpdateCpLcooOdds.ToDescription());
                 command.Parameters.AddWithValue("p_odd_odd", NpgsqlDbType.Text, "OFF");
                 command.Parameters.AddWithValue("p_match_id", NpgsqlDbType.Bigint, match_id);
                 command.Parameters.AddWithValue("p_odd_type_id", NpgsqlDbType.Bigint, odd_type_id);
-                insert(command);
+                await insert(command);
                 return true;
             }
             catch (Exception ex)
@@ -972,10 +53,10 @@ namespace BetService.Classes.DbInsert
         /// <param name="p_odd_name"></param>
         /// <param name="p_odd_visible"></param>
         /// <returns></returns>
-        public long insertCpLcooOdds(OddsEntity entity, long p_match_id, long p_odd_type_id, string p_odd_type_name, string p_odd_name, Boolean p_odd_visible, string p_odd_probability)
+        public async Task<long> insertCpLcooOdds(OddsEntity entity, long p_match_id, long p_odd_type_id, string p_odd_type_name, string p_odd_name, Boolean p_odd_visible, string p_odd_probability)
         {
 
-            var command = new NpgsqlCommand(Globals.DB_Functions.InsertCpLcooOdds.ToDescription());
+            var command = new NpgsqlCommand(await Globals.DB_Functions.InsertCpLcooOdds.ToDescription());
 
             try
             {
@@ -1083,7 +164,7 @@ namespace BetService.Classes.DbInsert
                 {
                     command.Parameters.AddWithValue("p_odd_probability", NpgsqlDbType.Text, DBNull.Value);
                 }
-                return insert(command);
+                return await insert(command);
             }
             catch (Exception ex)
             {
@@ -1097,7 +178,7 @@ namespace BetService.Classes.DbInsert
         /// <param name="Lineupentity"></param>
         /// Returns custom type Return Queue Long;        /// Queue: is the sum of other inserts " if applied " to add to the mother queue in case of rollback        /// Long: is the main inserted row id        /// 
         /// <returns>ReturnQueueLong</returns>
-        public static List<List<string>> duplicateJsonToArray(string json)
+        public async static Task<List<List<string>>> duplicateJsonToArray(string json)
         {
             json = json.Replace("[", "");
             json = json.Replace("]", "");
@@ -1149,18 +230,18 @@ namespace BetService.Classes.DbInsert
 
             return list;
         }
-        public void WorkAlive(AliveEventArgs e)
+        public async void WorkAlive(AliveEventArgs e)
         {
             foreach (var head in e.Alive.EventHeaders)
             {
                 //Task.Factory.StartNew(() => insertMatchDataAllDetails((MatchHeader)head, null));
-                insertMatchDataAllDetails((MatchHeader)head, null);
+                await insertMatchDataAllDetails((MatchHeader)head, null);
             }
         }
-        public Merchants selectDyMerchants(long p_merchant_id, string p_username)
+        public async Task<Merchants> selectDyMerchants(long p_merchant_id, string p_username)
         {
             var dyMerchants = new Merchants();
-            var command = new NpgsqlCommand(Globals.DB_Functions.selectDyMerchants.ToDescription());
+            var command = new NpgsqlCommand(await Globals.DB_Functions.selectDyMerchants.ToDescription());
 
             if (!string.IsNullOrEmpty(p_username))
             {
@@ -1180,7 +261,7 @@ namespace BetService.Classes.DbInsert
                 command.Parameters.AddWithValue("p_merchant_id", NpgsqlDbType.Bigint, DBNull.Value);
             }
 
-            var ds = select(command);
+            var ds = await select(command);
 
             if (ds.Tables.Count > 0)
             {
@@ -1209,63 +290,10 @@ namespace BetService.Classes.DbInsert
             }
 
         }
-        public DataSet selectotherOutcomesMarket(long p_match_id, long p_odd_type_id,string p_mid_otid_ocid_sid, string p_odd_special)
-        {
-            var dyMerchants = new Merchants();
-            var command = new NpgsqlCommand(Globals.DB_Functions.GetOtherMarketsOutcimes.ToDescription());
-
-
-
-            if (p_match_id != null)
-            {
-                command.Parameters.AddWithValue("p_match_id", NpgsqlDbType.Bigint, p_match_id);
-            }
-            else
-            {
-                command.Parameters.AddWithValue("p_match_id", NpgsqlDbType.Bigint, DBNull.Value);
-            }
-
-            if (p_odd_type_id != null)
-            {
-                command.Parameters.AddWithValue("p_odd_type_id", NpgsqlDbType.Bigint, p_odd_type_id);
-            }
-            else
-            {
-                command.Parameters.AddWithValue("p_odd_type_id", NpgsqlDbType.Bigint, DBNull.Value);
-            }
-            if (!string.IsNullOrEmpty(p_mid_otid_ocid_sid))
-            {
-                command.Parameters.AddWithValue("p_mid_otid_ocid_sid", NpgsqlDbType.Text, p_mid_otid_ocid_sid);
-            }
-            else
-            {
-                command.Parameters.AddWithValue("p_mid_otid_ocid_sid", NpgsqlDbType.Text, DBNull.Value);
-            }
-            if (!string.IsNullOrEmpty(p_odd_special))
-            {
-                command.Parameters.AddWithValue("p_odd_special", NpgsqlDbType.Text, p_odd_special);
-            }
-            else
-            {
-                command.Parameters.AddWithValue("p_odd_special", NpgsqlDbType.Text, DBNull.Value);
-            }
-
-            var ds = select(command);
-           
-            if (ds != null)
-            {
-                return ds;
-            }
-            else
-            {
-                return null;
-            }
-
-        }
-        public long insertDyMerchants(Merchants merch)
+        public async Task<long> insertDyMerchants(Merchants merch)
         {
 
-            var command = new NpgsqlCommand(Globals.DB_Functions.InsertDyMerchants.ToDescription());
+            var command = new NpgsqlCommand(await Globals.DB_Functions.InsertDyMerchants.ToDescription());
 
             try
             {
@@ -1351,7 +379,7 @@ namespace BetService.Classes.DbInsert
                     command.Parameters.AddWithValue("p_skin", NpgsqlDbType.Text, DBNull.Value);
                 }
 
-                var RetId = insert(command);
+                var RetId = await insert(command);
                 if (RetId > 0)
                     return RetId;
                 else
@@ -1365,9 +393,9 @@ namespace BetService.Classes.DbInsert
             }
 
         }
-        public void insertMatch(MatchEntity m_entity, int feedtype)
+        public async void insertMatch(MatchEntity m_entity, int feedtype)
         {
-            var command = new NpgsqlCommand(Globals.DB_Functions.InsertMatchAllData.ToDescription());
+            var command = new NpgsqlCommand(await Globals.DB_Functions.InsertMatchAllData.ToDescription());
             var sport_text = "";
             var tournament_name = "";
             var home_name = "";
@@ -1385,26 +413,26 @@ namespace BetService.Classes.DbInsert
                     //home_name = match.Fixture.Competitors.Texts[0].Texts[0].Text[2].Value;
                     if (match.Fixture.Competitors != null)
                     {
-                        home_name = TextsToJson(match.Fixture.Competitors.Texts, 0);
+                        home_name = await TextsToJson(match.Fixture.Competitors.Texts, 0);
                         var superid = match.Fixture.Competitors.Texts[0].Texts[0].Superid;
                         if (superid != null)
                             home_id = superid.Value;
                         var superid2 = match.Fixture.Competitors.Texts[1].Texts[0].Superid;
                         if (superid2 != null)
                             away_id = superid2.Value;
-                        away_name = TextsToJson(match.Fixture.Competitors.Texts, 1);
+                        away_name = await TextsToJson(match.Fixture.Competitors.Texts, 1);
                     }
-                    var first ="";
-                    var second ="";
-                    if (match.Fixture.Competitors.Texts.Count>0)
-                    { 
-                        if (match.Fixture.Competitors.Texts[0].Texts.Count> 0 && match.Fixture.Competitors.Texts[0].Texts[0].Text.Count>1)
+                    var first = "";
+                    var second = "";
+                    if (match.Fixture.Competitors.Texts.Count > 0)
+                    {
+                        if (match.Fixture.Competitors.Texts[0].Texts.Count > 0 && match.Fixture.Competitors.Texts[0].Texts[0].Text.Count > 1)
                         {
                             first = match.Fixture.Competitors.Texts[0].Texts[0].Text[2].Value;
                             second = match.Fixture.Competitors.Texts[1].Texts[0].Text[2].Value;
                         }
                     }
-                   
+
                     // away_name = match.Fixture.Competitors.Texts[1].Texts[0].Text[2].Value;
                     command.Parameters.AddWithValue("p_match_name", NpgsqlDbType.Text, first + @"|" + second);
 
@@ -1448,7 +476,7 @@ namespace BetService.Classes.DbInsert
                     //var dictionary = new Dictionary<string, string>();
                     if (match.Sport.Texts != null && match.Sport != null)
                     {
-                        sport_text = TextsToJson(match.Sport.Texts);
+                        sport_text = await TextsToJson(match.Sport.Texts);
                         command.Parameters.AddWithValue("p_sport_name", NpgsqlDbType.Text, sport_text);
                     }
                     else
@@ -1504,7 +532,7 @@ namespace BetService.Classes.DbInsert
                     command.Parameters.AddWithValue("match_start_date", NpgsqlDbType.Timestamp, DBNull.Value);
                 }
                 command.Parameters.AddWithValue("p_feed_type", NpgsqlDbType.Integer, feedtype);
-                var id = insert(command);
+                await insert(command);
 
             }
             catch (Exception ex)
@@ -1512,10 +540,10 @@ namespace BetService.Classes.DbInsert
                 SharedLibrary.Logg.logger.Fatal(ex.Message);
             }
         }
-        public void insertMatchLocal(MatchLocal m_entity, int feedtype)
+        public async void insertMatchLocal(MatchLocal m_entity, int feedtype)
         {
             var match = m_entity;
-            var command = new NpgsqlCommand(Globals.DB_Functions.InsertMatchAllData.ToDescription());
+            var command = new NpgsqlCommand(await Globals.DB_Functions.InsertMatchAllData.ToDescription());
             long home_id = match.home_team_id;
             long away_id = match.away_team_id;
             long sport_id = match.sport_id;
@@ -1568,31 +596,31 @@ namespace BetService.Classes.DbInsert
                 command.Parameters.AddWithValue("match_start_date", NpgsqlDbType.Timestamp, match.match_start_date);
                 command.Parameters.AddWithValue("p_feed_type", NpgsqlDbType.Integer, feedtype);
 
-                var id = insert(command);
+                await insert(command);
             }
             catch (Exception ex)
             {
                 SharedLibrary.Logg.logger.Fatal(ex.Message);
             }
         }
-        public MatchLocal ConvertLiveMatchToLcooMatch(MatchHeader header, MatchInfo info)
+        public async Task<MatchLocal> ConvertLiveMatchToLcooMatch(MatchHeader header, MatchInfo info)
         {
             var match = new MatchLocal();
             try
             {
                 match.match_id = header.Id;
                 match.away_team_id = info.AwayTeam.Id ?? 0;
-                match.away_team_name = IdNameTupleToJson(info.AwayTeam);
-                match.country_iso = IdNameTupleToJson(info.Category);
+                match.away_team_name = await IdNameTupleToJson(info.AwayTeam);
+                match.country_iso = await IdNameTupleToJson(info.Category);
                 match.home_team_id = info.HomeTeam.Id ?? 0;
-                match.home_team_name = IdNameTupleToJson(info.HomeTeam);
+                match.home_team_name = await IdNameTupleToJson(info.HomeTeam);
                 match.is_active = header.Active;
                 match.match_name = info.HomeTeam.Name.International + @"|" + info.AwayTeam.Name.International;
                 match.match_start_date = info.DateOfMatch ?? DateTime.Parse(null);
                 match.sport_id = info.Sport.Id ?? 0;
-                match.sport_name = IdNameTupleToJson(info.Sport);
+                match.sport_name = await IdNameTupleToJson(info.Sport);
                 match.tournament_id = info.Tournament.Id ?? 0;
-                match.tournament_name = IdNameTupleToJson(info.Tournament);
+                match.tournament_name = await IdNameTupleToJson(info.Tournament);
                 return match;
             }
             catch (Exception ex)
@@ -1601,17 +629,16 @@ namespace BetService.Classes.DbInsert
                 return null;
             }
         }
-        public long insertMatchDataAllDetails(MatchHeader entityMheader, MatchInfo entityMinfo)
+        public async Task<long> insertMatchDataAllDetails(MatchHeader entityMheader, MatchInfo entityMinfo)
         {
 
-            var queue = new Queue<Globals.Rollback>();
-            var ObjCommand = new NpgsqlCommand(Globals.DB_Functions.InsertDyMatchDataAllDetails.ToDescription());
+            var ObjCommand = new NpgsqlCommand(await Globals.DB_Functions.InsertDyMatchDataAllDetails.ToDescription());
             try
             {
                 var gogogog = entityMheader.Id;
                 if (entityMinfo != null)
                 {
-                    insertMatchLocal(ConvertLiveMatchToLcooMatch(entityMheader, entityMinfo), 2);
+                    insertMatchLocal(await ConvertLiveMatchToLcooMatch(entityMheader, entityMinfo), 2);
                 }
 
                 if (entityMheader.Active != null)
@@ -2155,7 +1182,7 @@ namespace BetService.Classes.DbInsert
                 //{
                 //    SharedLibrary.Logg.logger.Error("Match Details Inserted !!!");
                 //}
-                return insert(ObjCommand);
+                return await insert(ObjCommand);
             }
             catch (Exception ex)
             {
@@ -2163,12 +1190,12 @@ namespace BetService.Classes.DbInsert
                 return -1;
             }
         }
-        public bool updateDmadYellowRedCard(ScoreCardSummary entity, long p_match_id)
+        public async Task<bool> updateDmadYellowRedCard(ScoreCardSummary entity, long p_match_id)
         {
 
             try
             {
-                var command = new NpgsqlCommand(Globals.DB_Functions.UpdateDmadYellowRedCard.ToDescription());
+                var command = new NpgsqlCommand(await Globals.DB_Functions.UpdateDmadYellowRedCard.ToDescription());
                 command.Parameters.AddWithValue("p_match_id", NpgsqlDbType.Bigint, p_match_id);
                 if (entity.CardsByTime != null)
                 {
@@ -2179,7 +1206,7 @@ namespace BetService.Classes.DbInsert
                 {
                     command.Parameters.AddWithValue("p_yellow_red_cards", NpgsqlDbType.Text, DBNull.Value);
                 }
-                insert(command);
+                await insert(command);
                 return true;
             }
             catch (Exception ex)
@@ -2188,30 +1215,15 @@ namespace BetService.Classes.DbInsert
                 return false;
             }
         }
-        private long checkIfLiveOddExcists(string mid)
+        public async Task<bool> UpdateAllLiveOddsOutcomesActive(long match_id, EventOdds entity, bool Active)
         {
             try
             {
-                var commandText = "SELECT id from cp_live_odds WHERE mid_oid_oftid ='" + mid + "'";
-                var command = new NpgsqlCommand(commandText);
-                var id = selectOne(command);
-                return id;
-            }
-            catch (Exception ex)
-            {
-                SharedLibrary.Logg.logger.Fatal(ex.Message);
-                return -1;
-            }
-        }
-        public bool UpdateAllLiveOddsOutcomesActive(long match_id, EventOdds entity, bool Active)
-        {
-            try
-            {
-                var command = new NpgsqlCommand(Globals.DB_Functions.UpdateCpLiveOddsActive.ToDescription());
+                var command = new NpgsqlCommand(await Globals.DB_Functions.UpdateCpLiveOddsActive.ToDescription());
                 command.Parameters.AddWithValue("p_match_id", NpgsqlDbType.Bigint, match_id);
                 command.Parameters.AddWithValue("p_odd_id", NpgsqlDbType.Bigint, entity.Id);
                 command.Parameters.AddWithValue("p_active", NpgsqlDbType.Boolean, Active);
-                var ret = insert(command);
+                var ret = await insert(command);
                 if (ret == 1)
                 {
                     return true;
@@ -2227,7 +1239,7 @@ namespace BetService.Classes.DbInsert
                 return false;
             }
         }
-        public Globals.ReturnQueueLong insertLiveOdds(EventOdds entity, EventOddsField odd_field,
+        public async Task<long> insertLiveOdds(EventOdds entity, EventOddsField odd_field,
              bool p_odd_eventoddsfield_active, bool? p_odd_eventoddsfield_outcomestatus,
              long? p_odd_eventoddsfield_playerid, string p_odd_eventoddsfield_probability, LocalizedString p_odd_eventoddsfield_type,
              string p_odd_eventoddsfield_value, int? p_odd_eventoddsfield_viewindex, string p_odd_eventoddsfield_voidfactor,
@@ -2246,13 +1258,12 @@ namespace BetService.Classes.DbInsert
             {
                 oddUnique.TypeId = null;
             }
-            var before_unique = EncodeUnifiedBetClearQueueElementLive(oddUnique);
+            var before_unique = await EncodeUnifiedBetClearQueueElementLive(oddUnique);
             //var RowId = checkIfLiveOddExcists(before_unique);
             var TypeDictionary = new Dictionary<string, string>();
             var NameDictionary = new Dictionary<string, string>();
             try
             {
-
                 if (p_odd_eventoddsfield_type != null)
                 {
                     TypeDictionary.Add("BET", p_odd_eventoddsfield_type.International);
@@ -2273,37 +1284,16 @@ namespace BetService.Classes.DbInsert
                     }
                 }
 
-                //if (p_odd_eventoddsfield_outcomestatus == null)
-                //{
-                //    foreach (var name in NameDictionary)
-                //    {
-                //        var channel = CreateLiveOddsChannelName(match_id, name.Key);
-                //        SendToHybridgeSocketNewOdd(match_id, entity.Id, p_odd_eventoddsfield_typeid,
-                //            new JavaScriptSerializer().Serialize(name), entity.SpecialOddsValue, odd_field, channel);
-                //    }
-                //}
-
-
+            
             }
             catch (Exception ex)
             {
                 SharedLibrary.Logg.logger.Fatal(ex.Message);
             }
-            var queue = new Queue<Globals.Rollback>();
-            var command = new NpgsqlCommand(Globals.DB_Functions.InsertLiveOdds.ToDescription());
+            var command = new NpgsqlCommand(await Globals.DB_Functions.InsertLiveOdds.ToDescription());
             try
             {
-                //if (RowId < 0 && p_odd_eventoddsfield_outcomestatus == null)
-                //{
-                //    if (p_odd_eventoddsfield_outcomestatus == null)
-                //    {
-                //        foreach (var name in NameDictionary)
-                //        {
-                //            var channel = CreateLiveOddsChannelName(match_id, name.Key);
-                //            SendToHybridgeSocketNewOdd(match_id, entity.Id, p_odd_eventoddsfield_typeid,new JavaScriptSerializer().Serialize(name), entity.SpecialOddsValue, odd_field, channel);
-                //        }
-                //    }
-
+              
                 command.Parameters.AddWithValue("p_match_id", NpgsqlDbType.Bigint, match_id);
                 command.Parameters.AddWithValue("p_odd_active", NpgsqlDbType.Boolean, entity.Active);
                 if (entity.Changed != null)
@@ -2426,11 +1416,11 @@ namespace BetService.Classes.DbInsert
                 {
                     command.Parameters.AddWithValue("p_odd_eventoddsfield_value", NpgsqlDbType.Text, DBNull.Value);
                 }
-                if(p_odd_eventoddsfield_viewindex != null)
-                    { 
-                command.Parameters.AddWithValue("p_odd_eventoddsfield_viewindex", NpgsqlDbType.Integer,
-                    p_odd_eventoddsfield_viewindex);
-                    }
+                if (p_odd_eventoddsfield_viewindex != null)
+                {
+                    command.Parameters.AddWithValue("p_odd_eventoddsfield_viewindex", NpgsqlDbType.Integer,
+                        p_odd_eventoddsfield_viewindex);
+                }
                 else
                 {
                     command.Parameters.AddWithValue("p_odd_eventoddsfield_viewindex", NpgsqlDbType.Integer,
@@ -2517,7 +1507,7 @@ namespace BetService.Classes.DbInsert
                     command.Parameters.AddWithValue("p_time_stamp", NpgsqlDbType.Timestamp, DBNull.Value);
                 }
 
-                return new Globals.ReturnQueueLong(queue, insert(command));
+                return await insert(command);
                 // }
                 //else
                 //{
@@ -2536,11 +1526,11 @@ namespace BetService.Classes.DbInsert
             catch (Exception ex)
             {
                 SharedLibrary.Logg.logger.Fatal(ex.Message);
-                return new Globals.ReturnQueueLong(queue, -1);
+                return -1;
             }
         }
 
-        public Globals.ReturnQueueLong updateLiveOdds(string entity_Name, bool p_odd_active, bool? p_odd_changed, long p_odd_combination,
+        public async Task<long> updateLiveOdds(string entity_Name, bool p_odd_active, bool? p_odd_changed, long p_odd_combination,
              string p_odd_for_the_rest, string p_odd_free_text, bool? p_odd_most_balanced, string p_odd_special_odds_value, long p_odd_type_id,
               bool p_odd_eventoddsfield_active, bool? p_odd_eventoddsfield_outcomestatus, string p_odd_type,
               long? p_odd_eventoddsfield_playerid, string p_odd_eventoddsfield_probability, string p_odd_eventoddsfield_type,
@@ -2549,7 +1539,7 @@ namespace BetService.Classes.DbInsert
         {
 
             var queue = new Queue<Globals.Rollback>();
-            var Updatecommand = new NpgsqlCommand(Globals.DB_Functions.UpdateLiveOdds.ToDescription());
+            var Updatecommand = new NpgsqlCommand(await Globals.DB_Functions.UpdateLiveOdds.ToDescription());
             try
             {
                 Updatecommand.Parameters.AddWithValue("p_odd_active", NpgsqlDbType.Boolean, p_odd_active);
@@ -2686,20 +1676,14 @@ namespace BetService.Classes.DbInsert
 
                 Updatecommand.Parameters.AddWithValue("row_id", NpgsqlDbType.Bigint, row_id);
 
-                return new Globals.ReturnQueueLong(queue, update(Updatecommand));
+                return await update(Updatecommand);
             }
             catch (Exception ex)
             {
                 SharedLibrary.Logg.logger.Fatal(ex.Message);
-                return new Globals.ReturnQueueLong(queue, -1);
+                return -1;
             }
         }
-
-       
-
-        #region Live
-
-        #endregion
 
         #region Coupons
         /// <summary>
@@ -2708,11 +1692,11 @@ namespace BetService.Classes.DbInsert
         /// <param name="entity"></param>
         /// <param name="MatchID"></param>
         /// <returns></returns>
-        public Globals.ReturnQueueLong insertCpLcooBetclearOdds(BetResultEntity entity, long MatchID, string mid_otid_ocid_sid)
+        public async Task<long> insertCpLcooBetclearOdds(BetResultEntity entity, long MatchID, string mid_otid_ocid_sid)
         {
 
             var queue = new Queue<Globals.Rollback>();
-            var ObjCommand = new NpgsqlCommand(Globals.DB_Functions.InsertCpLcooBetClearOdds.ToDescription());
+            var ObjCommand = new NpgsqlCommand(await Globals.DB_Functions.InsertCpLcooBetClearOdds.ToDescription());
             try
             {
                 if (MatchID != null)
@@ -2803,28 +1787,19 @@ namespace BetService.Classes.DbInsert
                 {
                     ObjCommand.Parameters.AddWithValue("p_mid_otid_ocid_sid", NpgsqlDbType.Text, DBNull.Value);
                 }
-                var RetId = insert(ObjCommand);
-                if (RetId > 0)
-                {
-                    return new Globals.ReturnQueueLong(queue, RetId);
-                }
-                else
-                {
-                    return new Globals.ReturnQueueLong(queue, -1);
-                }
-
+                return await insert(ObjCommand);
             }
             catch (Exception ex)
             {
                 Logg.logger.Fatal(ex.Message);
-                return new Globals.ReturnQueueLong(queue, -1);
+                return -1;
             }
         }
-        public Globals.ReturnQueueLong insertCpLcooBetclearOdds(BetResultEntity entity, long MatchID, string mid_otid_ocid_sid,bool status)
+        public async Task<long> insertCpLcooBetclearOdds(BetResultEntity entity, long MatchID, string mid_otid_ocid_sid, bool status)
         {
 
             var queue = new Queue<Globals.Rollback>();
-            var ObjCommand = new NpgsqlCommand(Globals.DB_Functions.InsertCpLcooBetClearOdds.ToDescription());
+            var ObjCommand = new NpgsqlCommand(await Globals.DB_Functions.InsertCpLcooBetClearOdds.ToDescription());
             try
             {
                 if (MatchID != null)
@@ -2915,30 +1890,20 @@ namespace BetService.Classes.DbInsert
                 {
                     ObjCommand.Parameters.AddWithValue("p_mid_otid_ocid_sid", NpgsqlDbType.Text, DBNull.Value);
                 }
-                var RetId = insert(ObjCommand);
-                if (RetId > 0)
-                {
-                    return new Globals.ReturnQueueLong(queue, RetId);
-                }
-                else
-                {
-                    return new Globals.ReturnQueueLong(queue, -1);
-                }
-
+                return await insert(ObjCommand);
             }
             catch (Exception ex)
             {
                 Logg.logger.Fatal(ex.Message);
-                return new Globals.ReturnQueueLong(queue, -1);
+                return -1;
             }
         }
-        public Globals.ReturnQueueLong insertCpLcooBetclearOdds( long MatchID,long OddsType,string Outcome,string OutcomeId,string PlayerId, string Reason,
-            string SpecialBetValue, string TeamId,string VoidFactor,
-            string mid_otid_ocid_sid,bool status)
+        public async Task<long> insertCpLcooBetclearOdds(long MatchID, long OddsType, string Outcome, string OutcomeId, string PlayerId, string Reason,
+            string SpecialBetValue, string TeamId, string VoidFactor,
+            string mid_otid_ocid_sid, bool status)
         {
 
-            var queue = new Queue<Globals.Rollback>();
-            var ObjCommand = new NpgsqlCommand(Globals.DB_Functions.InsertCpLcooBetClearOdds.ToDescription());
+            var ObjCommand = new NpgsqlCommand(await Globals.DB_Functions.InsertCpLcooBetClearOdds.ToDescription());
             try
             {
                 if (MatchID != null)
@@ -2975,7 +1940,7 @@ namespace BetService.Classes.DbInsert
                 }
                 if (!string.IsNullOrEmpty(PlayerId))
                 {
-                    ObjCommand.Parameters.AddWithValue("p_player_id", NpgsqlDbType.Text,PlayerId);
+                    ObjCommand.Parameters.AddWithValue("p_player_id", NpgsqlDbType.Text, PlayerId);
                 }
                 else
                 {
@@ -3029,142 +1994,21 @@ namespace BetService.Classes.DbInsert
                 {
                     ObjCommand.Parameters.AddWithValue("p_mid_otid_ocid_sid", NpgsqlDbType.Text, DBNull.Value);
                 }
-                var RetId = insert(ObjCommand);
-                if (RetId > 0)
-                {
-                    return new Globals.ReturnQueueLong(queue, RetId);
-                }
-                else
-                {
-                    return new Globals.ReturnQueueLong(queue, -1);
-                }
+                return await insert(ObjCommand);
+
 
             }
             catch (Exception ex)
             {
                 Logg.logger.Fatal(ex.Message);
-                return new Globals.ReturnQueueLong(queue, -1);
+                return -1;
             }
         }
-
-        public Globals.ReturnQueueLong insertCpLcooBetclearOdds_test(BetResultEntity_test entity, long MatchID, string mid_otid_ocid_sid)
-        {
-
-            var queue = new Queue<Globals.Rollback>();
-            var ObjCommand = new NpgsqlCommand(Globals.DB_Functions.InsertCpLcooBetClearOdds.ToDescription());
-            try
-            {
-                if (MatchID != null)
-                {
-                    ObjCommand.Parameters.AddWithValue("p_match_id", NpgsqlDbType.Bigint, MatchID);
-                }
-                else
-                {
-                    ObjCommand.Parameters.AddWithValue("p_match_id", NpgsqlDbType.Bigint, DBNull.Value);
-                }
-                if (entity.OddsType != null)
-                {
-                    ObjCommand.Parameters.AddWithValue("p_odds_type", NpgsqlDbType.Bigint, entity.OddsType);
-                }
-                else
-                {
-                    ObjCommand.Parameters.AddWithValue("p_odds_type", NpgsqlDbType.Bigint, DBNull.Value);
-                }
-                if (!string.IsNullOrEmpty(entity.Outcome))
-                {
-                    ObjCommand.Parameters.AddWithValue("p_outcome", NpgsqlDbType.Text, entity.Outcome);
-                }
-                else
-                {
-                    ObjCommand.Parameters.AddWithValue("p_outcome", NpgsqlDbType.Text, DBNull.Value);
-                }
-                if (!string.IsNullOrEmpty(entity.OutcomeId))
-                {
-                    ObjCommand.Parameters.AddWithValue("p_outcome_id", NpgsqlDbType.Text, entity.OutcomeId);
-                }
-                else
-                {
-                    ObjCommand.Parameters.AddWithValue("p_outcome_id", NpgsqlDbType.Text, DBNull.Value);
-                }
-                if (!string.IsNullOrEmpty(entity.PlayerId))
-                {
-                    ObjCommand.Parameters.AddWithValue("p_player_id", NpgsqlDbType.Text, entity.PlayerId);
-                }
-                else
-                {
-                    ObjCommand.Parameters.AddWithValue("p_player_id", NpgsqlDbType.Text, DBNull.Value);
-                }
-                if (!string.IsNullOrEmpty(entity.Reason))
-                {
-                    ObjCommand.Parameters.AddWithValue("p_reason", NpgsqlDbType.Text, entity.Reason);
-                }
-                else
-                {
-                    ObjCommand.Parameters.AddWithValue("p_reason", NpgsqlDbType.Text, DBNull.Value);
-                }
-                if (!string.IsNullOrEmpty(entity.SpecialBetValue))
-                {
-                    ObjCommand.Parameters.AddWithValue("p_special_bet_value", NpgsqlDbType.Text, entity.SpecialBetValue);
-                }
-                else
-                {
-                    ObjCommand.Parameters.AddWithValue("p_special_bet_value", NpgsqlDbType.Text, DBNull.Value);
-                }
-                if (entity.Status != null)
-                {
-                    ObjCommand.Parameters.AddWithValue("p_status", NpgsqlDbType.Boolean, entity.Status);
-                }
-                else
-                {
-                    ObjCommand.Parameters.AddWithValue("p_status", NpgsqlDbType.Boolean, DBNull.Value);
-                }
-                if (!string.IsNullOrEmpty(entity.TeamId))
-                {
-                    ObjCommand.Parameters.AddWithValue("p_team_id", NpgsqlDbType.Text, entity.TeamId);
-                }
-                else
-                {
-                    ObjCommand.Parameters.AddWithValue("p_team_id", NpgsqlDbType.Text, DBNull.Value);
-                }
-                if (!string.IsNullOrEmpty(entity.VoidFactor))
-                {
-                    ObjCommand.Parameters.AddWithValue("p_void_factor", NpgsqlDbType.Text, entity.VoidFactor);
-                }
-                else
-                {
-                    ObjCommand.Parameters.AddWithValue("p_void_factor", NpgsqlDbType.Text, DBNull.Value);
-                }
-                if (!string.IsNullOrEmpty(mid_otid_ocid_sid))
-                {
-                    ObjCommand.Parameters.AddWithValue("p_mid_otid_ocid_sid", NpgsqlDbType.Text, mid_otid_ocid_sid);
-                }
-                else
-                {
-                    ObjCommand.Parameters.AddWithValue("p_mid_otid_ocid_sid", NpgsqlDbType.Text, DBNull.Value);
-                }
-                var RetId = insert(ObjCommand);
-                if (RetId > 0)
-                {
-                    return new Globals.ReturnQueueLong(queue, RetId);
-                }
-                else
-                {
-                    return new Globals.ReturnQueueLong(queue, -1);
-                }
-
-            }
-            catch (Exception ex)
-            {
-                Logg.logger.Fatal(ex.Message);
-                return new Globals.ReturnQueueLong(queue, -1);
-            }
-        }
-
 
 
         #endregion
 
-        public string IdNameTupleToJson(IdNameTuple tuple)
+        public async Task<string> IdNameTupleToJson(IdNameTuple tuple)
         {
             var Hdictionary = new Dictionary<string, string>();
             try
@@ -3183,7 +2027,7 @@ namespace BetService.Classes.DbInsert
                 return null;
             }
         }
-        public string IdNameTupleToJson(List<IdNameTuple> tuples)
+        public async Task<string> IdNameTupleToJson(List<IdNameTuple> tuples)
         {
             var Hdictionary = new Dictionary<string, string>();
             var DictionaryList = new List<Dictionary<string, string>>();
@@ -3208,7 +2052,7 @@ namespace BetService.Classes.DbInsert
                 return null;
             }
         }
-        public string TextsToJson(List<TextsEntity> texts, int? number)
+        public async Task<string> TextsToJson(List<TextsEntity> texts, int? number)
         {
             var dictionary = new Dictionary<string, string>();
             try
@@ -3240,7 +2084,7 @@ namespace BetService.Classes.DbInsert
                 return null;
             }
         }
-        public string TextsToJson(List<TextEntity> texts)
+        public async Task<string> TextsToJson(List<TextEntity> texts)
         {
             var dictionary = new Dictionary<string, string>();
             try
@@ -3258,19 +2102,21 @@ namespace BetService.Classes.DbInsert
             }
         }
 
-        public void UpdateAliveMatches(List<string> matches)
+        public async 
+        Task
+UpdateAliveMatches(List<string> matches)
         {
             try
             {
-                if (matches.Count>0)
+                if (matches.Count > 0)
                 {
                     string csv = String.Join(",", matches.Select(x => x.ToString()).ToArray());
-                    string query = "UPDATE dy_alive_matches SET matches_on = '" + csv + "', last_update = now() WHERE id = 1;  UPDATE dy_match_all_data SET feed_type = 2 WHERE match_id in ("+csv+")";
+                    string query = "UPDATE dy_alive_matches SET matches_on = '" + csv + "', last_update = now() WHERE id = 1;  UPDATE dy_match_all_data SET feed_type = 2 WHERE match_id in (" + csv + ")";
                     NpgsqlCommand objCommand = new NpgsqlCommand(query);
                     objCommand.CommandText = query;
-                    insertNonProc(objCommand);
+                    await insertNonProc(objCommand);
                 }
-               
+
             }
             catch (Exception ex)
             {
@@ -3278,7 +2124,7 @@ namespace BetService.Classes.DbInsert
             }
         }
 
-        public bool LiveOddsMoveToArch(DateTime lastUpdate)
+        public async Task<bool> LiveOddsMoveToArch(DateTime lastUpdate)
         {
             string rollbackArch = "BEGIN;" +
                                   "SAVEPOINT HERE;" +
@@ -3298,7 +2144,7 @@ namespace BetService.Classes.DbInsert
 
             try
             {
-                insertNonProc(objCommand);
+                await insertNonProc(objCommand);
             }
             catch (Exception ex)
             {
@@ -3307,7 +2153,7 @@ namespace BetService.Classes.DbInsert
                 objCommand.CommandText += rollbackArchOperation;
                 try
                 {
-                    insertNonProc(objCommand);
+                    await insertNonProc(objCommand);
                 }
                 catch (Exception exc)
                 {
@@ -3320,7 +2166,7 @@ namespace BetService.Classes.DbInsert
             objCommand.CommandText += rollbackEnd;
             try
             {
-                insertNonProc(objCommand);
+                await insertNonProc(objCommand);
             }
             catch (Exception e)
             {
@@ -3336,7 +2182,7 @@ namespace BetService.Classes.DbInsert
         /// <param name="Table"></param>
         /// <param name="Transaction"></param>
         /// <returns>Globals.Rollback</returns>
-        public Globals.Rollback SetRollback(long RowId, Globals.Tables Table, Globals.TransactionTypes Transaction)
+        public async Task<Globals.Rollback> SetRollback(long RowId, Globals.Tables Table, Globals.TransactionTypes Transaction)
         {
             var rollbackObject = new Globals.Rollback();
             try
@@ -3352,34 +2198,8 @@ namespace BetService.Classes.DbInsert
             }
             return rollbackObject;
         }
-        public void RollBack(List<Globals.Rollback> rolls)
-        {
-            // Get call stack
-            StackTrace stackTrace = new StackTrace();
 
-            // Get calling method name
-            Console.WriteLine(stackTrace.GetFrame(1).GetMethod().Name);
-            try
-            {
-                foreach (var roll in rolls)
-                {
-                    var adObjCommand = new NpgsqlCommand(Globals.DB_Functions.Rollback.ToDescription());
-                    adObjCommand.Parameters.AddWithValue("table_id", roll.TableId);
-                    adObjCommand.Parameters.AddWithValue("row_id", roll.RowId);
-                    adObjCommand.Parameters.AddWithValue("tran_type", roll.TransactionType);
-                    update(adObjCommand);
-                }
-            }
-            catch (Exception ex)
-            {
-                Logg.logger.Fatal(ex.Message);
-            }
-            finally
-            {
-
-            }
-        }
-        public NpgsqlConnection connection()
+        public async Task<NpgsqlConnection> connection()
         {
             var con = new NpgsqlConnection();
             try
@@ -3412,7 +2232,7 @@ namespace BetService.Classes.DbInsert
             }
 
         }
-        public long insert(NpgsqlCommand objCommand)
+        public async Task<long> insert(NpgsqlCommand objCommand)
         {
             long errorNumber = -1;
             long result = -20;
@@ -3421,10 +2241,10 @@ namespace BetService.Classes.DbInsert
             try
             {
 
-                objCommand.Connection = connection();
+                objCommand.Connection = await connection();
                 //objCommand.CommandTimeout = 5;
-                objCommand.Connection.Open();
-                one = objCommand.ExecuteScalar();
+                if (objCommand.Connection != null) await objCommand.Connection.OpenAsync();
+                one = await objCommand.ExecuteScalarAsync();
                 bool successfullyParsed = long.TryParse(one.ToString(), out result);
                 long val = 0;
                 if (successfullyParsed)
@@ -3445,9 +2265,6 @@ namespace BetService.Classes.DbInsert
                         }
                     }
                 }
-                else
-                {
-                }
 
                 return -1;
             }
@@ -3462,10 +2279,10 @@ namespace BetService.Classes.DbInsert
             }
             finally
             {
-                objCommand.Connection.Close();
+                if (objCommand.Connection != null) objCommand.Connection.Close();
             }
         }
-        public long insertNonProc(NpgsqlCommand objCommand)
+        public async Task<long> insertNonProc(NpgsqlCommand objCommand)
         {
 
             long errorNumber = -1;
@@ -3473,10 +2290,10 @@ namespace BetService.Classes.DbInsert
             try
             {
 
-                objCommand.Connection = connection();
-                objCommand.Connection.Open();
+                objCommand.Connection = await connection();
+                await objCommand.Connection.OpenAsync();
                 objCommand.CommandTimeout = 100;
-                var result = objCommand.ExecuteNonQuery();
+                var result = await objCommand.ExecuteNonQueryAsync();
                 long val = 0;
                 if (result != null && long.TryParse(result.ToString(), out val))
                 {
@@ -3509,18 +2326,18 @@ namespace BetService.Classes.DbInsert
                 objCommand.Connection.Close();
             }
         }
-        public long update(NpgsqlCommand objCommand)
+        public async Task<long> update(NpgsqlCommand objCommand)
         {
 
             objCommand.CommandType = CommandType.StoredProcedure;
             try
             {
-                objCommand.Connection = connection();
-                objCommand.Connection.Open();
+                objCommand.Connection = await connection();
+                if (objCommand.Connection != null) objCommand.Connection.OpenAsync();
 #if DEBUG
                 WriteFullLine(objCommand.CommandText);
 #endif
-                var result = objCommand.ExecuteScalar();
+                var result = await objCommand.ExecuteScalarAsync();
                 long val = 0;
                 if (long.TryParse(result.ToString(), out val))
                 {
@@ -3535,28 +2352,27 @@ namespace BetService.Classes.DbInsert
             }
             finally
             {
-                objCommand.Connection.Close();
+                if (objCommand.Connection != null) objCommand.Connection.Close();
             }
         }
 
-        public DataSet selectReader(NpgsqlCommand objCommand)
+        public async Task<DataSet> selectReader(NpgsqlCommand objCommand)
         {
             var lbetclear = new LcooBetClear();
             var ldata = new List<LcooBetClear>();
-            objCommand.Connection = connection();
-            objCommand.Connection.Open();
+            objCommand.Connection = await connection();
+            objCommand.Connection.OpenAsync();
             objCommand.CommandType = CommandType.StoredProcedure;
             var ds = new DataSet();
             try
             {
                 ds.Tables.Add();
-                NpgsqlDataReader dr = objCommand.ExecuteReader();
+                NpgsqlDataReader dr = await objCommand.ExecuteReaderAsync() as NpgsqlDataReader;
                 while (dr.Read())
                 {
-                  
-                        //lbetclear.id = long.TryParse(dr[0].ToString(),);
-                   
-                    
+
+                    //lbetclear.id = long.TryParse(dr[0].ToString(),);
+
                     lbetclear.match_id = long.Parse(dr[1].ToString());
                     lbetclear.odd_type_id = long.Parse(dr[2].ToString());
                     lbetclear.odd_type_name = dr[3].ToString();
@@ -3589,43 +2405,47 @@ namespace BetService.Classes.DbInsert
             }
             finally
             {
-                objCommand.Connection.Close();
+                if (objCommand.Connection != null) objCommand.Connection.Close();
             }
         }
-        public DataSet select(NpgsqlCommand objCommand)
+        public async Task<DataSet> select(NpgsqlCommand objCommand)
         {
-            objCommand.Connection = connection();
-            objCommand.Connection.Open();
-            objCommand.CommandType = CommandType.StoredProcedure;
-            var ds = new DataSet();
-            try
+            objCommand.Connection = await connection();
+            if (objCommand.Connection != null)
             {
-                NpgsqlDataAdapter da = new NpgsqlDataAdapter(objCommand);
-                da.Fill(ds);
+                await objCommand.Connection.OpenAsync();
+                objCommand.CommandType = CommandType.StoredProcedure;
+                var ds = new DataSet();
+                try
+                {
+                    NpgsqlDataAdapter da = new NpgsqlDataAdapter(objCommand);
+                    da.Fill(ds);
 #if DEBUG
-                WriteFullLine(objCommand.CommandText);
+                    WriteFullLine(objCommand.CommandText);
 #endif
-                return ds;
+                    return ds;
+                }
+                catch (Exception ex)
+                {
+                    Logg.logger.Fatal(ex.Message);
+                    return null;
+                }
+                finally
+                {
+                    objCommand.Connection.Close();
+                }
             }
-            catch (Exception ex)
-            {
-                Logg.logger.Fatal(ex.Message);
-                return null;
-            }
-            finally
-            {
-                objCommand.Connection.Close();
-            }
+            return null;
         }
-        public long selectOne(NpgsqlCommand objCommand)
+        public async Task<long> selectOne(NpgsqlCommand objCommand)
         {
 
             objCommand.CommandType = CommandType.Text;
             try
             {
-                objCommand.Connection = connection();
-                objCommand.Connection.Open();
-                var res = objCommand.ExecuteReader(CommandBehavior.SingleResult);
+                objCommand.Connection = await connection();
+                if (objCommand.Connection != null) await objCommand.Connection.OpenAsync();
+                var res = await objCommand.ExecuteReaderAsync(CommandBehavior.SingleResult);
                 if (res.Read())
                 {
 #if DEBUG
@@ -3648,11 +2468,11 @@ namespace BetService.Classes.DbInsert
                 objCommand.Connection.Close();
             }
         }
-        public void TraceMessage(string message, [CallerMemberName] string memberName = "", [CallerFilePath] string sourceFilePath = "", [CallerLineNumber] int sourceLineNumber = 0)
+        public async void TraceMessage(string message, [CallerMemberName] string memberName = "", [CallerFilePath] string sourceFilePath = "", [CallerLineNumber] int sourceLineNumber = 0)
         {
             Logg.logger.Fatal(message + "  |||  " + memberName + "  |||  " + sourceFilePath + "  |||  " + sourceLineNumber);
         }
-        public void SendToCoupon(BetClearQueueElement bet)
+        public async void SendToCoupon(BetClearQueueElement bet)
         {
             try
             {
@@ -3667,27 +2487,14 @@ namespace BetService.Classes.DbInsert
                 Logg.logger.Fatal(ex.Message);
             }
         }
-        public static void WriteFullLine(string value)
+        public static async void WriteFullLine(string value)
         {
-            //
-            // This method writes an entire line to the console with the string.
-            //
-            //Console.BackgroundColor = ConsoleColor.Green;
+
             Console.ForegroundColor = ConsoleColor.DarkGreen;
-            Console.WriteLine(value.PadRight(Console.WindowWidth - 1)); // <-- see note
-                                                                        //
-                                                                        // Reset the color.
-                                                                        //
+            Console.WriteLine(value.PadRight(Console.WindowWidth - 1));
             Console.ResetColor();
         }
 
-        public void Dispose()
-        {
-            throw new NotImplementedException();
-        }
     }
 
-    public class element
-    {
-    }
 }

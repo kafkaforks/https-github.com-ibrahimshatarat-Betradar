@@ -20,7 +20,7 @@ namespace BetService
         public static Timer timerFinalise = null;
         public static Timer timerRedisChannel = null;
         private Timer AliveTimer = null;
-        Thread m_thread = null;
+       // Thread m_thread = null;
 
 
         public CouponFinalize()
@@ -166,68 +166,6 @@ namespace BetService
 
         }
 
-        private void finalize()
-        {
-            var coupons = new Coupons();
-            try
-            {
-                Stopwatch stopwatch = Stopwatch.StartNew();
-                var count_processed = 0;
-                SharedLibrary.Logg.logger.Fatal(BetClearingQueue.StringQueue.Count);
-                if (BetClearingQueue.StringQueue.Count > 0)
-                {
-                    var db_list = coupons.GetDBQueue();
-                    var count = db_list.Count;
-                    while (BetClearingQueue.StringQueue.Count > 0)
-                    {
-                        var element_string = BetClearingQueue.StringQueue.Dequeue();
-                        var tagged = db_list.Select((item, i) => new { Item = item, Index = (int?)i });
-                        int? index = (from pair in tagged
-                                      where pair.Item == element_string
-                                      select pair.Index).FirstOrDefault();
-
-                        if (index != null && index > 0)
-                        {
-                            db_list.RemoveAt((int)index);
-#if DEBUG
-                            Console.WriteLine(element_string);
-#endif
-                            Task.Factory.StartNew(() =>
-                            {
-                                var coupon = new Coupons();
-                                coupon.MatchFinalize(element_string);
-                            });
-                        }
-#if DEBUG
-
-                        count_processed += 1;
-                        Console.WriteLine(":::::::::::::::::::::::::::::::::::::: " + count_processed + " ::::::::::::::::::::::::::::::::::::::");
-#endif
-                    }
-                    System.Threading.Thread.Sleep(500);
-                    stopwatch.Stop();
-#if DEBUG
-                    Logg.logger.Fatal("000000000000 THIS IS :   " + stopwatch.ElapsedMilliseconds + "  ::::  COUNT: " +
-                                      count.ToString());
-#endif
-                }
-                else
-                {
-#if DEBUG
-                    Console.WriteLine("Queue is empty now !!!");
-#endif
-                }
-            }
-            catch (Exception ex)
-            {
-                //this.EventLog.WriteEntry(ex.Message, EventLogEntryType.Information);
-                using (EventLog eventLog = new EventLog("Application"))
-                {
-                    eventLog.Source = "Application";
-                    eventLog.WriteEntry("Bet Error  " + ex.Message, EventLogEntryType.Information, 101, 1);
-                }
-            }
-        }
 
         [Conditional("DEBUG_SERVICE")]
         private static void DebugMode()

@@ -5,6 +5,7 @@ using System.Data;
 using System.IO;
 using System.Messaging;
 using System.Text;
+using System.Threading.Tasks;
 using System.Xml;
 using System.Xml.Serialization;
 using NetMQ.Sockets;
@@ -17,10 +18,10 @@ namespace SharedLibrary
     {
         public static volatile bool timerOnOff = false;
         public static volatile bool redisTimerOnOff = false;
-        public static DataSet MerchantsDs;
+        public static Task<DataSet> MerchantsDs;
         public static string BetQueueName = ".\\private$\\BetQueue";
-        public static Queue<string> LiveOddsQueue; 
-       
+        public static Queue<string> LiveOddsQueue;
+        public static NpgsqlConnection r_con;
         public enum BetFeedTypes
         {
             [Description("PreMatch")]
@@ -594,22 +595,7 @@ namespace SharedLibrary
         {
             public string[] messages { get; set; }
         }
-        public partial class ReturnQueueLong
-        {
-            public ReturnQueueLong()
-            {
-
-            }
-
-            public ReturnQueueLong(Queue<Rollback> iQueue, long iId)
-            {
-                queue = iQueue;
-                id = iId;
-            }
-
-            public Queue<Rollback> queue { get; set; }
-            public long id { get; set; }
-        }
+        
         public partial class enum_grouping
         {
             public int master { get; set; }

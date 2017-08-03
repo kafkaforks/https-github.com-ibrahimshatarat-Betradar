@@ -21,22 +21,17 @@ namespace Betradar.Classes.Socket
             m_live_odds.OnAlive += AliveHandler;
         }
 
-        protected virtual void AliveHandler(object sender, AliveEventArgs e)
+        protected virtual async void AliveHandler(object sender, AliveEventArgs e)
         {
             var common = new Common();
-            //ThreadStart action = () => {
-            //                               common.WorkAlive(e);
-            //};
-            //var exe = new ThreadInterruptedException();
-            //Thread threadAlive = new Thread(action) { IsBackground = true };
-            //threadAlive.Start();
+           
             try
             {
                 Console.WriteLine(":::::::::::::::::::::: Header Count: {0} / Status: {1} ::::::::::::::::::::::", e.Alive.EventHeaders.Count, e.Alive.Status);
                 var matches = new List<string>();
                 foreach (var head in e.Alive.EventHeaders)
                 {
-                    common.insertMatchDataAllDetails((MatchHeader)head, null);
+                    await common.insertMatchDataAllDetails((MatchHeader)head, null);
                     if (head.Status != EventStatus.UNDEFINED && head.Status != EventStatus.NOT_STARTED && head.Status != EventStatus.PAUSED && head.Status != EventStatus.ENDED && head.Status != EventStatus.ABANDONED && head.Status != EventStatus.CANCELED)
                     {
                         if (head.Active)
@@ -46,7 +41,7 @@ namespace Betradar.Classes.Socket
                     }
                 }
 
-                common.UpdateAliveMatches(matches);
+                await common.UpdateAliveMatches(matches);
             }
             catch (Exception ex)
             {

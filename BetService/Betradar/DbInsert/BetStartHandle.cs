@@ -15,43 +15,57 @@ namespace BetService.Classes.DbInsert
 {
     public class BetStartHandle : Core
     {
-        public BetStartHandle(BetStartEventArgs args)
+        public async Task BetStartHandler(BetStartEventArgs args)
         {
             try
             {
                 var common = new Common();
                 var merch = config.AppSettings.Get("ChannelsSecretPrefixLast_real");
-                var channel = CreateLiveOddsChannelName(args.BetStart.EventHeader.Id, "global", merch);
+                var channel = await CreateLiveOddsChannelName(args.BetStart.EventHeader.Id, "global", merch);
                 merch = config.AppSettings.Get("ChannelsSecretPrefixLast_real2");
-                var channel2 = CreateLiveOddsChannelName(args.BetStart.EventHeader.Id, "global", merch);
+                var channel2 = await CreateLiveOddsChannelName(args.BetStart.EventHeader.Id, "global", merch);
                 merch = config.AppSettings.Get("ChannelsSecretPrefixLast_real3");
-                var channel3 = CreateLiveOddsChannelName(args.BetStart.EventHeader.Id, "global", merch);
+                var channel3 = await CreateLiveOddsChannelName(args.BetStart.EventHeader.Id, "global", merch);
 
-                Task.Factory.StartNew(
-                              () =>
-                              {
-                                  SendToHybridgeSocketMessages(args.BetStart.Status.ToString(), channel, "BETSTART");
-                                  SendToHybridgeSocketMessages(args.BetStart.Status.ToString(), channel2, "BETSTART");
-                                  SendToHybridgeSocketMessages(args.BetStart.Status.ToString(), channel3, "BETSTART");
-                              }
-                              , CancellationToken.None, TaskCreationOptions.DenyChildAttach, TaskScheduler.Default);
+                await SendToHybridgeSocketMessages(args.BetStart.Status.ToString(), channel, "BETSTART");
+                await SendToHybridgeSocketMessages(args.BetStart.Status.ToString(), channel2, "BETSTART");
+                await SendToHybridgeSocketMessages(args.BetStart.Status.ToString(), channel3, "BETSTART");
 
 
+                // benchamrk test
+                //
+                //
+                //
+                //
+                await SendToHybridgeSocketMessages(args.BetStart.Status.ToString(), channel, "BETSTART");
+                await SendToHybridgeSocketMessages(args.BetStart.Status.ToString(), channel2, "BETSTART");
+                await SendToHybridgeSocketMessages(args.BetStart.Status.ToString(), channel3, "BETSTART"); await SendToHybridgeSocketMessages(args.BetStart.Status.ToString(), channel, "BETSTART");
+                await SendToHybridgeSocketMessages(args.BetStart.Status.ToString(), channel2, "BETSTART");
+                await SendToHybridgeSocketMessages(args.BetStart.Status.ToString(), channel3, "BETSTART"); await SendToHybridgeSocketMessages(args.BetStart.Status.ToString(), channel, "BETSTART");
+                await SendToHybridgeSocketMessages(args.BetStart.Status.ToString(), channel2, "BETSTART");
+                await SendToHybridgeSocketMessages(args.BetStart.Status.ToString(), channel3, "BETSTART"); await SendToHybridgeSocketMessages(args.BetStart.Status.ToString(), channel, "BETSTART");
+                await SendToHybridgeSocketMessages(args.BetStart.Status.ToString(), channel2, "BETSTART");
+                await SendToHybridgeSocketMessages(args.BetStart.Status.ToString(), channel3, "BETSTART"); await SendToHybridgeSocketMessages(args.BetStart.Status.ToString(), channel, "BETSTART");
+                await SendToHybridgeSocketMessages(args.BetStart.Status.ToString(), channel2, "BETSTART");
+                await SendToHybridgeSocketMessages(args.BetStart.Status.ToString(), channel3, "BETSTART"); await SendToHybridgeSocketMessages(args.BetStart.Status.ToString(), channel, "BETSTART");
+                await SendToHybridgeSocketMessages(args.BetStart.Status.ToString(), channel2, "BETSTART");
+                await SendToHybridgeSocketMessages(args.BetStart.Status.ToString(), channel3, "BETSTART"); await SendToHybridgeSocketMessages(args.BetStart.Status.ToString(), channel, "BETSTART");
+                await SendToHybridgeSocketMessages(args.BetStart.Status.ToString(), channel2, "BETSTART");
+                await SendToHybridgeSocketMessages(args.BetStart.Status.ToString(), channel3, "BETSTART"); await SendToHybridgeSocketMessages(args.BetStart.Status.ToString(), channel, "BETSTART");
+                await SendToHybridgeSocketMessages(args.BetStart.Status.ToString(), channel2, "BETSTART");
+                await SendToHybridgeSocketMessages(args.BetStart.Status.ToString(), channel3, "BETSTART"); await SendToHybridgeSocketMessages(args.BetStart.Status.ToString(), channel, "BETSTART");
+                await SendToHybridgeSocketMessages(args.BetStart.Status.ToString(), channel2, "BETSTART");
+                await SendToHybridgeSocketMessages(args.BetStart.Status.ToString(), channel3, "BETSTART"); await SendToHybridgeSocketMessages(args.BetStart.Status.ToString(), channel, "BETSTART");
+                await SendToHybridgeSocketMessages(args.BetStart.Status.ToString(), channel2, "BETSTART");
+                await SendToHybridgeSocketMessages(args.BetStart.Status.ToString(), channel3, "BETSTART"); await SendToHybridgeSocketMessages(args.BetStart.Status.ToString(), channel, "BETSTART");
+                await SendToHybridgeSocketMessages(args.BetStart.Status.ToString(), channel2, "BETSTART");
+                await SendToHybridgeSocketMessages(args.BetStart.Status.ToString(), channel3, "BETSTART"); await SendToHybridgeSocketMessages(args.BetStart.Status.ToString(), channel, "BETSTART");
+                await SendToHybridgeSocketMessages(args.BetStart.Status.ToString(), channel2, "BETSTART");
+                await SendToHybridgeSocketMessages(args.BetStart.Status.ToString(), channel3, "BETSTART");
 
 
-                //Task.Factory.StartNew(() =>
-                //{
-                //    SendToHybridgeSocketMessages(args.BetStart.Status.ToString(), channel);
-                //    SendToHybridgeSocketMessages(args.BetStart.Status.ToString(), channel2);
-                //});
-
-
-
-                common.insertMatchDataAllDetails((MatchHeader)args.BetStart.EventHeader, null);
-
-
-                //Task.Factory.StartNew(() => common.insertMatchDataAllDetails((MatchHeader)args.BetStart.EventHeader, null));
-
+                await common.insertMatchDataAllDetails((MatchHeader)args.BetStart.EventHeader, null);
+                
             }
             catch (Exception ex)
             {

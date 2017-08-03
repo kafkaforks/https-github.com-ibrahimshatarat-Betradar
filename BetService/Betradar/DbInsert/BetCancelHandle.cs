@@ -11,35 +11,28 @@ using Sportradar.SDK.FeedProviders.LiveOdds.LiveOdds;
 
 namespace BetService.Classes.DbInsert
 {
-    
+
     public class BetCancelHandle : Core
     {
 
-        public BetCancelHandle(BetCancelEventArgs args)
+        public async Task BetCancelHandler(BetCancelEventArgs args)
         {
-            RunTask(args);
+            await RunTask(args);
         }
 
-        private void RunTask(BetCancelEventArgs args)
+        private async Task RunTask(BetCancelEventArgs args)
         {
-            
+
             var common = new Common();
             var queue = new Queue<Globals.Rollback>();
             try
             {
-                 common.insertMatchDataAllDetails((MatchHeader)args.BetCancel.EventHeader, null);
-                Task.Factory.StartNew(() => common.insertMatchDataAllDetails((MatchHeader)args.BetCancel.EventHeader, null));
+                await common.insertMatchDataAllDetails((MatchHeader)args.BetCancel.EventHeader, null);
+                await common.insertMatchDataAllDetails((MatchHeader)args.BetCancel.EventHeader, null);
                 if (args.BetCancel.Odds != null && args.BetCancel.Odds.Count > 0)
                 {
                     // Task.Factory.StartNew(() => insertOdds(args));
-
-                    Task.Factory.StartNew(
-                       () =>
-                       {
-                           insertOdds(args);
-                       }
-                       , CancellationToken.None, TaskCreationOptions.DenyChildAttach, TaskScheduler.Default);
-
+                    await insertOdds(args);
                 }
             }
             catch (Exception ex)
@@ -48,17 +41,19 @@ namespace BetService.Classes.DbInsert
             }
             try
             {
-                Task.Factory.StartNew(() => common.insertMatchDataAllDetails((MatchHeader)args.BetCancel.EventHeader, null));
+                await common.insertMatchDataAllDetails((MatchHeader)args.BetCancel.EventHeader, null);
             }
             catch (Exception ex)
             {
                 Logg.logger.Fatal(ex.Message);
             }
-            
+
 
         }
 
-        private void insertOdds(BetCancelEventArgs args)
+        private async
+        Task
+insertOdds(BetCancelEventArgs args)
         {
             var common = new Common();
             try
@@ -71,10 +66,10 @@ namespace BetService.Classes.DbInsert
                     {
                         active = Odd.Active;
                     }
-                   
-                    common.insertLiveOdds(Odd, null, active, null, null,
-                            "", null,  "", null,
-                            "", null, entity.EventHeader.Id,  0, entity.Status.ToString(), entity.Timestamp.ToString());
+
+                    await common.insertLiveOdds(Odd, null, active, null, null,
+                        "", null, "", null,
+                        "", null, entity.EventHeader.Id, 0, entity.Status.ToString(), entity.Timestamp.ToString());
 
                     foreach (var field in Odd.OddsFields)
                     {
@@ -94,11 +89,10 @@ namespace BetService.Classes.DbInsert
                         {
                             // sendToRpc(EncodeUnifiedBetClearQueueElementLive(oddUnique));
                             // Task.Factory.StartNew(() => sendToRpc(EncodeUnifiedBetClearQueueElementLive(oddUnique)));
-                            Task.Factory.StartNew(() =>
-                            {
-                                var coupon = new Coupons();
-                                coupon.BetCancelDB(EncodeUnifiedBetClearQueueElementLive(oddUnique));
-                            });
+
+                            var coupon = new Coupons();
+                            await coupon.BetCancelDB(await EncodeUnifiedBetClearQueueElementLive(oddUnique));
+
                         }
                         catch (Exception ex)
                         {

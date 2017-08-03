@@ -307,8 +307,8 @@ namespace SharedLibrary
                 return null;
             }
         }
-       
-        public void SendToHybridgeSocket(long match_id, long odd_id, int? odd_eventoddsfield_typeid, string odd_name, string odd_special_odds_value, EventOddsField odd_in, string channel, string msg_event)
+
+        public async Task SendToHybridgeSocket(long match_id, long odd_id, int? odd_eventoddsfield_typeid, string odd_name, string odd_special_odds_value, EventOddsField odd_in, Task<string> channel, string msg_event)
         {
             var oddUnique = new BetClearQueueElementLive();
 
@@ -324,7 +324,7 @@ namespace SharedLibrary
                 {
                     oddUnique.TypeId = 0;
                 }
-                
+
                 var oid = EncodeUnifiedBetClearQueueElementLive(oddUnique);
                 var odd = new SocketOdd();
                 odd.odd_eventoddsfield_active = odd_in.Active;
@@ -338,11 +338,11 @@ namespace SharedLibrary
                     //Task.Factory.StartNew(()=>RedisQueue.Send_Redis_Channel(channel,
                     // "[{\"mid_otid_ocid_sid\": \"" + oid + "\"}," + new JavaScriptSerializer().Serialize(odd) + "]",
                     // "home@HYBRIDGE", "12345", "Odd", oid, msg_event));
-                    if (oid!=null && odd != null && msg_event != null)
+                    if (oid != null && odd != null && msg_event != null)
                     {
                         var ZMQ = new ZMQClient();
-                      Task.Factory.StartNew(()=> ZMQ.SendOut(channel, "[{\"mid_otid_ocid_sid\": \"" + oid + "\"}," + new JavaScriptSerializer().Serialize(odd) + "]", "home@HYBRIDGE", "12345", "Odd", oid, msg_event));
-                        ZMQ = null;
+                         await ZMQ.SendOut(await channel, "[{\"mid_otid_ocid_sid\": \"" + oid + "\"}," + new JavaScriptSerializer().Serialize(odd) + "]", "home@HYBRIDGE", "12345", "Odd", oid.Result, msg_event);
+                        //ZMQ = null;
                     }
 
 
@@ -366,7 +366,7 @@ namespace SharedLibrary
             }
         }
 
-        public void SendToHybridgeSocketNewOdd(long match_id, long odd_id, int? odd_eventoddsfield_typeid, string odd_name, string odd_special_odds_value, EventOddsField odd_in, string channel, string odd_event)
+        public async void SendToHybridgeSocketNewOdd(long match_id, long odd_id, int? odd_eventoddsfield_typeid, string odd_name, string odd_special_odds_value, EventOddsField odd_in, string channel, string odd_event)
         {
             var oddUnique = new BetClearQueueElementLive();
             try
@@ -399,10 +399,10 @@ namespace SharedLibrary
                     if (oid != null && odd != null && odd_event != null)
                     {
                         var ZMQ = new ZMQClient();
-                        Task.Factory.StartNew(() => ZMQ.SendOut(channel,
+                        await ZMQ.SendOut(channel,
                             "[{\"mid_otid_ocid_sid\": \"" + oid + "\"}," + new JavaScriptSerializer().Serialize(odd) +
-                            "]", "home@HYBRIDGE", "12345", "Odd_New", oid, odd_event));
-                        ZMQ = null;
+                            "]", "home@HYBRIDGE", "12345", "Odd_New", oid.Result, odd_event);
+                        // ZMQ = null;
                     }
                 }
 
@@ -413,17 +413,16 @@ namespace SharedLibrary
             }
         }
 
-        public void SendToHybridgeSocketMessages(string message, string channel, string odd_event)
+        public async Task SendToHybridgeSocketMessages(string message, string channel, string odd_event)
         {
             try
             {
                 //TODO REDISSEND
                 if (channel != null && message != null)
                 {
-                    var ZMQ = new ZMQClient();
-                    Task.Factory.StartNew(() => ZMQ.SendOut(channel, "[{\"message\": \"" + message + "\"}]]", "home@HYBRIDGE",
-                        "12345", "Message", "", odd_event));
-                    ZMQ = null;
+                    ZMQClient zmq = new ZMQClient();
+                    await zmq.SendOut(channel, "[{\"message\": \"" + message + "\"}]]", "home@HYBRIDGE", "12345", "Message", null, odd_event);
+                    // zmq = null;
                 }
 
             }
@@ -433,7 +432,7 @@ namespace SharedLibrary
             }
         }
 
-        public string EncodeUnifiedBetClearQueueElementLive(BetClearQueueElementLive UnifiedBetObject)
+        public async Task<string> EncodeUnifiedBetClearQueueElementLive(BetClearQueueElementLive UnifiedBetObject)
         {
             try
             {
@@ -473,52 +472,24 @@ namespace SharedLibrary
             }
         }
 
-        public BetClearQueueElementLive DecodeUnifiedBetClearQueueElementLive(string UnifiedBetCode)
+        public async Task<string> CreateLiveOddsChannelName(long match_id, string language, string last_prefix)
         {
             try
             {
-                var array = UnifiedBetCode.Split('|');
-                var element = new BetClearQueueElementLive();
-                for (int i = 0; i < array.Length; i++)
+                using (SHA1Managed sha1 = new SHA1Managed())
                 {
-                    switch (i)
-                    {
-                        case 0:
-                            if (array[i] != "0000")
-                            {
-                                long number;
-                                bool result = Int64.TryParse(array[i], out number);
-                                if (result)
-                                {
-                                    element.MatchId = number;
-                                }
-                            }
-                            break;
-                        case 1:
-                            if (array[i] != "0000")
-                            {
-                                long number;
-                                bool result = Int64.TryParse(array[i], out number);
-                                if (result)
-                                {
-                                    element.OddId = number;
-                                }
-                            }
-                            break;
-                        case 2:
-                            if (array[i] != "0000")
-                            {
-                                int number;
-                                bool result = Int32.TryParse(array[i], out number);
-                                if (result)
-                                {
-                                    element.TypeId = number;
-                                }
-                            }
-                            break;
-                    }
+#if DEBUG
+                    var prefix = config.AppSettings.Get("ChannelsSecretPrefix_test");
+                    // var last_prefix = config.AppSettings.Get("ChannelsSecretPrefixLast_test");
+                    var secret = config.AppSettings.Get("ChannelsSecretKey_test");
+#else
+                    var prefix = config.AppSettings.Get("ChannelsSecretPrefix_real");
+                    // var last_prefix = config.AppSettings.Get("ChannelsSecretPrefixLast_real");
+                    var secret = config.AppSettings.Get("ChannelsSecretKey_real");
+#endif
+                    byte[] bytes = System.Text.Encoding.UTF8.GetBytes(secret + "betradar_live_odds_" + language + "_" + match_id.ToString());
+                    return prefix + await ToHex(sha1.ComputeHash(bytes), false) + last_prefix; ;
                 }
-                return element;
             }
             catch (Exception ex)
             {
@@ -527,35 +498,8 @@ namespace SharedLibrary
             }
         }
 
-        public string CreateLiveOddsChannelName(long match_id, string language, string last_prefix)
-        {
-            try
-            {
-                using (SHA1Managed sha1 = new SHA1Managed())
-                {
-#if DEBUG
-                    var prefix = config.AppSettings.Get("ChannelsSecretPrefix_test");
-                   // var last_prefix = config.AppSettings.Get("ChannelsSecretPrefixLast_test");
-                    var secret = config.AppSettings.Get("ChannelsSecretKey_test");
-#else
-                    var prefix = config.AppSettings.Get("ChannelsSecretPrefix_real");
-                    // var last_prefix = config.AppSettings.Get("ChannelsSecretPrefixLast_real");
-                    var secret = config.AppSettings.Get("ChannelsSecretKey_real");
-#endif
-                    byte[] bytes = System.Text.Encoding.UTF8.GetBytes(secret + "betradar_live_odds_" + language + "_" + match_id.ToString());
-                    return prefix + ToHex(sha1.ComputeHash(bytes), false) + last_prefix;
-                }
 
-            }
-            catch (Exception ex)
-            {
-                return null;
-                throw;
-            }
-        }
-
-
-        public static string ToHex(byte[] bytes, bool upperCase)
+        public static async Task<string> ToHex(byte[] bytes, bool upperCase)
         {
             StringBuilder result = new StringBuilder(bytes.Length * 2);
 

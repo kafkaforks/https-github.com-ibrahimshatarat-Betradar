@@ -15,7 +15,7 @@ namespace SharedLibrary
 {
     public class Coupons : Core
     {
-       
+
         public void CalculatedCouponSystemsSelected(string json)
         {
             try
@@ -33,17 +33,17 @@ namespace SharedLibrary
             }
         }
 
-        public string CalculateSystemCombination(long p_coupon_id, int p_loop_length)
+        public async Task<string> CalculateSystemCombination(long p_coupon_id, int p_loop_length)
         {
 
-            var command = new NpgsqlCommand(Globals.DB_Functions.CpCalculateSystemCombination.ToDescription());
+            var command = new NpgsqlCommand(await Globals.DB_Functions.CpCalculateSystemCombination.ToDescription());
             try
             {
                 command.Parameters.AddWithValue("p_coupon_id", NpgsqlDbType.Bigint, p_coupon_id);
                 command.Parameters.AddWithValue("p_loop_length", NpgsqlDbType.Integer, p_loop_length);
 
                 var result = "-1";
-                var ds = select(command);
+                var ds = await select(command);
                 var value = ds.Tables[0].Rows[0][0];
                 if (ds.Tables.Count > 0)
                 {
@@ -62,12 +62,12 @@ namespace SharedLibrary
 
         }
 
-        public DataSet GetUnfinalizedCouponsOdds()
+        public async Task<DataSet> GetUnfinalizedCouponsOdds()
         {
             try
             {
-                var command = new NpgsqlCommand(Globals.DB_Functions.SelectCouponOddsTemp.ToDescription());
-                var data = select(command);
+                var command = new NpgsqlCommand(await Globals.DB_Functions.SelectCouponOddsTemp.ToDescription());
+                var data = await select(command);
                 return data;
             }
             catch (Exception ex)
@@ -77,12 +77,12 @@ namespace SharedLibrary
             }
         }
 
-        private DataSet GetUnfinalizedCouponsOddsTest()
+        private async Task<DataSet> GetUnfinalizedCouponsOddsTest()
         {
             try
             {
                 var command = new NpgsqlCommand("select_coupon_odds_temp_test");
-                var data = select(command);
+                var data = await select(command);
                 return data;
             }
             catch (Exception ex)
@@ -92,12 +92,12 @@ namespace SharedLibrary
             }
         }
 
-        public List<string> GetDBQueueTest()
+        public async Task<List<string>> GetDBQueueTest()
         {
             var db_data = new List<string>();
             try
             {
-                var ds = GetUnfinalizedCouponsOddsTest();
+                var ds = await GetUnfinalizedCouponsOddsTest();
                 if (ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
                 {
 
@@ -115,12 +115,12 @@ namespace SharedLibrary
             }
         }
 
-        public List<string> GetDBQueue()
+        public async Task<List<string>> GetDBQueue()
         {
             var db_data = new List<string>();
             try
             {
-                var ds = GetUnfinalizedCouponsOdds();
+                var ds = await GetUnfinalizedCouponsOdds();
                 if (ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
                 {
                     for (int i = 0; i < ds.Tables[0].Rows.Count; i++)
@@ -199,13 +199,13 @@ namespace SharedLibrary
 
         }
 
-        public bool UpdateCouponSendApi(long coupon_id)
+        public async Task<bool> UpdateCouponSendApi(long coupon_id)
         {
             try
             {
-                var command = new NpgsqlCommand(Globals.DB_Functions.UpdateSentCounpons.ToDescription());
+                var command = new NpgsqlCommand(await Globals.DB_Functions.UpdateSentCounpons.ToDescription());
                 command.Parameters.AddWithValue("p_coupon_id", NpgsqlDbType.Bigint, coupon_id);
-                var ret = insert(command);
+                var ret = await insert(command);
                 if (ret == 1)
                 {
                     return true;
@@ -222,15 +222,15 @@ namespace SharedLibrary
             }
         }
 
-        public string CouponOddsCalculate(long coupon_id)
+        public async Task<string> CouponOddsCalculate(long coupon_id)
         {
             try
             {
-                var command = new NpgsqlCommand(Globals.DB_Functions.CouponWinningOdds.ToDescription());
+                var command = new NpgsqlCommand(await Globals.DB_Functions.CouponWinningOdds.ToDescription());
                 command.Parameters.AddWithValue("p_coupon_id", NpgsqlDbType.Bigint, coupon_id);
-                var ret = @select(command);
+                var ret = await select(command);
                 string value = "";
-                if (ret.Tables.Count >0 && ret.Tables[0].Rows.Count>0)
+                if (ret.Tables.Count > 0 && ret.Tables[0].Rows.Count > 0)
                 {
                     value = ret.Tables[0].Rows[0][0].ToString();
                 }
@@ -243,38 +243,18 @@ namespace SharedLibrary
             }
         }
 
-        public void GetDummyData()
+        public async void GetDummyData()
         {
-            var command = new NpgsqlCommand(Globals.DB_Functions.GetFullFinalisedCoupons.ToDescription());
-            var data = select(command);
+            var command = new NpgsqlCommand(await Globals.DB_Functions.GetFullFinalisedCoupons.ToDescription());
+            var data = await select(command);
             var dt = new DataTable();
         }
 
-        public  void GetAllFinalizedCoupons()
+        public async Task GetAllFinalizedCoupons()
         {
             try
             {
-                var command = new NpgsqlCommand(Globals.DB_Functions.GetFullFinalisedCoupons.ToDescription());
-                var data = select(command);
-                //TODO send to seamless
-                //sendAllToApi(data);
-                Globals.timerOnOff = true;
-            }
-            catch (Exception ex)
-            {
-                Logg.logger.Fatal(ex.Message);
-            }
-            finally
-            {
-               
-            }
-        }
-
-        public void GetFinalisedOdds()
-        {
-            try
-            {
-                var command = new NpgsqlCommand(Globals.DB_Functions.GetFullFinalisedCoupons.ToDescription());
+                var command = new NpgsqlCommand(await Globals.DB_Functions.GetFullFinalisedCoupons.ToDescription());
                 var data = select(command);
                 //TODO send to seamless
                 //sendAllToApi(data);
@@ -290,7 +270,27 @@ namespace SharedLibrary
             }
         }
 
-        public  void sendAllToApi(DataSet data)
+        public async Task GetFinalisedOdds()
+        {
+            try
+            {
+                var command = new NpgsqlCommand(await Globals.DB_Functions.GetFullFinalisedCoupons.ToDescription());
+                var data = select(command);
+                //TODO send to seamless
+                //sendAllToApi(data);
+                Globals.timerOnOff = true;
+            }
+            catch (Exception ex)
+            {
+                Logg.logger.Fatal(ex.Message);
+            }
+            finally
+            {
+
+            }
+        }
+
+        public void sendAllToApi(DataSet data)
         {
             var dt = new DataTable();
             try
@@ -311,7 +311,7 @@ namespace SharedLibrary
                                 //CouponOddsCalculate(id);
                                 if (toSend != "{There is one or more odds not finalized yet!}")
                                 {
-                                   //sendToMerchantServices(toSend, id, merchant_id);
+                                    //sendToMerchantServices(toSend, id, merchant_id);
                                     //Task.Factory.StartNew(() => sendToMerchantServices(toSend, id, merchant_id));
 
                                 }
@@ -340,13 +340,13 @@ namespace SharedLibrary
             }
         }
 
-        public void MatchFinalize(string MatchPattern)
+        public async Task MatchFinalize(string MatchPattern)
         {
             try
             {
-                var command = new NpgsqlCommand(Globals.DB_Functions.FinalizeOdd.ToDescription());
+                var command = new NpgsqlCommand(await Globals.DB_Functions.FinalizeOdd.ToDescription());
                 command.Parameters.AddWithValue("p_mid_otid_ocid_sid", NpgsqlDbType.Text, MatchPattern);
-                insert(command);
+                await insert(command);
             }
             catch (Exception ex)
             {
@@ -355,27 +355,26 @@ namespace SharedLibrary
             }
         }
 
-        public void BetCancelDB(string MatchPattern)
+        public async Task BetCancelDB(string MatchPattern)
         {
             try
             {
-                var command = new NpgsqlCommand(Globals.DB_Functions.CancelOdd.ToDescription());
+                var command = new NpgsqlCommand(await Globals.DB_Functions.CancelOdd.ToDescription());
                 command.Parameters.AddWithValue("p_mid_otid_ocid_sid", NpgsqlDbType.Text, MatchPattern);
-                insert(command);
+                await insert(command);
             }
             catch (Exception ex)
             {
-                //BetClearingQueue.StringQueue.Enqueue(element_string)
                 Logg.logger.Fatal(ex.Message);
             }
         }
 
-        public DataSet GetFinalizedCouponsIds()
+        public async Task<DataSet> GetFinalizedCouponsIds()
         {
             try
             {
-                var command = new NpgsqlCommand(Globals.DB_Functions.FinalizeOddCoupons.ToDescription());
-                return select(command);
+                var command = new NpgsqlCommand(await Globals.DB_Functions.FinalizeOddCoupons.ToDescription());
+                return await select(command);
             }
             catch (Exception ex)
             {
@@ -384,13 +383,13 @@ namespace SharedLibrary
             }
         }
 
-        public DataSet GetCouponSystems(long Coupon_Id)
+        public async Task<DataSet> GetCouponSystems(long Coupon_Id)
         {
             try
             {
-                var command = new NpgsqlCommand(Globals.DB_Functions.FinalizeOddCoupons.ToDescription());
+                var command = new NpgsqlCommand(await Globals.DB_Functions.FinalizeOddCoupons.ToDescription());
                 command.Parameters.AddWithValue("p_coupon_id", NpgsqlDbType.Bigint, Coupon_Id);
-                return select(command);
+                return await select(command);
             }
             catch (Exception ex)
             {
@@ -402,13 +401,13 @@ namespace SharedLibrary
         public async Task sendToMerchantServices(string rawModeData, long id, long merchant_id)
         {
             IRestResponse response = null;
-            
+
             try
             {
-                var result = (from myRow in Globals.MerchantsDs.Tables[0].AsEnumerable()
+                var result = (from myRow in Globals.MerchantsDs.Result.Tables[0].AsEnumerable()
                               where myRow.Field<long>("vendor_id") == merchant_id
                               select myRow).ToList();
-               
+
                 var client = new RestClient(config.AppSettings.Get("Seamless_Services") + result[0]["prefix"]);
                 var request = new RestRequest(Method.POST);
                 request.Timeout = 3000;
@@ -424,14 +423,14 @@ namespace SharedLibrary
                     if (new JavaScriptSerializer().Deserialize<SeamlessResponse>(response.Content).error_codes[0] == 0)
                     {
 
-                        UpdateSentCouponsOnce(id, 2, rawModeData, response.Content);
+                        await UpdateSentCouponsOnce(id, 2, rawModeData, response.Content);
 #if DEBUG
                         Console.WriteLine(":::::::::::::::::::: END  ::::::::::::::::::::");
 #endif
                     }
                     else
                     {
-                        insertSeamlessCount(id, rawModeData, response.Content);
+                        await insertSeamlessCount(id, rawModeData, response.Content);
 #if DEBUG
                         Console.WriteLine(":::::::::::::::::::: NOT END  ::::::::::::::::::::");
 #endif
@@ -439,7 +438,7 @@ namespace SharedLibrary
                 }
                 else
                 {
-                    insertSeamlessCount(id, rawModeData, response.Content);
+                    await insertSeamlessCount(id, rawModeData, response.Content);
 #if DEBUG
                     Console.WriteLine(":::::::::::::::::::: EMPTY  ::::::::::::::::::::");
 #endif
@@ -448,18 +447,18 @@ namespace SharedLibrary
             catch (Exception ex)
             {
                 Logg.logger.Fatal(ex.Message);
-                insertSeamlessCount(id, rawModeData, response.Content);
+                await insertSeamlessCount(id, rawModeData, response.Content);
             }
         }
 
-        public async Task sendToMerchantServices_(string rawModeData,long id,long merchant_id)
+        public async Task sendToMerchantServices_(string rawModeData, long id, long merchant_id)
         {
             IRestResponse response = null;
-            
+
             try
             {
                 var merc = new Merchants();
-                merc = selectDyMerchants(merchant_id, "");
+                merc = await selectDyMerchants(merchant_id, "");
                 var client = new RestClient(config.AppSettings.Get("Seamless_Services") + merc.prefix);
                 var request = new RestRequest(Method.POST);
                 request.AddHeader("cache-control", "no-cache");
@@ -470,12 +469,12 @@ namespace SharedLibrary
                 {
                     if (new JavaScriptSerializer().Deserialize<SeamlessResponse>(response.Content).error_codes[0] == 0)
                     {
-                      
+
                         UpdateSentCouponsOnce(id, 2, rawModeData, response.Content);
                     }
                     else
                     {
-                        
+
                     }
                 }
                 //insertSeamlessCount(id, rawModeData, response.Content);
@@ -488,7 +487,7 @@ namespace SharedLibrary
             }
         }
 
-        public long MoveCouponAll(long p_table_id, long? p_coupon_id, DateTime? p_lastupdate)
+        public async Task<long> MoveCouponAll(long p_table_id, long? p_coupon_id, DateTime? p_lastupdate)
         {
             var command = new NpgsqlCommand("coupon_move");
             try
@@ -512,15 +511,8 @@ namespace SharedLibrary
                     command.Parameters.AddWithValue("p_lastupdate", NpgsqlDbType.Timestamp, DBNull.Value);
                 }
 
-                var RetId = insert(command);
-                if (RetId > 0)
-                {
-                    return RetId;
-                }
-                else
-                {
-                    return -1;
-                }
+                return await insert(command);
+
             }
             catch (Exception ex)
             {
@@ -529,9 +521,9 @@ namespace SharedLibrary
             }
         }
 
-        public void UpdateSentCouponsOnce(long counpon_id,int action, string request, string response)
+        public async Task UpdateSentCouponsOnce(long counpon_id, int action, string request, string response)
         {
-            var command = new NpgsqlCommand(Globals.DB_Functions.UpdateSentCouponsOnce.ToDescription());
+            var command = new NpgsqlCommand(await Globals.DB_Functions.UpdateSentCouponsOnce.ToDescription());
             try
             {
                 command.Parameters.AddWithValue("p_coupon_id", NpgsqlDbType.Bigint, counpon_id);
@@ -539,7 +531,7 @@ namespace SharedLibrary
                 command.Parameters.AddWithValue("p_request", NpgsqlDbType.Text, request);
                 command.Parameters.AddWithValue("p_response", NpgsqlDbType.Text, response);
 
-                 insertNonReturn(command);
+                insertNonReturn(command);
             }
             catch (Exception ex)
             {
@@ -547,16 +539,16 @@ namespace SharedLibrary
             }
         }
 
-        public long insertSeamlessCount(long counpon_id, string request, string response)
+        public async Task<long> insertSeamlessCount(long counpon_id, string request, string response)
         {
-            var command = new NpgsqlCommand(Globals.DB_Functions.UpdateSendSeamless.ToDescription());
+            var command = new NpgsqlCommand(await Globals.DB_Functions.UpdateSendSeamless.ToDescription());
             try
             {
                 command.Parameters.AddWithValue("p_coupon_id", NpgsqlDbType.Bigint, counpon_id);
                 command.Parameters.AddWithValue("p_request", NpgsqlDbType.Text, request);
                 command.Parameters.AddWithValue("p_response", NpgsqlDbType.Text, response);
 
-                return update(command);
+                return await update(command);
             }
             catch (Exception ex)
             {
@@ -564,12 +556,12 @@ namespace SharedLibrary
                 return -1;
             }
         }
-        public void WorkAlive()
+        public async Task WorkAlive()
         {
-            var command = new NpgsqlCommand(Globals.DB_Functions.UpdateLiveMatchesShow.ToDescription());
+            var command = new NpgsqlCommand(await Globals.DB_Functions.UpdateLiveMatchesShow.ToDescription());
             try
             {
-                 select(command);
+                await @select(command);
             }
             catch (Exception ex)
             {
@@ -577,10 +569,10 @@ namespace SharedLibrary
             }
         }
 
-        public DataSet selectAllMerchants(long? p_merchant_id)
+        public async Task<DataSet> selectAllMerchants(long? p_merchant_id)
         {
             var dyMerchants = new Merchants();
-            var command = new NpgsqlCommand(Globals.DB_Functions.SelectMerchants.ToDescription());
+            var command = new NpgsqlCommand(await Globals.DB_Functions.SelectMerchants.ToDescription());
             try
             {
 
@@ -594,7 +586,7 @@ namespace SharedLibrary
                 }
 
 
-                var ds = select(command);
+                var ds = await select(command);
 
                 if (ds.Tables.Count > 0)
                 {
@@ -613,10 +605,10 @@ namespace SharedLibrary
 
         }
 
-        public Merchants selectDyMerchants(long p_merchant_id, string p_username)
+        public async Task<Merchants> selectDyMerchants(long p_merchant_id, string p_username)
         {
             var dyMerchants = new Merchants();
-            var command = new NpgsqlCommand(Globals.DB_Functions.selectDyMerchants.ToDescription());
+            var command = new NpgsqlCommand(await Globals.DB_Functions.selectDyMerchants.ToDescription());
             try
             {
 
@@ -639,7 +631,7 @@ namespace SharedLibrary
                 }
 
 
-                var ds = select(command);
+                var ds = await select(command);
 
                 if (ds.Tables.Count > 0)
                 {
@@ -691,7 +683,7 @@ namespace SharedLibrary
             }
             return rollbackObject;
         }
-        public void RollBack(List<Globals.Rollback> rolls)
+        public async Task RollBack(List<Globals.Rollback> rolls)
         {
             // Get call stack
             StackTrace stackTrace = new StackTrace();
@@ -702,11 +694,11 @@ namespace SharedLibrary
             {
                 foreach (var roll in rolls)
                 {
-                    var adObjCommand = new NpgsqlCommand(Globals.DB_Functions.Rollback.ToDescription());
+                    var adObjCommand = new NpgsqlCommand(await Globals.DB_Functions.Rollback.ToDescription());
                     adObjCommand.Parameters.AddWithValue("table_id", roll.TableId);
                     adObjCommand.Parameters.AddWithValue("row_id", roll.RowId);
                     adObjCommand.Parameters.AddWithValue("tran_type", roll.TransactionType);
-                    update(adObjCommand);
+                    await update(adObjCommand);
                 }
             }
             catch (Exception ex)
@@ -751,7 +743,7 @@ namespace SharedLibrary
             }
 
         }
-        public long insert(NpgsqlCommand objCommand)
+        public async Task<long> insert(NpgsqlCommand objCommand)
         {
             long errorNumber = -1;
             long result = -20;
@@ -762,8 +754,8 @@ namespace SharedLibrary
 
                 objCommand.Connection = connection();
                 //objCommand.CommandTimeout = 5;
-                objCommand.Connection.Open();
-                one = objCommand.ExecuteScalar();
+                await objCommand.Connection.OpenAsync();
+                one = await objCommand.ExecuteScalarAsync();
                 bool successfullyParsed = long.TryParse(one.ToString(), out result);
                 long val = 0;
                 if (successfullyParsed)
@@ -780,7 +772,7 @@ namespace SharedLibrary
                         else
                         {
                             errorNumber = val;
-                            throw new DataException();
+                          
                         }
                     }
                 }
@@ -801,11 +793,11 @@ namespace SharedLibrary
             }
             finally
             {
-                objCommand.Connection.Close();
+                if (objCommand.Connection != null) objCommand.Connection.Close();
             }
         }
 
-        public void insertNonReturn(NpgsqlCommand objCommand)
+        public async Task insertNonReturn(NpgsqlCommand objCommand)
         {
             long errorNumber = -1;
             long result = -20;
@@ -815,8 +807,8 @@ namespace SharedLibrary
             {
                 objCommand.Connection = connection();
                 //objCommand.CommandTimeout = 5;
-                objCommand.Connection.Open();
-                one = objCommand.ExecuteNonQuery();
+                await objCommand.Connection.OpenAsync();
+                one = await objCommand.ExecuteNonQueryAsync();
             }
             catch (Exception ex)
             {
@@ -878,18 +870,18 @@ namespace SharedLibrary
                 objCommand.Connection.Close();
             }
         }
-        public long update(NpgsqlCommand objCommand)
+        public async Task<long> update(NpgsqlCommand objCommand)
         {
 
             objCommand.CommandType = CommandType.StoredProcedure;
             try
             {
                 objCommand.Connection = connection();
-                objCommand.Connection.Open();
+                await objCommand.Connection.OpenAsync();
 #if DEBUG
                 WriteFullLine(objCommand.CommandText);
 #endif
-                var result = objCommand.ExecuteScalar();
+                var result = await objCommand.ExecuteScalarAsync();
                 long val = 0;
                 if (long.TryParse(result.ToString(), out val))
                 {
@@ -904,13 +896,13 @@ namespace SharedLibrary
             }
             finally
             {
-                objCommand.Connection.Close();
+                if (objCommand.Connection != null) objCommand.Connection.Close();
             }
         }
-        public DataSet select(NpgsqlCommand objCommand)
+        public async Task<DataSet> select(NpgsqlCommand objCommand)
         {
             objCommand.Connection = connection();
-            objCommand.Connection.Open();
+            await objCommand.Connection.OpenAsync();
             objCommand.CommandType = CommandType.StoredProcedure;
             var ds = new DataSet();
             try
@@ -932,15 +924,15 @@ namespace SharedLibrary
                 objCommand.Connection.Close();
             }
         }
-        public long selectOne(NpgsqlCommand objCommand)
+        public async Task<long> selectOne(NpgsqlCommand objCommand)
         {
 
             objCommand.CommandType = CommandType.Text;
             try
             {
                 objCommand.Connection = connection();
-                objCommand.Connection.Open();
-                var res = objCommand.ExecuteReader(CommandBehavior.SingleResult);
+                await objCommand.Connection.OpenAsync();
+                var res = await objCommand.ExecuteReaderAsync(CommandBehavior.SingleResult);
                 if (res.Read())
                 {
 #if DEBUG
@@ -967,7 +959,7 @@ namespace SharedLibrary
         {
             Logg.logger.Fatal(message + "  |||  " + memberName + "  |||  " + sourceFilePath + "  |||  " + sourceLineNumber);
         }
-       
+
         public static void WriteFullLine(string value)
         {
             //

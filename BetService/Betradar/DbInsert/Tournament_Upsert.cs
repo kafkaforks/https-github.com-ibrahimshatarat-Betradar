@@ -30,11 +30,10 @@ namespace BetService.Classes.DbInsert
 
 
 
-        public Globals.ReturnQueueLong insertCpTournament()
+        public async Task<long> insertCpTournament()
         {
             var common = new Common();
-            var queue = new Queue<Globals.Rollback>();
-            var ObjCommand = new NpgsqlCommand(Globals.DB_Functions.InsertCpTournament.ToDescription());
+            var ObjCommand = new NpgsqlCommand(await Globals.DB_Functions.InsertCpTournament.ToDescription());
             try
             {
 
@@ -60,21 +59,13 @@ namespace BetService.Classes.DbInsert
 
                 ObjCommand.Parameters.AddWithValue("p_super_team_id", NpgsqlDbType.Bigint, (object)super_team_id ?? DBNull.Value);
 
-                var RetId = common.insert(ObjCommand);
-                if (RetId > 0)
-                {
-                    return new Globals.ReturnQueueLong(queue, RetId);
-                }
-                else
-                {
-                    return new Globals.ReturnQueueLong(queue, -1);
-                }
+                return await common.insert(ObjCommand);
 
             }
             catch (Exception ex)
             {
                 Logg.logger.Fatal(ex.Message);
-                return new Globals.ReturnQueueLong(queue, -1);
+                return  -1;
             }
         }
     }

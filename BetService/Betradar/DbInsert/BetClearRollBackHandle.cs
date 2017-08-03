@@ -13,15 +13,13 @@ namespace BetService.Classes.DbInsert
     public class BetClearRollBackHandle : Core
     {
 
-        public BetClearRollBackHandle(BetClearRollbackEventArgs args)
+        public async Task BetClearRollBackHandler(BetClearRollbackEventArgs args)
         {
-            RunTask(args);
+            await RunTask(args);
         }
 
-        public void RunTask(BetClearRollbackEventArgs queueElement)
+        private async Task RunTask(BetClearRollbackEventArgs queueElement)
         {
-           // var common = new Common();
-           // Task.Factory.StartNew(() => common.insertMatchDataAllDetails((MatchHeader)queueElement.BetClearRollback.EventHeader, null));
 
         }
     }

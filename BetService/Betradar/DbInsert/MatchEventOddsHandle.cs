@@ -19,9 +19,11 @@ namespace BetService.Classes.DbInsert
     public class MatchEventOddsHandle : Core
     {
 
-        public MatchEventOddsHandle(MatchEventOdds args)
+        public async 
+        Task
+MatchEventOddsHandler(MatchEventOdds args)
         {
-            MatchEventOdds_Queue_WatchQueueMatches(args);
+            await MatchEventOdds_Queue_WatchQueueMatches(args);
         }
         public object GetPropertyValue(object obj, string propertyName)
         {
@@ -41,17 +43,10 @@ namespace BetService.Classes.DbInsert
 
             return obj;
         }
-        public void MatchEventOdds_Queue_WatchQueueMatches(MatchEventOdds queueElement)
+        public async Task MatchEventOdds_Queue_WatchQueueMatches(MatchEventOdds queueElement)
         {
-            //TODO: uncomment ;
-            //var d = new JavaScriptSerializer().Serialize(queueElement);
-            //var write = new StreamWriter(@"C:\Users\heythamwork\Google Drive\ecoPayz\betradar-History\2_14_2017\Live\Betradar\Betradar\bin\Debug\logs\"+queueElement.MatchEntity.MatchId.ToString());
-            //write.Write(d);
 
             var common = new Common();
-            var entity = queueElement.MatchEntity;
-            var queue = new Queue<Globals.Rollback>();
-            var queueMatch = new Queue<Globals.Rollback>();
             var match = queueElement.MatchEntity;
             try
             {
@@ -70,10 +65,10 @@ namespace BetService.Classes.DbInsert
                         bet.PlayerId = bet_result.PlayerId;
                         bet.TeamId = bet_result.TeamId;
                         var mid = EncodeUnifiedBetClearQueueElement(bet);
-                        common.insertCpLcooBetclearOdds(bet_result, match.MatchId, mid);
+                        await common.insertCpLcooBetclearOdds(bet_result, match.MatchId, mid);
                     }
                 }
-               common.insertMatch(match, 1);
+                common.insertMatch(match, 1);
             }
             catch (Exception ex)
             {
@@ -122,19 +117,17 @@ namespace BetService.Classes.DbInsert
 
                                 if (visible_odd_types.Contains(Odds.OddsType))
                                 {
-                                    var insertNewMatchOdds = common.insertCpLcooOdds(odd, match.MatchId, Odds.OddsType,
-                                        "", "", true, probability);
+                                    await common.insertCpLcooOdds(odd, match.MatchId, Odds.OddsType, "", "", true, probability);
                                 }
                                 else
                                 {
-                                    var insertNewMatchOdds = common.insertCpLcooOdds(odd, match.MatchId, Odds.OddsType,
-                                        "", "", false, probability);
+                                    await common.insertCpLcooOdds(odd, match.MatchId, Odds.OddsType, "", "", false, probability);
                                 }
 
                             }
                             else
                             {
-                                common.updateCpLcooOdds(match.MatchId, Odds.OddsType);
+                                await common.updateCpLcooOdds(match.MatchId, Odds.OddsType);
                             }
                         }
 

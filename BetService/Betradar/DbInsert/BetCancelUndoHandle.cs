@@ -12,28 +12,26 @@ namespace BetService.Classes.DbInsert
 {
     class BetCancelUndoHandle : Core
     {
-        public BetCancelUndoHandle(BetCancelUndoEventArgs args)
+        public async Task BetCancelUndoHandler(BetCancelUndoEventArgs args)
         {
-            RunTask(args);
+            await RunTask(args);
         }
-        public void RunTask(BetCancelUndoEventArgs args)
+        public async Task RunTask(BetCancelUndoEventArgs args)
         {
             var common = new Common();
-            //var queue = new Queue<Globals.Rollback>();
             try
             {
-                Task.Factory.StartNew(() => insertOdds(args));
-                Task.Factory.StartNew(() => common.insertMatchDataAllDetails((MatchHeader)args.BetCancelUndo.EventHeader, null));
+                 await insertOdds(args);
+                 await common.insertMatchDataAllDetails((MatchHeader)args.BetCancelUndo.EventHeader, null);
             }
             catch (Exception ex)
             {
                 Logg.logger.Fatal(ex.Message);
             }
-
         }
-        private void insertOdds(BetCancelUndoEventArgs args)
+        private async Task insertOdds(BetCancelUndoEventArgs args)
         {
-            
+
             var common = new Common();
             try
             {
@@ -46,7 +44,7 @@ namespace BetService.Classes.DbInsert
                         active = odd.Active;
                     }
 
-                    common.insertLiveOdds(odd, null, active, null, null,
+                    await common.insertLiveOdds(odd, null, active, null, null,
                             "", null, "", null,
                             "", null, entity.EventHeader.Id, 0, entity.Status.ToString(), entity.Timestamp.ToString());
 

@@ -14,7 +14,6 @@ namespace BetService
 {
     partial class LiveOddsSender : ServiceBase
     {
-        private string[] args;
         private Timer timer1 = null;
         public LiveOddsSender()
         {

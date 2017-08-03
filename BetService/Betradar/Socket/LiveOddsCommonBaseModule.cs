@@ -56,196 +56,124 @@ namespace Betradar.Classes.Socket
             m_live_odds.Stop();
         }
 
-        protected virtual void BetCancelHandler(object sender, BetCancelEventArgs e)
+        protected virtual async void BetCancelHandler(object sender, BetCancelEventArgs e)
         {
+            var r = new BetCancelHandle();
+            Task.Factory.StartNew(() => r.BetCancelHandler(e));
+#if DEBUG
             g_log.Info("{0}: Received BetCancel for event {1} and odds id {2}", m_feed_name, e.BetCancel.EventHeader.Id, e.BetCancel.Odds[0].Id);
-
-            Task.Factory.StartNew(
-           () =>
-           {
-               new BetCancelHandle(e);
-           }
-           , CancellationToken.None, TaskCreationOptions.DenyChildAttach, TaskScheduler.Default);
-
-            //Task.Factory.StartNew(() => new BetCancelHandle(e));
-#if DEBUG
             InCount += 1;
             Logg.logger.Warn("InCount Count = " + InCount);
 #endif
         }
 
-        protected virtual void BetCancelUndoHandler(object sender, BetCancelUndoEventArgs e)
+        protected virtual async void BetCancelUndoHandler(object sender, BetCancelUndoEventArgs e)
         {
+            var r = new BetCancelUndoHandle();
+            Task.Factory.StartNew(() => r.BetCancelUndoHandler(e));
+#if DEBUG
             g_log.Info("{0}: Received BetCancelUndo for event {1} and odds id {2}", m_feed_name,
-                e.BetCancelUndo.EventHeader.Id, e.BetCancelUndo.Odds[0].Id);
-
-
-            Task.Factory.StartNew(
-                () =>
-                {
-                    new BetCancelUndoHandle(e);
-                }
-                , CancellationToken.None, TaskCreationOptions.DenyChildAttach, TaskScheduler.Default);
-
-
-            // Task.Factory.StartNew(() => new BetCancelUndoHandle(e));
-#if DEBUG
+               e.BetCancelUndo.EventHeader.Id, e.BetCancelUndo.Odds[0].Id);
             InCount += 1;
             Logg.logger.Warn("InCount Count = " + InCount);
 #endif
         }
 
-        protected virtual void BetClearHandler(object sender, BetClearEventArgs e)
+        protected virtual async void BetClearHandler(object sender, BetClearEventArgs e)
         {
+            var r = new BetClearHandle();
+            Task.Factory.StartNew(() => r.BetClearHandler(e));
+#if DEBUG
             g_log.Info("{0}: Received BetClear for event {1} and odds id {2}", m_feed_name, e.BetClear.EventHeader.Id, e.BetClear.Odds[0].Id);
-            // Task.Factory.StartNew(() => new BetClearHandle(e));
-
-            Task.Factory.StartNew(
-               () =>
-               {
-                   new BetClearHandle(e);
-               }
-               , CancellationToken.None, TaskCreationOptions.DenyChildAttach, TaskScheduler.Default);
-
-            //var bet = new BetClearQueueElement();
-            //foreach (var odd in e.BetClear.Odds)
-            //{
-            //    bet.MatchId = e.BetClear.EventHeader.Id;
-            //    bet.OddsId = odd.Id;
-            //    //RedisQueue.BetClear_Enqueue(bet);
-            //    //TODO: add backup queue here!!!!
-            //}
-
-#if DEBUG
             InCount += 1;
             Logg.logger.Warn("InCount Count = " + InCount);
 #endif
         }
 
-        protected virtual void BetClearRollbackHandler(object sender, BetClearRollbackEventArgs e)
+        protected virtual async void BetClearRollbackHandler(object sender, BetClearRollbackEventArgs e)
         {
+            var r = new BetClearRollBackHandle();
+            Task.Factory.StartNew(() => r.BetClearRollBackHandler(e));
+#if DEBUG
             g_log.Info("{0}: Received BetClear for event {1} and odds id {2}", m_feed_name, e.BetClearRollback.EventHeader.Id, e.BetClearRollback.Odds[0].Id);
-
-            Task.Factory.StartNew(
-             () =>
-             {
-                 new BetClearRollBackHandle(e);
-             }
-             , CancellationToken.None, TaskCreationOptions.DenyChildAttach, TaskScheduler.Default);
-           
-            //Task.Factory.StartNew(() => new BetClearRollBackHandle(e));
-#if DEBUG
             InCount += 1;
             Logg.logger.Warn("InCount Count = " + InCount);
 #endif
         }
 
-        protected virtual void BetStartHandler(object sender, BetStartEventArgs e)
+        protected virtual async void BetStartHandler(object sender, BetStartEventArgs e)
         {
+            var r = new BetStartHandle();
+            Task.Factory.StartNew(() =>  r.BetStartHandler(e));
+#if DEBUG
             g_log.Info("{0}: Received BetStart for event {1}", m_feed_name, e.BetStart.EventHeader.Id);
-            Task.Factory.StartNew(
-                  () =>
-                  {
-                      new BetStartHandle(e);
-                  }
-                  , CancellationToken.None, TaskCreationOptions.DenyChildAttach, TaskScheduler.Default);
-          
-            //Task.Factory.StartNew(() => new BetStartHandle(e));
-#if DEBUG
             InCount += 1;
             Logg.logger.Warn("InCount Count = " + InCount);
 #endif
         }
 
-        protected virtual void BetStopHandler(object sender, BetStopEventArgs e)
+        protected virtual async void BetStopHandler(object sender, BetStopEventArgs e)
         {
+            var r = new BetStopHandle();
+            Task.Factory.StartNew(()=> r.BetStopHandler(e));
+#if DEBUG
             g_log.Info("{0}: Received BetStart for event {1}", m_feed_name, e.BetStop.EventHeader.Id);
-
-            Task.Factory.StartNew(
-               () =>
-               {
-                   new BetStopHandle(e);
-               }
-               , CancellationToken.None, TaskCreationOptions.DenyChildAttach, TaskScheduler.Default);
-
-    
-
-            // Task.Factory.StartNew(() => new BetStopHandle(e));
-#if DEBUG
             InCount += 1;
             Logg.logger.Warn("InCount Count = " + InCount);
 #endif
         }
 
-        protected virtual void ConnectionStableHandler(object sender, EventArgs e)
+        protected virtual async void ConnectionStableHandler(object sender, EventArgs e)
         {
-            g_log.Info("{0} connection is stable. It is now safe to accept bets and make requests", m_feed_name);
+
             TimeSpan half = TimeSpan.FromMilliseconds(m_meta_timer.Interval);
-            MakeMetaRequest(half, half);
+            Task.Factory.StartNew(() => MakeMetaRequest(half, half));
             m_meta_timer.Start();
+#if DEBUG
+            g_log.Info("{0} connection is stable. It is now safe to accept bets and make requests", m_feed_name);
+#endif
         }
 
         protected virtual void ConnectionUnstableHandler(object sender, EventArgs e)
         {
-            g_log.Info("{0} connection is unstable. Don't accept any bets or call any requests", m_feed_name);
+            
             m_meta_timer.Stop();
+#if DEBUG
+            g_log.Info("{0} connection is unstable. Don't accept any bets or call any requests", m_feed_name);
+#endif
         }
 
         protected virtual void EventMessagesHandler(object sender, EventDataReceivedEventArgs e)
         {
+#if DEBUG
             g_log.Info("{0}: Received {1} of error reply messages with reply number {2}", m_feed_name, e.Messages.Count, e.ReplyNr);
+#endif
 
         }
 
         protected virtual void EventStatusHandler(object sender, EventDataReceivedEventArgs e)
         {
+#if DEBUG
             g_log.Info("{0}: Received {1} of current reply messages with reply number {2}", m_feed_name, e.Messages.Count, e.ReplyNr);
+#endif
         }
 
-        protected virtual void OddsChangeHandler(object sender, OddsChangeEventArgs e)
+        protected virtual async void OddsChangeHandler(object sender, OddsChangeEventArgs e)
         {
-           
-            g_log.Info("{0}: Received OddsChange for event {1} with {2} odds", m_feed_name, e.OddsChange.EventHeader.Id, e.OddsChange.Odds.Count);
-            //var o_change = new OddsChangeHandle(e);
-
-            Task.Factory.StartNew(
-               () =>
-               {
-                   new OddsChangeHandle(e);
-               }
-               , CancellationToken.None, TaskCreationOptions.DenyChildAttach, TaskScheduler.Default);
-
-            // Task.Factory.StartNew(() => new OddsChangeHandle(e));
+            var r = new OddsChangeHandle();
+            Task.Factory.StartNew(() => r.OddsChangeHandler(e));
 #if DEBUG
+            g_log.Info("{0}: Received OddsChange for event {1} with {2} odds", m_feed_name, e.OddsChange.EventHeader.Id, e.OddsChange.Odds.Count);
             InCount += 1;
             Logg.logger.Warn("InCount Count = " + InCount);
 #endif
         }
 
-        protected virtual void MakeMetaRequest(TimeSpan back, TimeSpan forward)
+        protected virtual async Task MakeMetaRequest(TimeSpan back, TimeSpan forward)
         {
             DateTime now = DateTime.Now;
-            var sofo = m_live_odds.GetEventList(now.Subtract(back), now.Add(forward));
-           
+            var sofo =  m_live_odds.GetEventList(now.Subtract(back), now.Add(forward));
         }
-        //public static RegisterTestConfig GetConfig()
-        //{
-        //    return (RegisterCompaniesConfig)System.Configuration.ConfigurationManager.GetSection("RegisterCompanies") ?? new RegisterCompaniesConfig();
-        //}
 
-        //[System.Configuration.ConfigurationProperty("Sdk")]
-        //[ConfigurationCollection(typeof(Sdk), AddItemName = "LiveOdds")]
-        //public RegisterTestConfig conf
-        //{
-        //    get
-        //    {
-        //        object o = this["Companies"];
-        //        return o as Companies;
-        //    }
-        //}
-    }
-
-    internal interface ILog
-    {
     }
 }

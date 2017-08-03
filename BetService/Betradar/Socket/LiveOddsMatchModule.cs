@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Web.Script.Serialization;
@@ -18,10 +19,15 @@ namespace Betradar.Classes.Socket
         {
             m_live_odds = live_odds;
             m_live_odds.OnScoreCardSummary += ScoreCardSummaryHandler;
-            m_live_odds.OnMetaInfo += MetaInfoHandler;
+            m_live_odds.OnMetaInfo += MetaInfoHandlerWrapper;
         }
 
-        protected override void ConnectionStableHandler(object sender, EventArgs e)
+        private void MetaInfoHandlerWrapper(object sender, MetaInfoEventArgs e)
+        {
+            MetaInfoHandler(sender, e).Start();
+        }
+
+        protected override async void ConnectionStableHandler(object sender, EventArgs e)
         {
             base.ConnectionStableHandler(sender, e);
             if (m_live_odds.TestManager != null)
@@ -45,9 +51,8 @@ namespace Betradar.Classes.Socket
             }
         }
 
-        private void MetaInfoHandler(object sender, MetaInfoEventArgs e)
+        private async Task MetaInfoHandler(object sender, MetaInfoEventArgs e)
         {
-
             var meta_data = e.MetaInfo.MetaInfoDataContainer as LiveOddsMetaData;
             if (meta_data != null)
             {
@@ -98,17 +103,8 @@ namespace Betradar.Classes.Socket
                         }
                         Tup.sport = new JavaScriptSerializer().Serialize(dic);
                     }
-                    Tup.insertCpTournament();
-                    Task.Factory.StartNew(
-                        () =>
-                        {
-                            common.insertMatchDataAllDetails(match_info.MatchHeader, match_info.MatchInfo);
-                        }
-                        , CancellationToken.None, TaskCreationOptions.DenyChildAttach, TaskScheduler.Default);
-
-
-
-                    // Task.Factory.StartNew(() => common.insertMatchDataAllDetails(match_info.MatchHeader,match_info.MatchInfo));
+                    await Tup.insertCpTournament();
+                    await common.insertMatchDataAllDetails(match_info.MatchHeader, match_info.MatchInfo);
                 }
 
                 Logg.logger.Info("{0}: Received MetaInfo with {1} matches", m_feed_name,
@@ -116,23 +112,11 @@ namespace Betradar.Classes.Socket
             }
         }
 
-        private void ScoreCardSummaryHandler(object sender, ScoreCardSummaryEventArgs e)
+        private static async void ScoreCardSummaryHandler(object sender, ScoreCardSummaryEventArgs e)
         {
-            Task.Factory.StartNew(
-                () =>
-                {
-                    new ScoreCardSummaryHandle(e);
-                }
-                , CancellationToken.None, TaskCreationOptions.DenyChildAttach, TaskScheduler.Default);
-
-
-            // Task.Factory.StartNew(() => new ScoreCardSummaryHandle(e));
-#if DEBUG
-            InCount += 1;
-            Logg.logger.Warn("InCount Count = " + InCount);
-#endif
-            Logg.logger.Info("{0}: Received ScoreCardSummary for event {1}", m_feed_name,
-                e.ScoreCardSummary.EventHeader.Id);
+            var r = new ScoreCardSummaryHandle();
+            await r.ScoreCardSummaryHandler(e);
         }
+
     }
 }

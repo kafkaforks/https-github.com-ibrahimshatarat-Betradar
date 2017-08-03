@@ -25,8 +25,10 @@ namespace Betradar.Classes.Socket
 
         public void Start()
         {
-            Logg.logger.Info("{0} Starting", m_feed_name);
             m_lcoo.Start();
+#if DEBUG
+            Logg.logger.Info("{0} Starting", m_feed_name);
+#endif
         }
 
         public void Stop()
@@ -34,7 +36,7 @@ namespace Betradar.Classes.Socket
             m_lcoo.Stop();
         }
 
-        private void CheckIfOldData(DateTime? timestamp)
+        private async Task CheckIfOldData(DateTime? timestamp)
         {
             if (timestamp == null)
             {
@@ -58,47 +60,42 @@ namespace Betradar.Classes.Socket
                 }
                 else if (DateTime.UtcNow.Subtract(time) > TimeSpan.FromMinutes(5))
                 {
+#if DEBUG
                     Logg.logger.Warn("{0}: Received message with timestamp {1}, is it too old to accept bets?", m_feed_name, timestamp);
+#endif
                 }
             }
         }
 
-        private void lcoo_OnMatch(object sender, MatchEventOdds e)
+        private async void lcoo_OnMatch(object sender, MatchEventOdds e)
         {
-            CheckIfOldData(e.MatchEntity.MessageTime);
+            await CheckIfOldData(e.MatchEntity.MessageTime);
+
+            var r = new MatchEventOddsHandle();
+            await r.MatchEventOddsHandler(e);
+#if DEBUG
             Logg.logger.Info("{0}: Received Match with id {1}", m_feed_name, e.MatchEntity.MatchId);
-
-            Task.Factory.StartNew(
-             () =>
-             {
-                 new MatchEventOddsHandle(e);
-             }
-             , CancellationToken.None, TaskCreationOptions.DenyChildAttach, TaskScheduler.Default);
-
-            // Task.Factory.StartNew(() => new MatchEventOddsHandle(e));
-#if DEBUG
             InCount += 1;
             Logg.logger.Warn("InCount Count = " + InCount);
 #endif
         }
 
-        private void lcoo_OnOutright(object sender, OutrightEventOdds e)
+        private async void lcoo_OnOutright(object sender, OutrightEventOdds e)
         {
-            CheckIfOldData(e.OutrightEntity.MessageTime);
+            await CheckIfOldData(e.OutrightEntity.MessageTime);
+#if DEBUG
             Logg.logger.Info("{0}: Received Outright with id {1}", m_feed_name, e.OutrightEntity.Id);
-            //Task.Factory.StartNew(() => new OutrightEventOddsHandle(e));
-#if DEBUG
             InCount += 1;
             Logg.logger.Warn("InCount Count = " + InCount);
 #endif
         }
 
-        private void m_lcoo_OnThreeBall(object sender, ThreeBallEventArgs e)
+        private async void m_lcoo_OnThreeBall(object sender, ThreeBallEventArgs e)
         {
-            CheckIfOldData(e.ThreeBallEntity.MessageTime);
-            Logg.logger.Info("{0}: Received ThreeBall with id {1}", m_feed_name, e.ThreeBallEntity.Id);
-           // Task.Factory.StartNew(() => new ThreeBallEventHandle(e));
+            await CheckIfOldData(e.ThreeBallEntity.MessageTime);
+
 #if DEBUG
+            Logg.logger.Info("{0}: Received ThreeBall with id {1}", m_feed_name, e.ThreeBallEntity.Id);
             InCount += 1;
             Logg.logger.Warn("InCount Count = " + InCount);
 #endif

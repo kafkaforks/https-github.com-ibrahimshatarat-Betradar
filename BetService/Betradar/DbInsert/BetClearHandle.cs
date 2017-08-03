@@ -17,15 +17,15 @@ namespace BetService.Classes.DbInsert
 {
     class BetClearHandle : Core
     {
-        public BetClearHandle(BetClearEventArgs args)
+        public async Task BetClearHandler(BetClearEventArgs args)
         {
-            RunTask(args);
+            await RunTask(args);
         }
 
-        private void RunTask(BetClearEventArgs queueElement)
+        private async Task RunTask(BetClearEventArgs queueElement)
         {
             //var client = new Client();
-           // var proxy = client.ServerproxyLive();
+            // var proxy = client.ServerproxyLive();
             var common = new Common();
             try
             {
@@ -52,22 +52,16 @@ namespace BetService.Classes.DbInsert
                             oddUnique.TypeId = null;
                         }
 
-                        common.insertLiveOdds(Odd, odd, Odd.Active, odd.Outcome, odd.PlayerId,
-                                    odd.Probability.ToString() ?? "", odd.Type, odd.Value.ToString() ?? "",
-                                    odd.ViewIndex,
-                                    odd.VoidFactor.ToString() ?? "", new JavaScriptSerializer().Serialize(NameDictionary), queueElement.BetClear.EventHeader.Id, odd.TypeId ?? 0,queueElement.BetClear.Status.ToString(),queueElement.BetClear.Timestamp.ToString());
+                        await common.insertLiveOdds(Odd, odd, Odd.Active, odd.Outcome, odd.PlayerId,
+                            odd.Probability.ToString() ?? "", odd.Type, odd.Value.ToString() ?? "",
+                            odd.ViewIndex,
+                            odd.VoidFactor.ToString() ?? "", new JavaScriptSerializer().Serialize(NameDictionary), queueElement.BetClear.EventHeader.Id, odd.TypeId ?? 0, queueElement.BetClear.Status.ToString(), queueElement.BetClear.Timestamp.ToString());
 
                         NameDictionary = null;
-                        //common.insertCpLcooBetclearOdds( (BetResultEntity) queueElement.BetClear.ChangeType(typeof (BetResultEntity)), queueElement.BetClear.EventHeader.Id, EncodeUnifiedBetClearQueueElementLive(oddUnique));
                         try
                         {
-                            // sendToRpc(EncodeUnifiedBetClearQueueElementLive(oddUnique));
-                            // Task.Factory.StartNew(() => sendToRpc(EncodeUnifiedBetClearQueueElementLive(oddUnique)));
-                            Task.Factory.StartNew(() =>
-                            {
-                                var coupon = new Coupons();
-                                coupon.MatchFinalize(EncodeUnifiedBetClearQueueElementLive(oddUnique));
-                            });
+                            var coupon = new Coupons();
+                            await coupon.MatchFinalize(await EncodeUnifiedBetClearQueueElementLive(oddUnique));
                         }
                         catch (Exception ex)
                         {

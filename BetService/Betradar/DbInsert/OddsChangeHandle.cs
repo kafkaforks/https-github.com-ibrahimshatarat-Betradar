@@ -16,15 +16,18 @@ namespace BetService.Classes.DbInsert
 {
     public class OddsChangeHandle : Core
     {
-        public OddsChangeHandle(OddsChangeEventArgs args)
+        public async Task OddsChangeHandler(OddsChangeEventArgs args)
         {
-            //var queue = new OddChangeQueue();
-            //queue.arg = args;
-            //queue.time = args.OddsChange.Timestamp;
-            //Globals.Queue_Odd_Change.Enqueue(queue);
-            //RunTask(args);
+
             var common = new Common();
             bool active;
+
+
+            foreach (var l_odds in args.OddsChange.Odds)
+            {
+
+            }
+
 
             foreach (var odd in args.OddsChange.Odds)
             {
@@ -40,7 +43,7 @@ namespace BetService.Classes.DbInsert
                             {
                                 active = val.Active;
                             }
-                            common.insertLiveOdds(odd, val, active, val.Outcome, val.PlayerId,
+                            await common.insertLiveOdds(odd, val, active, val.Outcome, val.PlayerId,
                                 val.Probability.ToString() ?? "", val.Type, val.Value.ToString() ?? "",
                                 val.ViewIndex,
                                 val.VoidFactor.ToString() ?? "", field.Key, args.OddsChange.EventHeader.Id,
@@ -56,68 +59,38 @@ namespace BetService.Classes.DbInsert
                                     NameDictionary.Add(language, odd.Name.GetTranslation(language));
                                 }
                             }
-                            // common.insertMatchDataAllDetails((MatchHeader)entity.EventHeader, null);
 
                             //TODO OPEN
                             var csr = new CancellationTokenSource();
-
-
-
-                            Task.Factory.StartNew(() =>
+                            foreach (var lang in NameDictionary)
                             {
-
-                                foreach (var lang in NameDictionary)
-                                {
-                                    var last_prefix = config.AppSettings.Get("ChannelsSecretPrefixLast_real");
-                                    SendToHybridgeSocket(args.OddsChange.EventHeader.Id, odd.Id, val.TypeId, "", odd.SpecialOddsValue,
-                                        val, CreateLiveOddsChannelName(args.OddsChange.EventHeader.Id, lang.Key, last_prefix), "ODDCHANGE");
-                                }
-
-                                foreach (var lang in NameDictionary)
-                                {
-                                    var last_prefix = config.AppSettings.Get("ChannelsSecretPrefixLast_real2");
-                                    SendToHybridgeSocket(args.OddsChange.EventHeader.Id, odd.Id, val.TypeId, "", odd.SpecialOddsValue,
-                                        val, CreateLiveOddsChannelName(args.OddsChange.EventHeader.Id, lang.Key, last_prefix), "ODDCHANGE");
-                                }
-                                foreach (var lang in NameDictionary)
-                                {
-                                    var last_prefix = config.AppSettings.Get("ChannelsSecretPrefixLast_real3");
-                                    SendToHybridgeSocket(args.OddsChange.EventHeader.Id, odd.Id, val.TypeId, "", odd.SpecialOddsValue,
-                                        val, CreateLiveOddsChannelName(args.OddsChange.EventHeader.Id, lang.Key, last_prefix), "ODDCHANGE");
-                                }
-                                NameDictionary = null;
-                                csr.Cancel();
+                                var last_prefix = config.AppSettings.Get("ChannelsSecretPrefixLast_real");
+                                await SendToHybridgeSocket(args.OddsChange.EventHeader.Id, odd.Id, val.TypeId, "", odd.SpecialOddsValue,
+                                    val, CreateLiveOddsChannelName(args.OddsChange.EventHeader.Id, lang.Key, last_prefix), "ODDCHANGE");
                             }
 
-                             , csr.Token, TaskCreationOptions.None, TaskScheduler.Default)
-                            ;
+                            foreach (var lang in NameDictionary)
+                            {
+                                var last_prefix = config.AppSettings.Get("ChannelsSecretPrefixLast_real2");
+                                await SendToHybridgeSocket(args.OddsChange.EventHeader.Id, odd.Id, val.TypeId, "", odd.SpecialOddsValue,
+                                     val, CreateLiveOddsChannelName(args.OddsChange.EventHeader.Id, lang.Key, last_prefix), "ODDCHANGE");
+                            }
+                            foreach (var lang in NameDictionary)
+                            {
+                                var last_prefix = config.AppSettings.Get("ChannelsSecretPrefixLast_real3");
+                                await SendToHybridgeSocket(args.OddsChange.EventHeader.Id, odd.Id, val.TypeId, "", odd.SpecialOddsValue,
+                                    val, CreateLiveOddsChannelName(args.OddsChange.EventHeader.Id, lang.Key, last_prefix), "ODDCHANGE");
+                            }
+                            NameDictionary = null;
+
                         }
                     }
                     else
                     {
-                        common.UpdateAllLiveOddsOutcomesActive(args.OddsChange.EventHeader.Id, odd, odd.Active);
+                        await common.UpdateAllLiveOddsOutcomesActive(args.OddsChange.EventHeader.Id, odd, odd.Active);
                     }
                 }
             }
-
-            //common.insertMatchDataAllDetails((MatchHeader)entity.EventHeader, null);
-
-            //Task.Factory.StartNew(
-            //         () =>
-            //         {
-            //             common.insertMatchDataAllDetails((MatchHeader)args.OddsChange.EventHeader, null);
-            //         }
-            //, CancellationToken.None, TaskCreationOptions.DenyChildAttach, TaskScheduler.Default);
-
-            //Task.Factory.StartNew(
-            //    () => common.insertMatchDataAllDetails((MatchHeader)entity.EventHeader, null));
-            //Globals.Queue_Odd_Change.Remove(l);
-
-        }
-
-        public void RunTask(OddsChangeEventArgs queueElement)
-        {
-
         }
     }
 }
