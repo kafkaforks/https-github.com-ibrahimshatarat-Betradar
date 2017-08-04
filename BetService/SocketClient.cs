@@ -1,22 +1,27 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Net;
 using System.Net.Sockets;
 using System.Security.Cryptography;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Web.Script.Serialization;
 using Newtonsoft.Json.Linq;
 using SharedLibrary;
 using Sportradar.SDK.FeedProviders.LiveOdds.Common;
+using StackExchange.Redis;
 
 namespace BetService
 {
-    class SocketClient:Core
+    class SocketClient : Core
     {
-       // public static Socket connector = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
-        static async Task SendString( string value)
+        // public static Socket connector = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
+        private static ConnectionMultiplexer Rconnect = RedisConnectorHelper.RedisConn;
+        private static ISubscriber sub = Rconnect.GetSubscriber();
+        static async Task SendString(string value)
         {
             var encoding = Encoding.UTF8;
             try
@@ -31,44 +36,80 @@ namespace BetService
                 SharedLibrary.Logg.logger.Fatal(ex.Message);
             }
         }
-        private async Task SendRedisChannelSocket(string Channel, string Data, string username, string password, string node, string external_content_id, string bet_event)
+        private async void SendRedisChannelSocket(string Channel, string Data, string username, string password, string node, string external_content_id, string bet_event)
         {
             try
             {
-                var address = Core.config.AppSettings.Get("RedisCommandChannel");
-                var data = new JObject();
-                if (!String.IsNullOrEmpty(node))
-                {
-                    //  data["external_content_name"] = node;
-                }
-                if (!String.IsNullOrEmpty(external_content_id))
-                {
-                    // data["external_content_id"] = external_content_id;
-                }
-                data["auth"] = new JObject();
-                data["event"] = "data.upsert";
-                data["data"] = new JObject();
-                data["auth"]["username"] = Core.config.AppSettings.Get("HybridgeClientUserName");
-                data["auth"]["password"] = Core.config.AppSettings.Get("HybridgeClientUserPassword");
-                data["data"]["channel"] = Channel;
-                data["data"]["event"] = bet_event;
-                data["data"]["payload"] = Data;
-                await SendString(data.ToString());
+                //var address = Core.config.AppSettings.Get("RedisCommandChannel");
+                //var data = new JObject();
+                //if (!String.IsNullOrEmpty(node))
+                //{
+                //    //  data["external_content_name"] = node;
+                //}
+                //if (!String.IsNullOrEmpty(external_content_id))
+                //{
+                //    // data["external_content_id"] = external_content_id;
+                //}
+                //data["auth"] = new JObject();
+                //data["event"] = "data.upsert";
+                //data["data"] = new JObject();
+                //data["auth"]["username"] = Core.config.AppSettings.Get("HybridgeClientUserName");
+                //data["auth"]["password"] = Core.config.AppSettings.Get("HybridgeClientUserPassword");
+                //data["data"]["channel"] = Channel;
+                //data["data"]["event"] = bet_event;
+                //data["data"]["payload"] = Data;
+                //Task.Factory.StartNew(()=>SendString(data.ToString()));
+                var build = new StringBuilder(); //Channel+'|'+Data + '|' +username + '|' +password + '|' +node + '|' +external_content_id + '|' +bet_event
 
+                build.Append(Channel);
+                build.Append('|');
+                build.Append(Data);
+                build.Append('|');
+                build.Append(username);
+                build.Append('|');
+                build.Append(password);
+                build.Append('|');
+                build.Append(node);
+                build.Append('|');
+                build.Append(external_content_id);
+                build.Append('|');
+                build.Append(bet_event);
 
-                //await SendToredis(data.ToString());
-
+                SendToredis(build.ToString());
+                build = null;
                 // var command = new NpgsqlCommand("insert_cp_send");
                 // command.Parameters.AddWithValue("p_message", NpgsqlDbType.Text, data.ToString());
                 // await insert(command);
                 //Globals.LiveOddsQueue.Enqueue(data.ToString());
                 //SenMQueue(data.ToString());
-                data = null;
-                GC.Collect();
+                //data = null;
+                //GC.Collect();
             }
             catch (Exception ex)
             {
                 Logg.logger.Fatal(ex.Message);
+            }
+        }
+
+        public void SendToredis(string message)
+        {
+            try
+            {
+                var address = Core.config.AppSettings.Get("RedisCommandChannel");
+
+                if (sub.IsConnected(address))
+                {
+                    var res =  sub.Publish(address, message);
+                }
+                else
+                {
+                    sub = Rconnect.GetSubscriber();
+                    var res =  sub.Publish(address, message);
+                }
+            }
+            catch (Exception ex)
+            {
+                Logg.logger.Fatal("ERROR: " + ex.Message);
             }
         }
 
@@ -104,8 +145,9 @@ namespace BetService
                     // "home@HYBRIDGE", "12345", "Odd", oid, msg_event));
                     if (oid != null && odd != null && msg_event != null)
                     {
-                        
-                        await SendRedisChannelSocket(channel, "[{\"mid_otid_ocid_sid\": \"" + oid + "\"}," + new JavaScriptSerializer().Serialize(odd) + "]", "home@HYBRIDGE", "12345", "Odd", oid.Result, msg_event);
+                        Task.Run(() =>
+                        SendRedisChannelSocket(channel, "[{\"mid_otid_ocid_sid\": \"" + oid + "\"}," + new JavaScriptSerializer().Serialize(odd) + "]", "home@HYBRIDGE", "12345", "Odd", oid.Result, msg_event)
+                        ).ConfigureAwait(false);
                         //ZMQ = null;
                     }
 
@@ -162,10 +204,10 @@ namespace BetService
                 {
                     if (oid != null && odd != null && odd_event != null)
                     {
-                       
-                        await SendRedisChannelSocket(channel,
-                            "[{\"mid_otid_ocid_sid\": \"" + oid + "\"}," + new JavaScriptSerializer().Serialize(odd) +
-                            "]", "home@HYBRIDGE", "12345", "Odd_New", oid.Result, odd_event);
+                        Task.Run(() =>
+                            SendRedisChannelSocket(channel,
+                                "[{\"mid_otid_ocid_sid\": \"" + oid + "\"}," + new JavaScriptSerializer().Serialize(odd) +
+                                "]", "home@HYBRIDGE", "12345", "Odd_New", oid.Result, odd_event)).ConfigureAwait(false);
                         // ZMQ = null;
                     }
                 }
@@ -184,8 +226,7 @@ namespace BetService
                 //TODO REDISSEND
                 if (channel != null && message != null)
                 {
-                    
-                    await SendRedisChannelSocket(channel, "[{\"message\": \"" + message + "\"}]]", "home@HYBRIDGE", "12345", "Message", null, odd_event);
+                    Task.Run(() => SendRedisChannelSocket(channel, "[{\"message\": \"" + message + "\"}]]", "home@HYBRIDGE", "12345", "Message", null, odd_event)).ConfigureAwait(false);
                     // zmq = null;
                 }
 
@@ -272,5 +313,37 @@ namespace BetService
             return result.ToString();
         }
 
+    }
+
+    public class RedisConnectorHelper : Core
+    {
+        public static ConnectionMultiplexer RedisConn;
+        static RedisConnectorHelper()
+        {
+            try
+            {
+
+                ConfigurationOptions configs = new ConfigurationOptions
+                {
+                    EndPoints =
+                    {
+                        {Core.config.AppSettings.Get("RedisServer"), int.Parse(Core.config.AppSettings.Get("RedisPort"))}
+                    },
+                    KeepAlive = 100,
+                    AbortOnConnectFail = false,
+                    ResponseTimeout = 100,
+                    ConnectTimeout = 100,
+                    SyncTimeout = 200,
+                    Password = config.AppSettings.Get("RedisServerPassword")
+                };
+
+                RedisConn = ConnectionMultiplexer.Connect(configs);
+
+            }
+            catch (Exception ex)
+            {
+                Logg.logger.Fatal(ex.Message);
+            }
+        }
     }
 }

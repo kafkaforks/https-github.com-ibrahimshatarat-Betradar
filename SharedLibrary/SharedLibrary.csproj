@@ -35,8 +35,8 @@
       <HintPath>..\packages\AsyncIO.0.1.20.0\lib\net40\AsyncIO.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="BookmakerSdk, Version=2.6.1.0, Culture=neutral, PublicKeyToken=ebebff56eb417380, processorArchitecture=MSIL">
-      <HintPath>..\packages\BookmakerSDK.2.6.1.0\lib\net45\BookmakerSdk.dll</HintPath>
+    <Reference Include="BookmakerSdk, Version=2.6.1.1, Culture=neutral, PublicKeyToken=ebebff56eb417380, processorArchitecture=MSIL">
+      <HintPath>..\packages\BookmakerSDK.2.6.1.1\lib\net45\BookmakerSdk.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Jil, Version=2.15.2.0, Culture=neutral, processorArchitecture=MSIL">
@@ -95,8 +95,8 @@
       <HintPath>..\packages\Sigil.4.7.0\lib\net45\Sigil.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="StackExchange.Redis, Version=1.2.5.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\StackExchange.Redis.1.2.5\lib\net46\StackExchange.Redis.dll</HintPath>
+    <Reference Include="StackExchange.Redis, Version=1.1.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\StackExchange.Redis.1.1.603\lib\net46\StackExchange.Redis.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />

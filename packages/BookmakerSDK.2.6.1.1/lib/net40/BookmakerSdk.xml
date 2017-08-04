@@ -17490,7 +17490,7 @@
     </member>
     <member name="T:Sportradar.SDK.FeedProviders.LiveOdds.Internal.LiveOddsFeedProviderVbl">
       <summary>
-            Virtual football league LiveOdds provider.
+            Virtual basketball league LiveOdds provider.
             </summary>
     </member>
     <member name="P:Sportradar.SDK.FeedProviders.LiveOdds.Internal.LiveOddsFeedProviderVbl.ProviderType">

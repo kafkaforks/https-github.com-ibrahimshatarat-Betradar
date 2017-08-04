@@ -10,11 +10,11 @@ using StackExchange.Redis;
 
 namespace Communicator
 {
-    static class SocketServer
+    class SocketServer
     {
         private static ConnectionMultiplexer Rconnect = RedisConnectorHelper.RedisConn;
         private static ISubscriber sub = Rconnect.GetSubscriber();
-        public static async void ReceivedString(IAsyncResult asyncResult)
+        public  async void ReceivedString(IAsyncResult asyncResult)
         {
             Connection connection = (Connection)asyncResult.AsyncState;
             try
@@ -47,7 +47,9 @@ namespace Communicator
                     }
                     else
                     {
-                       // Task.Factory.StartNew(()=> SendToredis(connection.Encoding.GetString(buffer, 0, length)));
+                         
+                        Task.Run(() =>  SendToredis(connection.Encoding.GetString(buffer, 0, length))).ConfigureAwait(false);
+                        //Task.Factory.StartNew(()=> SendToredis(connection.Encoding.GetString(buffer, 0, length)));
                     }
 
                     connection.WaitForNextString(ReceivedString);
@@ -58,7 +60,7 @@ namespace Communicator
                 Logg.logger.Fatal("ERROR: " + ex.Message);
             }
         }
-        private static async Task SendToredis(string message)
+        public  async Task SendToredis(string message)
         {
             try
             {
@@ -79,7 +81,37 @@ namespace Communicator
                 Logg.logger.Fatal("ERROR: " + ex.Message);
             }
         }
+
+  
     }
+
+    class Recievers
+    {
+        public void Recieve()
+        {
+            var server = new SocketServer();
+            try
+            {
+                Connection connection;
+                Console.WriteLine("The beginning");
+                using (Socket listener = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp))
+                {
+                    Console.WriteLine("listener");
+                    listener.Bind(new IPEndPoint(IPAddress.Parse("127.0.0.1"), 6767));
+                    listener.Listen(1);
+                    connection = new Connection(listener.Accept());
+                    Console.WriteLine("Connection established.");
+                }
+
+                connection.WaitForNextString(server.ReceivedString);
+            }
+            catch (Exception ex)
+            {
+                Logg.logger.Fatal("ERROR: " + ex.Message);
+            }
+        }
+    }
+
     class Connection
     {
         public Socket Socket { get; private set; }
