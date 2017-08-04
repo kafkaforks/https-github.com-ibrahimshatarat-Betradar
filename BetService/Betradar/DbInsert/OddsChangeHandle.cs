@@ -6,8 +6,6 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Web.Script.Serialization;
 using BetService.Classes.DbInsert;
-using Npgsql;
-using NpgsqlTypes;
 using SharedLibrary;
 using Sportradar.SDK.FeedProviders.LiveOdds.Common;
 using Sportradar.SDK.FeedProviders.LiveOdds.LiveOdds;
