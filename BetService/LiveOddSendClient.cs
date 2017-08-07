@@ -16,11 +16,11 @@ using StackExchange.Redis;
 
 namespace BetService
 {
-    class SocketClient : Core
+    class LiveOddSendClient : Core
     {
         // public static Socket connector = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
-        private static ConnectionMultiplexer Rconnect = RedisConnectorHelper.RedisConn;
-        private static ISubscriber sub = Rconnect.GetSubscriber();
+        public static ConnectionMultiplexer Rconnect = RedisConnectorHelper.RedisConn;
+        public static ISubscriber sub = Rconnect.GetSubscriber();
         static async Task SendString(string value)
         {
             var encoding = Encoding.UTF8;
@@ -40,50 +40,24 @@ namespace BetService
         {
             try
             {
-                //var address = Core.config.AppSettings.Get("RedisCommandChannel");
-                //var data = new JObject();
-                //if (!String.IsNullOrEmpty(node))
-                //{
-                //    //  data["external_content_name"] = node;
-                //}
-                //if (!String.IsNullOrEmpty(external_content_id))
-                //{
-                //    // data["external_content_id"] = external_content_id;
-                //}
-                //data["auth"] = new JObject();
-                //data["event"] = "data.upsert";
-                //data["data"] = new JObject();
-                //data["auth"]["username"] = Core.config.AppSettings.Get("HybridgeClientUserName");
-                //data["auth"]["password"] = Core.config.AppSettings.Get("HybridgeClientUserPassword");
-                //data["data"]["channel"] = Channel;
-                //data["data"]["event"] = bet_event;
-                //data["data"]["payload"] = Data;
-                //Task.Factory.StartNew(()=>SendString(data.ToString()));
+
                 var build = new StringBuilder(); //Channel+'|'+Data + '|' +username + '|' +password + '|' +node + '|' +external_content_id + '|' +bet_event
 
                 build.Append(Channel);
-                build.Append('|');
-                build.Append(Data);
                 build.Append('|');
                 build.Append(username);
                 build.Append('|');
                 build.Append(password);
                 build.Append('|');
-                build.Append(node);
-                build.Append('|');
-                build.Append(external_content_id);
+                build.Append(external_content_id.Replace('|','_'));
                 build.Append('|');
                 build.Append(bet_event);
+                build.Append('|');
+                build.Append(Data);
 
-                SendToredis(build.ToString());
+                await SendToredis(build.ToString());
                 build = null;
-                // var command = new NpgsqlCommand("insert_cp_send");
-                // command.Parameters.AddWithValue("p_message", NpgsqlDbType.Text, data.ToString());
-                // await insert(command);
-                //Globals.LiveOddsQueue.Enqueue(data.ToString());
-                //SenMQueue(data.ToString());
-                //data = null;
-                //GC.Collect();
+
             }
             catch (Exception ex)
             {
@@ -91,21 +65,12 @@ namespace BetService
             }
         }
 
-        public void SendToredis(string message)
+        public async Task SendToredis(string message)
         {
             try
             {
                 var address = Core.config.AppSettings.Get("RedisCommandChannel");
-
-                if (sub.IsConnected(address))
-                {
-                    var res =  sub.Publish(address, message);
-                }
-                else
-                {
-                    sub = Rconnect.GetSubscriber();
-                    var res =  sub.Publish(address, message);
-                }
+                sub.PublishAsync(address, message);
             }
             catch (Exception ex)
             {
@@ -140,31 +105,64 @@ namespace BetService
                 //TODO ASian handicap block
                 if (odd_in.TypeId != 51 && odd_in.TypeId != 7)
                 {
-                    //Task.Factory.StartNew(()=>RedisQueue.Send_Redis_Channel(channel,
-                    // "[{\"mid_otid_ocid_sid\": \"" + oid + "\"}," + new JavaScriptSerializer().Serialize(odd) + "]",
-                    // "home@HYBRIDGE", "12345", "Odd", oid, msg_event));
                     if (oid != null && odd != null && msg_event != null)
                     {
+                        var sb = new StringBuilder();
+                        //sb.Append("{");
+                        sb.Append("\"");
+                        sb.Append("last_update");
+                        sb.Append("\"");
+                        sb.Append(":");
+                        sb.Append("\"");
+                        sb.Append(odd.last_update);
+                        sb.Append("\"");
+                        sb.Append(",");
+                        sb.Append("\"");
+                        sb.Append("odd_eventoddsfield_active");
+                        sb.Append("\"");
+                        sb.Append(":");
+                        sb.Append("\"");
+                        sb.Append(odd.odd_eventoddsfield_active);
+                        sb.Append("\"");
+                        sb.Append(",");
+                        sb.Append("\"");
+                        sb.Append("odd_name");
+                        sb.Append("\"");
+                        sb.Append(":");
+                        sb.Append("\"");
+                        sb.Append(odd.odd_name);
+                        sb.Append("\"");
+                        sb.Append(",");
+                        sb.Append("\"");
+                        sb.Append("odd_odd");
+                        sb.Append("\"");
+                        sb.Append(":");
+                        sb.Append("\"");
+                        sb.Append(odd.odd_odd);
+                        sb.Append("\"");
+                        sb.Append(",");
+                        sb.Append("\"");
+                        sb.Append("odd_probability");
+                        sb.Append("\"");
+                        sb.Append(":");
+                        sb.Append("\"");
+                        sb.Append(odd.odd_probability);
+                        sb.Append("\"");
+                        sb.Append(",");
+                        sb.Append("\"");
+                        sb.Append("odd_special_odds_value");
+                        sb.Append("\"");
+                        sb.Append(":");
+                        sb.Append("\"");
+                        sb.Append(odd.odd_special_odds_value);
+                        sb.Append("\"");
+                       
+                        //sb.Append("}");
                         Task.Run(() =>
-                        SendRedisChannelSocket(channel, "[{\"mid_otid_ocid_sid\": \"" + oid + "\"}," + new JavaScriptSerializer().Serialize(odd) + "]", "home@HYBRIDGE", "12345", "Odd", oid.Result, msg_event)
+                        SendRedisChannelSocket(channel, "[{\"mid_otid_ocid_sid\": \"" + oid.Result + "\"},{" + sb + "}]", config.AppSettings.Get("RedisUserName"), config.AppSettings.Get("RedisPassword"), "Odd", oid.Result, msg_event)
                         ).ConfigureAwait(false);
-                        //ZMQ = null;
                     }
-
-
-                    // var channelQueueObject = new RedisChannelObject();
-                    //channelQueueObject.Channel = channel;
-                    //channelQueueObject.Data = "[{\"mid_otid_ocid_sid\": \"" + oid + "\"}," + new JavaScriptSerializer().Serialize(odd) + "]";
-                    //channelQueueObject.username = config.AppSettings.Get("RedisUserName");
-                    //channelQueueObject.password = config.AppSettings.Get("RedisPassword");
-                    //channelQueueObject.node = "Odd";
-                    //channelQueueObject.external_content_id = oid;
-                    //channelQueueObject.bet_event = msg_event;
-                    //Globals.Queue_RedisChannelSend.Enqueue(channelQueueObject);
                 }
-
-                //Task.Factory.StartNew(()=>HybridgeClient.SendDataSocketPhoenix(channel, "[{\"mid_otid_ocid_sid\": \"" + oid + "\"}," + new JavaScriptSerializer().Serialize(odd) + "]", "home@HYBRIDGE", "12345","Odd",oid,msg_event));
-                //clientSock.SendData(channel,"[{\"mid_otid_ocid_sid\": \"" + oid + "\"}," + new JavaScriptSerializer().Serialize(odd) + "]");
             }
             catch (Exception ex)
             {
@@ -204,11 +202,60 @@ namespace BetService
                 {
                     if (oid != null && odd != null && odd_event != null)
                     {
+                        var sb = new StringBuilder();
+                        //sb.Append("{");
+                        sb.Append("\"");
+                        sb.Append("last_update");
+                        sb.Append("\"");
+                        sb.Append(":");
+                        sb.Append("\"");
+                        sb.Append(odd.last_update);
+                        sb.Append("\"");
+                        sb.Append(",");
+                        sb.Append("\"");
+                        sb.Append("odd_eventoddsfield_active");
+                        sb.Append("\"");
+                        sb.Append(":");
+                        sb.Append("\"");
+                        sb.Append(odd.odd_eventoddsfield_active);
+                        sb.Append("\"");
+                        sb.Append(",");
+                        sb.Append("\"");
+                        sb.Append("odd_name");
+                        sb.Append("\"");
+                        sb.Append(":");
+                        sb.Append("\"");
+                        sb.Append(odd.odd_name);
+                        sb.Append("\"");
+                        sb.Append(",");
+                        sb.Append("\"");
+                        sb.Append("odd_odd");
+                        sb.Append("\"");
+                        sb.Append(":");
+                        sb.Append("\"");
+                        sb.Append(odd.odd_odd);
+                        sb.Append("\"");
+                        sb.Append(",");
+                        sb.Append("\"");
+                        sb.Append("odd_probability");
+                        sb.Append("\"");
+                        sb.Append(":");
+                        sb.Append("\"");
+                        sb.Append(odd.odd_probability);
+                        sb.Append("\"");
+                        sb.Append(",");
+                        sb.Append("\"");
+                        sb.Append("odd_special_odds_value");
+                        sb.Append("\"");
+                        sb.Append(":");
+                        sb.Append("\"");
+                        sb.Append(odd.odd_special_odds_value);
+                        sb.Append("\"");
+                       // sb.Append("}");
                         Task.Run(() =>
                             SendRedisChannelSocket(channel,
-                                "[{\"mid_otid_ocid_sid\": \"" + oid + "\"}," + new JavaScriptSerializer().Serialize(odd) +
-                                "]", "home@HYBRIDGE", "12345", "Odd_New", oid.Result, odd_event)).ConfigureAwait(false);
-                        // ZMQ = null;
+                                "[{\"mid_otid_ocid_sid\": \"" + oid.Result + "\"},{" + sb +
+                                "}]", config.AppSettings.Get("RedisUserName"), config.AppSettings.Get("RedisPassword"), "Odd_New", oid.Result, odd_event)).ConfigureAwait(false);
                     }
                 }
 
@@ -226,7 +273,7 @@ namespace BetService
                 //TODO REDISSEND
                 if (channel != null && message != null)
                 {
-                    Task.Run(() => SendRedisChannelSocket(channel, "[{\"message\": \"" + message + "\"}]]", "home@HYBRIDGE", "12345", "Message", null, odd_event)).ConfigureAwait(false);
+                    Task.Run(() => SendRedisChannelSocket(channel, "[{\"message\": \"" + message + "\"}]]", config.AppSettings.Get("RedisUserName"), config.AppSettings.Get("RedisPassword"), "Message", null, odd_event)).ConfigureAwait(false);
                     // zmq = null;
                 }
 
@@ -332,8 +379,8 @@ namespace BetService
                     KeepAlive = 100,
                     AbortOnConnectFail = false,
                     ResponseTimeout = 100,
-                    ConnectTimeout = 100,
-                    SyncTimeout = 200,
+                    ConnectTimeout = 5000,
+                    SyncTimeout = 100,
                     Password = config.AppSettings.Get("RedisServerPassword")
                 };
 

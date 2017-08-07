@@ -20,13 +20,6 @@ namespace BetService.Classes.DbInsert
             var common = new Common();
             bool active;
 
-
-            foreach (var l_odds in args.OddsChange.Odds)
-            {
-
-            }
-
-
             foreach (var odd in args.OddsChange.Odds)
             {
                 if (odd.Active != null)
@@ -59,7 +52,7 @@ namespace BetService.Classes.DbInsert
                             }
 
                             //TODO OPEN
-                            var socket = new SocketClient();
+                            var socket = new LiveOddSendClient();
                             foreach (var lang in NameDictionary)
                             {
                                 var last_prefix = config.AppSettings.Get("ChannelsSecretPrefixLast_real");
@@ -80,6 +73,14 @@ namespace BetService.Classes.DbInsert
                             foreach (var lang in NameDictionary)
                             {
                                 var last_prefix = config.AppSettings.Get("ChannelsSecretPrefixLast_real3");
+
+                                await socket.SendToHybridgeSocket(args.OddsChange.EventHeader.Id, odd.Id, val.TypeId, "", odd.SpecialOddsValue,
+                                    val, await CreateLiveOddsChannelName(args.OddsChange.EventHeader.Id, lang.Key, last_prefix), "ODDCHANGE");
+
+                            }
+                            foreach (var lang in NameDictionary)
+                            {
+                                var last_prefix = config.AppSettings.Get("ChannelsSecretPrefixLast_real4");
 
                                 await socket.SendToHybridgeSocket(args.OddsChange.EventHeader.Id, odd.Id, val.TypeId, "", odd.SpecialOddsValue,
                                     val, await CreateLiveOddsChannelName(args.OddsChange.EventHeader.Id, lang.Key, last_prefix), "ODDCHANGE");

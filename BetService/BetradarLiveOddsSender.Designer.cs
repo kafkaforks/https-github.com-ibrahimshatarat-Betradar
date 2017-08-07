@@ -1,6 +1,6 @@
 ﻿namespace BetService
 {
-    partial class LiveOddsSender
+    partial class BetradarLiveOddsSender
     {
         /// <summary> 
         /// Required designer variable.

@@ -12,15 +12,15 @@ using SharedLibrary;
 
 namespace BetService
 {
-    partial class LiveOddsSender : ServiceBase
+    partial class BetradarLiveOddsSender : ServiceBase
     {
         private Timer timer1 = null;
-        public LiveOddsSender()
+        public BetradarLiveOddsSender()
         {
             InitializeComponent();
         }
 
-        public LiveOddsSender(string[] args)
+        public BetradarLiveOddsSender(string[] args)
         {
             InitializeComponent();
             TestStartupAndStop(args);
@@ -34,25 +34,28 @@ namespace BetService
 
         protected override void OnStart(string[] args)
         {
-            //timer1 = new Timer();
-            //timer1.Interval = 11000;
-            //timer1.Elapsed += timer1_Tick;
-            //timer1.Enabled = true;
-            //timer1.Start();
+            timer1 = new Timer();
+            timer1.Interval = 11000;
+            timer1.Elapsed += timer1_Tick;
+            timer1.Enabled = true;
+            timer1.Start();
         }
 
         protected override void OnStop()
         {
-            // TODO: Add code here to perform any tear-down necessary to stop your service.
+            timer1.Stop();
+            timer1.Enabled = false;
         }
         private void timer1_Tick(object sender, ElapsedEventArgs e)
         {
             try
             {
                 timer1.Enabled = false;
-                while (Globals.LiveOddsQueue.Count > 0)
+                var address = Core.config.AppSettings.Get("RedisCommandChannel");
+
+                if (!LiveOddSendClient.sub.IsConnected(address))
                 {
-                    ZMQClient.Instance.SendOutQueue(Globals.LiveOddsQueue.Dequeue().ToString());
+                    LiveOddSendClient.sub = LiveOddSendClient.Rconnect.GetSubscriber();
                 }
                 timer1.Enabled = true;
             }

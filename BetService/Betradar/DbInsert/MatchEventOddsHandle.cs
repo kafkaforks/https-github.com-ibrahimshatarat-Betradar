@@ -78,7 +78,9 @@ MatchEventOddsHandler(MatchEventOdds args)
             {
                 // Here we add the odds of the match
 
+
                 int[] visible_odd_types = new int[] { 10, 46, 60, 42, 20, 225, 52 };
+               // match.Sport.Id
                 if (match.Odds != null)
                 {
                     foreach (var Odds in match.Odds)

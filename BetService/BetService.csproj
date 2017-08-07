@@ -192,11 +192,11 @@
       <DependentUpon>CouponFinalize.cs</DependentUpon>
     </Compile>
     <Compile Include="Library.cs" />
-    <Compile Include="LiveOddsSender.cs">
+    <Compile Include="BetradarLiveOddsSender.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="LiveOddsSender.Designer.cs">
-      <DependentUpon>LiveOddsSender.cs</DependentUpon>
+    <Compile Include="BetradarLiveOddsSender.Designer.cs">
+      <DependentUpon>BetradarLiveOddsSender.cs</DependentUpon>
     </Compile>
     <Compile Include="Logg.cs" />
     <Compile Include="Program.cs" />
@@ -213,7 +213,7 @@
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
     <Compile Include="RPC\MsgPackSerializer.cs" />
-    <Compile Include="SocketClient.cs" />
+    <Compile Include="LiveOddSendClient.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config">
@@ -250,6 +250,9 @@
       <Project>{da2907bc-53ec-49b7-8740-c09aabfe57ab}</Project>
       <Name>SharedLibrary</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Betradar\DbInsert\VissibleMarkets.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

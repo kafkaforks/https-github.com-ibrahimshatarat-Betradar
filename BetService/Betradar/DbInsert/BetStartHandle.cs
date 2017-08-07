@@ -28,11 +28,13 @@ namespace BetService.Classes.DbInsert
                 var channel2 = await CreateLiveOddsChannelName(args.BetStart.EventHeader.Id, "global", merch);
                 merch = config.AppSettings.Get("ChannelsSecretPrefixLast_real3");
                 var channel3 = await CreateLiveOddsChannelName(args.BetStart.EventHeader.Id, "global", merch);
-                var socket = new SocketClient();
+                merch = config.AppSettings.Get("ChannelsSecretPrefixLast_real4");
+                var channel4 = await CreateLiveOddsChannelName(args.BetStart.EventHeader.Id, "global", merch);
+                var socket = new LiveOddSendClient();
                 await socket.SendToHybridgeSocketMessages(args.BetStart.Status.ToString(), channel, "BETSTART");
                 await socket.SendToHybridgeSocketMessages(args.BetStart.Status.ToString(), channel2, "BETSTART");
                 await socket.SendToHybridgeSocketMessages(args.BetStart.Status.ToString(), channel3, "BETSTART");
-                
+                await socket.SendToHybridgeSocketMessages(args.BetStart.Status.ToString(), channel4, "BETSTART");
             }
             catch (Exception ex)
             {

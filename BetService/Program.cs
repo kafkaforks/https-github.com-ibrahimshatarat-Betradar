@@ -55,7 +55,7 @@ namespace BetService
             ServiceBase[] ServicesToRun;
             ServicesToRun = new ServiceBase[]
             {
-                new CouponFinalize(),new Betradar(),new LiveOddsSender() 
+                new CouponFinalize(),new Betradar(),new BetradarLiveOddsSender() 
             };
 
 
@@ -63,10 +63,10 @@ namespace BetService
             {
                 CouponFinalize service1;
                 Betradar service2;
-                LiveOddsSender service3;
+                BetradarLiveOddsSender service3;
                 Task.Factory.StartNew(() => service1 = new CouponFinalize(args));
                 Task.Factory.StartNew(() => service2 = new Betradar(args));
-                Task.Factory.StartNew(() => service3= new LiveOddsSender(args));
+                Task.Factory.StartNew(() => service3= new BetradarLiveOddsSender(args));
                 //Console.WriteLine("Press any key to stop program");
                 Console.Read();
 
