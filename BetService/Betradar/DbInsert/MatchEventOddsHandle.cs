@@ -19,9 +19,7 @@ namespace BetService.Classes.DbInsert
     public class MatchEventOddsHandle : Core
     {
 
-        public async 
-        Task
-MatchEventOddsHandler(MatchEventOdds args)
+        public async Task MatchEventOddsHandler(MatchEventOdds args)
         {
             await MatchEventOdds_Queue_WatchQueueMatches(args);
         }

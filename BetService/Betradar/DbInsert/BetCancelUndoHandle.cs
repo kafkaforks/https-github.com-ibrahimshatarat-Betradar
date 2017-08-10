@@ -22,7 +22,8 @@ namespace BetService.Classes.DbInsert
             try
             {
                  await insertOdds(args);
-                 await common.insertMatchDataAllDetails((MatchHeader)args.BetCancelUndo.EventHeader, null);
+                //TODO: REDISSSSSS
+                //await common.insertMatchDataAllDetails((MatchHeader)args.BetCancelUndo.EventHeader, null);
             }
             catch (Exception ex)
             {

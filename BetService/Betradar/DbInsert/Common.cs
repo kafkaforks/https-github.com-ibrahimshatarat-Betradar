@@ -413,14 +413,14 @@ namespace BetService.Classes.DbInsert
                     //home_name = match.Fixture.Competitors.Texts[0].Texts[0].Text[2].Value;
                     if (match.Fixture.Competitors != null)
                     {
-                        home_name = await TextsToJson(match.Fixture.Competitors.Texts, 0);
+                        home_name = TextsToJson(match.Fixture.Competitors.Texts, 0);
                         var superid = match.Fixture.Competitors.Texts[0].Texts[0].Superid;
                         if (superid != null)
                             home_id = superid.Value;
                         var superid2 = match.Fixture.Competitors.Texts[1].Texts[0].Superid;
                         if (superid2 != null)
                             away_id = superid2.Value;
-                        away_name = await TextsToJson(match.Fixture.Competitors.Texts, 1);
+                        away_name = TextsToJson(match.Fixture.Competitors.Texts, 1);
                     }
                     var first = "";
                     var second = "";
@@ -476,7 +476,7 @@ namespace BetService.Classes.DbInsert
                     //var dictionary = new Dictionary<string, string>();
                     if (match.Sport.Texts != null && match.Sport != null)
                     {
-                        sport_text = await TextsToJson(match.Sport.Texts);
+                        sport_text = TextsToJson(match.Sport.Texts);
                         command.Parameters.AddWithValue("p_sport_name", NpgsqlDbType.Text, sport_text);
                     }
                     else
@@ -531,7 +531,8 @@ namespace BetService.Classes.DbInsert
                 {
                     command.Parameters.AddWithValue("match_start_date", NpgsqlDbType.Timestamp, DBNull.Value);
                 }
-                command.Parameters.AddWithValue("p_feed_type", NpgsqlDbType.Integer, feedtype);
+                //command.Parameters.AddWithValue("p_feed_type", NpgsqlDbType.Integer, feedtype);
+                command.Parameters.AddWithValue("p_feed_type", NpgsqlDbType.Integer, DBNull.Value);
                 await insert(command);
 
             }
@@ -594,8 +595,8 @@ namespace BetService.Classes.DbInsert
                 command.Parameters.AddWithValue("p_is_active", NpgsqlDbType.Boolean, match.is_active);
                 command.Parameters.AddWithValue("country_iso", NpgsqlDbType.Text, DBNull.Value);
                 command.Parameters.AddWithValue("match_start_date", NpgsqlDbType.Timestamp, match.match_start_date);
-                command.Parameters.AddWithValue("p_feed_type", NpgsqlDbType.Integer, feedtype);
-
+                //command.Parameters.AddWithValue("p_feed_type", NpgsqlDbType.Integer, feedtype);
+                command.Parameters.AddWithValue("p_feed_type", NpgsqlDbType.Integer, DBNull.Value);
                 await insert(command);
             }
             catch (Exception ex)
@@ -610,17 +611,17 @@ namespace BetService.Classes.DbInsert
             {
                 match.match_id = header.Id;
                 match.away_team_id = info.AwayTeam.Id ?? 0;
-                match.away_team_name = await IdNameTupleToJson(info.AwayTeam);
-                match.country_iso = await IdNameTupleToJson(info.Category);
+                match.away_team_name = IdNameTupleToJson(info.AwayTeam);
+                match.country_iso = IdNameTupleToJson(info.Category);
                 match.home_team_id = info.HomeTeam.Id ?? 0;
-                match.home_team_name = await IdNameTupleToJson(info.HomeTeam);
+                match.home_team_name = IdNameTupleToJson(info.HomeTeam);
                 match.is_active = header.Active;
                 match.match_name = info.HomeTeam.Name.International + @"|" + info.AwayTeam.Name.International;
                 match.match_start_date = info.DateOfMatch ?? DateTime.Parse(null);
                 match.sport_id = info.Sport.Id ?? 0;
-                match.sport_name = await IdNameTupleToJson(info.Sport);
+                match.sport_name = IdNameTupleToJson(info.Sport);
                 match.tournament_id = info.Tournament.Id ?? 0;
-                match.tournament_name = await IdNameTupleToJson(info.Tournament);
+                match.tournament_name = IdNameTupleToJson(info.Tournament);
                 return match;
             }
             catch (Exception ex)
@@ -631,11 +632,9 @@ namespace BetService.Classes.DbInsert
         }
         public async Task<long> insertMatchDataAllDetails(MatchHeader entityMheader, MatchInfo entityMinfo)
         {
-
             var ObjCommand = new NpgsqlCommand(await Globals.DB_Functions.InsertDyMatchDataAllDetails.ToDescription());
             try
             {
-                var gogogog = entityMheader.Id;
                 if (entityMinfo != null)
                 {
                     insertMatchLocal(await ConvertLiveMatchToLcooMatch(entityMheader, entityMinfo), 2);
@@ -1176,19 +1175,72 @@ namespace BetService.Classes.DbInsert
                         ObjCommand.Parameters.AddWithValue("p_tv_channels", NpgsqlDbType.Text, DBNull.Value);
                     }
                 }
+                var ret = await insert(ObjCommand);
+                try
+                {
+                    var merchList = new List<string>();
+                    merchList.Add(config.AppSettings.Get("ChannelsSecretPrefixLast_real"));
+                    merchList.Add(config.AppSettings.Get("ChannelsSecretPrefixLast_real2"));
+                    merchList.Add(config.AppSettings.Get("ChannelsSecretPrefixLast_real3"));
+                    merchList.Add(config.AppSettings.Get("ChannelsSecretPrefixLast_real4"));
+                    foreach (var merch in merchList)
+                    {
+                        var socket = new LiveOddSendClient();
+                        var langList = new List<string>();
+                        langList.Add("BET");
+                        langList.Add("en");
 
-                //var ret = new Globals.ReturnQueueLong(queue, insert(ObjCommand));
-                //if (ret.id > 0 )
-                //{
-                //    SharedLibrary.Logg.logger.Error("Match Details Inserted !!!");
-                //}
-                return await insert(ObjCommand);
+                        if (entityMinfo != null)
+                        {
+                            Task.Run(() =>
+                            socket.SendToHybridgeLiveMenue(CreateLiveOddsChannelName("sports.live", merch).Result,
+                            (entityMheader.Status == null) ? " " : entityMheader.Status.ToString(),
+                            (entityMheader.MatchTime == null) ? " " : entityMheader.MatchTime.ToString(),
+                            (entityMheader.BetStatus == null) ? " " : entityMheader.BetStatus.ToString(),
+                            (entityMheader.Id == null) ? " " : entityMheader.Id.ToString(),
+                            (entityMinfo.HomeTeam == null) ? " " : entityMinfo.HomeTeam.Id.ToString(), " ",
+                            (entityMinfo.AwayTeam == null) ? " " : LocalizedStringToJson(entityMinfo.AwayTeam.Name),
+                            (entityMinfo.DateOfMatch == null) ? " " : entityMinfo.DateOfMatch.ToString(),
+                            (entityMinfo.AwayTeam == null) ? " " : entityMinfo.AwayTeam.Id.ToString(),
+                            (entityMheader.Score == null) ? " " : entityMheader.Score,
+                            (entityMinfo.HomeTeam == null) ? " " : LocalizedStringToJson(entityMinfo.HomeTeam.Name),
+                            (entityMinfo.Tournament == null) ? " " : LocalizedStringToJson(entityMinfo.Tournament.Name),
+                            (entityMinfo.Category == null) ? " " : entityMinfo.Category.Id.ToString(),
+                            " ",
+                            (entityMinfo.Category == null) ? " " : LocalizedStringToJson(entityMinfo.Category.Name),
+                            (entityMinfo.Tournament == null) ? " " : entityMinfo.Tournament.Id.ToString(),
+                            (entityMinfo.Sport == null) ? " " : entityMinfo.Sport.Id.ToString(),
+                            (entityMinfo.Sport.Name == null) ? " " : LocalizedStringToJson(entityMinfo.Sport.Name))
+                             ).ConfigureAwait(false);
+                        }
+                        else
+                        {
+                            Task.Run(() =>
+                           socket.SendToHybridgeLiveMenue(CreateLiveOddsChannelName("sports.live", merch).Result, entityMheader.Status.ToString(),
+                           (entityMheader.MatchTime == null) ? " " : entityMheader.MatchTime.ToString(),
+                           (entityMheader.BetStatus == null) ? " " : entityMheader.BetStatus.ToString(), (entityMheader.Id == null) ? " " : entityMheader.Id.ToString(), " ", " ", " ", " ", " ",
+                           (entityMheader.Score == null) ? " " : entityMheader.Score, " ", " ", " ", " ", " ", " ", " ", " ")
+                            ).ConfigureAwait(false);
+                        }
+                        ////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+                        socket = null;
+
+                    }
+
+                }
+                catch (Exception ex)
+                {
+                    Logg.logger.Fatal(ex.Message);
+                }
+                return ret;
             }
             catch (Exception ex)
             {
                 Logg.logger.Fatal(ex.Message);
                 return -1;
             }
+            
         }
         public async Task<bool> updateDmadYellowRedCard(ScoreCardSummary entity, long p_match_id)
         {
@@ -1284,7 +1336,7 @@ namespace BetService.Classes.DbInsert
                     }
                 }
 
-            
+
             }
             catch (Exception ex)
             {
@@ -1293,7 +1345,7 @@ namespace BetService.Classes.DbInsert
             var command = new NpgsqlCommand(await Globals.DB_Functions.InsertLiveOdds.ToDescription());
             try
             {
-              
+
                 command.Parameters.AddWithValue("p_match_id", NpgsqlDbType.Bigint, match_id);
                 command.Parameters.AddWithValue("p_odd_active", NpgsqlDbType.Boolean, entity.Active);
                 if (entity.Changed != null)
@@ -2008,7 +2060,25 @@ namespace BetService.Classes.DbInsert
 
         #endregion
 
-        public async Task<string> IdNameTupleToJson(IdNameTuple tuple)
+        public string LocalizedStringToJson(LocalizedString tuple)
+        {
+            var Hdictionary = new Dictionary<string, string>();
+            try
+            {
+                Hdictionary.Add("BET", tuple.International);
+                foreach (var lang in tuple.AvailableTranslationLanguages)
+                {
+                    Hdictionary.Add(lang, tuple.GetTranslation(lang));
+                }
+                return new JavaScriptSerializer().Serialize(Hdictionary);
+            }
+            catch (Exception ex)
+            {
+                SharedLibrary.Logg.logger.Fatal(ex.Message);
+                return null;
+            }
+        }
+        public string IdNameTupleToJson(IdNameTuple tuple)
         {
             var Hdictionary = new Dictionary<string, string>();
             try
@@ -2027,7 +2097,7 @@ namespace BetService.Classes.DbInsert
                 return null;
             }
         }
-        public async Task<string> IdNameTupleToJson(List<IdNameTuple> tuples)
+        public string IdNameTupleToJson(List<IdNameTuple> tuples)
         {
             var Hdictionary = new Dictionary<string, string>();
             var DictionaryList = new List<Dictionary<string, string>>();
@@ -2052,7 +2122,7 @@ namespace BetService.Classes.DbInsert
                 return null;
             }
         }
-        public async Task<string> TextsToJson(List<TextsEntity> texts, int? number)
+        public string TextsToJson(List<TextsEntity> texts, int? number)
         {
             var dictionary = new Dictionary<string, string>();
             try
@@ -2084,7 +2154,7 @@ namespace BetService.Classes.DbInsert
                 return null;
             }
         }
-        public async Task<string> TextsToJson(List<TextEntity> texts)
+        public string TextsToJson(List<TextEntity> texts)
         {
             var dictionary = new Dictionary<string, string>();
             try
@@ -2102,7 +2172,7 @@ namespace BetService.Classes.DbInsert
             }
         }
 
-        public async 
+        public async
         Task
 UpdateAliveMatches(List<string> matches)
         {

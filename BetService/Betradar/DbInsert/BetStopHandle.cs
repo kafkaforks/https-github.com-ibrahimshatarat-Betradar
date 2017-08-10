@@ -19,6 +19,7 @@ namespace BetService.Classes.DbInsert
         {
             try
             {
+                
                 var common = new Common();
                 await common.insertMatchDataAllDetails((MatchHeader)args.BetStop.EventHeader, null);
                 var merch = config.AppSettings.Get("ChannelsSecretPrefixLast_real");

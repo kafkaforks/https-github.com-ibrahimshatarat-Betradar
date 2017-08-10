@@ -49,7 +49,7 @@ namespace BetService
                 build.Append('|');
                 build.Append(password);
                 build.Append('|');
-                build.Append(external_content_id.Replace('|','_'));
+                build.Append(external_content_id.Replace('|', '_'));
                 build.Append('|');
                 build.Append(bet_event);
                 build.Append('|');
@@ -75,6 +75,192 @@ namespace BetService
             catch (Exception ex)
             {
                 Logg.logger.Fatal("ERROR: " + ex.Message);
+            }
+        }
+
+        public async void SendToHybridgeLiveMenue(string Channel,  string status, string match_time, string bet_status, string match_id, string home_team_id, string match_name, string away_team_name, string match_start_date, string away_team_id, string score, string home_team_name, string tournament_name, string country_id, string country_iso, string country_name, string tournament_id,string sport_id,string sport_name)
+        {
+            try
+            {
+                //"matches": [
+                var sb = new StringBuilder();
+                //sb.Append("{");
+                sb.Append("{");
+                ////////////////////////
+                sb.Append("\"");
+                sb.Append("matches");
+                sb.Append("\"");
+                sb.Append(":");
+                sb.Append("[");
+                sb.Append("{");
+                /////////////////////////
+                sb.Append("\"");
+                sb.Append("status");
+                sb.Append("\"");
+                sb.Append(":");
+                sb.Append("\"");
+                sb.Append(status);
+                sb.Append("\"");
+                sb.Append(",");
+                ///////////////////////// 
+                sb.Append("\"");
+                sb.Append("match_time");
+                sb.Append("\"");
+                sb.Append(":");
+                sb.Append("\"");
+                sb.Append(match_time);
+                sb.Append("\"");
+                sb.Append(",");
+                ///////////////////////// 
+                sb.Append("\"");
+                sb.Append("bet_status");
+                sb.Append("\"");
+                sb.Append(":");
+                sb.Append("\"");
+                sb.Append(bet_status);
+                sb.Append("\"");
+                sb.Append(",");
+                ///////////////////////// 
+                sb.Append("\"");
+                sb.Append("match_id");
+                sb.Append("\"");
+                sb.Append(":");
+                sb.Append("\"");
+                sb.Append(match_id);
+                sb.Append("\"");
+                sb.Append(",");
+                ///////////////////////// 
+                sb.Append("\"");
+                sb.Append("home_team_id");
+                sb.Append("\"");
+                sb.Append(":");
+                sb.Append("\"");
+                sb.Append(home_team_id);
+                sb.Append("\"");
+                sb.Append(",");
+                ///////////////////////// 
+                sb.Append("\"");
+                sb.Append("match_name");
+                sb.Append("\"");
+                sb.Append(":");
+                sb.Append("\"");
+                sb.Append(match_name);
+                sb.Append("\"");
+                sb.Append(",");
+                ///////////////////////// 
+                sb.Append("\"");
+                sb.Append("away_team_name");
+                sb.Append("\"");
+                sb.Append(":");
+                sb.Append("\"");
+                sb.Append(away_team_name);
+                sb.Append("\"");
+                sb.Append(",");
+                ///////////////////////// 
+                sb.Append("\"");
+                sb.Append("match_start_date");
+                sb.Append("\"");
+                sb.Append(":");
+                sb.Append("\"");
+                sb.Append(match_start_date);
+                sb.Append("\"");
+                sb.Append(",");
+                ///////////////////////// 
+                sb.Append("\"");
+                sb.Append("away_team_id");
+                sb.Append("\"");
+                sb.Append(":");
+                sb.Append("\"");
+                sb.Append(away_team_id);
+                sb.Append("\"");
+                sb.Append(",");
+                ///////////////////////// 
+                sb.Append("\"");
+                sb.Append("score");
+                sb.Append("\"");
+                sb.Append(":");
+                sb.Append("\"");
+                sb.Append(score);
+                sb.Append("\"");
+                sb.Append(",");
+                ///////////////////////// 
+                sb.Append("\"");
+                sb.Append("home_team_name");
+                sb.Append("\"");
+                sb.Append(":");
+                sb.Append("\"");
+                sb.Append(home_team_name);
+                sb.Append("\"");
+                sb.Append(",");
+                ///////////////////////// 
+                sb.Append("\"");
+                sb.Append("tournament_name");
+                sb.Append("\"");
+                sb.Append(":");
+                sb.Append("\"");
+                sb.Append(tournament_name);
+                sb.Append("\"");
+                sb.Append(",");
+                ///////////////////////// 
+                sb.Append("\"");
+                sb.Append("country_id");
+                sb.Append("\"");
+                sb.Append(":");
+                sb.Append("\"");
+                sb.Append(country_id);
+                sb.Append("\"");
+                sb.Append(",");
+                ///////////////////////// 
+                sb.Append("\"");
+                sb.Append("country_iso");
+                sb.Append("\"");
+                sb.Append(":");
+                sb.Append("\"");
+                sb.Append(country_iso);
+                sb.Append("\"");
+                sb.Append(",");
+                ///////////////////////// 
+                sb.Append("\"");
+                sb.Append("country_name");
+                sb.Append("\"");
+                sb.Append(":");
+                sb.Append("\"");
+                sb.Append(country_name);
+                sb.Append("\"");
+                sb.Append(",");
+                ///////////////////////// 
+                 sb.Append("\"");
+                sb.Append("sport_id");
+                sb.Append("\"");
+                sb.Append(":");
+                sb.Append("\"");
+                sb.Append(sport_id);
+                sb.Append("\"");
+                sb.Append(",");
+                /////////////////////////
+                sb.Append("\"");
+                sb.Append("sport_name");
+                sb.Append("\"");
+                sb.Append(":");
+                sb.Append("\"");
+                sb.Append(sport_name);
+                sb.Append("\"");
+                sb.Append(",");
+                /////////////////////////
+                sb.Append("\"");
+                sb.Append("tournament_id");
+                sb.Append("\"");
+                sb.Append(":");
+                sb.Append("\"");
+                sb.Append(tournament_id);
+                sb.Append("\"");
+                ///////////////////////// 
+                sb.Append("}]}");
+                SendRedisChannelSocket(Channel, sb.ToString(), config.AppSettings.Get("RedisUserName"), config.AppSettings.Get("RedisPassword"), "Match","MATCH|"+match_id,"LIVEMENUEUPDATES");
+            }
+            catch (Exception ex)
+            {
+                Logg.logger.Fatal(ex.Message);
             }
         }
 
@@ -156,7 +342,7 @@ namespace BetService
                         sb.Append("\"");
                         sb.Append(odd.odd_special_odds_value);
                         sb.Append("\"");
-                       
+
                         //sb.Append("}");
                         Task.Run(() =>
                         SendRedisChannelSocket(channel, "[{\"mid_otid_ocid_sid\": \"" + oid.Result + "\"},{" + sb + "}]", config.AppSettings.Get("RedisUserName"), config.AppSettings.Get("RedisPassword"), "Odd", oid.Result, msg_event)
@@ -251,7 +437,7 @@ namespace BetService
                         sb.Append("\"");
                         sb.Append(odd.odd_special_odds_value);
                         sb.Append("\"");
-                       // sb.Append("}");
+                        // sb.Append("}");
                         Task.Run(() =>
                             SendRedisChannelSocket(channel,
                                 "[{\"mid_otid_ocid_sid\": \"" + oid.Result + "\"},{" + sb +
@@ -273,7 +459,7 @@ namespace BetService
                 //TODO REDISSEND
                 if (channel != null && message != null)
                 {
-                    Task.Run(() => SendRedisChannelSocket(channel, "[{\"message\": \"" + message + "\"}]]", config.AppSettings.Get("RedisUserName"), config.AppSettings.Get("RedisPassword"), "Message", null, odd_event)).ConfigureAwait(false);
+                    Task.Run(() => SendRedisChannelSocket(channel, "[{\"message\": \"" + message + "\"}]]", config.AppSettings.Get("RedisUserName"), config.AppSettings.Get("RedisPassword"), "Message", "|", odd_event)).ConfigureAwait(false);
                     // zmq = null;
                 }
 

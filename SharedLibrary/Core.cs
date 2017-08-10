@@ -498,7 +498,31 @@ namespace SharedLibrary
             }
         }
 
-
+        public async Task<string> CreateLiveOddsChannelName(string first_prefix,string last_prefix)
+        {
+            try
+            {
+                using (SHA1Managed sha1 = new SHA1Managed())
+                {
+#if DEBUG
+                    var prefix = config.AppSettings.Get("ChannelsSecretPrefix_test");
+                    // var last_prefix = config.AppSettings.Get("ChannelsSecretPrefixLast_test");
+                    var secret = config.AppSettings.Get("ChannelsSecretKey_test");
+#else
+                    var prefix = config.AppSettings.Get("ChannelsSecretPrefix_real");
+                    // var last_prefix = config.AppSettings.Get("ChannelsSecretPrefixLast_real");
+                    var secret = config.AppSettings.Get("ChannelsSecretKey_real");
+#endif
+                    byte[] bytes = System.Text.Encoding.UTF8.GetBytes(secret + first_prefix);
+                    return prefix + await ToHex(sha1.ComputeHash(bytes), false) + last_prefix; ;
+                }
+            }
+            catch (Exception ex)
+            {
+                Logg.logger.Fatal(ex.Message);
+                return null;
+            }
+        }
         public static async Task<string> ToHex(byte[] bytes, bool upperCase)
         {
             StringBuilder result = new StringBuilder(bytes.Length * 2);

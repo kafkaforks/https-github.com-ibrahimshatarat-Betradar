@@ -38,7 +38,8 @@ namespace BetService.Classes.DbInsert
             }
             try
             {
-                await common.insertMatchDataAllDetails((MatchHeader)args.BetCancel.EventHeader, null);
+                //TODO: REDISSSSSS
+                //await common.insertMatchDataAllDetails((MatchHeader)args.BetCancel.EventHeader, null);
             }
             catch (Exception ex)
             {
