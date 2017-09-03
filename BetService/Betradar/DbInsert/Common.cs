@@ -49,7 +49,7 @@ namespace BetService.Classes.DbInsert
         //{
         //    var command = new NpgsqlCommand(Globals.DB_Functions.insertDyMatchs.ToDescription());
         //    return 1;
-        //}
+        //}Ibrahim
         public long insertDyMatchs(MatchHeader entityMheader, MatchInfo entityMinfo, Boolean p_match_on, Boolean p_is_active, Boolean p_is_visible, int p_feed_type)
         {
 
