@@ -18,7 +18,7 @@ namespace Betradar.Classes.Socket
             : base(live_odds, feed_name, meta_interval)
         {
             m_live_odds = live_odds;
-            m_live_odds.OnAlive += AliveHandler;
+            m_live_odds.OnAlive += AliveHandler; 
 
         }
 
