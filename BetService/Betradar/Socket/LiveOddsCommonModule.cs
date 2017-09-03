@@ -20,6 +20,7 @@ namespace Betradar.Classes.Socket
             m_live_odds = live_odds;
             m_live_odds.OnAlive += AliveHandler; 
 
+
         }
 
         protected virtual  void AliveHandler(object sender, AliveEventArgs e)
