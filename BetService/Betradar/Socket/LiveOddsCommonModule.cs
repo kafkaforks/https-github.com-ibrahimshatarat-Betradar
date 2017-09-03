@@ -13,12 +13,13 @@ namespace Betradar.Classes.Socket
     public abstract class LiveOddsCommonModule : LiveOddsCommonBaseModule
     {
         private readonly ILiveOddsCommon m_live_odds; 
-
+        
         protected LiveOddsCommonModule(ILiveOddsCommon live_odds, string feed_name, TimeSpan meta_interval)
             : base(live_odds, feed_name, meta_interval)
         {
             m_live_odds = live_odds;
             m_live_odds.OnAlive += AliveHandler;
+
         }
 
         protected virtual  void AliveHandler(object sender, AliveEventArgs e)
