@@ -12,7 +12,7 @@ namespace Betradar.Classes.Socket
 {
     public abstract class LiveOddsCommonModule : LiveOddsCommonBaseModule
     {
-        private readonly ILiveOddsCommon m_live_odds;
+        private readonly ILiveOddsCommon m_live_odds; 
 
         protected LiveOddsCommonModule(ILiveOddsCommon live_odds, string feed_name, TimeSpan meta_interval)
             : base(live_odds, feed_name, meta_interval)
