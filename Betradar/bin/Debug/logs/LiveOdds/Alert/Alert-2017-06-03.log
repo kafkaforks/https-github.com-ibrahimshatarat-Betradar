@@ -1,5 +1,0 @@
-﻿2017-06-03 08:29:11,079 [IOLoop-LIVEODDS] [ERROR] |isLK5LQcO6L+0dAGA5bnh4Oudzc=| TCP connection error, fatal True
-System.OutOfMemoryException: Exception of type 'System.OutOfMemoryException' was thrown.
-   at System.String.CtorCharArray(Char[] value)
-   at Sportradar.SDK.ConnectionProviders.TcpConnectionProvider.HandleConnection()
-   at Sportradar.SDK.ConnectionProviders.TcpConnectionProvider.IOLoop()

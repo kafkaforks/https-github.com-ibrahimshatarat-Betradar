@@ -13,12 +13,12 @@ namespace BetService.Classes.DbInsert
     public class BetClearRollBackHandle : Core
     {
 
-        public async Task BetClearRollBackHandler(BetClearRollbackEventArgs args)
-        {
-            await RunTask(args);
+        public  void BetClearRollBackHandler(BetClearRollbackEventArgs args)
+        { 
+             RunTask(args);
         }
 
-        private async Task RunTask(BetClearRollbackEventArgs queueElement)
+        private void  RunTask(BetClearRollbackEventArgs queueElement)
         {
 
         }

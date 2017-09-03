@@ -36,7 +36,7 @@ namespace Betradar.Classes.Socket
             m_lcoo.Stop();
         }
 
-        private async Task CheckIfOldData(DateTime? timestamp)
+        private void CheckIfOldData(DateTime? timestamp)
         {
             if (timestamp == null)
             {
@@ -67,22 +67,24 @@ namespace Betradar.Classes.Socket
             }
         }
 
-        private async void lcoo_OnMatch(object sender, MatchEventOdds e)
+        private void lcoo_OnMatch(object sender, MatchEventOdds e)
         {
-            await CheckIfOldData(e.MatchEntity.MessageTime);
-
-            var r = new MatchEventOddsHandle();
-            await r.MatchEventOddsHandler(e);
+            Task.Factory.StartNew(() =>
+            {
+                var r = new MatchEventOddsHandle();
+                r.MatchEventOddsHandler(e);
+            }).ConfigureAwait(false);
 #if DEBUG
             Logg.logger.Info("{0}: Received Match with id {1}", m_feed_name, e.MatchEntity.MatchId);
             InCount += 1;
             Logg.logger.Warn("InCount Count = " + InCount);
 #endif
+            CheckIfOldData(e.MatchEntity.MessageTime);
         }
 
-        private async void lcoo_OnOutright(object sender, OutrightEventOdds e)
+        private  void lcoo_OnOutright(object sender, OutrightEventOdds e)
         {
-            await CheckIfOldData(e.OutrightEntity.MessageTime);
+             CheckIfOldData(e.OutrightEntity.MessageTime);
 #if DEBUG
             Logg.logger.Info("{0}: Received Outright with id {1}", m_feed_name, e.OutrightEntity.Id);
             InCount += 1;
@@ -90,9 +92,9 @@ namespace Betradar.Classes.Socket
 #endif
         }
 
-        private async void m_lcoo_OnThreeBall(object sender, ThreeBallEventArgs e)
+        private  void m_lcoo_OnThreeBall(object sender, ThreeBallEventArgs e)
         {
-            await CheckIfOldData(e.ThreeBallEntity.MessageTime);
+             CheckIfOldData(e.ThreeBallEntity.MessageTime);
 
 #if DEBUG
             Logg.logger.Info("{0}: Received ThreeBall with id {1}", m_feed_name, e.ThreeBallEntity.Id);

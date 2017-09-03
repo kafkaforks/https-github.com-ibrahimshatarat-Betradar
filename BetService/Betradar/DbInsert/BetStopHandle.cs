@@ -15,27 +15,33 @@ namespace BetService.Classes.DbInsert
 {
     public class BetStopHandle : Core
     {
-        public async Task BetStopHandler(BetStopEventArgs args)
+        public void BetStopHandler(BetStopEventArgs args)
         {
             try
             {
-                
+
                 var common = new Common();
-                await common.insertMatchDataAllDetails((MatchHeader)args.BetStop.EventHeader, null);
+                common.insertMatchDataAllDetails((MatchHeader)args.BetStop.EventHeader, null);
                 var merch = config.AppSettings.Get("ChannelsSecretPrefixLast_real");
-                var channel = await CreateLiveOddsChannelName(args.BetStop.EventHeader.Id, "global", merch);
+                string channel = CreateLiveOddsChannelName(args.BetStop.EventHeader.Id, "global", merch);
                 merch = config.AppSettings.Get("ChannelsSecretPrefixLast_real2");
-                var channel2 = await CreateLiveOddsChannelName(args.BetStop.EventHeader.Id, "global", merch);
+                var channel2 = CreateLiveOddsChannelName(args.BetStop.EventHeader.Id, "global", merch);
                 merch = config.AppSettings.Get("ChannelsSecretPrefixLast_real3");
-                var channel3 = await CreateLiveOddsChannelName(args.BetStop.EventHeader.Id, "global", merch);
+                var channel3 = CreateLiveOddsChannelName(args.BetStop.EventHeader.Id, "global", merch);
                 merch = config.AppSettings.Get("ChannelsSecretPrefixLast_real4");
-                var channel4 = await CreateLiveOddsChannelName(args.BetStop.EventHeader.Id, "global", merch);
+                var channel4 = CreateLiveOddsChannelName(args.BetStop.EventHeader.Id, "global", merch);
+                merch = config.AppSettings.Get("ChannelsSecretPrefixLast_real5");
+                var channel5 = CreateLiveOddsChannelName(args.BetStop.EventHeader.Id, "global", merch);
+                merch = config.AppSettings.Get("ChannelsSecretPrefixLast_real6");
+                var channel6 = CreateLiveOddsChannelName(args.BetStop.EventHeader.Id, "global", merch);
 
                 var socket = new LiveOddSendClient();
-                await socket.SendToHybridgeSocketMessages(args.BetStop.Status.ToString(), channel, "BETSTOP");
-                await socket.SendToHybridgeSocketMessages(args.BetStop.Status.ToString(), channel2, "BETSTOP");
-                await socket.SendToHybridgeSocketMessages(args.BetStop.Status.ToString(), channel3, "BETSTOP");
-                await socket.SendToHybridgeSocketMessages(args.BetStop.Status.ToString(), channel4, "BETSTOP");
+                socket.SendToHybridgeSocketMessages(args.BetStop.Status.ToString(), channel, "BETSTOP");
+                socket.SendToHybridgeSocketMessages(args.BetStop.Status.ToString(), channel2, "BETSTOP");
+                socket.SendToHybridgeSocketMessages(args.BetStop.Status.ToString(), channel3, "BETSTOP");
+                socket.SendToHybridgeSocketMessages(args.BetStop.Status.ToString(), channel4, "BETSTOP");
+                socket.SendToHybridgeSocketMessages(args.BetStop.Status.ToString(), channel5, "BETSTOP");
+                socket.SendToHybridgeSocketMessages(args.BetStop.Status.ToString(), channel6, "BETSTOP");
             }
             catch (Exception ex)
             {

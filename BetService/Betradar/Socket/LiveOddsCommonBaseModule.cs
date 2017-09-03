@@ -43,7 +43,7 @@ namespace Betradar.Classes.Socket
             m_live_odds.OnEventMessages += EventMessagesHandler;
             m_live_odds.OnEventStatus += EventStatusHandler;
             m_meta_timer = new Timer(meta_interval.TotalMilliseconds / 2.0);
-            m_meta_timer.Elapsed += async (sender, args) => await MakeMetaRequest(TimeSpan.Zero, meta_interval);
+            m_meta_timer.Elapsed += (sender, args) => MakeMetaRequest(TimeSpan.Zero, meta_interval);
         }
 
         public void Start()
@@ -56,10 +56,13 @@ namespace Betradar.Classes.Socket
             m_live_odds.Stop();
         }
 
-        protected virtual async void BetCancelHandler(object sender, BetCancelEventArgs e)
+        protected virtual void BetCancelHandler(object sender, BetCancelEventArgs e)
         {
-            var r = new BetCancelHandle();
-            await r.BetCancelHandler(e);
+            Task.Factory.StartNew(() =>
+            {
+                var r = new BetCancelHandle();
+                r.BetCancelHandler(e);
+            }).ConfigureAwait(false);
 #if DEBUG
             g_log.Info("{0}: Received BetCancel for event {1} and odds id {2}", m_feed_name, e.BetCancel.EventHeader.Id, e.BetCancel.Odds[0].Id);
             InCount += 1;
@@ -67,10 +70,13 @@ namespace Betradar.Classes.Socket
 #endif
         }
 
-        protected virtual async void BetCancelUndoHandler(object sender, BetCancelUndoEventArgs e)
+        protected virtual void BetCancelUndoHandler(object sender, BetCancelUndoEventArgs e)
         {
-            var r = new BetCancelUndoHandle();
-            await r.BetCancelUndoHandler(e);
+            Task.Factory.StartNew(() =>
+            {
+                var r = new BetCancelUndoHandle();
+                r.BetCancelUndoHandler(e);
+            }).ConfigureAwait(false);
 #if DEBUG
             g_log.Info("{0}: Received BetCancelUndo for event {1} and odds id {2}", m_feed_name,
                e.BetCancelUndo.EventHeader.Id, e.BetCancelUndo.Odds[0].Id);
@@ -79,10 +85,13 @@ namespace Betradar.Classes.Socket
 #endif
         }
 
-        protected virtual async void BetClearHandler(object sender, BetClearEventArgs e)
+        protected virtual void BetClearHandler(object sender, BetClearEventArgs e)
         {
-            var r = new BetClearHandle();
-            await  r.BetClearHandler(e);
+            Task.Factory.StartNew(() =>
+            {
+                var r = new BetClearHandle();
+                r.BetClearHandler(e);
+            }).ConfigureAwait(false);
 #if DEBUG
             g_log.Info("{0}: Received BetClear for event {1} and odds id {2}", m_feed_name, e.BetClear.EventHeader.Id, e.BetClear.Odds[0].Id);
             InCount += 1;
@@ -90,10 +99,13 @@ namespace Betradar.Classes.Socket
 #endif
         }
 
-        protected virtual async void BetClearRollbackHandler(object sender, BetClearRollbackEventArgs e)
+        protected virtual void BetClearRollbackHandler(object sender, BetClearRollbackEventArgs e)
         {
-            var r = new BetClearRollBackHandle();
-            await r.BetClearRollBackHandler(e);
+            Task.Factory.StartNew(() =>
+            {
+                var r = new BetClearRollBackHandle();
+                r.BetClearRollBackHandler(e);
+            }).ConfigureAwait(false);
 #if DEBUG
             g_log.Info("{0}: Received BetClear for event {1} and odds id {2}", m_feed_name, e.BetClearRollback.EventHeader.Id, e.BetClearRollback.Odds[0].Id);
             InCount += 1;
@@ -101,10 +113,13 @@ namespace Betradar.Classes.Socket
 #endif
         }
 
-        protected virtual async void BetStartHandler(object sender, BetStartEventArgs e)
+        protected virtual void BetStartHandler(object sender, BetStartEventArgs e)
         {
-            var r = new BetStartHandle();
-            await  r.BetStartHandler(e);
+            Task.Factory.StartNew(() =>
+            {
+                var r = new BetStartHandle();
+                r.BetStartHandler(e);
+            }).ConfigureAwait(false);
 #if DEBUG
             g_log.Info("{0}: Received BetStart for event {1}", m_feed_name, e.BetStart.EventHeader.Id);
             InCount += 1;
@@ -112,10 +127,14 @@ namespace Betradar.Classes.Socket
 #endif
         }
 
-        protected virtual async void BetStopHandler(object sender, BetStopEventArgs e)
+        protected virtual void BetStopHandler(object sender, BetStopEventArgs e)
         {
-            var r = new BetStopHandle();
-            await r.BetStopHandler(e);
+            
+            Task.Factory.StartNew(() =>
+            {
+                var r = new BetStopHandle();
+                r.BetStopHandler(e);
+            }).ConfigureAwait(false);
 #if DEBUG
             g_log.Info("{0}: Received BetStart for event {1}", m_feed_name, e.BetStop.EventHeader.Id);
             InCount += 1;
@@ -123,12 +142,13 @@ namespace Betradar.Classes.Socket
 #endif
         }
 
-        protected virtual async void ConnectionStableHandler(object sender, EventArgs e)
+        protected virtual void ConnectionStableHandler(object sender, EventArgs e)
         {
 
             TimeSpan half = TimeSpan.FromMilliseconds(m_meta_timer.Interval);
-            await  MakeMetaRequest(half, half);
+            MakeMetaRequest(half, half);
             m_meta_timer.Start();
+
 #if DEBUG
             g_log.Info("{0} connection is stable. It is now safe to accept bets and make requests", m_feed_name);
 #endif
@@ -136,7 +156,7 @@ namespace Betradar.Classes.Socket
 
         protected virtual void ConnectionUnstableHandler(object sender, EventArgs e)
         {
-            
+
             m_meta_timer.Stop();
 #if DEBUG
             g_log.Info("{0} connection is unstable. Don't accept any bets or call any requests", m_feed_name);
@@ -158,10 +178,13 @@ namespace Betradar.Classes.Socket
 #endif
         }
 
-        protected virtual async void OddsChangeHandler(object sender, OddsChangeEventArgs e)
+        protected virtual void OddsChangeHandler(object sender, OddsChangeEventArgs e)
         {
-            var r = new OddsChangeHandle();
-            await r.OddsChangeHandler(e);
+            Task.Factory.StartNew(() =>
+            {
+                var r = new OddsChangeHandle();
+                r.OddsChangeHandler(e);
+            }).ConfigureAwait(false);
 #if DEBUG
             g_log.Info("{0}: Received OddsChange for event {1} with {2} odds", m_feed_name, e.OddsChange.EventHeader.Id, e.OddsChange.Odds.Count);
             InCount += 1;
@@ -169,10 +192,10 @@ namespace Betradar.Classes.Socket
 #endif
         }
 
-        protected virtual async Task MakeMetaRequest(TimeSpan back, TimeSpan forward)
+        protected virtual void MakeMetaRequest(TimeSpan back, TimeSpan forward)
         {
             DateTime now = DateTime.Now;
-            var sofo =  m_live_odds.GetEventList(now.Subtract(back), now.Add(forward));
+            var sofo = m_live_odds.GetEventList(now.Subtract(back), now.Add(forward));
         }
 
     }

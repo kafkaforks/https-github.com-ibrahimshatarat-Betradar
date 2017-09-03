@@ -33,17 +33,17 @@ namespace SharedLibrary
             }
         }
 
-        public async Task<string> CalculateSystemCombination(long p_coupon_id, int p_loop_length)
+        public string CalculateSystemCombination(long p_coupon_id, int p_loop_length)
         {
 
-            var command = new NpgsqlCommand(await Globals.DB_Functions.CpCalculateSystemCombination.ToDescription());
+            var command = new NpgsqlCommand( Globals.DB_Functions.CpCalculateSystemCombination.ToDescription().ToString());
             try
             {
                 command.Parameters.AddWithValue("p_coupon_id", NpgsqlDbType.Bigint, p_coupon_id);
                 command.Parameters.AddWithValue("p_loop_length", NpgsqlDbType.Integer, p_loop_length);
 
                 var result = "-1";
-                var ds = await select(command);
+                var ds =  select(command);
                 var value = ds.Tables[0].Rows[0][0];
                 if (ds.Tables.Count > 0)
                 {
@@ -62,12 +62,12 @@ namespace SharedLibrary
 
         }
 
-        public async Task<DataSet> GetUnfinalizedCouponsOdds()
+        public  DataSet GetUnfinalizedCouponsOdds()
         {
             try
             {
-                var command = new NpgsqlCommand(await Globals.DB_Functions.SelectCouponOddsTemp.ToDescription());
-                var data = await select(command);
+                var command = new NpgsqlCommand( Globals.DB_Functions.SelectCouponOddsTemp.ToDescription().ToString());
+                var data =  select(command);
                 return data;
             }
             catch (Exception ex)
@@ -77,12 +77,12 @@ namespace SharedLibrary
             }
         }
 
-        private async Task<DataSet> GetUnfinalizedCouponsOddsTest()
+        private  DataSet GetUnfinalizedCouponsOddsTest()
         {
             try
             {
                 var command = new NpgsqlCommand("select_coupon_odds_temp_test");
-                var data = await select(command);
+                var data =  select(command);
                 return data;
             }
             catch (Exception ex)
@@ -92,12 +92,12 @@ namespace SharedLibrary
             }
         }
 
-        public async Task<List<string>> GetDBQueueTest()
+        public  List<string> GetDBQueueTest()
         {
             var db_data = new List<string>();
             try
             {
-                var ds = await GetUnfinalizedCouponsOddsTest();
+                var ds =  GetUnfinalizedCouponsOddsTest();
                 if (ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
                 {
 
@@ -115,12 +115,12 @@ namespace SharedLibrary
             }
         }
 
-        public async Task<List<string>> GetDBQueue()
+        public  List<string> GetDBQueue()
         {
             var db_data = new List<string>();
             try
             {
-                var ds = await GetUnfinalizedCouponsOdds();
+                var ds =  GetUnfinalizedCouponsOdds();
                 if (ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
                 {
                     for (int i = 0; i < ds.Tables[0].Rows.Count; i++)
@@ -199,13 +199,13 @@ namespace SharedLibrary
 
         }
 
-        public async Task<bool> UpdateCouponSendApi(long coupon_id)
+        public bool UpdateCouponSendApi(long coupon_id)
         {
             try
             {
-                var command = new NpgsqlCommand(await Globals.DB_Functions.UpdateSentCounpons.ToDescription());
+                var command = new NpgsqlCommand( Globals.DB_Functions.UpdateSentCounpons.ToDescription().ToString());
                 command.Parameters.AddWithValue("p_coupon_id", NpgsqlDbType.Bigint, coupon_id);
-                var ret = await insert(command);
+                var ret =  insert(command);
                 if (ret == 1)
                 {
                     return true;
@@ -222,13 +222,13 @@ namespace SharedLibrary
             }
         }
 
-        public async Task<string> CouponOddsCalculate(long coupon_id)
+        public string CouponOddsCalculate(long coupon_id)
         {
             try
             {
-                var command = new NpgsqlCommand(await Globals.DB_Functions.CouponWinningOdds.ToDescription());
+                var command = new NpgsqlCommand( Globals.DB_Functions.CouponWinningOdds.ToDescription().ToString());
                 command.Parameters.AddWithValue("p_coupon_id", NpgsqlDbType.Bigint, coupon_id);
-                var ret = await select(command);
+                var ret =  select(command);
                 string value = "";
                 if (ret.Tables.Count > 0 && ret.Tables[0].Rows.Count > 0)
                 {
@@ -243,19 +243,42 @@ namespace SharedLibrary
             }
         }
 
-        public async void GetDummyData()
+        public  void GetDummyData()
         {
-            var command = new NpgsqlCommand(await Globals.DB_Functions.GetFullFinalisedCoupons.ToDescription());
-            var data = await select(command);
+            var command = new NpgsqlCommand( Globals.DB_Functions.GetFullFinalisedCoupons.ToDescription().ToString());
+            var data =  select(command);
             var dt = new DataTable();
         }
+        public DataSet getAllUNfinalisedMid()
+        {
+            var dyMerchants = new Merchants();
+            var command = new NpgsqlCommand(Globals.DB_Functions.GetUnfinalisedMid.ToDescription().ToString());
+            try
+            {
+                var ds = select(command);
 
-        public async Task GetAllFinalizedCoupons()
+                if (ds.Tables.Count > 0)
+                {
+                    return ds;
+                }
+                else
+                {
+                    return null;
+                }
+            }
+            catch (Exception ex)
+            {
+                Logg.logger.Fatal(ex.Message);
+                return null;
+            }
+
+        }
+        public  void GetAllFinalizedCoupons()
         {
             try
             {
-                var command = new NpgsqlCommand(await Globals.DB_Functions.GetFullFinalisedCoupons.ToDescription());
-                var data = select(command);
+                var command = new NpgsqlCommand( Globals.DB_Functions.GetFullFinalisedCoupons.ToDescription().ToString());
+                // var data = select(command);
                 //TODO send to seamless
                 //sendAllToApi(data);
                 Globals.timerOnOff = true;
@@ -270,11 +293,11 @@ namespace SharedLibrary
             }
         }
 
-        public async Task GetFinalisedOdds()
+        public void GetFinalisedOdds()
         {
             try
             {
-                var command = new NpgsqlCommand(await Globals.DB_Functions.GetFullFinalisedCoupons.ToDescription());
+                var command = new NpgsqlCommand( Globals.DB_Functions.GetFullFinalisedCoupons.ToDescription().ToString());
                 var data = select(command);
                 //TODO send to seamless
                 //sendAllToApi(data);
@@ -340,13 +363,13 @@ namespace SharedLibrary
             }
         }
 
-        public async Task MatchFinalize(string MatchPattern)
+        public void MatchFinalize(string MatchPattern)
         {
             try
             {
-                var command = new NpgsqlCommand(await Globals.DB_Functions.FinalizeOdd.ToDescription());
+                var command = new NpgsqlCommand( Globals.DB_Functions.FinalizeOdd.ToDescription().ToString());
                 command.Parameters.AddWithValue("p_mid_otid_ocid_sid", NpgsqlDbType.Text, MatchPattern);
-                await insert(command);
+                 insert(command);
             }
             catch (Exception ex)
             {
@@ -355,13 +378,13 @@ namespace SharedLibrary
             }
         }
 
-        public async Task BetCancelDB(string MatchPattern)
+        public void BetCancelDB(string MatchPattern)
         {
             try
             {
-                var command = new NpgsqlCommand(await Globals.DB_Functions.CancelOdd.ToDescription());
+                var command = new NpgsqlCommand( Globals.DB_Functions.CancelOdd.ToDescription().ToString());
                 command.Parameters.AddWithValue("p_mid_otid_ocid_sid", NpgsqlDbType.Text, MatchPattern);
-                await insert(command);
+                 insert(command);
             }
             catch (Exception ex)
             {
@@ -369,12 +392,12 @@ namespace SharedLibrary
             }
         }
 
-        public async Task<DataSet> GetFinalizedCouponsIds()
+        public DataSet GetFinalizedCouponsIds()
         {
             try
             {
-                var command = new NpgsqlCommand(await Globals.DB_Functions.FinalizeOddCoupons.ToDescription());
-                return await select(command);
+                var command = new NpgsqlCommand( Globals.DB_Functions.FinalizeOddCoupons.ToDescription().ToString());
+                return  select(command);
             }
             catch (Exception ex)
             {
@@ -383,13 +406,13 @@ namespace SharedLibrary
             }
         }
 
-        public async Task<DataSet> GetCouponSystems(long Coupon_Id)
+        public DataSet GetCouponSystems(long Coupon_Id)
         {
             try
             {
-                var command = new NpgsqlCommand(await Globals.DB_Functions.FinalizeOddCoupons.ToDescription());
+                var command = new NpgsqlCommand( Globals.DB_Functions.FinalizeOddCoupons.ToDescription().ToString());
                 command.Parameters.AddWithValue("p_coupon_id", NpgsqlDbType.Bigint, Coupon_Id);
-                return await select(command);
+                return  select(command);
             }
             catch (Exception ex)
             {
@@ -398,13 +421,13 @@ namespace SharedLibrary
             }
         }
 
-        public async Task sendToMerchantServices(string rawModeData, long id, long merchant_id)
+        public  void sendToMerchantServices(string rawModeData, long id, long merchant_id)
         {
             IRestResponse response = null;
 
             try
             {
-                var result = (from myRow in Globals.MerchantsDs.Result.Tables[0].AsEnumerable()
+                var result = (from myRow in Globals.MerchantsDs.Tables[0].AsEnumerable()
                               where myRow.Field<long>("vendor_id") == merchant_id
                               select myRow).ToList();
 
@@ -415,22 +438,22 @@ namespace SharedLibrary
                 request.AddHeader("content-type", "application/json");
                 request.AddParameter("application/json", rawModeData, ParameterType.RequestBody);
                 response =
-                    await
-                        client.ExecuteTaskAsync(request);
+                    
+                        client.Execute(request);
                 // response = client.Execute(request);
                 if (!string.IsNullOrEmpty(response.Content))
                 {
                     if (new JavaScriptSerializer().Deserialize<SeamlessResponse>(response.Content).error_codes[0] == 0)
                     {
 
-                        await UpdateSentCouponsOnce(id, 2, rawModeData, response.Content);
+                         UpdateSentCouponsOnce(id, 2, rawModeData, response.Content);
 #if DEBUG
                         Console.WriteLine(":::::::::::::::::::: END  ::::::::::::::::::::");
 #endif
                     }
                     else
                     {
-                        await insertSeamlessCount(id, rawModeData, response.Content);
+                         insertSeamlessCount(id, rawModeData, response.Content);
 #if DEBUG
                         Console.WriteLine(":::::::::::::::::::: NOT END  ::::::::::::::::::::");
 #endif
@@ -438,7 +461,7 @@ namespace SharedLibrary
                 }
                 else
                 {
-                    await insertSeamlessCount(id, rawModeData, response.Content);
+                     insertSeamlessCount(id, rawModeData, response.Content);
 #if DEBUG
                     Console.WriteLine(":::::::::::::::::::: EMPTY  ::::::::::::::::::::");
 #endif
@@ -447,24 +470,24 @@ namespace SharedLibrary
             catch (Exception ex)
             {
                 Logg.logger.Fatal(ex.Message);
-                await insertSeamlessCount(id, rawModeData, response.Content);
+                 insertSeamlessCount(id, rawModeData, response.Content);
             }
         }
 
-        public async Task sendToMerchantServices_(string rawModeData, long id, long merchant_id)
+        public void sendToMerchantServices_(string rawModeData, long id, long merchant_id)
         {
             IRestResponse response = null;
 
             try
             {
                 var merc = new Merchants();
-                merc = await selectDyMerchants(merchant_id, "");
+                merc =  selectDyMerchants(merchant_id, "");
                 var client = new RestClient(config.AppSettings.Get("Seamless_Services") + merc.prefix);
                 var request = new RestRequest(Method.POST);
                 request.AddHeader("cache-control", "no-cache");
                 request.AddHeader("content-type", "application/json");
                 request.AddParameter("application/json", rawModeData, ParameterType.RequestBody);
-                response = await client.ExecuteTaskAsync(request);
+                response =  client.Execute(request);
                 if (response.Content != null)
                 {
                     if (new JavaScriptSerializer().Deserialize<SeamlessResponse>(response.Content).error_codes[0] == 0)
@@ -487,7 +510,7 @@ namespace SharedLibrary
             }
         }
 
-        public async Task<long> MoveCouponAll(long p_table_id, long? p_coupon_id, DateTime? p_lastupdate)
+        public long MoveCouponAll(long p_table_id, long? p_coupon_id, DateTime? p_lastupdate)
         {
             var command = new NpgsqlCommand("coupon_move");
             try
@@ -511,7 +534,7 @@ namespace SharedLibrary
                     command.Parameters.AddWithValue("p_lastupdate", NpgsqlDbType.Timestamp, DBNull.Value);
                 }
 
-                return await insert(command);
+                return  insert(command);
 
             }
             catch (Exception ex)
@@ -521,9 +544,9 @@ namespace SharedLibrary
             }
         }
 
-        public async Task UpdateSentCouponsOnce(long counpon_id, int action, string request, string response)
+        public void UpdateSentCouponsOnce(long counpon_id, int action, string request, string response)
         {
-            var command = new NpgsqlCommand(await Globals.DB_Functions.UpdateSentCouponsOnce.ToDescription());
+            var command = new NpgsqlCommand( Globals.DB_Functions.UpdateSentCouponsOnce.ToDescription().ToString());
             try
             {
                 command.Parameters.AddWithValue("p_coupon_id", NpgsqlDbType.Bigint, counpon_id);
@@ -539,16 +562,16 @@ namespace SharedLibrary
             }
         }
 
-        public async Task<long> insertSeamlessCount(long counpon_id, string request, string response)
+        public long insertSeamlessCount(long counpon_id, string request, string response)
         {
-            var command = new NpgsqlCommand(await Globals.DB_Functions.UpdateSendSeamless.ToDescription());
+            var command = new NpgsqlCommand( Globals.DB_Functions.UpdateSendSeamless.ToDescription().ToString());
             try
             {
                 command.Parameters.AddWithValue("p_coupon_id", NpgsqlDbType.Bigint, counpon_id);
                 command.Parameters.AddWithValue("p_request", NpgsqlDbType.Text, request);
                 command.Parameters.AddWithValue("p_response", NpgsqlDbType.Text, response);
 
-                return await update(command);
+                return  update(command);
             }
             catch (Exception ex)
             {
@@ -556,12 +579,12 @@ namespace SharedLibrary
                 return -1;
             }
         }
-        public async Task WorkAlive()
+        public void WorkAlive()
         {
-            var command = new NpgsqlCommand(await Globals.DB_Functions.UpdateLiveMatchesShow.ToDescription());
+            var command = new NpgsqlCommand( Globals.DB_Functions.UpdateLiveMatchesShow.ToDescription().ToString());
             try
             {
-                await @select(command);
+                select(command);
             }
             catch (Exception ex)
             {
@@ -569,10 +592,10 @@ namespace SharedLibrary
             }
         }
 
-        public async Task<DataSet> selectAllMerchants(long? p_merchant_id)
+        public DataSet selectAllMerchants(long? p_merchant_id)
         {
             var dyMerchants = new Merchants();
-            var command = new NpgsqlCommand(await Globals.DB_Functions.SelectMerchants.ToDescription());
+            var command = new NpgsqlCommand( Globals.DB_Functions.SelectMerchants.ToDescription().ToString());
             try
             {
 
@@ -586,7 +609,7 @@ namespace SharedLibrary
                 }
 
 
-                var ds = await select(command);
+                var ds =  select(command);
 
                 if (ds.Tables.Count > 0)
                 {
@@ -605,10 +628,10 @@ namespace SharedLibrary
 
         }
 
-        public async Task<Merchants> selectDyMerchants(long p_merchant_id, string p_username)
+        public  Merchants selectDyMerchants(long p_merchant_id, string p_username)
         {
             var dyMerchants = new Merchants();
-            var command = new NpgsqlCommand(await Globals.DB_Functions.selectDyMerchants.ToDescription());
+            var command = new NpgsqlCommand( Globals.DB_Functions.selectDyMerchants.ToDescription().ToString());
             try
             {
 
@@ -631,7 +654,7 @@ namespace SharedLibrary
                 }
 
 
-                var ds = await select(command);
+                var ds =  select(command);
 
                 if (ds.Tables.Count > 0)
                 {
@@ -667,137 +690,16 @@ namespace SharedLibrary
             }
 
         }
-        public Globals.Rollback SetRollback(long RowId, Globals.Tables Table, Globals.TransactionTypes Transaction)
-        {
-            var rollbackObject = new Globals.Rollback();
-            try
-            {
-                rollbackObject.RowId = RowId;
-                rollbackObject.TableId = (int)Table;
-                rollbackObject.TransactionType = (int)Transaction;
-            }
-            catch (Exception ex)
-            {
-                Logg.logger.Fatal(ex.Message);
-                return null;
-            }
-            return rollbackObject;
-        }
-        public async Task RollBack(List<Globals.Rollback> rolls)
-        {
-            // Get call stack
-            StackTrace stackTrace = new StackTrace();
+     
 
-            // Get calling method name
-            Console.WriteLine(stackTrace.GetFrame(1).GetMethod().Name);
-            try
-            {
-                foreach (var roll in rolls)
-                {
-                    var adObjCommand = new NpgsqlCommand(await Globals.DB_Functions.Rollback.ToDescription());
-                    adObjCommand.Parameters.AddWithValue("table_id", roll.TableId);
-                    adObjCommand.Parameters.AddWithValue("row_id", roll.RowId);
-                    adObjCommand.Parameters.AddWithValue("tran_type", roll.TransactionType);
-                    await update(adObjCommand);
-                }
-            }
-            catch (Exception ex)
-            {
-                Logg.logger.Fatal(ex.Message);
-            }
-            finally
-            {
 
-            }
-        }
-        public NpgsqlConnection connection()
-        {
-            var con = new NpgsqlConnection();
-            try
-            {
-                if (con.State == ConnectionState.Closed)
-                {
 
-                    var connectionBuilder = new NpgsqlConnectionStringBuilder();
-                    connectionBuilder.Host = config.AppSettings.Get("DB_Host");
-                    connectionBuilder.Port = int.Parse(config.AppSettings.Get("DB_Port"));
-                    connectionBuilder.Database = config.AppSettings.Get("DB_Database");
-                    connectionBuilder.Username = config.AppSettings.Get("DB_Username");
-                    connectionBuilder.Password = config.AppSettings.Get("DB_Password");
-                    connectionBuilder.Timeout = 300;
-                    connectionBuilder.Pooling = true;
-                    connectionBuilder.CommandTimeout = 300;
-                    con = new NpgsqlConnection(connectionBuilder.ConnectionString);
-                    return con;
-                }
-                else
-                {
-                    return null;
-                }
 
-            }
-            catch (Exception ex)
-            {
-                Logg.logger.Fatal(ex.Message);
-                return null;
-            }
 
-        }
-        public async Task<long> insert(NpgsqlCommand objCommand)
-        {
-            long errorNumber = -1;
-            long result = -20;
-            object one;
-            objCommand.CommandType = CommandType.StoredProcedure;
-            try
-            {
 
-                objCommand.Connection = connection();
-                //objCommand.CommandTimeout = 5;
-                await objCommand.Connection.OpenAsync();
-                one = await objCommand.ExecuteScalarAsync();
-                bool successfullyParsed = long.TryParse(one.ToString(), out result);
-                long val = 0;
-                if (successfullyParsed)
-                {
-                    if (result != null && long.TryParse(result.ToString(), out val))
-                    {
-                        if (val > 0)
-                        {
-#if DEBUG
-                            WriteFullLine(objCommand.CommandText);
-#endif
-                            return val;
-                        }
-                        else
-                        {
-                            errorNumber = val;
-                          
-                        }
-                    }
-                }
-                else
-                {
-                }
 
-                return -1;
-            }
-            catch (Exception ex)
-            {
-                StackTrace trace = new StackTrace(true);
-                var frame = trace.GetFrame(1);
-                var altMessage = "  Error#: " + errorNumber.ToString() + "  METHOD: " + frame.GetMethod().Name + "  LINE:  " + frame.GetFileLineNumber();
-                Logg.logger.Fatal(ex.Message + altMessage);
-                // Task.Factory.StartNew(() => Globals.Queue_Errors.Enqueue(objCommand));
-                return -1;
-            }
-            finally
-            {
-                if (objCommand.Connection != null) objCommand.Connection.Close();
-            }
-        }
 
-        public async Task insertNonReturn(NpgsqlCommand objCommand)
+        public void insertNonReturn(NpgsqlCommand objCommand)
         {
             long errorNumber = -1;
             long result = -20;
@@ -807,8 +709,8 @@ namespace SharedLibrary
             {
                 objCommand.Connection = connection();
                 //objCommand.CommandTimeout = 5;
-                await objCommand.Connection.OpenAsync();
-                one = await objCommand.ExecuteNonQueryAsync();
+                 objCommand.Connection.Open();
+                one =  objCommand.ExecuteNonQuery();
             }
             catch (Exception ex)
             {
@@ -824,154 +726,6 @@ namespace SharedLibrary
             }
         }
 
-
-
-        public long insertNonProc(NpgsqlCommand objCommand)
-        {
-
-            long errorNumber = -1;
-            objCommand.CommandType = CommandType.Text;
-            try
-            {
-
-                objCommand.Connection = connection();
-                objCommand.Connection.Open();
-                objCommand.CommandTimeout = 100;
-                var result = objCommand.ExecuteNonQuery();
-                long val = 0;
-                if (result != null && long.TryParse(result.ToString(), out val))
-                {
-                    if (val > 0)
-                    {
-#if DEBUG
-                        WriteFullLine(objCommand.CommandText);
-#endif
-                        return val;
-                    }
-                    else
-                    {
-                        errorNumber = val;
-                        //throw new DataException();
-                    }
-                }
-                return -1;
-            }
-            catch (Exception ex)
-            {
-                objCommand.Connection.Close();
-                StackTrace trace = new StackTrace(true);
-                var frame = trace.GetFrame(1);
-                var altMessage = "  Error#: " + errorNumber.ToString() + "  METHOD: " + frame.GetMethod().Name + "  LINE:  " + frame.GetFileLineNumber();
-                Logg.logger.Fatal(ex.Message + altMessage);
-                return errorNumber;
-            }
-            finally
-            {
-                objCommand.Connection.Close();
-            }
-        }
-        public async Task<long> update(NpgsqlCommand objCommand)
-        {
-
-            objCommand.CommandType = CommandType.StoredProcedure;
-            try
-            {
-                objCommand.Connection = connection();
-                await objCommand.Connection.OpenAsync();
-#if DEBUG
-                WriteFullLine(objCommand.CommandText);
-#endif
-                var result = await objCommand.ExecuteScalarAsync();
-                long val = 0;
-                if (long.TryParse(result.ToString(), out val))
-                {
-                    return val;
-                }
-                return -1;
-            }
-            catch (Exception ex)
-            {
-                Logg.logger.Fatal(ex.Message);
-                return -1;
-            }
-            finally
-            {
-                if (objCommand.Connection != null) objCommand.Connection.Close();
-            }
-        }
-        public async Task<DataSet> select(NpgsqlCommand objCommand)
-        {
-            objCommand.Connection = connection();
-            await objCommand.Connection.OpenAsync();
-            objCommand.CommandType = CommandType.StoredProcedure;
-            var ds = new DataSet();
-            try
-            {
-                NpgsqlDataAdapter da = new NpgsqlDataAdapter(objCommand);
-                da.Fill(ds);
-#if DEBUG
-                WriteFullLine(objCommand.CommandText);
-#endif
-                return ds;
-            }
-            catch (Exception ex)
-            {
-                Logg.logger.Fatal(ex.Message);
-                return null;
-            }
-            finally
-            {
-                objCommand.Connection.Close();
-            }
-        }
-        public async Task<long> selectOne(NpgsqlCommand objCommand)
-        {
-
-            objCommand.CommandType = CommandType.Text;
-            try
-            {
-                objCommand.Connection = connection();
-                await objCommand.Connection.OpenAsync();
-                var res = await objCommand.ExecuteReaderAsync(CommandBehavior.SingleResult);
-                if (res.Read())
-                {
-#if DEBUG
-                    WriteFullLine(objCommand.CommandText);
-#endif
-                    return res.GetInt64(0);
-                }
-                else
-                {
-                    return -1;
-                }
-            }
-            catch (Exception ex)
-            {
-                Logg.logger.Fatal(ex.Message);
-                return -1;
-            }
-            finally
-            {
-                objCommand.Connection.Close();
-            }
-        }
-        public void TraceMessage(string message, [CallerMemberName] string memberName = "", [CallerFilePath] string sourceFilePath = "", [CallerLineNumber] int sourceLineNumber = 0)
-        {
-            Logg.logger.Fatal(message + "  |||  " + memberName + "  |||  " + sourceFilePath + "  |||  " + sourceLineNumber);
-        }
-
-        public static void WriteFullLine(string value)
-        {
-            //
-            // This method writes an entire line to the console with the string.
-            //
-            //Console.BackgroundColor = ConsoleColor.Green;
-            Console.ForegroundColor = ConsoleColor.DarkGreen;
-            Console.WriteLine(value.PadRight(Console.WindowWidth - 1)); // <-- see note
-                                                                        //
-                                                                        // Reset the color.
-                                                                        //
-            Console.ResetColor();
-        }
+        
     }
 }

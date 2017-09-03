@@ -20,8 +20,10 @@ namespace BetService
     {
         // public static Socket connector = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
         public static ConnectionMultiplexer Rconnect = RedisConnectorHelper.RedisConn;
+
         public static ISubscriber sub = Rconnect.GetSubscriber();
-        static async Task SendString(string value)
+
+        static  void SendString(string value)
         {
             var encoding = Encoding.UTF8;
             try
@@ -36,11 +38,11 @@ namespace BetService
                 SharedLibrary.Logg.logger.Fatal(ex.Message);
             }
         }
-        private async void SendRedisChannelSocket(string Channel, string Data, string username, string password, string node, string external_content_id, string bet_event)
+
+        private void SendRedisChannelSocket(string Channel, string Data, string username, string password, string node, string external_content_id, string bet_event)
         {
             try
             {
-
                 var build = new StringBuilder(); //Channel+'|'+Data + '|' +username + '|' +password + '|' +node + '|' +external_content_id + '|' +bet_event
 
                 build.Append(Channel);
@@ -54,10 +56,8 @@ namespace BetService
                 build.Append(bet_event);
                 build.Append('|');
                 build.Append(Data);
-
-                await SendToredis(build.ToString());
+                SendToredis(build.ToString());
                 build = null;
-
             }
             catch (Exception ex)
             {
@@ -65,12 +65,12 @@ namespace BetService
             }
         }
 
-        public async Task SendToredis(string message)
+        public void SendToredis(string message)
         {
             try
             {
                 var address = Core.config.AppSettings.Get("RedisCommandChannel");
-                sub.PublishAsync(address, message);
+                sub.PublishAsync(address, message).ConfigureAwait(false);
             }
             catch (Exception ex)
             {
@@ -78,7 +78,7 @@ namespace BetService
             }
         }
 
-        public async void SendToHybridgeLiveMenue(string Channel,  string status, string match_time, string bet_status, string match_id, string home_team_id, string match_name, string away_team_name, string match_start_date, string away_team_id, string score, string home_team_name, string tournament_name, string country_id, string country_iso, string country_name, string tournament_id,string sport_id,string sport_name)
+        public void SendToHybridgeLiveMenue(string Channel,  string status, string match_time, string bet_status, string match_id, string home_team_id, string match_name, string away_team_name, string match_start_date, string away_team_id, string score, string home_team_name, string tournament_name, string country_id, string country_iso, string country_name, string tournament_id,string sport_id,string sport_name)
         {
             try
             {
@@ -263,8 +263,8 @@ namespace BetService
                 Logg.logger.Fatal(ex.Message);
             }
         }
-
-        public async Task SendToHybridgeSocket(long match_id, long odd_id, int? odd_eventoddsfield_typeid, string odd_name, string odd_special_odds_value, EventOddsField odd_in, string channel, string msg_event)
+      
+        public void SendToHybridgeSocket(long match_id, long odd_id, int? odd_eventoddsfield_typeid, string odd_name, string odd_special_odds_value, EventOddsField odd_in, string channel, string msg_event)
         {
             var oddUnique = new BetClearQueueElementLive();
 
@@ -344,9 +344,9 @@ namespace BetService
                         sb.Append("\"");
 
                         //sb.Append("}");
-                        Task.Run(() =>
-                        SendRedisChannelSocket(channel, "[{\"mid_otid_ocid_sid\": \"" + oid.Result + "\"},{" + sb + "}]", config.AppSettings.Get("RedisUserName"), config.AppSettings.Get("RedisPassword"), "Odd", oid.Result, msg_event)
-                        ).ConfigureAwait(false);
+                        Task.Factory.StartNew(() =>
+                        SendRedisChannelSocket(channel, "[{\"mid_otid_ocid_sid\": \"" + oid + "\"},{" + sb + "}]", config.AppSettings.Get("RedisUserName"), config.AppSettings.Get("RedisPassword"), "Odd", oid, msg_event)
+                        );
                     }
                 }
             }
@@ -356,7 +356,7 @@ namespace BetService
             }
         }
 
-        public async void SendToHybridgeSocketNewOdd(long match_id, long odd_id, int? odd_eventoddsfield_typeid, string odd_name, string odd_special_odds_value, EventOddsField odd_in, string channel, string odd_event)
+        public void SendToHybridgeSocketNewOdd(long match_id, long odd_id, int? odd_eventoddsfield_typeid, string odd_name, string odd_special_odds_value, EventOddsField odd_in, string channel, string odd_event)
         {
             var oddUnique = new BetClearQueueElementLive();
             try
@@ -438,10 +438,10 @@ namespace BetService
                         sb.Append(odd.odd_special_odds_value);
                         sb.Append("\"");
                         // sb.Append("}");
-                        Task.Run(() =>
+                        Task.Factory.StartNew(() =>
                             SendRedisChannelSocket(channel,
-                                "[{\"mid_otid_ocid_sid\": \"" + oid.Result + "\"},{" + sb +
-                                "}]", config.AppSettings.Get("RedisUserName"), config.AppSettings.Get("RedisPassword"), "Odd_New", oid.Result, odd_event)).ConfigureAwait(false);
+                                "[{\"mid_otid_ocid_sid\": \"" + oid + "\"},{" + sb +
+                                "}]", config.AppSettings.Get("RedisUserName"), config.AppSettings.Get("RedisPassword"), "Odd_New", oid, odd_event)).ConfigureAwait(false);
                     }
                 }
 
@@ -452,24 +452,24 @@ namespace BetService
             }
         }
 
-        public async Task SendToHybridgeSocketMessages(string message, string channel, string odd_event)
+        public void SendToHybridgeSocketMessages(string message, string channel, string odd_event)
         {
             try
             {
                 //TODO REDISSEND
                 if (channel != null && message != null)
                 {
-                    Task.Run(() => SendRedisChannelSocket(channel, "[{\"message\": \"" + message + "\"}]]", config.AppSettings.Get("RedisUserName"), config.AppSettings.Get("RedisPassword"), "Message", "|", odd_event)).ConfigureAwait(false);
+                    Task.Factory.StartNew(() => SendRedisChannelSocket(channel, "[{\"message\": \"" + message + "\"}]]", config.AppSettings.Get("RedisUserName"), config.AppSettings.Get("RedisPassword"), "Message", "|", odd_event));
                     // zmq = null;
                 }
-
             }
             catch (Exception ex)
             {
                 Logg.logger.Fatal(ex.Message);
             }
         }
-        public async Task<string> EncodeUnifiedBetClearQueueElementLive(BetClearQueueElementLive UnifiedBetObject)
+
+        public string EncodeUnifiedBetClearQueueElementLive(BetClearQueueElementLive UnifiedBetObject)
         {
             try
             {
@@ -509,7 +509,7 @@ namespace BetService
             }
         }
 
-        public async Task<string> CreateLiveOddsChannelName(long match_id, string language, string last_prefix)
+        public string CreateLiveOddsChannelName(long match_id, string language, string last_prefix)
         {
             try
             {
@@ -525,7 +525,7 @@ namespace BetService
                     var secret = Core.config.AppSettings.Get("ChannelsSecretKey_real");
 #endif
                     byte[] bytes = System.Text.Encoding.UTF8.GetBytes(secret + "betradar_live_odds_" + language + "_" + match_id.ToString());
-                    return prefix + await ToHex(sha1.ComputeHash(bytes), false) + last_prefix; ;
+                    return prefix +  ToHex(sha1.ComputeHash(bytes), false) + last_prefix; ;
                 }
             }
             catch (Exception ex)
@@ -535,8 +535,7 @@ namespace BetService
             }
         }
 
-
-        public static async Task<string> ToHex(byte[] bytes, bool upperCase)
+        public static string ToHex(byte[] bytes, bool upperCase)
         {
             StringBuilder result = new StringBuilder(bytes.Length * 2);
 
@@ -562,11 +561,11 @@ namespace BetService
                     {
                         {Core.config.AppSettings.Get("RedisServer"), int.Parse(Core.config.AppSettings.Get("RedisPort"))}
                     },
-                    KeepAlive = 100,
+                    KeepAlive = 1000,
                     AbortOnConnectFail = false,
-                    ResponseTimeout = 100,
+                    ResponseTimeout = 1000,
                     ConnectTimeout = 5000,
-                    SyncTimeout = 100,
+                    SyncTimeout = 1000,
                     Password = config.AppSettings.Get("RedisServerPassword")
                 };
 

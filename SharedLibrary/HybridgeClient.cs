@@ -19,74 +19,8 @@ namespace SharedLibrary
 
 
 
-        public static async void SendDataSocket(string channel, string data, string username, string passeord)
-        {
-            using (ClientWebSocket ws = new ClientWebSocket())
-            {
-                var cancellationTokenSource = new CancellationTokenSource();
-                try
-                {
-                    Uri serverUri = new Uri(Core.config.AppSettings.Get("HybridgeClientServer"));
-                    await ws.ConnectAsync(serverUri, cancellationTokenSource.Token);
-                    while (ws.State == WebSocketState.Open)
-                    {
-                        var body = "------WebKitFormBoundary7MA4YWxkTrZu0gW\r\nContent-Disposition: form-data; name=\"channel\"\r\n\r\n" + channel + "\r\n------WebKitFormBoundary7MA4YWxkTrZu0gW\r\nContent-Disposition: form-data; name=\"data\"\r\n\r\n" + data + "\r\n------WebKitFormBoundary7MA4YWxkTrZu0gW\r\nContent-Disposition: form-data; name=\"__api_key\"\r\n\r\nDU?JG`s:OQNrV]%ruhgLl}dpFr;z_No=uHXE{/j&[_wQBS;J)yNOBMj>7VP<\r\n------WebKitFormBoundary7MA4YWxkTrZu0gW\r\nContent-Disposition: form-data; name=\"event\"\r\n\r\nshout\r\n------WebKitFormBoundary7MA4YWxkTrZu0gW\r\nContent-Disposition: form-data; name=\"\"\r\n\r\n\r\n------WebKitFormBoundary7MA4YWxkTrZu0gW--";
-                        ArraySegment<byte> bytesToSend = new ArraySegment<byte>(Encoding.UTF8.GetBytes(body));
-                        await ws.SendAsync(bytesToSend, WebSocketMessageType.Text, true, cancellationTokenSource.Token);
-                        ArraySegment<byte> bytesReceived = new ArraySegment<byte>(new byte[1024]);
-                        await ws.ReceiveAsync(bytesReceived, cancellationTokenSource.Token);
-                    }
-                    ws.Abort();
-                    ws.Dispose();
-                }
-                catch (Exception ex)
-                {
-                    await ws.CloseAsync(WebSocketCloseStatus.EndpointUnavailable, ex.Message, cancellationTokenSource.Token);
-                    ws.Abort();
-                    ws.Dispose();
-                    Logg.logger.Fatal(ex.Message);
-                }
-
-            }
-        }
-
-
-
-        public static async void SendDataSocket_new(string channel, string data, string username, string passeord)
-        {
-            var cancellationTokenSource = new CancellationTokenSource();
-            try
-            {
-                using (ClientWebSocket ws = new ClientWebSocket())
-                {
-                    Uri serverUri = new Uri(Core.config.AppSettings.Get("HybridgeClientServer"));
-                    await ws.ConnectAsync(serverUri, CancellationToken.None);
-
-                    while (ws.State == WebSocketState.Open)
-                    {
-                        var body =
-                            "{\"topic\":\"REST@HYBRIDGE\",\"event\":\"data.create\",\"payload\":{\"merchant_id\":1,\"auth\":{\"username\":\"" +
-                            username + "\",\"password\":\"" + passeord + "\"},\"data\":{\"channel\":\"" + channel +
-                            "\",\"payload\":\"For instance: JSON encoded data.\",\"identifier_slug\":\"oddsa\",\"expires_after_ms\":54000}},\"ref\":\"2\"} ";
-                        ArraySegment<byte> bytesToSend = new ArraySegment<byte>(Encoding.UTF8.GetBytes(body));
-                        await ws.SendAsync(bytesToSend, WebSocketMessageType.Text, true, cancellationTokenSource.Token);
-                        //ArraySegment<byte> bytesReceived = new ArraySegment<byte>(new byte[1024]);
-                        // WebSocketReceiveResult result = await ws.ReceiveAsync(bytesReceived, CancellationToken.None);
-                        // Console.WriteLine(Encoding.UTF8.GetString(bytesReceived.Array, 0, result.Count));
-                        ws.Abort();
-                        ws.Dispose();
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                Logg.logger.Fatal(ex.Message);
-            }
-
-        }
-
-
-
+      
+      
         public static void JoinChannel()
         {
             try
@@ -122,7 +56,6 @@ namespace SharedLibrary
                 if (!string.IsNullOrEmpty(node))
                 {
                     data["external_content_name"] = node;
-                   
                 }
                 if (!string.IsNullOrEmpty(external_content_id))
                 {

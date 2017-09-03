@@ -14,12 +14,12 @@ namespace BetService.Classes.DbInsert
 {
     public class ScoreCardSummaryHandle : Core
     {
-        public async Task ScoreCardSummaryHandler(ScoreCardSummaryEventArgs args)
+        public void ScoreCardSummaryHandler(ScoreCardSummaryEventArgs args)
         {
             try
             {
                 var common = new Common();
-                await common.updateDmadYellowRedCard(args.ScoreCardSummary, args.ScoreCardSummary.EventHeader.Id);
+                 common.updateDmadYellowRedCard(args.ScoreCardSummary, args.ScoreCardSummary.EventHeader.Id);
             }
             catch (Exception ex)
             {

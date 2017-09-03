@@ -30,10 +30,10 @@ namespace BetService.Classes.DbInsert
 
 
 
-        public async Task<long> insertCpTournament()
+        public  long insertCpTournament()
         {
             var common = new Common();
-            var ObjCommand = new NpgsqlCommand(await Globals.DB_Functions.InsertCpTournament.ToDescription());
+            var ObjCommand = new NpgsqlCommand( Globals.DB_Functions.InsertCpTournament.ToDescription().ToString());
             try
             {
 
@@ -59,7 +59,7 @@ namespace BetService.Classes.DbInsert
 
                 ObjCommand.Parameters.AddWithValue("p_super_team_id", NpgsqlDbType.Bigint, (object)super_team_id ?? DBNull.Value);
 
-                return await common.insert(ObjCommand);
+                return  common.insert(ObjCommand);
 
             }
             catch (Exception ex)

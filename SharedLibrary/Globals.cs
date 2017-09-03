@@ -18,7 +18,7 @@ namespace SharedLibrary
     {
         public static volatile bool timerOnOff = false;
         public static volatile bool redisTimerOnOff = false;
-        public static Task<DataSet> MerchantsDs;
+        public static DataSet MerchantsDs;
         public static string BetQueueName = ".\\private$\\BetQueue";
         public static Queue<string> LiveOddsQueue;
         public static NpgsqlConnection r_con;
@@ -329,7 +329,12 @@ namespace SharedLibrary
             [Description("cp_cancel_odd")]
             CancelOdd = 124,
             [Description("cp_get_other_market_outcomes")]
-            GetOtherMarketsOutcimes = 125
+            GetOtherMarketsOutcimes = 125,
+            [Description("cp_get_unfinalised_mid")]
+            GetUnfinalisedMid = 126,
+            [Description("insert_dy_matchs")]
+            insertDyMatchs = 128,
+
         }
         public enum Tables
         {

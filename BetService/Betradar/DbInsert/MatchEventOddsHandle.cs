@@ -19,29 +19,12 @@ namespace BetService.Classes.DbInsert
     public class MatchEventOddsHandle : Core
     {
 
-        public async Task MatchEventOddsHandler(MatchEventOdds args)
+        public void MatchEventOddsHandler(MatchEventOdds args)
         {
-            await MatchEventOdds_Queue_WatchQueueMatches(args);
+             MatchEventOdds_Queue_WatchQueueMatches(args);
         }
-        public object GetPropertyValue(object obj, string propertyName)
-        {
-            var _propertyNames = propertyName.Split('.');
-
-            for (var i = 0; i < _propertyNames.Length; i++)
-            {
-                if (obj != null)
-                {
-                    var _propertyInfo = obj.GetType().GetProperty(_propertyNames[i]);
-                    if (_propertyInfo != null)
-                        obj = _propertyInfo.GetValue(obj);
-                    else
-                        obj = null;
-                }
-            }
-
-            return obj;
-        }
-        public async Task MatchEventOdds_Queue_WatchQueueMatches(MatchEventOdds queueElement)
+      
+        public void MatchEventOdds_Queue_WatchQueueMatches(MatchEventOdds queueElement)
         {
 
             var common = new Common();
@@ -63,7 +46,7 @@ namespace BetService.Classes.DbInsert
                         bet.PlayerId = bet_result.PlayerId;
                         bet.TeamId = bet_result.TeamId;
                         var mid = EncodeUnifiedBetClearQueueElement(bet);
-                        await common.insertCpLcooBetclearOdds(bet_result, match.MatchId, mid);
+                         common.insertCpLcooBetclearOdds(bet_result, match.MatchId, mid);
                     }
                 }
                 common.insertMatch(match, 1);
@@ -75,9 +58,7 @@ namespace BetService.Classes.DbInsert
             try
             {
                 // Here we add the odds of the match
-
-
-                int[] visible_odd_types = new int[] { 10, 46, 60, 42, 20, 225, 52 };
+                int[] visible_odd_types = new int[] { 10, 46, 60, 43, 20, 225,52 };
                // match.Sport.Id
                 if (match.Odds != null)
                 {
@@ -117,17 +98,17 @@ namespace BetService.Classes.DbInsert
 
                                 if (visible_odd_types.Contains(Odds.OddsType))
                                 {
-                                    await common.insertCpLcooOdds(odd, match.MatchId, Odds.OddsType, "", "", true, probability);
+                                     common.insertCpLcooOdds(odd, match.MatchId, Odds.OddsType, "", "", true, probability);
                                 }
                                 else
                                 {
-                                    await common.insertCpLcooOdds(odd, match.MatchId, Odds.OddsType, "", "", false, probability);
+                                     common.insertCpLcooOdds(odd, match.MatchId, Odds.OddsType, "", "", false, probability);
                                 }
 
                             }
                             else
                             {
-                                await common.updateCpLcooOdds(match.MatchId, Odds.OddsType);
+                                 common.updateCpLcooOdds(match.MatchId, Odds.OddsType);
                             }
                         }
 

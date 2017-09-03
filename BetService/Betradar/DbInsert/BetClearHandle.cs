@@ -17,12 +17,12 @@ namespace BetService.Classes.DbInsert
 {
     class BetClearHandle : Core
     {
-        public async Task BetClearHandler(BetClearEventArgs args)
+        public void BetClearHandler(BetClearEventArgs args)
         {
-            await RunTask(args);
+             RunTask(args);
         }
 
-        private async Task RunTask(BetClearEventArgs queueElement)
+        private void RunTask(BetClearEventArgs queueElement)
         {
             //var client = new Client();
             // var proxy = client.ServerproxyLive();
@@ -52,7 +52,7 @@ namespace BetService.Classes.DbInsert
                             oddUnique.TypeId = null;
                         }
 
-                        await common.insertLiveOdds(Odd, odd, Odd.Active, odd.Outcome, odd.PlayerId,
+                         common.insertLiveOdds(Odd, odd, Odd.Active, odd.Outcome, odd.PlayerId,
                             odd.Probability.ToString() ?? "", odd.Type, odd.Value.ToString() ?? "",
                             odd.ViewIndex,
                             odd.VoidFactor.ToString() ?? "", new JavaScriptSerializer().Serialize(NameDictionary), queueElement.BetClear.EventHeader.Id, odd.TypeId ?? 0, queueElement.BetClear.Status.ToString(), queueElement.BetClear.Timestamp.ToString());
@@ -61,14 +61,14 @@ namespace BetService.Classes.DbInsert
                         try
                         {
                             var coupon = new Coupons();
-                            await coupon.MatchFinalize(await EncodeUnifiedBetClearQueueElementLive(oddUnique));
+                             coupon.MatchFinalize(EncodeUnifiedBetClearQueueElementLive(oddUnique));
                         }
                         catch (Exception ex)
                         {
                             SharedLibrary.Logg.logger.Fatal("SEND TO PROXY ERROR: " + ex.Message);
                         }
                     }
-                    //Task.Factory.StartNew(() => common.insertMatchDataAllDetails((MatchHeader)queueElement.BetClear.EventHeader, null));
+                    Task.Factory.StartNew(() => common.insertMatchDataAllDetails((MatchHeader)queueElement.BetClear.EventHeader, null)).ConfigureAwait(false);
                 }
             }
             catch (Exception ex)

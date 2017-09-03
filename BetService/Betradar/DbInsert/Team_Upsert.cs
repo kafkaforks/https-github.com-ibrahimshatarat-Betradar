@@ -23,11 +23,11 @@ namespace BetService
         public long? team_id { get; set; }
         public string team_name { get; set; }
         public long? super_team_id { get; set; }
-        public async Task<long> insertCpTeam()
+        public long insertCpTeam()
         {
             var common = new Common();
             var queue = new Queue<Globals.Rollback>();
-            var command = new NpgsqlCommand(await Globals.DB_Functions.InsertCpTeam.ToDescription());
+            var command = new NpgsqlCommand(Globals.DB_Functions.InsertCpTeam.ToDescription().ToString());
             try
             {
 
@@ -53,7 +53,7 @@ namespace BetService
 
                 command.Parameters.AddWithValue("p_super_team_id", NpgsqlDbType.Bigint, (object)super_team_id ?? DBNull.Value);
 
-                return await common.insert(command);
+                return  common.insert(command);
             }
             catch (Exception ex)
             {

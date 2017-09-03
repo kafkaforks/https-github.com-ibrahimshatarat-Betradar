@@ -54,7 +54,7 @@ namespace BetService
             //m_thread.Start(); 
             timerFinalise = new Timer();
             timerFinalise.AutoReset = false;
-            timerFinalise.Interval = 1000;
+            timerFinalise.Interval = 30000;
             lock (timerFinalise)
             {
                 timerFinalise.Elapsed += TimerFinaliseTick;
@@ -95,12 +95,35 @@ namespace BetService
             if (Globals.timerOnOff)
             {
                 Globals.timerOnOff = false;
-                var coup = new Coupons();
-                  coup.GetAllFinalizedCoupons();
+                finalize();
                 Globals.timerOnOff = true;
             }
 
             timerFinalise.Enabled = true;
+        }
+
+        private void finalize()
+        {
+            try
+            {
+                var coupon = new Coupons();
+               var ds =  coupon.getAllUNfinalisedMid();
+                if (ds.Tables.Count>0)
+                {
+                    if (ds.Tables[0].Rows.Count>0)
+                    {
+                        foreach (var mid in ds.Tables[0].Rows)
+                        {
+                            coupon.MatchFinalize(mid.ToString());
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Logg.logger.Fatal(ex.Message);
+            }
+
         }
 
         public void ThreadProc()

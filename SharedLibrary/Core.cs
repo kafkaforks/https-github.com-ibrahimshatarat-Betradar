@@ -1,6 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
+using System.Diagnostics;
 using System.Net.WebSockets;
+using System.Runtime.CompilerServices;
 using System.Security.Cryptography;
 using System.Text;
 using System.Threading;
@@ -9,6 +12,7 @@ using System.Web.Script.Serialization;
 using NetMQ;
 using Newtonsoft.Json.Linq;
 using NLog.Internal;
+using Npgsql;
 using RestSharp;
 using Sportradar.SDK.FeedProviders.LiveOdds.Common;
 
@@ -23,8 +27,6 @@ namespace SharedLibrary
         public static long OutCount;
         private static ClientWebSocket pusher = new ClientWebSocket();
         public static ClientWebSocket client;
-
-
 
         public Core()
         {
@@ -432,7 +434,7 @@ namespace SharedLibrary
         //    }
         //}
 
-        public async Task<string> EncodeUnifiedBetClearQueueElementLive(BetClearQueueElementLive UnifiedBetObject)
+        public  string EncodeUnifiedBetClearQueueElementLive(BetClearQueueElementLive UnifiedBetObject)
         {
             try
             {
@@ -472,7 +474,7 @@ namespace SharedLibrary
             }
         }
 
-        public async Task<string> CreateLiveOddsChannelName(long match_id, string language, string last_prefix)
+        public  string CreateLiveOddsChannelName(long match_id, string language, string last_prefix)
         {
             try
             {
@@ -488,7 +490,7 @@ namespace SharedLibrary
                     var secret = config.AppSettings.Get("ChannelsSecretKey_real");
 #endif
                     byte[] bytes = System.Text.Encoding.UTF8.GetBytes(secret + "betradar_live_odds_" + language + "_" + match_id.ToString());
-                    return prefix + await ToHex(sha1.ComputeHash(bytes), false) + last_prefix; ;
+                    return prefix +  ToHex(sha1.ComputeHash(bytes), false) + last_prefix; ;
                 }
             }
             catch (Exception ex)
@@ -498,7 +500,7 @@ namespace SharedLibrary
             }
         }
 
-        public async Task<string> CreateLiveOddsChannelName(string first_prefix,string last_prefix)
+        public  string CreateLiveOddsChannelName(string first_prefix,string last_prefix)
         {
             try
             {
@@ -514,7 +516,7 @@ namespace SharedLibrary
                     var secret = config.AppSettings.Get("ChannelsSecretKey_real");
 #endif
                     byte[] bytes = System.Text.Encoding.UTF8.GetBytes(secret + first_prefix);
-                    return prefix + await ToHex(sha1.ComputeHash(bytes), false) + last_prefix; ;
+                    return prefix +  ToHex(sha1.ComputeHash(bytes), false) + last_prefix; ;
                 }
             }
             catch (Exception ex)
@@ -523,7 +525,7 @@ namespace SharedLibrary
                 return null;
             }
         }
-        public static async Task<string> ToHex(byte[] bytes, bool upperCase)
+        public static  string ToHex(byte[] bytes, bool upperCase)
         {
             StringBuilder result = new StringBuilder(bytes.Length * 2);
 
@@ -531,6 +533,340 @@ namespace SharedLibrary
                 result.Append(bytes[i].ToString(upperCase ? "X2" : "x2"));
 
             return result.ToString();
+        }
+
+        public NpgsqlConnection connection()
+        {
+            var con = new NpgsqlConnection();
+            try
+            {
+                if (con.State == ConnectionState.Closed)
+                {
+
+                    var connectionBuilder = new NpgsqlConnectionStringBuilder();
+                    connectionBuilder.Host = config.AppSettings.Get("DB_Host");
+                    connectionBuilder.Port = int.Parse(config.AppSettings.Get("DB_Port"));
+                    connectionBuilder.Database = config.AppSettings.Get("DB_Database");
+                    connectionBuilder.Username = config.AppSettings.Get("DB_Username");
+                    connectionBuilder.Password = config.AppSettings.Get("DB_Password");
+                    connectionBuilder.Timeout = 300;
+                    connectionBuilder.Pooling = true;
+                    connectionBuilder.CommandTimeout = 300;
+                    con = new NpgsqlConnection(connectionBuilder.ConnectionString);
+                    return con;
+                }
+                else
+                {
+                    return null;
+                }
+
+            }
+            catch (Exception ex)
+            {
+                Logg.logger.Fatal(ex.Message);
+                return null;
+            }
+
+        }
+        public long insert(NpgsqlCommand objCommand)
+        {
+            long errorNumber = -1;
+            long result = -20;
+            object one;
+            objCommand.CommandType = CommandType.StoredProcedure;
+            try
+            {
+
+                objCommand.Connection = connection();
+                //objCommand.CommandTimeout = 5;
+                objCommand.Connection.Open();
+                one = objCommand.ExecuteScalar();
+                bool successfullyParsed = long.TryParse(one.ToString(), out result);
+                long val = 0;
+                if (successfullyParsed)
+                {
+                    if (result != null && long.TryParse(result.ToString(), out val))
+                    {
+                        if (val > 0)
+                        {
+#if DEBUG
+                            WriteFullLine(objCommand.CommandText);
+#endif
+                            return val;
+                        }
+                        else
+                        {
+                            errorNumber = val;
+                            throw new DataException();
+                        }
+                    }
+                }
+                else
+                {
+                }
+
+                return -1;
+            }
+            catch (Exception ex)
+            {
+                StackTrace trace = new StackTrace(true);
+                var frame = trace.GetFrame(1);
+                var altMessage = "  Error#: " + errorNumber.ToString() + "  METHOD: " + frame.GetMethod().Name + "  LINE:  " + frame.GetFileLineNumber();
+                Logg.logger.Fatal(ex.Message + altMessage);
+                // Task.Factory.StartNew(() => Globals.Queue_Errors.Enqueue(objCommand));
+                return -1;
+            }
+            finally
+            {
+                objCommand.Connection.Close();
+            }
+        }
+        //        public long insert(NpgsqlCommand objCommand)
+        //        {
+        //            long errorNumber = -1;
+        //            long result = -20;
+        //            object one = null;
+        //            objCommand.CommandType = CommandType.StoredProcedure;
+        //            try
+        //            {
+
+        //                objCommand.Connection =  connection();
+        //                //objCommand.CommandTimeout = 5;
+        //                if (objCommand.Connection != null)  objCommand.Connection.Open();
+        //                one =  objCommand.ExecuteScalar();
+        //                bool successfullyParsed = long.TryParse(one.ToString(), out result);
+        //                long val = 0;
+        //                if (successfullyParsed)
+        //                {
+        //                    if (result != null && long.TryParse(result.ToString(), out val))
+        //                    {
+        //                        if (val > 0)
+        //                        {
+        //#if DEBUG
+        //                            WriteFullLine(objCommand.CommandText);
+        //#endif
+        //                            return val;
+        //                        }
+        //                        else
+        //                        {
+        //                            errorNumber = val;
+        //                            throw new DataException();
+        //                        }
+        //                    }
+        //                }
+
+        //                return -1;
+        //            }
+        //            catch (Exception ex)
+        //            {
+        //                StackTrace trace = new StackTrace(true);
+        //                var frame = trace.GetFrame(1);
+        //                var altMessage = "  Error#: " + errorNumber.ToString() + "  METHOD: " + frame.GetMethod().Name + "  LINE:  " + frame.GetFileLineNumber();
+        //                Logg.logger.Fatal(ex.Message + altMessage);
+        //                // Task.Factory.StartNew(() => Globals.Queue_Errors.Enqueue(objCommand));
+        //                return -1;
+        //            }
+        //            finally
+        //            {
+        //                if (objCommand.Connection != null) objCommand.Connection.Close();
+        //            }
+        //        }
+        public long insertNonProc(NpgsqlCommand objCommand)
+        {
+
+            long errorNumber = -1;
+            objCommand.CommandType = CommandType.Text;
+            try
+            {
+
+                objCommand.Connection = connection();
+                objCommand.Connection.Open();
+                objCommand.CommandTimeout = 100;
+                var result = objCommand.ExecuteNonQuery();
+                long val = 0;
+                if (result != null && long.TryParse(result.ToString(), out val))
+                {
+                    if (val > 0)
+                    {
+#if DEBUG
+                        WriteFullLine(objCommand.CommandText);
+#endif
+                        return val;
+                    }
+                    else
+                    {
+                        errorNumber = val;
+                        //throw new DataException();
+                    }
+                }
+                return -1;
+            }
+            catch (Exception ex)
+            {
+                objCommand.Connection.Close();
+                StackTrace trace = new StackTrace(true);
+                var frame = trace.GetFrame(1);
+                var altMessage = "  Error#: " + errorNumber.ToString() + "  METHOD: " + frame.GetMethod().Name + "  LINE:  " + frame.GetFileLineNumber();
+                Logg.logger.Fatal(ex.Message + altMessage);
+                return errorNumber;
+            }
+            finally
+            {
+                objCommand.Connection.Close();
+            }
+        }
+        public long update(NpgsqlCommand objCommand)
+        {
+
+            objCommand.CommandType = CommandType.StoredProcedure;
+            try
+            {
+                objCommand.Connection = connection();
+                if (objCommand.Connection != null) objCommand.Connection.Open();
+#if DEBUG
+                WriteFullLine(objCommand.CommandText);
+#endif
+                var result = objCommand.ExecuteScalar();
+                long val = 0;
+                if (long.TryParse(result.ToString(), out val))
+                {
+                    return val;
+                }
+                return -1;
+            }
+            catch (Exception ex)
+            {
+                Logg.logger.Fatal(ex.Message);
+                return -1;
+            }
+            finally
+            {
+                if (objCommand.Connection != null) objCommand.Connection.Close();
+            }
+        }
+        public DataSet selectReader(NpgsqlCommand objCommand)
+        {
+            var lbetclear = new LcooBetClear();
+            var ldata = new List<LcooBetClear>();
+            objCommand.Connection = connection();
+            objCommand.Connection.Open();
+            objCommand.CommandType = CommandType.StoredProcedure;
+            var ds = new DataSet();
+            try
+            {
+                ds.Tables.Add();
+                NpgsqlDataReader dr = objCommand.ExecuteReader() as NpgsqlDataReader;
+                while (dr.Read())
+                {
+
+                    //lbetclear.id = long.TryParse(dr[0].ToString(),);
+
+                    lbetclear.match_id = long.Parse(dr[1].ToString());
+                    lbetclear.odd_type_id = long.Parse(dr[2].ToString());
+                    lbetclear.odd_type_name = dr[3].ToString();
+                    lbetclear.odd_id = long.Parse(dr[4].ToString());
+                    lbetclear.odd_outcome = dr[5].ToString();
+                    lbetclear.odd_outcome_id = dr[6].ToString();
+                    lbetclear.odd_player_id = dr[7].ToString();
+                    lbetclear.odd_team_id = dr[8].ToString();
+                    lbetclear.odd_name = dr[9].ToString();
+                    lbetclear.odd_visible = bool.Parse(dr[10].ToString());
+                    lbetclear.odd_special = dr[11].ToString();
+                    lbetclear.odd_odd = dr[12].ToString();
+                    lbetclear.is_deleted = bool.Parse(dr[13].ToString());
+                    lbetclear.created_at = DateTime.Parse(dr[14].ToString());
+                    lbetclear.odd_probability = dr[15].ToString();
+                    lbetclear.last_update = DateTime.Parse(dr[16].ToString());
+                    lbetclear.last_odd = dr[17].ToString();
+                    lbetclear.mid_otid_ocid_sid = dr[18].ToString();
+                    ldata.Add(lbetclear);
+                }
+#if DEBUG
+                WriteFullLine(objCommand.CommandText);
+#endif
+                return ds;
+            }
+            catch (Exception ex)
+            {
+                Logg.logger.Fatal(ex.Message);
+                return null;
+            }
+            finally
+            {
+                if (objCommand.Connection != null) objCommand.Connection.Close();
+            }
+        }
+        public DataSet select(NpgsqlCommand objCommand)
+        {
+            objCommand.Connection = connection();
+            if (objCommand.Connection != null)
+            {
+                objCommand.Connection.Open();
+                objCommand.CommandType = CommandType.StoredProcedure;
+                var ds = new DataSet();
+                try
+                {
+                    NpgsqlDataAdapter da = new NpgsqlDataAdapter(objCommand);
+                    da.Fill(ds);
+#if DEBUG
+                    WriteFullLine(objCommand.CommandText);
+#endif
+                    return ds;
+                }
+                catch (Exception ex)
+                {
+                    Logg.logger.Fatal(ex.Message);
+                    return null;
+                }
+                finally
+                {
+                    objCommand.Connection.Close();
+                }
+            }
+            return null;
+        }
+        public long selectOne(NpgsqlCommand objCommand)
+        {
+
+            objCommand.CommandType = CommandType.Text;
+            try
+            {
+                objCommand.Connection = connection();
+                if (objCommand.Connection != null) objCommand.Connection.Open();
+                var res = objCommand.ExecuteReader(CommandBehavior.SingleResult);
+                if (res.Read())
+                {
+#if DEBUG
+                    WriteFullLine(objCommand.CommandText);
+#endif
+                    return res.GetInt64(0);
+                }
+                else
+                {
+                    return -1;
+                }
+            }
+            catch (Exception ex)
+            {
+                Logg.logger.Fatal(ex.Message);
+                return -1;
+            }
+            finally
+            {
+                objCommand.Connection.Close();
+            }
+        }
+        public void TraceMessage(string message, [CallerMemberName] string memberName = "", [CallerFilePath] string sourceFilePath = "", [CallerLineNumber] int sourceLineNumber = 0)
+        {
+            Logg.logger.Fatal(message + "  |||  " + memberName + "  |||  " + sourceFilePath + "  |||  " + sourceLineNumber);
+        }
+     
+        public static void WriteFullLine(string value)
+        {
+
+            Console.ForegroundColor = ConsoleColor.DarkGreen;
+            Console.WriteLine(value.PadRight(Console.WindowWidth - 1));
+            Console.ResetColor();
         }
 
     }

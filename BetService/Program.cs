@@ -34,7 +34,7 @@ namespace BetService
             //var common = new Common();
             //var ds = common.selectotherOutcomesMarket(12016834, 20, "12016834|20|3|0000|0000|0000", "");
 
-
+            
 
             //var entity = new BetResultEntity_test();
             // common.insertCpLcooBetclearOdds_test(entity, 11537497, "11537497|10|1|0000|0000|0000");

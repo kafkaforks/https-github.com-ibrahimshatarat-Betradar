@@ -21,43 +21,63 @@ namespace Betradar.Classes.Socket
             m_live_odds.OnAlive += AliveHandler;
         }
 
-        protected virtual async void AliveHandler(object sender, AliveEventArgs e)
+        protected virtual  void AliveHandler(object sender, AliveEventArgs e)
         {
             var common = new Common();
            
             try
             {
-                Console.WriteLine(":::::::::::::::::::::: Header Count: {0} / Status: {1} ::::::::::::::::::::::", e.Alive.EventHeaders.Count, e.Alive.Status);
-                var matches = new List<string>();
-                foreach (var head in e.Alive.EventHeaders)
+                // var i = e.Alive.EventHeaders;
+                foreach (var i in e.Alive.EventHeaders)
                 {
-                    await common.insertMatchDataAllDetails((MatchHeader)head, null);
-                    if (head.Status != EventStatus.UNDEFINED && head.Status != EventStatus.NOT_STARTED && head.Status != EventStatus.PAUSED && head.Status != EventStatus.ENDED && head.Status != EventStatus.ABANDONED && head.Status != EventStatus.CANCELED)
-                    {
-                        if (head.Active)
-                        {
-                            matches.Add(head.Id.ToString());
-                        }
-                    }
+                    //Console.WriteLine("gtgggg");
+                    common.insertDyMatchs((MatchHeader)i, null, true, true, true, 2);
                 }
 
-                await common.UpdateAliveMatches(matches);
+                Console.WriteLine(":::::::::::::::::::::: Header Count: {0} / Status: {1} ::::::::::::::::::::::", e.Alive.EventHeaders.Count, e.Alive.Status);
+                var matches = new List<string>();
+                Task.Factory.StartNew(() =>
+                {
+                   
+                    foreach (var head in e.Alive.EventHeaders)
+                    {
+                        common.insertMatchDataAllDetails((MatchHeader) head, null);
+                        if (head.Status != EventStatus.UNDEFINED && head.Status != EventStatus.NOT_STARTED &&
+                           // head.Status != EventStatus.PAUSED &&
+                            head.Status != EventStatus.ENDED &&
+                            head.Status != EventStatus.ABANDONED && head.Status != EventStatus.CANCELED)
+                        {
+                            if (head.Active)
+                            {
+                                matches.Add(head.Id.ToString());
+                            }
+                        }
+                    }
+
+                    common.UpdateAliveMatches(matches);
+                }).ConfigureAwait(false);
             }
             catch (Exception ex)
             {
                 SharedLibrary.Logg.logger.Fatal(ex.Message);
             }
-            //Task.Factory.StartNew(
-            //    () =>
-            //    {
-            //        foreach (var head in e.Alive.EventHeaders)
+            //try
+            //{
+            //    Task.Factory.StartNew(
+            //        () =>
             //        {
-            //            common.insertMatchDataAllDetails((MatchHeader)head, null);
+            //            foreach (var head in e.Alive.EventHeaders)
+            //            {
+            //                common.insertMatchDataAllDetails((MatchHeader) head, null);
+            //            }
+            //            // common.WorkAlive(e);
             //        }
-            //        // common.WorkAlive(e);
-            //    }
-            //    , CancellationToken.None, TaskCreationOptions.DenyChildAttach, TaskScheduler.Default);
-
+            //        , CancellationToken.None, TaskCreationOptions.DenyChildAttach, TaskScheduler.Default);
+            //}
+            //catch (Exception ex)
+            //{
+            //    SharedLibrary.Logg.logger.Fatal(ex.Message);
+            //}
 
 
 
