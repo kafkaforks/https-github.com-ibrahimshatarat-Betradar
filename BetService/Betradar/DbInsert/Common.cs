@@ -1531,6 +1531,7 @@ namespace BetService.Classes.DbInsert
                     ObjCommand.Parameters.AddWithValue("p_dismissals", NpgsqlDbType.Text, DBNull.Value);
                 }
                 if (entityMheader.EarlyBetStatus != null)
+
                 {
                     ObjCommand.Parameters.AddWithValue("p_early_bet_status", NpgsqlDbType.Text, entityMheader.EarlyBetStatus);
                 }
