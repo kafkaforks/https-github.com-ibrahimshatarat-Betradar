@@ -93,6 +93,7 @@ namespace BetService.Classes.DbInsert
                 //    command.Parameters.AddWithValue("p_home_team_name", NpgsqlDbType.Text, entityMinfo.AwayTeam.Name);
                 //}
                 //else
+
                 //{
                 //    command.Parameters.AddWithValue("p_home_team_name", NpgsqlDbType.Text, DBNull.Value);
                 //}
