@@ -1533,6 +1533,7 @@ namespace BetService.Classes.DbInsert
                 if (entityMheader.EarlyBetStatus != null)
 
                 {
+
                     ObjCommand.Parameters.AddWithValue("p_early_bet_status", NpgsqlDbType.Text, entityMheader.EarlyBetStatus);
                 }
                 else
