@@ -180,9 +180,6 @@ namespace BetService.Classes.DbInsert
                 //{
                 //    command.Parameters.AddWithValue("p_category_name", NpgsqlDbType.Text, DBNull.Value);
                 //}
-
-
-
                 //p_feed_type not 
                 if (p_feed_type != null)
                 {
