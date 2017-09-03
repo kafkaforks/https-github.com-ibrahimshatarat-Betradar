@@ -14,6 +14,7 @@ namespace BetService.Classes.DbInsert
     {
         public void BetCancelUndoHandler(BetCancelUndoEventArgs args)
         {
+
              RunTask(args);
         }
         public  void RunTask(BetCancelUndoEventArgs args)
