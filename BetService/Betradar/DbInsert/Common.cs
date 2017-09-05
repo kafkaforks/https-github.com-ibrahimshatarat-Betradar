@@ -69,78 +69,7 @@ namespace BetService.Classes.DbInsert
                     command.Parameters.AddWithValue("p_match_id", NpgsqlDbType.Bigint, DBNull.Value);
                 }
 
-                //command.Parameters.AddWithValue("p_match_name", NpgsqlDbType.Text, LocalizedStringToJson(entityMinfo.HomeTeam.Name) + "|" + LocalizedStringToJson(entityMinfo.AwayTeam.Name));
-               
-
-                //if (entityMinfo.HomeTeam.Id != null)
-                //{
-                //    command.Parameters.AddWithValue("p_home_team_id", NpgsqlDbType.Bigint, entityMinfo.HomeTeam.Id);
-                //}
-                //else
-                //{
-                //    command.Parameters.AddWithValue("p_home_team_id", NpgsqlDbType.Bigint, DBNull.Value);
-                //}
-                //if (entityMinfo.AwayTeam.Id != null)
-                //{
-                //    command.Parameters.AddWithValue("p_away_team_id", NpgsqlDbType.Bigint, entityMinfo.AwayTeam.Id);
-                //}
-                //else
-                //{
-                //    command.Parameters.AddWithValue("p_away_team_id", NpgsqlDbType.Bigint, DBNull.Value);
-                ////}
-                //if (entityMinfo.HomeTeam.Name != null)
-                //{
-                //    command.Parameters.AddWithValue("p_home_team_name", NpgsqlDbType.Text, entityMinfo.AwayTeam.Name);
-                //}
-                //else
-
-                //{
-                //    command.Parameters.AddWithValue("p_home_team_name", NpgsqlDbType.Text, DBNull.Value);
-                //}
-                //if (entityMinfo.AwayTeam.Name != null)
-                //{
-                //    command.Parameters.AddWithValue("p_away_team_name", NpgsqlDbType.Text, entityMinfo.AwayTeam.Name);
-                //}
-                //else
-                //{
-                //    command.Parameters.AddWithValue("p_away_team_name", NpgsqlDbType.Text, DBNull.Value);
-                //}
-
-                //if (entityMinfo.Sport.Id != null)
-                //{
-                //    command.Parameters.AddWithValue("p_sport_id", NpgsqlDbType.Bigint, entityMinfo.Sport.Id);
-                //}
-                //else
-                //{
-                //    command.Parameters.AddWithValue("p_sport_id", NpgsqlDbType.Bigint, DBNull.Value);
-                //}
-
-                //if (entityMinfo.Sport.Name != null)
-                //{
-                //    command.Parameters.AddWithValue("p_sport_name", NpgsqlDbType.Text, entityMinfo.Sport.Name);
-                //}
-                //else
-                //{
-                //    command.Parameters.AddWithValue("p_sport_name", NpgsqlDbType.Text, DBNull.Value);
-                //}
-
-                //if (entityMinfo.Tournament.Id != null)
-                //{
-                //    command.Parameters.AddWithValue("p_tournament_id", NpgsqlDbType.Bigint, entityMinfo.Tournament.Id);
-                //}
-                //else
-                //{
-                //    command.Parameters.AddWithValue("p_tournament_id", NpgsqlDbType.Bigint, DBNull.Value);
-                //}
-
-                //if (entityMinfo.Tournament.Name != null)
-                //{
-                //    command.Parameters.AddWithValue("p_tournament_name", NpgsqlDbType.Text, entityMinfo.Tournament.Name);
-                //}
-                //else
-                //{
-                //    command.Parameters.AddWithValue("p_tournament_name", NpgsqlDbType.Text, DBNull.Value);
-                //}
+                
 
                 if (p_is_active != null) // is_active
                 {
@@ -152,16 +81,7 @@ namespace BetService.Classes.DbInsert
                 }
                 //p_country_iso
                 
-                //if (entityMinfo.Category != null)
-                //{
-                //    //IdNameTupleToJson(entityMinfo.Category);
-
-                //    command.Parameters.AddWithValue("p_country_iso", NpgsqlDbType.Text, IdNameTupleToJson(entityMinfo.Category));
-                //}
-                //else
-                //{
-                //    command.Parameters.AddWithValue("p_country_iso", NpgsqlDbType.Text, DBNull.Value);
-                //}
+               
 
                 if (entityMheader.MatchTime != null)
                 {
@@ -172,14 +92,6 @@ namespace BetService.Classes.DbInsert
                     command.Parameters.AddWithValue("match_start_date", NpgsqlDbType.Timestamp, DBNull.Value);
                 }
 
-                //if (entityMinfo.Category.Name != null)
-                //{
-                //    command.Parameters.AddWithValue("p_category_name", NpgsqlDbType.Text, entityMinfo.Category.Name);
-                //}
-                //else
-                //{
-                //    command.Parameters.AddWithValue("p_category_name", NpgsqlDbType.Text, DBNull.Value);
-                //}
                 //p_feed_type not 
                 if (p_feed_type != null)
                 {
@@ -682,45 +594,7 @@ namespace BetService.Classes.DbInsert
                     command.Parameters.AddWithValue("p_yellow_red_cards", NpgsqlDbType.Text, DBNull.Value);
                 }
 
-                //if (entityMinfo.BetPal != null)
-                //{
-
-                //    command.Parameters.AddWithValue("p_bet_pal", NpgsqlDbType.Text, entityMinfo.BetPal);
-                //}
-                //else
-                //{
-                //    command.Parameters.AddWithValue("p_bet_pal", NpgsqlDbType.Text, DBNull.Value);
-                //}
-
-                //if (entityMinfo.CoverageInfo != null)
-                //{
-
-                //    command.Parameters.AddWithValue("p_coverage_info", NpgsqlDbType.Text, entityMinfo.CoverageInfo);
-                //}
-                //else
-                //{
-                //    command.Parameters.AddWithValue("p_coverage_info", NpgsqlDbType.Text, DBNull.Value);
-                //}
-
-                //if (entityMinfo.DateOfMatch != null)
-                //{
-
-                //    command.Parameters.AddWithValue("p_date_of_match", NpgsqlDbType.Timestamp, entityMinfo.DateOfMatch);
-                //}
-                //else
-                //{
-                //    command.Parameters.AddWithValue("p_date_of_match", NpgsqlDbType.Timestamp, DBNull.Value);
-                //}
-
-                //if (entityMinfo.ExtraInfo != null)
-                //{
-
-                //    command.Parameters.AddWithValue("p_extra_info", NpgsqlDbType.Text, entityMinfo.ExtraInfo);
-                //}
-                //else
-                //{
-                //    command.Parameters.AddWithValue("p_extra_info", NpgsqlDbType.Text, DBNull.Value);
-                //}
+                
 
                 if (entityMinfo == null)
                 {
@@ -744,46 +618,178 @@ namespace BetService.Classes.DbInsert
 
 
                 }
+                else
+                {
+                    //command.Parameters.AddWithValue("p_match_name", NpgsqlDbType.Text, LocalizedStringToJson(entityMinfo.HomeTeam.Name) + "|" + LocalizedStringToJson(entityMinfo.AwayTeam.Name));
 
-                //if (entityMinfo.Round != null)
-                //{
+                    //if (entityMinfo.Category != null)
+                    //{
+                    //    //IdNameTupleToJson(entityMinfo.Category);
 
-                //    command.Parameters.AddWithValue("p_round", NpgsqlDbType.Text, entityMinfo.Round);
-                //}
-                //else
-                //{
-                //    command.Parameters.AddWithValue("p_round", NpgsqlDbType.Text, DBNull.Value);
-                //}
+                    //    command.Parameters.AddWithValue("p_country_iso", NpgsqlDbType.Text, IdNameTupleToJson(entityMinfo.Category));
+                    //}
+                    //else
+                    //{
+                    //    command.Parameters.AddWithValue("p_country_iso", NpgsqlDbType.Text, DBNull.Value);
+                    //}
+                    //if (entityMinfo.Category.Name != null)
+                    //{
+                    //    command.Parameters.AddWithValue("p_category_name", NpgsqlDbType.Text, entityMinfo.Category.Name);
+                    //}
+                    //else
+                    //{
+                    //    command.Parameters.AddWithValue("p_category_name", NpgsqlDbType.Text, DBNull.Value);
+                    //}
+                    //if (entityMinfo.HomeTeam.Id != null)
+                    //{
+                    //    command.Parameters.AddWithValue("p_home_team_id", NpgsqlDbType.Bigint, entityMinfo.HomeTeam.Id);
+                    //}
+                    //else
+                    //{
+                    //    command.Parameters.AddWithValue("p_home_team_id", NpgsqlDbType.Bigint, DBNull.Value);
+                    //}
+                    //if (entityMinfo.AwayTeam.Id != null)
+                    //{
+                    //    command.Parameters.AddWithValue("p_away_team_id", NpgsqlDbType.Bigint, entityMinfo.AwayTeam.Id);
+                    //}
+                    //else
+                    //{
+                    //    command.Parameters.AddWithValue("p_away_team_id", NpgsqlDbType.Bigint, DBNull.Value);
+                    ////}
+                    //if (entityMinfo.HomeTeam.Name != null)
+                    //{
+                    //    command.Parameters.AddWithValue("p_home_team_name", NpgsqlDbType.Text, entityMinfo.AwayTeam.Name);
+                    //}
+                    //else
 
-                //if (entityMinfo.Season != null)
-                //{
+                    //{
+                    //    command.Parameters.AddWithValue("p_home_team_name", NpgsqlDbType.Text, DBNull.Value);
+                    //}
+                    //if (entityMinfo.AwayTeam.Name != null)
+                    //{
+                    //    command.Parameters.AddWithValue("p_away_team_name", NpgsqlDbType.Text, entityMinfo.AwayTeam.Name);
+                    //}
+                    //else
+                    //{
+                    //    command.Parameters.AddWithValue("p_away_team_name", NpgsqlDbType.Text, DBNull.Value);
+                    //}
 
-                //    command.Parameters.AddWithValue("p_season", NpgsqlDbType.Text, entityMinfo.Season);
-                //}
-                //else
-                //{
-                //    command.Parameters.AddWithValue("p_season", NpgsqlDbType.Text, DBNull.Value);
-                //}
+                    //if (entityMinfo.Sport.Id != null)
+                    //{
+                    //    command.Parameters.AddWithValue("p_sport_id", NpgsqlDbType.Bigint, entityMinfo.Sport.Id);
+                    //}
+                    //else
+                    //{
+                    //    command.Parameters.AddWithValue("p_sport_id", NpgsqlDbType.Bigint, DBNull.Value);
+                    //}
 
-                //if (entityMinfo.StreamingChannels != null)
-                //{
+                    //if (entityMinfo.Sport.Name != null)
+                    //{
+                    //    command.Parameters.AddWithValue("p_sport_name", NpgsqlDbType.Text, entityMinfo.Sport.Name);
+                    //}
+                    //else
+                    //{
+                    //    command.Parameters.AddWithValue("p_sport_name", NpgsqlDbType.Text, DBNull.Value);
+                    //}
 
-                //    command.Parameters.AddWithValue("p_streaming_channels", NpgsqlDbType.Text, entityMinfo.StreamingChannels);
-                //}
-                //else
-                //{
-                //    command.Parameters.AddWithValue("p_streaming_channels", NpgsqlDbType.Text, DBNull.Value);
-                //}
+                    //if (entityMinfo.Tournament.Id != null)
+                    //{
+                    //    command.Parameters.AddWithValue("p_tournament_id", NpgsqlDbType.Bigint, entityMinfo.Tournament.Id);
+                    //}
+                    //else
+                    //{
+                    //    command.Parameters.AddWithValue("p_tournament_id", NpgsqlDbType.Bigint, DBNull.Value);
+                    //}
 
-                //if (entityMinfo.TvChannels != null)
-                //{
+                    //if (entityMinfo.Tournament.Name != null)
+                    //{
+                    //    command.Parameters.AddWithValue("p_tournament_name", NpgsqlDbType.Text, entityMinfo.Tournament.Name);
+                    //}
+                    //else
+                    //{
+                    //    command.Parameters.AddWithValue("p_tournament_name", NpgsqlDbType.Text, DBNull.Value);
+                    //}
+                    //if (entityMinfo.BetPal != null)
+                    //{
 
-                //    command.Parameters.AddWithValue("p_tv_channels", NpgsqlDbType.Text, entityMinfo.TvChannels);
-                //}
-                //else
-                //{
-                //    command.Parameters.AddWithValue("p_tv_channels", NpgsqlDbType.Text, DBNull.Value);
-                //}
+                    //    command.Parameters.AddWithValue("p_bet_pal", NpgsqlDbType.Text, entityMinfo.BetPal);
+                    //}
+                    //else
+                    //{
+                    //    command.Parameters.AddWithValue("p_bet_pal", NpgsqlDbType.Text, DBNull.Value);
+                    //}
+
+                    //if (entityMinfo.CoverageInfo != null)
+                    //{
+
+                    //    command.Parameters.AddWithValue("p_coverage_info", NpgsqlDbType.Text, entityMinfo.CoverageInfo);
+                    //}
+                    //else
+                    //{
+                    //    command.Parameters.AddWithValue("p_coverage_info", NpgsqlDbType.Text, DBNull.Value);
+                    //}
+
+                    //if (entityMinfo.DateOfMatch != null)
+                    //{
+
+                    //    command.Parameters.AddWithValue("p_date_of_match", NpgsqlDbType.Timestamp, entityMinfo.DateOfMatch);
+                    //}
+                    //else
+                    //{
+                    //    command.Parameters.AddWithValue("p_date_of_match", NpgsqlDbType.Timestamp, DBNull.Value);
+                    //}
+
+                    //if (entityMinfo.ExtraInfo != null)
+                    //{
+
+                    //    command.Parameters.AddWithValue("p_extra_info", NpgsqlDbType.Text, entityMinfo.ExtraInfo);
+                    //}
+                    //else
+                    //{
+                    //    command.Parameters.AddWithValue("p_extra_info", NpgsqlDbType.Text, DBNull.Value);
+                    //}
+                    //if (entityMinfo.Round != null)
+                    //{
+
+                    //    command.Parameters.AddWithValue("p_round", NpgsqlDbType.Text, entityMinfo.Round);
+                    //}
+                    //else
+                    //{
+                    //    command.Parameters.AddWithValue("p_round", NpgsqlDbType.Text, DBNull.Value);
+                    //}
+
+                    //if (entityMinfo.Season != null)
+                    //{
+
+                    //    command.Parameters.AddWithValue("p_season", NpgsqlDbType.Text, entityMinfo.Season);
+                    //}
+                    //else
+                    //{
+                    //    command.Parameters.AddWithValue("p_season", NpgsqlDbType.Text, DBNull.Value);
+                    //}
+
+                    //if (entityMinfo.StreamingChannels != null)
+                    //{
+
+                    //    command.Parameters.AddWithValue("p_streaming_channels", NpgsqlDbType.Text, entityMinfo.StreamingChannels);
+                    //}
+                    //else
+                    //{
+                    //    command.Parameters.AddWithValue("p_streaming_channels", NpgsqlDbType.Text, DBNull.Value);
+                    //}
+
+                    //if (entityMinfo.TvChannels != null)
+                    //{
+
+                    //    command.Parameters.AddWithValue("p_tv_channels", NpgsqlDbType.Text, entityMinfo.TvChannels);
+                    //}
+                    //else
+                    //{
+                    //    command.Parameters.AddWithValue("p_tv_channels", NpgsqlDbType.Text, DBNull.Value);
+                    //}
+                }
+
+
 
                 //p_match_on
                 if (p_match_on != null)
